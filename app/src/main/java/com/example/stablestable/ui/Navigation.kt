@@ -38,14 +38,14 @@ fun SetupNavGraph(
         ) {
             MyProfileScreen(navController = navController)
         }
-        
+
         // Stable Screen Route
         composable(
             route = Screen.StableScreen.route
         ) {
             StableScreen(navController = navController)
         }
-        
+
         // Calendar Screen Route
         composable(
             route = Screen.CalendarScreen.route
