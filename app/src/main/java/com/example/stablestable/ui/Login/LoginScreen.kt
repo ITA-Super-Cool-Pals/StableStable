@@ -10,6 +10,6 @@ fun LoginScreen(
     navController: NavController
 ) {
     Column {
-        Text(text = "Hello!")
+        Text(text = "Helloo!")
     }
 }
