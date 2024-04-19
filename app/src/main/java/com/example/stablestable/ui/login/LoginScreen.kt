@@ -1,4 +1,4 @@
-package com.example.stablestable.ui.Login
+package com.example.stablestable.ui.login
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
@@ -10,6 +10,6 @@ fun LoginScreen(
     navController: NavController
 ) {
     Column {
-        Text(text = "Hello!")
+        Text(text = "Login Screen")
     }
 }
