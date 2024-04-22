@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "319222709312",
+    "project_id": "stable-stable",
+    "storage_bucket": "stable-stable.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:319222709312:android:e7e527d4f8692cd668b3a5",
+        "android_client_info": {
+          "package_name": "com.example.stablestable"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXtksyQj0vx9eiOcalqOJDfmm40VSyFwo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
