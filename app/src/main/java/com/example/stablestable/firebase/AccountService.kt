@@ -4,9 +4,20 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 
 class AccountService {
-    //authenticate creates a user with email and password.
-    //remember to pass onResult and onElse
-    fun authenticate(email: String, password: String, onResult: () -> Unit, onElse:()-> Unit) {
+    // Login User
+    fun userLogin(email: String, password: String, onResult: () -> Unit) {
+        Firebase.auth.signInWithEmailAndPassword(email, password)
+            .addOnSuccessListener {
+                onResult()
+            }
+            .addOnFailureListener { exception ->
+                // Handle login failure
+                // Log error or show toast message
+            }
+    }
+
+    // Create User
+    fun userCreate(email: String, password: String, onResult: () -> Unit, onElse:()-> Unit) {
         Firebase.auth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener {
                 onResult()
@@ -16,10 +27,5 @@ class AccountService {
             }
     }
 
-    fun login(email: String, password: String, onResult: () -> Unit) {
-        Firebase.auth.signInWithEmailAndPassword(email, password)
-            .addOnSuccessListener {
-                //TODO: Skal der ske noget her?
-            }
-    }
+
 }

@@ -12,14 +12,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import com.example.stablestable.firebase.AccountService
+import com.example.stablestable.ui.Screen
 
 @Composable
-fun LoginUI() {
+fun LoginUI(navController: NavController) {
     val viewModel = viewModel<LoginViewModel>()
+    val accountService = AccountService()
 
     Column(
         modifier = Modifier
@@ -39,8 +44,8 @@ fun LoginUI() {
 
         // Username Field
         OutlinedTextField(
-            value = viewModel.username,
-            onValueChange = { viewModel.username = it },
+            value = viewModel.email,
+            onValueChange = { viewModel.email = it },
             label = { Text("Username") },
             modifier = Modifier
                 .fillMaxWidth()
@@ -52,6 +57,7 @@ fun LoginUI() {
             value = viewModel.password,
             onValueChange = { viewModel.password = it },
             label = { Text("Password") },
+            visualTransformation = PasswordVisualTransformation(), // Hide password text
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 8.dp)
@@ -67,8 +73,12 @@ fun LoginUI() {
             Button(
                 onClick = {
                     // TODO: Implement login logic
-                    val username = viewModel.username
+                    val email = viewModel.email
                     val password = viewModel.password
+                    accountService.userLogin(viewModel.email, viewModel.password) {
+                        // Handle login success, navigate to next screen
+                        navController.navigate(route = Screen.HomeScreen.route)
+                    }
                     // Call a function to handle login with username and password
                 },
                 modifier = Modifier
@@ -83,7 +93,7 @@ fun LoginUI() {
             Button(
                 onClick = {
                     // TODO: Implement create user logic
-                    val username = viewModel.username
+                    val username = viewModel.email
                     val password = viewModel.password
                     // Call a function to move to create user screen
                 },

@@ -7,6 +7,6 @@ import androidx.lifecycle.ViewModel
 
 class LoginViewModel : ViewModel() {
     // Define username and password properties with initial empty strings
-    var username by mutableStateOf("")
+    var email by mutableStateOf("")
     var password by mutableStateOf("")
 }

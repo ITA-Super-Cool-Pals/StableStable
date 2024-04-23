@@ -15,6 +15,6 @@ fun LoginScreen(
         Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        LoginUI()
+        LoginUI(navController = navController) // Pass the NavController
     }
 }
