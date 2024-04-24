@@ -15,7 +15,14 @@ class LoginViewModel : ViewModel() {
 
     // Create user function
     fun userCreate(navigateOnSuccess: () -> Unit, navigateOnFailure: () -> Unit) {
-        accountService.userCreate(email, password, navigateOnSuccess, navigateOnFailure)
+        accountService.userCreate(email, password,
+            onResult = {
+                accountService.createUserInFirestore(email)
+                navigateOnSuccess()
+            },
+            onFailure = {
+                navigateOnFailure()
+            })
     }
 
     fun userLogin(navigateOnSuccess: () -> Unit, navigateOnFailure: () -> Unit) {
