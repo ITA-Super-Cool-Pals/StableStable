@@ -27,6 +27,7 @@ class AccountService {
             }
     }
 
+    // Add currently authenticated user to the database
     fun createUserInFirestore(email: String) {
         // Firestore Database Access
         val db = Firebase.firestore
@@ -59,6 +60,41 @@ class AccountService {
         } else {
             // User not authenticated
             // Handle accordingly
+        }
+    }
+
+    // Fetch user data from Firebase
+    fun fetchUserData(onSuccess: (String) -> Unit, onFailure: () -> Unit) {
+        val db = Firebase.firestore
+        val currentUser = Firebase.auth.currentUser
+
+        // Check if user is authenticated
+        if (currentUser != null) {
+            // Get the user ID
+            val userId = currentUser.uid
+            // Get user data from database
+            val userDocRef = db.collection("ryttere").document(userId)
+
+            // Fetch the user data
+            userDocRef.get()
+                .addOnSuccessListener { document ->
+                    // Check if document exists
+                    if (document.exists()) {
+                        val email = document.getString("email")
+                        if (email != null) {
+                            onSuccess(email)
+                        } else {
+                            onFailure()
+                        }
+                    } else {
+                        onFailure()
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    onFailure()
+                }
+        } else {
+            onFailure()
         }
     }
 }
