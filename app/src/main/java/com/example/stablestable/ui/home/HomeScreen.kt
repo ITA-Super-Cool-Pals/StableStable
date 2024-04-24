@@ -1,16 +1,21 @@
 package com.example.stablestable.ui.home
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 
 @Composable
 fun HomeScreen(
     navController: NavController
 ) {
-    Column {
-        Text(text = "Home Screen")
+    Box(
+        Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        HomeUI(navController = navController) // Pass the NavController
     }
 }
-//adding a comment for initial commit
+
