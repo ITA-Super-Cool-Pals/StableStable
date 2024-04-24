@@ -22,7 +22,10 @@ fun SetupNavGraph(
         composable(
             route = Screen.LoginScreen.route
         ) {
-            LoginScreen(navController = navController)
+            LoginScreen(
+                onRegistrationSuccess = { navController.navigate(Screen.HomeScreen.route) },
+                onRegistrationFailure = { println("Login / Account creation error!") }
+            )
         }
 
         // Home Screen Route
