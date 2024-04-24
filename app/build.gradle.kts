@@ -78,4 +78,6 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
+    // Firebase Messaging Dependency
+    implementation("com.google.firebase:firebase-messaging:23.0.0")
 }

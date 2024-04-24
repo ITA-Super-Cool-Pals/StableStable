@@ -12,6 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StableStable"
         tools:targetApi="31">
+
+        <!-- Firebase Messaging service registration -->
+        <service
+            android:name=".firebase.MessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -11,10 +11,15 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.stablestable.ui.SetupNavGraph
 import com.example.stablestable.ui.theme.StableStableTheme
+import com.google.firebase.FirebaseApp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
+        // Initialize Firebase
+        FirebaseApp.initializeApp(this@MainActivity)
+
+        // Initialize navController
         lateinit var navController: NavHostController
 
         super.onCreate(savedInstanceState)
