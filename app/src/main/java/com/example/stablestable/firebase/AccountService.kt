@@ -79,6 +79,8 @@ class AccountService {
                 .addOnSuccessListener { document ->
                     // Check if document exists
                     if (document.exists()) {
+                        // TODO: Add more data that can be fetched, once user profile data structure is decided
+                        // TODO: Needs to be after proper user creation is made
                         val email = document.getString("email")
                         if (email != null) {
                             onSuccess(email)
@@ -99,6 +101,8 @@ class AccountService {
 
     // Update user data in Firebase
     fun updateUserData(email: String, onSuccess: () -> Unit, onFailure: () -> Unit) {
+        // TODO: Decide what user information should be updated, and how it should be updated
+        // TODO: Separate functions? All in one, with all info at once?
         val db = Firebase.firestore
         val currentUser = Firebase.auth.currentUser
 
