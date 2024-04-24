@@ -31,7 +31,6 @@ class AccountService {
     fun createUserInFirestore(email: String) {
         // Firestore Database Access
         val db = Firebase.firestore
-
         // Get the current authenticated userID
         val currentUser = Firebase.auth.currentUser
 
@@ -91,6 +90,29 @@ class AccountService {
                     }
                 }
                 .addOnFailureListener { exception ->
+                    onFailure()
+                }
+        } else {
+            onFailure()
+        }
+    }
+
+    // Update user data in Firebase
+    fun updateUserData(email: String, onSuccess: () -> Unit, onFailure: () -> Unit) {
+        val db = Firebase.firestore
+        val currentUser = Firebase.auth.currentUser
+
+        // Check if current user is authenticated
+        if (currentUser != null) {
+            val userId = currentUser.uid
+            val userDocRef = db.collection("ryttere").document(userId)
+
+            // Update user data
+            userDocRef.update("email", email)
+                .addOnSuccessListener {
+                    onSuccess()
+                }
+                .addOnFailureListener {
                     onFailure()
                 }
         } else {
