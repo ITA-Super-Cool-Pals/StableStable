@@ -8,6 +8,7 @@ import com.example.stablestable.ui.calendar.CalendarScreen
 import com.example.stablestable.ui.home.HomeScreen
 import com.example.stablestable.ui.login.LoginScreen
 import com.example.stablestable.ui.profile.MyProfileScreen
+import com.example.stablestable.ui.profile.MyProfileScreenPreview
 import com.example.stablestable.ui.stable.StableScreen
 
 @Composable
@@ -16,7 +17,7 @@ fun SetupNavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.LoginScreen.route
+        startDestination = Screen.MyProfileScreen.route
     ) {
         // Login Screen Route
         composable(
@@ -57,3 +58,4 @@ fun SetupNavGraph(
         }
     }
 }
+
