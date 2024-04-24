@@ -13,6 +13,11 @@ class LoginViewModel : ViewModel() {
     var email by mutableStateOf("")
     var password by mutableStateOf("")
 
+    // Create user function
+    fun userCreate(navigateOnSuccess: () -> Unit, navigateOnFailure: () -> Unit) {
+        accountService.userCreate(email, password, navigateOnSuccess, navigateOnFailure)
+    }
+
     fun userLogin(navigateOnSuccess: () -> Unit, navigateOnFailure: () -> Unit) {
         accountService.userLogin(email, password, navigateOnSuccess, navigateOnFailure)
     }

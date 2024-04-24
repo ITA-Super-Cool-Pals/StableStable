@@ -6,12 +6,14 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -48,7 +50,8 @@ fun LoginUI(
             label = { Text("Username") },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 8.dp)
+                .padding(bottom = 8.dp),
+            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Email)
         )
 
         // Password Field
@@ -59,7 +62,8 @@ fun LoginUI(
             visualTransformation = PasswordVisualTransformation(), // Hide password text
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 8.dp)
+                .padding(bottom = 8.dp),
+            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Password)
         )
 
         // Login / Create User Buttons
@@ -85,8 +89,8 @@ fun LoginUI(
             // Create User Button
             Button(
                 onClick = {
-                    // TODO: Implement create user logic
-                    // Call a function to move to create user screen
+                    loginViewModel.userCreate(onRegistrationSuccess, onRegistrationFailure)
+                    // TODO: Make a proper user creation function / screen
                 },
                 modifier = Modifier
                     .weight(1f) // Assign equal weight to both buttons to ensure same size

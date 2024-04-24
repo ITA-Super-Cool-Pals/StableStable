@@ -24,7 +24,7 @@ fun SetupNavGraph(
         ) {
             LoginScreen(
                 onRegistrationSuccess = { navController.navigate(Screen.HomeScreen.route) },
-                onRegistrationFailure = { println("Login error!") }
+                onRegistrationFailure = { println("Login / Account creation error!") }
             )
         }
 
