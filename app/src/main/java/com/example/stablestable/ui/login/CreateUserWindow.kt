@@ -33,7 +33,7 @@ fun CreateUserWindow(
     ) {
         Box(
             modifier = Modifier
-                .background(Color.White)
+                .background(Color.White, shape = RoundedCornerShape(10.dp))
                 .padding(25.dp)
         ) {
             val loginViewModel = viewModel<LoginViewModel>()
