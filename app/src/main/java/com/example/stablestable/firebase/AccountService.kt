@@ -6,7 +6,7 @@ import com.google.firebase.firestore.firestore
 
 class AccountService {
     // Create User
-    fun userCreate(email: String, password: String, onResult: () -> Unit, onFailure: () -> Unit) {
+    fun userCreate(email: String, password: String, fullName: String, phone: String, onResult: () -> Unit, onFailure: () -> Unit) {
         Firebase.auth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener {
                 onResult()
@@ -28,7 +28,7 @@ class AccountService {
     }
 
     // Add currently authenticated user to the database
-    fun createUserInFirestore(email: String) {
+    fun createUserInFirestore(fullName: String, phone: String) {
         // Firestore Database Access
         val db = Firebase.firestore
         // Get the current authenticated userID
@@ -44,7 +44,9 @@ class AccountService {
 
             // Add user data to Firestore
             val userData = hashMapOf(
-                "email" to currentUser.email
+                "email" to currentUser.email,
+                "fullname" to fullName,
+                "phone" to phone
                 // TODO: Add more data fields for account creation
             )
 
