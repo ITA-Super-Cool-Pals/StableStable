@@ -1,5 +1,7 @@
 package com.example.stablestable.firebase
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
@@ -65,7 +67,7 @@ class AccountService {
     }
 
     // Fetch user data from Firebase
-    fun fetchUserData(onSuccess: (String) -> Unit, onFailure: () -> Unit) {
+    fun fetchUserData(onSuccess: (String)->Unit, onFailure: () -> Unit) {
         val db = Firebase.firestore
         val currentUser = Firebase.auth.currentUser
 
@@ -88,16 +90,20 @@ class AccountService {
                             onSuccess(email)
                         } else {
                             onFailure()
+
                         }
                     } else {
                         onFailure()
+                        Log.d(TAG,"error is Here")
                     }
                 }
                 .addOnFailureListener { exception ->
                     onFailure()
+
                 }
         } else {
             onFailure()
+
         }
     }
 

@@ -8,7 +8,6 @@ import com.example.stablestable.ui.calendar.CalendarScreen
 import com.example.stablestable.ui.home.HomeScreen
 import com.example.stablestable.ui.login.LoginScreen
 import com.example.stablestable.ui.profile.MyProfileScreen
-import com.example.stablestable.ui.profile.MyProfileScreenPreview
 import com.example.stablestable.ui.stable.StableScreen
 
 @Composable
@@ -17,14 +16,14 @@ fun SetupNavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.MyProfileScreen.route
+        startDestination = Screen.LoginScreen.route
     ) {
         // Login Screen Route
         composable(
             route = Screen.LoginScreen.route
         ) {
             LoginScreen(
-                onRegistrationSuccess = { navController.navigate(Screen.HomeScreen.route) },
+                onRegistrationSuccess = { navController.navigate(Screen.MyProfileScreen.route) },
                 onRegistrationFailure = { println("Login / Account creation error!") }
             )
         }
