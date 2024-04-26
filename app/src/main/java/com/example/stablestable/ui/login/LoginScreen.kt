@@ -60,7 +60,7 @@ fun LoginScreen(
             OutlinedTextField(
                 value = loginViewModel.email,
                 onValueChange = { loginViewModel.email = it },
-                label = { Text("Username") },
+                label = { Text("Email") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 8.dp),
@@ -71,7 +71,7 @@ fun LoginScreen(
             OutlinedTextField(
                 value = loginViewModel.password,
                 onValueChange = { loginViewModel.password = it },
-                label = { Text("Password") },
+                label = { Text("Kodeord") },
                 visualTransformation = PasswordVisualTransformation(), // Hide password text
                 modifier = Modifier
                     .fillMaxWidth()
@@ -111,7 +111,7 @@ fun LoginScreen(
                         .padding(start = 6.dp), // Add padding between buttons
                     shape = RoundedCornerShape(12.dp)
                 ) {
-                    Text("Create User", fontSize = 16.sp)
+                    Text("Opret Bruger", fontSize = 16.sp)
                 }
             }
         }
@@ -119,9 +119,10 @@ fun LoginScreen(
         // Display CreateUserWindow dialog if createUserWindowVisible is true
         if (createUserWindowVisible) {
             CreateUserWindow(
-                onConfirm = { fullName, phone, email, password ->
+                onConfirm = { email, password, firstName, lastName, phone ->
                     // Handle user creation here with additional information (fullname, phone)
-                    loginViewModel.fullName = fullName
+                    loginViewModel.firstName = firstName
+                    loginViewModel.lastName = lastName
                     loginViewModel.phone = phone
                     loginViewModel.email = email
                     loginViewModel.password = password

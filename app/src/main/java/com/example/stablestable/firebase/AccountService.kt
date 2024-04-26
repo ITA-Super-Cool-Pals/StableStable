@@ -28,7 +28,7 @@ class AccountService {
     }
 
     // Add currently authenticated user to the database
-    fun createUserInFirestore(fullName: String, phone: String) {
+    fun createUserInFirestore(firstName: String, lastName: String, phone: String) {
         // Firestore Database Access
         val db = Firebase.firestore
         // Get the current authenticated userID
@@ -44,9 +44,16 @@ class AccountService {
 
             // Add user data to Firestore
             val userData = hashMapOf(
-                "email" to currentUser.email,
-                "fullname" to fullName,
-                "phone" to phone
+                "firstname" to firstName,
+                "lastname" to lastName,
+                "contact-information" to hashMapOf(
+                    "email" to currentUser.email,
+                    "phone" to phone
+                )
+                /*"email" to currentUser.email,
+                "firstname" to firstName,
+                "lastname" to lastName,
+                "phone" to phone*/
                 // TODO: Add more data fields for account creation
             )
 
