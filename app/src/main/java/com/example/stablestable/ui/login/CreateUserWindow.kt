@@ -101,7 +101,6 @@ fun CreateUserWindow(
                             loginViewModel.lastName,
                             loginViewModel.phone
                         )
-                        onDismiss()
                     },
                     modifier = Modifier
                         .padding(vertical = 8.dp)
@@ -109,6 +108,15 @@ fun CreateUserWindow(
                     shape = RoundedCornerShape(12.dp)
                 ) {
                     Text("Opret Bruger")
+                }
+
+                if (loginViewModel.createUserErrorMessage != "") {
+                    Text(
+                        loginViewModel.createUserErrorMessage,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = Color.Red,
+                        modifier = Modifier.padding(top = 8.dp)
+                    )
                 }
             }
         }

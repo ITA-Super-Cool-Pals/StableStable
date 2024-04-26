@@ -6,24 +6,24 @@ import com.google.firebase.firestore.firestore
 
 class AccountService {
     // Create User
-    fun userCreate(email: String, password: String, onResult: () -> Unit, onFailure: () -> Unit) {
+    fun userCreate(email: String, password: String, onResult: () -> Unit, onFailure: (String) -> Unit) {
         Firebase.auth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener {
                 onResult()
             }
-            .addOnFailureListener {
-                onFailure()
+            .addOnFailureListener { exception ->
+                onFailure(exception.message?: "Account creation failed: Unknown error")
             }
     }
 
     // Login User
-    fun userLogin(email: String, password: String, onResult: () -> Unit, onFailure: () -> Unit) {
+    fun userLogin(email: String, password: String, onResult: () -> Unit, onFailure: (String) -> Unit) {
         Firebase.auth.signInWithEmailAndPassword(email, password)
             .addOnSuccessListener {
                 onResult()
             }
-            .addOnFailureListener {
-                onFailure()
+            .addOnFailureListener { exception ->
+                onFailure(exception.message ?: "Login failed: Unknown error")
             }
     }
 

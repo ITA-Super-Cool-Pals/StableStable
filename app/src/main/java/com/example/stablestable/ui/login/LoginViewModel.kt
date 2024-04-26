@@ -9,6 +9,10 @@ import com.example.stablestable.firebase.AccountService
 class LoginViewModel : ViewModel() {
     private val accountService: AccountService = AccountService()
 
+    // State variable to hold error message
+    var loginErrorMessage by mutableStateOf("")
+    var createUserErrorMessage by mutableStateOf("")
+
     // Define username and password properties with initial empty strings
     var email by mutableStateOf("")
     var password by mutableStateOf("")
@@ -23,12 +27,13 @@ class LoginViewModel : ViewModel() {
                 accountService.createUserInFirestore(firstName, lastName, phone)
                 navigateOnSuccess()
             },
-            onFailure = {
+            onFailure = { errorMessage ->
+                createUserErrorMessage = errorMessage
                 navigateOnFailure()
             })
     }
 
-    fun userLogin(navigateOnSuccess: () -> Unit, navigateOnFailure: () -> Unit) {
+    fun userLogin(navigateOnSuccess: () -> Unit, navigateOnFailure: (String) -> Unit) {
         accountService.userLogin(email, password, navigateOnSuccess, navigateOnFailure)
     }
 }

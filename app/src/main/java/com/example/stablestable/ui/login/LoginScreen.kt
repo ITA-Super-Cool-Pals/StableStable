@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,6 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
@@ -88,8 +90,12 @@ fun LoginScreen(
                 // Login Button
                 Button(
                     onClick = {
-                        loginViewModel.userLogin(onRegistrationSuccess, onRegistrationFailure)
-                        // TODO: Finish proper error display
+                        loginViewModel.userLogin(
+                            onRegistrationSuccess,
+                            navigateOnFailure = { errorMessage ->
+                                loginViewModel.loginErrorMessage = errorMessage
+                            }
+                        )
                     },
                     modifier = Modifier
                         .weight(1f) // Assign equal weight to both buttons to ensure same size
@@ -103,8 +109,6 @@ fun LoginScreen(
                 Button(
                     onClick = {
                         createUserWindowVisible = true
-                        //loginViewModel.userCreate(onRegistrationSuccess, onRegistrationFailure)
-                        // TODO: Make a proper user creation function / screen
                     },
                     modifier = Modifier
                         .weight(1f) // Assign equal weight to both buttons to ensure same size
@@ -113,6 +117,15 @@ fun LoginScreen(
                 ) {
                     Text("Opret Bruger", fontSize = 16.sp)
                 }
+            }
+
+            if (loginViewModel.loginErrorMessage != "") {
+                Text(
+                    loginViewModel.loginErrorMessage,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = Color.Red,
+                    modifier = Modifier.padding(top = 8.dp)
+                )
             }
         }
 
@@ -126,8 +139,14 @@ fun LoginScreen(
                     loginViewModel.phone = phone
                     loginViewModel.email = email
                     loginViewModel.password = password
-                    loginViewModel.userCreate(onRegistrationSuccess, onRegistrationFailure)
-                    createUserWindowVisible = false // Dismiss window after confirmation
+                    loginViewModel.userCreate(
+                        navigateOnSuccess = {
+                            onRegistrationSuccess()
+                            createUserWindowVisible = false
+                        },
+                        navigateOnFailure = {
+                        }
+                    )
                 },
                 onDismiss = {
                     createUserWindowVisible = false // Dismiss window if dismissed
