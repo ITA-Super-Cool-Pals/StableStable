@@ -49,11 +49,8 @@ class AccountService {
                 "contact-information" to hashMapOf(
                     "email" to currentUser.email,
                     "phone" to phone
-                )
-                /*"email" to currentUser.email,
-                "firstname" to firstName,
-                "lastname" to lastName,
-                "phone" to phone*/
+                ),
+                "stable-id" to "69"
                 // TODO: Add more data fields for account creation
             )
 
@@ -72,7 +69,7 @@ class AccountService {
     }
 
     // Fetch user data from Firebase
-    fun fetchUserData(onSuccess: (String) -> Unit, onFailure: () -> Unit) {
+    fun fetchUserData(onSuccess: (Map<String, Any>) -> Unit, onFailure: () -> Unit) {
         val db = Firebase.firestore
         val currentUser = Firebase.auth.currentUser
 
@@ -88,14 +85,65 @@ class AccountService {
                 .addOnSuccessListener { document ->
                     // Check if document exists
                     if (document.exists()) {
-                        // TODO: Add more data that can be fetched, once user profile data structure is decided
-                        // TODO: Needs to be after proper user creation is made
-                        val email = document.getString("email")
-                        if (email != null) {
-                            onSuccess(email)
+                        // Convert document data to a Map
+                        val userData = document.data
+                        if (userData != null) {
+                            onSuccess(userData)
                         } else {
                             onFailure()
                         }
+                    } else {
+                        onFailure()
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    onFailure()
+                }
+        } else {
+            onFailure()
+        }
+    }
+
+    // Fetch all user data based on logged in users stable
+    fun fetchAllUserData(onSuccess: (List<Map<String, Any>>) -> Unit, onFailure: () -> Unit) {
+        val db = Firebase.firestore
+        val currentUser = Firebase.auth.currentUser
+        var stableId: String
+
+        if (currentUser != null) {
+            // Get the users current stable id
+            val userId = currentUser.uid
+            db.collection("ryttere").document(userId).get()
+                .addOnSuccessListener { collection ->
+                    if (collection.exists()) {
+                        // Set the stable ID
+                        stableId = collection.getString("stable-id").toString()
+
+                        // Get reference to the "ryttere" collection
+                        val userCollectionRef = db.collection("ryttere")
+
+                        // Query to filter documents based on stable ID
+                        val query = userCollectionRef.whereEqualTo("stable-id", stableId)
+
+                        // Fetch documents based on query
+                        query.get()
+                            .addOnSuccessListener { querySnapshot ->
+                                val userDataList = mutableListOf<Map<String, Any>>()
+
+                                // Iterate over each document in the query result
+                                for (document in querySnapshot.documents) {
+                                    // Convert docuument data to a Map and add it to the list
+                                    val userData = document.data
+                                    if (userData != null) {
+                                        userDataList.add(userData)
+                                    }
+                                }
+                                // Pass the list of user data to the success callback
+                                onSuccess(userDataList)
+                            }
+                            .addOnFailureListener { exception ->
+                                onFailure()
+                            }
                     } else {
                         onFailure()
                     }
