@@ -48,6 +48,23 @@ fun CreateUserWindow(
                     textAlign = TextAlign.Center
                 )
 
+                // Email field
+                OutlinedTextField(
+                    value = loginViewModel.email,
+                    onValueChange = { loginViewModel.email = it },
+                    label = { Text("Email") },
+                    keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Email)
+                )
+
+                // Password field
+                OutlinedTextField(
+                    value = loginViewModel.password,
+                    onValueChange = { loginViewModel.password = it },
+                    label = { Text("Kodeord") },
+                    visualTransformation = PasswordVisualTransformation(), // Hide password text
+                    keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Password)
+                )
+
                 // First name
                 OutlinedTextField(
                     value = loginViewModel.firstName,
@@ -71,23 +88,6 @@ fun CreateUserWindow(
                     },
                     label = { Text("Telefon") },
                     keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
-                )
-
-                // Email field
-                OutlinedTextField(
-                    value = loginViewModel.email,
-                    onValueChange = { loginViewModel.email = it },
-                    label = { Text("Email") },
-                    keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Email)
-                )
-
-                // Password field
-                OutlinedTextField(
-                    value = loginViewModel.password,
-                    onValueChange = { loginViewModel.password = it },
-                    label = { Text("Kodeord") },
-                    visualTransformation = PasswordVisualTransformation(), // Hide password text
-                    keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Password)
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))
