@@ -12,10 +12,19 @@ class LoginViewModel : ViewModel() {
     // Define username and password properties with initial empty strings
     var email by mutableStateOf("")
     var password by mutableStateOf("")
+    var fullName by mutableStateOf("")
+    var phone by mutableStateOf("")
 
     // Create user function
     fun userCreate(navigateOnSuccess: () -> Unit, navigateOnFailure: () -> Unit) {
-        accountService.userCreate(email, password, navigateOnSuccess, navigateOnFailure)
+        accountService.userCreate(email, password, fullName, phone,
+            onResult = {
+                accountService.createUserInFirestore(fullName, phone)
+                navigateOnSuccess()
+            },
+            onFailure = {
+                navigateOnFailure()
+            })
     }
 
     fun userLogin(navigateOnSuccess: () -> Unit, navigateOnFailure: () -> Unit) {
