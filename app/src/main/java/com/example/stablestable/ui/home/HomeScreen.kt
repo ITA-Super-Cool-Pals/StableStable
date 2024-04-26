@@ -1,6 +1,8 @@
 package com.example.stablestable.ui.home
 
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -20,13 +22,17 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.TextButton
+import androidx.compose.ui.res.stringResource
 import com.example.stablestable.R
 import com.example.stablestable.ui.Screen
 
 
 @Composable
 fun HomeScreen(navController: NavController) {
+    val viewModel = viewModel<HomeViewModel>()
 
     Box(
         modifier = Modifier
@@ -49,7 +55,7 @@ fun HomeScreen(navController: NavController) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ){
                 Text(
-                    text = "Stable Name",
+                    text = "Stald Navn",
                     modifier = Modifier,
                     textAlign = TextAlign.Left,
                     fontSize = 35.sp
@@ -59,6 +65,9 @@ fun HomeScreen(navController: NavController) {
                     contentDescription = "Notification Bell",
                     modifier = Modifier
                         .size(30.dp) // Adjust the size as needed
+                        .clickable {
+                            viewModel.setNotificationDialogStateToTrue()
+                        }
                 )
             }
         }
@@ -91,7 +100,9 @@ fun HomeScreen(navController: NavController) {
                             .padding(vertical = 15.dp), // Add padding between buttons
                         shape = RoundedCornerShape(12.dp)
                     ) {
-                        Text("Profile", fontSize = 10.sp)
+                        Text(
+                            text = stringResource(R.string.profil),
+                            fontSize = 10.sp)
                     }
                     Button(
                         onClick = {
@@ -104,7 +115,9 @@ fun HomeScreen(navController: NavController) {
                             .padding(vertical = 15.dp), // Add padding between buttons
                         shape = RoundedCornerShape(12.dp)
                     ) {
-                        Text("Fodder Plan", fontSize = 10.sp)
+                        Text(
+                            text = stringResource(R.string.foderplan),
+                            fontSize = 10.sp)
                     }
                     Button(
                         onClick = {
@@ -117,7 +130,9 @@ fun HomeScreen(navController: NavController) {
                             .padding(vertical = 15.dp), // Add padding between buttons
                         shape = RoundedCornerShape(12.dp)
                     ) {
-                        Text("Horses", fontSize = 10.sp)
+                        Text(
+                            text = stringResource(R.string.kalender),
+                            fontSize = 10.sp)
                     }
                     Button(
                         onClick = {
@@ -130,7 +145,9 @@ fun HomeScreen(navController: NavController) {
                             .padding(vertical = 15.dp), // Add padding between buttons
                         shape = RoundedCornerShape(12.dp)
                     ) {
-                        Text("FAQ", fontSize = 10.sp)
+                        Text(
+                            text = stringResource(R.string.faq),
+                            fontSize = 10.sp)
                     }
                 }
                 Column{
@@ -145,7 +162,9 @@ fun HomeScreen(navController: NavController) {
                             .padding(vertical = 15.dp), // Add padding between buttons
                         shape = RoundedCornerShape(12.dp)
                     ) {
-                        Text("Calendar", fontSize = 10.sp)
+                        Text(
+                            text = stringResource(R.string.vagtplan),
+                            fontSize = 10.sp)
                     }
                     Button(
                         onClick = {
@@ -158,7 +177,9 @@ fun HomeScreen(navController: NavController) {
                             .padding(vertical = 15.dp), // Add padding between buttons
                         shape = RoundedCornerShape(12.dp)
                     ) {
-                        Text("Shifts", fontSize = 10.sp)
+                        Text(
+                            text = stringResource(R.string.ryttere),
+                            fontSize = 10.sp)
                     }
                     Button(
                         onClick = {
@@ -171,7 +192,9 @@ fun HomeScreen(navController: NavController) {
                             .padding(vertical = 15.dp), // Add padding between buttons
                         shape = RoundedCornerShape(12.dp)
                     ) {
-                        Text("Riders", fontSize = 10.sp)
+                        Text(
+                            text = stringResource(R.string.heste),
+                            fontSize = 10.sp)
                     }
                     Button(
                         onClick = {
@@ -190,4 +213,43 @@ fun HomeScreen(navController: NavController) {
             }
         }
     }
+    if (viewModel.showNotificationDialog) {
+        NotificationsDialog()
+    }
+}
+@Composable
+private fun NotificationsDialog(
+    //listOfNotifications: List<String>,
+    modifier: Modifier = Modifier
+) {
+    val viewModel = viewModel<HomeViewModel>()
+
+    AlertDialog(
+        onDismissRequest = {
+            viewModel.setNotificationDialogStateToFalse()
+        },
+        title = {
+            Text(
+                text = stringResource(R.string.notifikationer)
+            ) },
+        text = {
+               Text(
+                   text = "Test-notifikation 01"
+               ) },
+        modifier = modifier,
+        dismissButton = {
+            TextButton(
+                onClick = {
+                    viewModel.setNotificationDialogStateToFalse()
+                }
+            ) {
+                Text(
+                    text = stringResource(R.string.luk)
+                )
+            }
+        },
+        confirmButton = {
+
+        }
+    )
 }
