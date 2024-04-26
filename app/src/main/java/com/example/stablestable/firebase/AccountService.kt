@@ -6,7 +6,7 @@ import com.google.firebase.firestore.firestore
 
 class AccountService {
     // Create User
-    fun userCreate(email: String, password: String, fullName: String, phone: String, onResult: () -> Unit, onFailure: () -> Unit) {
+    fun userCreate(email: String, password: String, onResult: () -> Unit, onFailure: () -> Unit) {
         Firebase.auth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener {
                 onResult()
