@@ -1,5 +1,6 @@
 package com.example.stablestable.firebase
 
+import android.util.Log
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
@@ -56,20 +57,15 @@ class AccountService {
 
             // Set the user document
             userDocRef.set(userData)
-                .addOnSuccessListener {
-
-                }
-                .addOnFailureListener { err ->
-
-                }
+                .addOnSuccessListener {}
+                .addOnFailureListener {}
         } else {
-            // User not authenticated
-            // Handle accordingly
+            Log.e("CreateUserInFirestore", "User is not authenticated")
         }
     }
 
     // Fetch user data from Firebase
-    fun fetchUserData(onSuccess: (Map<String, Any>) -> Unit, onFailure: () -> Unit) {
+    fun fetchUserData(onSuccess: (Map<String, Any>) -> Unit, onFailure: (String) -> Unit) {
         val db = Firebase.firestore
         val currentUser = Firebase.auth.currentUser
 
@@ -90,22 +86,25 @@ class AccountService {
                         if (userData != null) {
                             onSuccess(userData)
                         } else {
-                            onFailure()
+                            onFailure("ERROR: User data does not exist")
+                            Log.e("FetchUserData", "User data does not exist")
                         }
                     } else {
-                        onFailure()
+                        onFailure("ERROR: User document does not exist")
+                        Log.e("FetchUserData", "User document does not exist")
                     }
                 }
                 .addOnFailureListener { exception ->
-                    onFailure()
+                    onFailure(exception.message?: "ERROR: Failed to get user data: Unknown error")
                 }
         } else {
-            onFailure()
+            onFailure("ERROR: User not authenticated")
+            Log.e("FetchUserData", "User not authenticated")
         }
     }
 
     // Fetch all user data based on logged in users stable
-    fun fetchAllUserData(onSuccess: (List<Map<String, Any>>) -> Unit, onFailure: () -> Unit) {
+    fun fetchAllUserData(onSuccess: (List<Map<String, Any>>) -> Unit, onFailure: (String) -> Unit) {
         val db = Firebase.firestore
         val currentUser = Firebase.auth.currentUser
         var stableId: String
@@ -142,22 +141,24 @@ class AccountService {
                                 onSuccess(userDataList)
                             }
                             .addOnFailureListener { exception ->
-                                onFailure()
+                                onFailure(exception.message?: "Could not query documents, unknown error")
                             }
                     } else {
-                        onFailure()
+                        onFailure("ERROR: Collection does not exist")
+                        Log.e("fetchAllUserData", "Collection does not exist")
                     }
                 }
                 .addOnFailureListener { exception ->
-                    onFailure()
+                    onFailure(exception.message?: "Could not get collection, unknown error")
                 }
         } else {
-            onFailure()
+            onFailure("ERROR: User not authenticated")
+            Log.e("FetchAllUserData", "User not authenticated")
         }
     }
 
     // Update user data in Firebase
-    fun updateUserData(email: String, onSuccess: () -> Unit, onFailure: () -> Unit) {
+    fun updateUserData(email: String, onSuccess: () -> Unit, onFailure: (String) -> Unit) {
         // TODO: Decide what user information should be updated, and how it should be updated
         // TODO: Separate functions? All in one, with all info at once?
         val db = Firebase.firestore
@@ -173,11 +174,12 @@ class AccountService {
                 .addOnSuccessListener {
                     onSuccess()
                 }
-                .addOnFailureListener {
-                    onFailure()
+                .addOnFailureListener { exception ->
+                    onFailure(exception.message?: "Failed to update user data, unknown error")
                 }
         } else {
-            onFailure()
+            onFailure("ERROR: Could not authenticate user")
+            Log.e("updateUserData", "Could not authenticate user")
         }
     }
 }
