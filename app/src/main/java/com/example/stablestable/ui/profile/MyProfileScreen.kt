@@ -40,7 +40,7 @@ fun MyProfileScreen(
                 .background(Color.Red)) {
             }
             Spacer(modifier = Modifier.width(width = 16.dp))
-            Text(text = "Name McNameson", fontSize = 26.sp, modifier = Modifier
+            Text(text = profileViewModel.fullname, fontSize = 26.sp, modifier = Modifier
                 .align(Alignment.CenterVertically))
         }
         Row(modifier=Modifier.padding(start = 16.dp,top = 50.dp)) {
@@ -51,7 +51,7 @@ fun MyProfileScreen(
                 .align(Alignment.CenterVertically)) {
             }
             Text(text = "Tlf:", fontSize = 16.sp, textAlign = TextAlign.Center)
-            Text(text = "+45 11 11 11 11", modifier = Modifier
+            Text(text = profileViewModel.phone, modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 26.dp),fontSize = 16.sp)
 
@@ -64,15 +64,20 @@ fun MyProfileScreen(
                 .align(Alignment.CenterVertically)) {
             }
             Text(text = "Mail:",fontSize = 16.sp)
-            Text(text = "test@mail.dk", modifier = Modifier
+            Text(text = profileViewModel.mail, modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 15.dp),fontSize = 16.sp)
 
         }
+        /*
         Button(onClick = { profileViewModel.fetchOne() },
-            modifier = Modifier.fillMaxWidth().height(height = 60.dp).padding(top=16.dp)) {
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(height = 60.dp)
+                .padding(top = 16.dp)) {
             Text(text = "Click to Fetch data", color = Color.White)
         }
+         */
     }
 }
 
