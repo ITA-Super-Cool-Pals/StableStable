@@ -9,6 +9,7 @@ import com.example.stablestable.ui.home.HomeScreen
 import com.example.stablestable.ui.login.LoginScreen
 import com.example.stablestable.ui.profile.MyProfileScreen
 import com.example.stablestable.ui.stable.StableScreen
+import com.example.stablestable.ui.stable.StableUsers
 
 @Composable
 fun SetupNavGraph(
@@ -55,6 +56,12 @@ fun SetupNavGraph(
             route = Screen.CalendarScreen.route
         ) {
             CalendarScreen(navController = navController)
+        }
+
+        composable(
+            route = Screen.StableUsers.route
+        ) {
+            StableUsers(navController = navController)
         }
     }
 }

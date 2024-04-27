@@ -79,15 +79,15 @@ fun HomeScreen(navController: NavController) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(
-                        start = 30.dp,
+                        start = 15.dp,
                         top = 200.dp,
-                        end = 30.dp,
-                        bottom = 100.dp
+                        end = 15.dp,
+                        bottom = 20.dp
                     ),
                 horizontalArrangement = Arrangement.SpaceBetween
             )
             {
-                Column {
+                Column(modifier = Modifier.padding(horizontal = 10.dp)) {
                     // Login Button
                     Button(
                         onClick = {
@@ -95,8 +95,8 @@ fun HomeScreen(navController: NavController) {
                             navController.navigate(route = Screen.MyProfileScreen.route)
                         },
                         modifier = Modifier
-                            .width(130.dp)
-                            .height(130.dp)
+                            .width(100.dp)
+                            .height(100.dp)
                             .padding(vertical = 15.dp), // Add padding between buttons
                         shape = RoundedCornerShape(12.dp)
                     ) {
@@ -105,13 +105,14 @@ fun HomeScreen(navController: NavController) {
                             fontSize = 10.sp)
                     }
                     Button(
+                        enabled = false,
                         onClick = {
                             // TODO: Implement login logic
                             /* navController.navigate(route = Screen.FodderPlanScreen.route)*/
                         },
                         modifier = Modifier
-                            .width(130.dp)
-                            .height(130.dp)
+                            .width(100.dp)
+                            .height(100.dp)
                             .padding(vertical = 15.dp), // Add padding between buttons
                         shape = RoundedCornerShape(12.dp)
                     ) {
@@ -120,13 +121,14 @@ fun HomeScreen(navController: NavController) {
                             fontSize = 10.sp)
                     }
                     Button(
+                        enabled = false,
                         onClick = {
                             // TODO: Implement login logic
                             /* navController.navigate(route = Screen.HorsesScreen.route)*/
                         },
                         modifier = Modifier
-                            .width(130.dp)
-                            .height(130.dp)
+                            .width(100.dp)
+                            .height(100.dp)
                             .padding(vertical = 15.dp), // Add padding between buttons
                         shape = RoundedCornerShape(12.dp)
                     ) {
@@ -135,13 +137,14 @@ fun HomeScreen(navController: NavController) {
                             fontSize = 10.sp)
                     }
                     Button(
+                        enabled = false,
                         onClick = {
                             // TODO: Implement login logic
                             /*navController.navigate(route = Screen.FaqScreen.route)*/
                         },
                         modifier = Modifier
-                            .width(130.dp)
-                            .height(130.dp)
+                            .width(100.dp)
+                            .height(100.dp)
                             .padding(vertical = 15.dp), // Add padding between buttons
                         shape = RoundedCornerShape(12.dp)
                     ) {
@@ -152,13 +155,14 @@ fun HomeScreen(navController: NavController) {
                 }
                 Column{
                     Button(
+                        enabled = false,
                         onClick = {
                             // TODO: Implement login logic
                             navController.navigate(route = Screen.CalendarScreen.route)
                         },
                         modifier = Modifier
-                            .width(130.dp)
-                            .height(130.dp)
+                            .width(100.dp)
+                            .height(100.dp)
                             .padding(vertical = 15.dp), // Add padding between buttons
                         shape = RoundedCornerShape(12.dp)
                     ) {
@@ -168,12 +172,11 @@ fun HomeScreen(navController: NavController) {
                     }
                     Button(
                         onClick = {
-                            // TODO: Implement login logic
-                            /* navController.navigate(route = Screen.ShiftsScreen.route)*/
+                            navController.navigate(route = Screen.StableUsers.route)
                         },
                         modifier = Modifier
-                            .width(130.dp)
-                            .height(130.dp)
+                            .width(100.dp)
+                            .height(100.dp)
                             .padding(vertical = 15.dp), // Add padding between buttons
                         shape = RoundedCornerShape(12.dp)
                     ) {
@@ -182,13 +185,14 @@ fun HomeScreen(navController: NavController) {
                             fontSize = 10.sp)
                     }
                     Button(
+                        enabled = false,
                         onClick = {
                             // TODO: Implement login logic
                             /* navController.navigate(route = Screen.RidersScreen.route)*/
                         },
                         modifier = Modifier
-                            .width(130.dp)
-                            .height(130.dp)
+                            .width(100.dp)
+                            .height(100.dp)
                             .padding(vertical = 15.dp), // Add padding between buttons
                         shape = RoundedCornerShape(12.dp)
                     ) {
@@ -197,13 +201,14 @@ fun HomeScreen(navController: NavController) {
                             fontSize = 10.sp)
                     }
                     Button(
+                        enabled = false,
                         onClick = {
                             // TODO: Implement login logic
                             /* navController.navigate(route = Screen.BoardScreen.route)*/
                         },
                         modifier = Modifier
-                            .width(130.dp)
-                            .height(130.dp)
+                            .width(100.dp)
+                            .height(100.dp)
                             .padding(vertical = 15.dp), // Add padding between buttons
                         shape = RoundedCornerShape(12.dp)
                     ) {

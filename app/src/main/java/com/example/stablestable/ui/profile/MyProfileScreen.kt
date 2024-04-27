@@ -50,7 +50,6 @@ fun MyProfileScreen(
                 .align(Alignment.CenterVertically))
         }
         Row(modifier=Modifier.padding(start = 16.dp,top = 50.dp)) {
-
             Text(text = "Tlf:", fontSize = 16.sp, textAlign = TextAlign.Center)
             Text(text = profileViewModel.phone, modifier = Modifier
                 .fillMaxWidth()

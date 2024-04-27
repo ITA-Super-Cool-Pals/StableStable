@@ -6,4 +6,5 @@ sealed class Screen(val route: String) {
     object MyProfileScreen: Screen(route = "myProfile_screen")
     object StableScreen: Screen(route = "stable_screen")
     object CalendarScreen: Screen(route = "calendar_screen")
+    object StableUsers: Screen(route = "user_list")
 }
