@@ -17,7 +17,7 @@ fun SetupNavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.StableUsers.route
+        startDestination = Screen.HomeScreen.route
     ) {
         // Login Screen Route
 

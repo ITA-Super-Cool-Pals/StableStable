@@ -168,8 +168,7 @@ fun HomeScreen(navController: NavController) {
                     }
                     Button(
                         onClick = {
-                            // TODO: Implement login logic
-                            /* navController.navigate(route = Screen.ShiftsScreen.route)*/
+                            navController.navigate(route = Screen.StableUsers.route)
                         },
                         modifier = Modifier
                             .width(130.dp)
