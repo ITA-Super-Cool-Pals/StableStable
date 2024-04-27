@@ -18,7 +18,7 @@ fun StableUsers(
 ) {
     val stableUsersViewModel = viewModel<StableUsersViewModel>()
 
-    val users = remember { stableUsersViewModel.nameList }
+    val users = stableUsersViewModel.nameList
 
     LazyColumn(
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
