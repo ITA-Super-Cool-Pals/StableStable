@@ -29,13 +29,11 @@ class ProfileViewModel: ViewModel() {
             fullname = r["fullname"].toString()
             phone = r["Phone"].toString()
             email = r["email"].toString()
-
         }, onFailure = {Log.d(TAG,"faliure")})
 
     }
 
     init {
-
         fetchOne()
     }
 }
