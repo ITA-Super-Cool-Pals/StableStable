@@ -14,7 +14,7 @@ class ProfileViewModel: ViewModel() {
     // This should be looked at if database change structure
     var fullname by mutableStateOf("")
     var phone by mutableStateOf("")
-    var mail by mutableStateOf("")
+    var email by mutableStateOf("")
 
     init {
         // TODO: This call should be made on login, and save the profile to local memory. Possibly via Object
@@ -28,7 +28,7 @@ class ProfileViewModel: ViewModel() {
         accountService.fetchUserData(onSuccess = {r: Map<String, Any> ->
             fullname = r["fullname"].toString()
             phone = r["Phone"].toString()
-            mail = r["mail"].toString()
+            email = r["email"].toString()
 
         }, onFailure = {Log.d(TAG,"faliure")})
 
