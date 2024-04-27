@@ -16,24 +16,22 @@ class ProfileViewModel: ViewModel() {
     var phone by mutableStateOf("")
     var email by mutableStateOf("")
 
-    init {
-        // TODO: This call should be made on login, and save the profile to local memory. Possibly via Object
-        fetchOne()
-    }
-
-
 
     // Fetch current user details and pass it to ViewModel
-    fun fetchOne() {
+    private fun fetchOne() {
         accountService.fetchUserData(onSuccess = {r: Map<String, Any> ->
-            fullname = r["fullname"].toString()
-            phone = r["Phone"].toString()
-            email = r["email"].toString()
+            val contactInfo:Map<String,Any> = r["contact-information"] as Map<String, Any>
+            fullname = r["firstname"].toString()+" "+r["lastname"].toString()
+
+            phone = contactInfo["phone"].toString()
+            email = contactInfo["email"].toString()
+
         }, onFailure = {Log.d(TAG,"faliure")})
 
     }
 
     init {
+        // TODO: This call should be made on login, and save the profile to local memory. Possibly via Object
         fetchOne()
     }
 }
