@@ -1,9 +1,11 @@
 package com.example.stablestable.firebase
 
+import android.content.ContentValues.TAG
 import android.util.Log
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
+import com.google.firebase.firestore.toObject
 
 class AccountService {
     // Create User
@@ -82,6 +84,7 @@ class AccountService {
                     // Check if document exists
                     if (document.exists()) {
                         // Convert document data to a Map
+                        Log.d(TAG, "DocumentSnapshot data: ${document.data}")
                         val userData = document.data
                         if (userData != null) {
                             onSuccess(userData)
