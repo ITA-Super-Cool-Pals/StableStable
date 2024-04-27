@@ -10,16 +10,17 @@ import com.example.stablestable.firebase.AccountService
 
 
 class ProfileViewModel: ViewModel() {
-
-    init {
-        fetchOne()
-    }
-
     private val accountService: AccountService = AccountService()
     // This should be looked at if database change structure
     var fullname by mutableStateOf("")
     var phone by mutableStateOf("")
     var mail by mutableStateOf("")
+
+    init {
+        // TODO: This call should be made on login, and save the profile to local memory. Possibly via Object
+        fetchOne()
+    }
+
 
 
     // Fetch current user details and pass it to ViewModel
@@ -33,6 +34,8 @@ class ProfileViewModel: ViewModel() {
 
     }
 
+    init {
 
-
+        fetchOne()
+    }
 }
