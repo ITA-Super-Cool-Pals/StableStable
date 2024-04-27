@@ -25,7 +25,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun CreateUserWindow(
-    onConfirm: (String, String, String, String) -> Unit,
+    onConfirm: (String, String, String, String, String) -> Unit,
     onDismiss: () -> Unit
 ) {
     Dialog(
@@ -40,35 +40,14 @@ fun CreateUserWindow(
 
             Column {
                 Text(
-                    "User Registration",
+                    "Bruger Registrering",
                     modifier = Modifier
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
+                        .padding(bottom = 10.dp),
                     style = MaterialTheme.typography.headlineSmall,
                     textAlign = TextAlign.Center
                 )
 
-                Spacer(modifier = Modifier.height(16.dp))
-                // Name Field
-                OutlinedTextField(
-                    value = loginViewModel.fullName,
-                    onValueChange = { loginViewModel.fullName = it },
-                    label = { Text("Name") }
-                )
-
-                Spacer(modifier = Modifier.height(8.dp))
-                // Phone Field
-                OutlinedTextField(
-                    value = loginViewModel.phone,
-                    onValueChange = {
-                        if (it.all { char -> char.isDigit() }) {
-                            loginViewModel.phone = it
-                        }
-                    },
-                    label = { Text("Phone") },
-                    keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
-                )
-
-                Spacer(modifier = Modifier.height(8.dp))
                 // Email field
                 OutlinedTextField(
                     value = loginViewModel.email,
@@ -77,33 +56,67 @@ fun CreateUserWindow(
                     keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Email)
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
                 // Password field
                 OutlinedTextField(
                     value = loginViewModel.password,
                     onValueChange = { loginViewModel.password = it },
-                    label = { Text("Password") },
+                    label = { Text("Kodeord") },
                     visualTransformation = PasswordVisualTransformation(), // Hide password text
                     keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Password)
                 )
 
+                // First name
+                OutlinedTextField(
+                    value = loginViewModel.firstName,
+                    onValueChange = { loginViewModel.firstName = it },
+                    label = { Text("Fornavn") }
+                )
+                // Last name
+                OutlinedTextField(
+                    value = loginViewModel.lastName,
+                    onValueChange = { loginViewModel.lastName = it },
+                    label = { Text("Efternavn") }
+                )
+
+                // Phone Field
+                OutlinedTextField(
+                    value = loginViewModel.phone,
+                    onValueChange = {
+                        if (it.all { char -> char.isDigit() }) {
+                            loginViewModel.phone = it
+                        }
+                    },
+                    label = { Text("Telefon") },
+                    keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
+                )
+
                 Spacer(modifier = Modifier.height(8.dp))
+
                 Button(
                     onClick = {
                         onConfirm(
-                            loginViewModel.fullName,
-                            loginViewModel.phone,
                             loginViewModel.email,
-                            loginViewModel.password
+                            loginViewModel.password,
+                            loginViewModel.firstName,
+                            loginViewModel.lastName,
+                            loginViewModel.phone
                         )
-                        onDismiss()
                     },
                     modifier = Modifier
                         .padding(vertical = 8.dp)
                         .fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp)
                 ) {
-                    Text("Create Account")
+                    Text("Opret Bruger")
+                }
+
+                if (loginViewModel.createUserErrorMessage != "") {
+                    Text(
+                        loginViewModel.createUserErrorMessage,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = Color.Red,
+                        modifier = Modifier.padding(top = 8.dp)
+                    )
                 }
             }
         }
