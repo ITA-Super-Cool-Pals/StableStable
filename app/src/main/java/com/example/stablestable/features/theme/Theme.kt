@@ -1,4 +1,4 @@
-package com.example.stablestable.ui.theme
+package com.example.stablestable.features.theme
 
 import android.app.Activity
 import android.os.Build

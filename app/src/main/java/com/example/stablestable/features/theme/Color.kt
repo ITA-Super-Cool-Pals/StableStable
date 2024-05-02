@@ -1,4 +1,4 @@
-package com.example.stablestable.ui.theme
+package com.example.stablestable.features.theme
 
 import androidx.compose.ui.graphics.Color
 

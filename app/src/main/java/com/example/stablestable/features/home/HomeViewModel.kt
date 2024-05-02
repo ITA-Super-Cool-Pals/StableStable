@@ -1,4 +1,4 @@
-package com.example.stablestable.ui.home
+package com.example.stablestable.features.home
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
