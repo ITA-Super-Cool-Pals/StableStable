@@ -24,7 +24,6 @@ android {
     buildTypes {
         create("customDebugType") {
             isDebuggable = true
-
         }
         release {
             isMinifyEnabled = false

@@ -1,4 +1,4 @@
-package com.example.stablestable.components
+package com.example.stablestable.ui.login
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -22,7 +22,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.stablestable.ui.login.LoginViewModel
 
 /*
  * Create User Window
