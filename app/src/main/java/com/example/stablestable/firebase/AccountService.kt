@@ -59,17 +59,6 @@ class AccountService {
                 phone = phone
             )
 
-            /*val userData = hashMapOf(
-                "firstname" to firstName,
-                "lastname" to lastName,
-                "contact-information" to hashMapOf(
-                    "email" to currentUser.email,
-                    "phone" to phone
-                ),
-                "stable-id" to "69"
-                // TODO: Add more data fields for account creation
-            )*/
-
             // Set the user document
             userDocRef.set(userData)
                 .addOnSuccessListener {}
