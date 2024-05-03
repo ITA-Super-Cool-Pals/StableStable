@@ -12,7 +12,7 @@ import com.example.stablestable.firebase.AccountService
 class ProfileViewModel: ViewModel() {
     private val accountService: AccountService = AccountService()
     // This should be looked at if database change structure
-    var fullname by mutableStateOf("")
+    var fullName by mutableStateOf("")
     var phone by mutableStateOf("")
     var email by mutableStateOf("")
 
@@ -20,11 +20,10 @@ class ProfileViewModel: ViewModel() {
     // Fetch current user details and pass it to ViewModel
     private fun fetchOne() {
         accountService.fetchUserData(onSuccess = {r: Map<String, Any> ->
-            val contactInfo:Map<String,Any> = r["contact-information"] as Map<String, Any>
-            fullname = r["firstname"].toString()+" "+r["lastname"].toString()
+            fullName = r["firstName"].toString()+" "+r["lastName"].toString()
 
-            phone = contactInfo["phone"].toString()
-            email = contactInfo["email"].toString()
+            phone = r["phone"].toString()
+            email = r["email"].toString()
 
         }, onFailure = {Log.d(TAG,"faliure")})
 

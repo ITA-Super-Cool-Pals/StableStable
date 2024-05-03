@@ -1,4 +1,4 @@
-package com.example.stablestable.ui
+package com.example.stablestable.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
@@ -9,7 +9,7 @@ import com.example.stablestable.ui.home.HomeScreen
 import com.example.stablestable.ui.login.LoginScreen
 import com.example.stablestable.ui.profile.MyProfileScreen
 import com.example.stablestable.ui.stable.StableScreen
-import com.example.stablestable.ui.stable.StableUsers
+import com.example.stablestable.components.StableUsers
 
 @Composable
 fun SetupNavGraph(
@@ -25,8 +25,7 @@ fun SetupNavGraph(
             route = Screen.LoginScreen.route
         ) {
             LoginScreen(
-                onRegistrationSuccess = { navController.navigate(Screen.HomeScreen.route) },
-                onRegistrationFailure = {}
+                onRegistrationSuccess = { navController.navigate(Screen.HomeScreen.route) }
             )
         }
 

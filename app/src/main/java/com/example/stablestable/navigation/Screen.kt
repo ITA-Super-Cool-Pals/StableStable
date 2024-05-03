@@ -1,4 +1,4 @@
-package com.example.stablestable.ui
+package com.example.stablestable.navigation
 
 sealed class Screen(val route: String) {
     object LoginScreen: Screen(route = "login_screen")

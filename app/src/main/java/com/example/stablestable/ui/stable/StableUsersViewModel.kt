@@ -15,9 +15,9 @@ class StableUsersViewModel: ViewModel() {
     private fun fetchUserList(){
         accountService.fetchAllUserData(onSuccess = {l:List<Map<String,Any>> ->
             for (map in l) {
-                val firstname = map["firstname"] as String
-                val lastname = map["lastname"] as String
-                nameList.add("$firstname $lastname")
+                val firstName = map["firstName"] as String
+                val lastName = map["lastName"] as String
+                nameList.add("$firstName $lastName")
             }
 
         }, onFailure={s:String -> Log.d(TAG,s)})

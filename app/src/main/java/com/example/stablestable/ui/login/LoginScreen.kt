@@ -27,22 +27,22 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
-import com.example.stablestable.ui.Screen
+import com.example.stablestable.components.CreateUserWindow
+
+/*
+ * Login Screen
+ * Code by Emily
+ */
 
 @Composable
 fun LoginScreen(
-    onRegistrationSuccess:()->Unit,
-    onRegistrationFailure: ()->Unit
+    onRegistrationSuccess: () -> Unit
 ) {
-    // Variable to track user window creation state
-    var createUserWindowVisible by remember { mutableStateOf(false) }
-
     Box(
         Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        val loginViewModel = viewModel<LoginViewModel>()
+        val viewModel = viewModel<LoginViewModel>()
 
         Column(
             modifier = Modifier
@@ -62,8 +62,8 @@ fun LoginScreen(
 
             // Username Field
             OutlinedTextField(
-                value = loginViewModel.email,
-                onValueChange = { loginViewModel.email = it },
+                value = viewModel.email,
+                onValueChange = { viewModel.email = it },
                 label = { Text("Email") },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -73,8 +73,8 @@ fun LoginScreen(
 
             // Password Field
             OutlinedTextField(
-                value = loginViewModel.password,
-                onValueChange = { loginViewModel.password = it },
+                value = viewModel.password,
+                onValueChange = { viewModel.password = it },
                 label = { Text("Kodeord") },
                 visualTransformation = PasswordVisualTransformation(), // Hide password text
                 modifier = Modifier
@@ -92,10 +92,10 @@ fun LoginScreen(
                 // Login Button
                 Button(
                     onClick = {
-                        loginViewModel.userLogin(
-                            navigateOnSuccess = onRegistrationSuccess,
+                        viewModel.userLogin(
+                            onRegistrationSuccess,
                             navigateOnFailure = { errorMessage ->
-                                loginViewModel.loginErrorMessage = errorMessage
+                                viewModel.loginErrorMessage = errorMessage
                             }
                         )
                     },
@@ -110,7 +110,7 @@ fun LoginScreen(
                 // Create User Button
                 Button(
                     onClick = {
-                        createUserWindowVisible = true
+                        viewModel.showCreateUserWindow = true
                     },
                     modifier = Modifier
                         .weight(1f) // Assign equal weight to both buttons to ensure same size
@@ -121,9 +121,9 @@ fun LoginScreen(
                 }
             }
 
-            if (loginViewModel.loginErrorMessage != "") {
+            if (viewModel.loginErrorMessage != "") {
                 Text(
-                    loginViewModel.loginErrorMessage,
+                    viewModel.loginErrorMessage,
                     style = MaterialTheme.typography.bodySmall,
                     color = Color.Red,
                     modifier = Modifier.padding(top = 8.dp)
@@ -131,27 +131,27 @@ fun LoginScreen(
             }
         }
 
-        // Display CreateUserWindow dialog if createUserWindowVisible is true
-        if (createUserWindowVisible) {
+        // Display CreateUserWindow dialog if showCreateUserWindow is true
+        if (viewModel.showCreateUserWindow) {
             CreateUserWindow(
                 onConfirm = { email, password, firstName, lastName, phone ->
                     // Handle user creation here with additional information (fullname, phone)
-                    loginViewModel.firstName = firstName
-                    loginViewModel.lastName = lastName
-                    loginViewModel.phone = phone
-                    loginViewModel.email = email
-                    loginViewModel.password = password
-                    loginViewModel.userCreate(
+                    viewModel.firstName = firstName
+                    viewModel.lastName = lastName
+                    viewModel.phone = phone
+                    viewModel.email = email
+                    viewModel.password = password
+                    viewModel.userCreate(
                         navigateOnSuccess = {
                             onRegistrationSuccess()
-                            createUserWindowVisible = false
+                            viewModel.showCreateUserWindow = false
                         },
                         navigateOnFailure = {
                         }
                     )
                 },
                 onDismiss = {
-                    createUserWindowVisible = false // Dismiss window if dismissed
+                    viewModel.showCreateUserWindow = false // Dismiss window if dismissed
                 }
             )
         }
