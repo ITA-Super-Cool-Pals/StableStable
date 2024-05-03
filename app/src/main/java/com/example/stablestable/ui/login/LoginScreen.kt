@@ -28,14 +28,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
+/*
+ * Login Screen
+ * Code by Emily
+ */
+
 @Composable
 fun LoginScreen(
     onRegistrationSuccess: () -> Unit,
     onRegistrationFailure: () -> Unit
 ) {
-    // Variable to track user window creation state
-    var createUserWindowVisible by remember { mutableStateOf(false) }
-
     Box(
         Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
@@ -108,7 +110,7 @@ fun LoginScreen(
                 // Create User Button
                 Button(
                     onClick = {
-                        createUserWindowVisible = true
+                        loginViewModel.showCreateUserWindow = true
                     },
                     modifier = Modifier
                         .weight(1f) // Assign equal weight to both buttons to ensure same size
@@ -129,8 +131,8 @@ fun LoginScreen(
             }
         }
 
-        // Display CreateUserWindow dialog if createUserWindowVisible is true
-        if (createUserWindowVisible) {
+        // Display CreateUserWindow dialog if showCreateUserWindow is true
+        if (loginViewModel.showCreateUserWindow) {
             CreateUserWindow(
                 onConfirm = { email, password, firstName, lastName, phone ->
                     // Handle user creation here with additional information (fullname, phone)
@@ -142,14 +144,14 @@ fun LoginScreen(
                     loginViewModel.userCreate(
                         navigateOnSuccess = {
                             onRegistrationSuccess()
-                            createUserWindowVisible = false
+                            loginViewModel.showCreateUserWindow = false
                         },
                         navigateOnFailure = {
                         }
                     )
                 },
                 onDismiss = {
-                    createUserWindowVisible = false // Dismiss window if dismissed
+                    loginViewModel.showCreateUserWindow = false // Dismiss window if dismissed
                 }
             )
         }

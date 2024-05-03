@@ -1,4 +1,4 @@
-package com.example.stablestable.ui
+package com.example.stablestable.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController

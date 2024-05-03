@@ -23,6 +23,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.viewmodel.compose.viewModel
 
+/*
+ * Create User Window
+ * Code by Emily
+ */
+
 @Composable
 fun CreateUserWindow(
     onConfirm: (String, String, String, String, String) -> Unit,

@@ -7,6 +7,11 @@ import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.toObject
 
+/*
+ * Firebase Account and Database integration
+ * Code by Emily
+ */
+
 class AccountService {
     // Create User
     fun userCreate(email: String, password: String, onResult: () -> Unit, onFailure: (String) -> Unit) {
@@ -26,7 +31,7 @@ class AccountService {
                 onResult()
             }
             .addOnFailureListener { exception ->
-                onFailure(exception.message ?: "Login failed: Unknown error")
+                onFailure(exception.message?: "Login failed: Unknown error")
             }
     }
 
