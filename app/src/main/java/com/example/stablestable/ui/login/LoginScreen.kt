@@ -32,7 +32,8 @@ import com.example.stablestable.ui.Screen
 
 @Composable
 fun LoginScreen(
-    navController: NavController
+    onRegistrationSuccess:()->Unit,
+    onRegistrationFailure: ()->Unit
 ) {
     // Variable to track user window creation state
     var createUserWindowVisible by remember { mutableStateOf(false) }
@@ -92,7 +93,7 @@ fun LoginScreen(
                 Button(
                     onClick = {
                         loginViewModel.userLogin(
-                            { navController.navigate(route = Screen.HomeScreen.route)  },
+                            navigateOnSuccess = onRegistrationSuccess,
                             navigateOnFailure = { errorMessage ->
                                 loginViewModel.loginErrorMessage = errorMessage
                             }
@@ -142,7 +143,7 @@ fun LoginScreen(
                     loginViewModel.password = password
                     loginViewModel.userCreate(
                         navigateOnSuccess = {
-                            navController.navigate(route = Screen.HomeScreen.route)
+                            onRegistrationSuccess()
                             createUserWindowVisible = false
                         },
                         navigateOnFailure = {
