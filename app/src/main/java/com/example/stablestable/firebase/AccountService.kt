@@ -43,29 +43,29 @@ class AccountService {
         // Get the current authenticated userID
         val currentUser = Firebase.auth.currentUser
 
-        // Check if the user is authenticated
-        if (currentUser != null) {
-            // Get the user ID
-            val userId = currentUser.uid
-
-            // Create a reference to the user document using the UID
-            val userDocRef = db.collection("ryttere").document(userId)
-
-            // Add user data to Firestore
-            val userData = UserProfileClass(
-                firstName = firstName,
-                lastName = lastName,
-                email = currentUser.email,
-                phone = phone
-            )
-
-            // Set the user document
-            userDocRef.set(userData)
-                .addOnSuccessListener {}
-                .addOnFailureListener {}
-        } else {
+        if (currentUser == null) {
             Log.e("CreateUserInFirestore", "User is not authenticated")
+            return
         }
+
+        // Get the user ID
+        val userId = currentUser.uid
+
+        // Create a reference to the user document using the UID
+        val userDocRef = db.collection("ryttere").document(userId)
+
+        // Add user data to Firestore
+        val userData = UserProfileClass(
+            firstName = firstName,
+            lastName = lastName,
+            email = currentUser.email,
+            phone = phone
+        )
+
+        // Set the user document
+        userDocRef.set(userData)
+            .addOnSuccessListener {}
+            .addOnFailureListener {}
     }
 
     // Fetch user data from Firebase
@@ -73,39 +73,31 @@ class AccountService {
         val db = Firebase.firestore
         val currentUser = Firebase.auth.currentUser
 
-        // Check if user is authenticated
-        if (currentUser != null) {
-            // Get the user ID
-            val userId = currentUser.uid
-            // Get user data from database
-            val userDocRef = db.collection("ryttere").document(userId)
-
-            // Fetch the user data
-            userDocRef.get()
-                .addOnSuccessListener { document ->
-                    // Check if document exists
-                    if (document.exists()) {
-                        // Convert document data to a Map
-                        Log.d(TAG, "DocumentSnapshot data: ${document.data}")
-                        val userData = document.data
-                        if (userData != null) {
-                            onSuccess(userData)
-                        } else {
-                            onFailure("ERROR: User data does not exist")
-                            Log.e("FetchUserData", "User data does not exist")
-                        }
-                    } else {
-                        onFailure("ERROR: User document does not exist")
-                        Log.e("FetchUserData", "User document does not exist")
-                    }
-                }
-                .addOnFailureListener { exception ->
-                    onFailure(exception.message?: "ERROR: Failed to get user data: Unknown error")
-                }
-        } else {
+        if (currentUser == null) {
             onFailure("ERROR: User not authenticated")
             Log.e("FetchUserData", "User not authenticated")
+            return
         }
+
+        // Get the user ID
+        val userId = currentUser.uid
+        // Get user data from database
+        val userDocRef = db.collection("ryttere").document(userId)
+        // Fetch the user data
+        userDocRef.get()
+            .addOnSuccessListener { document ->
+                // Convert document data to a Map
+                Log.d(TAG, "DocumentSnapshot data: ${document.data}")
+                val userData = document.data
+
+                // If user data is not null, fetch user data
+                if (userData != null) {
+                    onSuccess(userData)
+                }
+            }
+            .addOnFailureListener { exception ->
+                onFailure(exception.message?: "ERROR: Failed to get user data: Unknown error")
+            }
     }
 
     // Fetch all user data based on logged in users stable
@@ -114,52 +106,48 @@ class AccountService {
         val currentUser = Firebase.auth.currentUser
         var stableId: String
 
-        if (currentUser != null) {
-            // Get the users current stable id
-            val userId = currentUser.uid
-            db.collection("ryttere").document(userId).get()
-                .addOnSuccessListener { collection ->
-                    if (collection.exists()) {
-                        // Set the stable ID
-                        stableId = collection.getString("stable-id").toString()
-
-                        // Get reference to the "ryttere" collection
-                        val userCollectionRef = db.collection("ryttere")
-
-                        // Query to filter documents based on stable ID
-                        val query = userCollectionRef.whereEqualTo("stable-id", stableId)
-
-                        // Fetch documents based on query
-                        query.get()
-                            .addOnSuccessListener { querySnapshot ->
-                                val userDataList = mutableListOf<Map<String, Any>>()
-
-                                // Iterate over each document in the query result
-                                for (document in querySnapshot.documents) {
-                                    // Convert docuument data to a Map and add it to the list
-                                    val userData = document.data
-                                    if (userData != null) {
-                                        userDataList.add(userData)
-                                    }
-                                }
-                                // Pass the list of user data to the success callback
-                                onSuccess(userDataList)
-                            }
-                            .addOnFailureListener { exception ->
-                                onFailure(exception.message?: "Could not query documents, unknown error")
-                            }
-                    } else {
-                        onFailure("ERROR: Collection does not exist")
-                        Log.e("fetchAllUserData", "Collection does not exist")
-                    }
-                }
-                .addOnFailureListener { exception ->
-                    onFailure(exception.message?: "Could not get collection, unknown error")
-                }
-        } else {
+        if (currentUser == null) {
             onFailure("ERROR: User not authenticated")
             Log.e("FetchAllUserData", "User not authenticated")
+            return
         }
+
+        // Get current authenticated users id
+        val userId = currentUser.uid
+        db.collection("ryttere").document(userId).get()
+            .addOnSuccessListener { collection ->
+                // Get stable ID
+                stableId = collection.getString("stableId").toString()
+
+                // Get reference to the "ryttere" collection
+                val userCollectionRef = db.collection("ryttere")
+
+                // Query to filter documents based on stable ID
+                val query = userCollectionRef.whereEqualTo("stableId", stableId)
+
+                // Fetch documents based on query
+                query.get()
+                    .addOnSuccessListener { querySnapshot ->
+                        val userDataList = mutableListOf<Map<String, Any>>()
+
+                        // Iterate over each document in the query result
+                        for (document in querySnapshot.documents) {
+                            // Convert docuument data to a Map and add it to the list
+                            val userData = document.data
+                            if (userData != null) {
+                                userDataList.add(userData)
+                            }
+                        }
+                        // Pass the list of user data to the success callback
+                        onSuccess(userDataList)
+                    }
+                    .addOnFailureListener { exception ->
+                        onFailure(exception.message ?: "Could not query documents, unknown error")
+                    }
+            }
+            .addOnFailureListener { exception ->
+                onFailure(exception.message ?: "Could not get collection, unknown error")
+            }
     }
 
     // Update user data in Firebase
@@ -169,22 +157,25 @@ class AccountService {
         val db = Firebase.firestore
         val currentUser = Firebase.auth.currentUser
 
-        // Check if current user is authenticated
-        if (currentUser != null) {
-            val userId = currentUser.uid
-            val userDocRef = db.collection("ryttere").document(userId)
-
-            // Update user data
-            userDocRef.update("email", email)
-                .addOnSuccessListener {
-                    onSuccess()
-                }
-                .addOnFailureListener { exception ->
-                    onFailure(exception.message?: "Failed to update user data, unknown error")
-                }
-        } else {
+        if (currentUser == null) {
             onFailure("ERROR: Could not authenticate user")
             Log.e("updateUserData", "Could not authenticate user")
+            return
         }
+
+        // Get current authenticated users id
+        val userId = currentUser.uid
+        // get reference to the users document in firebase database
+        val userDocRef = db.collection("ryttere").document(userId)
+
+        // Update the users data
+        // TODO: Update to follow new data class structure
+        userDocRef.update("email", email)
+            .addOnSuccessListener {
+                onSuccess()
+            }
+            .addOnFailureListener { exception ->
+                onFailure(exception.message?: "Failed to update user data, unknown error")
+            }
     }
 }
