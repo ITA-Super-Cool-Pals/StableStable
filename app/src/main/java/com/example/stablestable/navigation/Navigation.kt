@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.stablestable.ui.Screen
 import com.example.stablestable.ui.calendar.CalendarScreen
 import com.example.stablestable.ui.home.HomeScreen
 import com.example.stablestable.ui.login.LoginScreen
