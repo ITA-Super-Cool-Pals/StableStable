@@ -1,4 +1,4 @@
-package com.example.stablestable.features.profile
+package com.example.stablestable.ui.profile
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column

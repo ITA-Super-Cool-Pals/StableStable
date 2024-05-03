@@ -9,7 +9,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.stablestable.features.theme.StableStableTheme
+import com.example.stablestable.navigation.SetupNavGraph
+import com.example.stablestable.ui.theme.StableStableTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

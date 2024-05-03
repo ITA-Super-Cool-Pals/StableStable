@@ -22,7 +22,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.stablestable.features.login.LoginViewModel
+import com.example.stablestable.ui.login.LoginViewModel
 
 @Composable
 fun CreateUserWindow(

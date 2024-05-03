@@ -1,4 +1,4 @@
-package com.example.stablestable.features.stable
+package com.example.stablestable.ui.stable
 
 import android.content.ContentValues.TAG
 import android.util.Log

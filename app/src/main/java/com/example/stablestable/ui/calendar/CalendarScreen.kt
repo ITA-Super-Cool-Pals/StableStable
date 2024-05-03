@@ -1,4 +1,4 @@
-package com.example.stablestable.features.calendar
+package com.example.stablestable.ui.calendar
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text

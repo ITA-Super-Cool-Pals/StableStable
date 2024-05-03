@@ -1,4 +1,4 @@
-package com.example.stablestable.features.home
+package com.example.stablestable.ui.home
 
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.foundation.Image
@@ -27,7 +27,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.TextButton
 import androidx.compose.ui.res.stringResource
 import com.example.stablestable.R
-import com.example.stablestable.features.Screen
+import com.example.stablestable.ui.Screen
 
 
 @Composable

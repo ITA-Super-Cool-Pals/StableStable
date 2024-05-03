@@ -1,4 +1,4 @@
-package com.example.stablestable.features.theme
+package com.example.stablestable.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

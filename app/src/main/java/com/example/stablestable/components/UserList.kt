@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.stablestable.features.stable.StableUsersViewModel
+import com.example.stablestable.ui.stable.StableUsersViewModel
 
 @Composable
 fun StableUsers(

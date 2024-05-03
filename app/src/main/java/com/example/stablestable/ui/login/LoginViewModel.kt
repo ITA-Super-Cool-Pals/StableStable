@@ -1,4 +1,4 @@
-package com.example.stablestable.features.login
+package com.example.stablestable.ui.login
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
