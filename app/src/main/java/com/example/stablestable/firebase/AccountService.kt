@@ -52,7 +52,7 @@ class AccountService {
         val userId = currentUser.uid
 
         // Create a reference to the user document using the UID
-        val userDocRef = db.collection("ryttere").document(userId)
+        val userDocRef = db.collection("users").document(userId)
 
         // Add user data to Firestore
         val userData = UserProfileClass(
@@ -82,7 +82,7 @@ class AccountService {
         // Get the user ID
         val userId = currentUser.uid
         // Get user data from database
-        val userDocRef = db.collection("ryttere").document(userId)
+        val userDocRef = db.collection("users").document(userId)
         // Fetch the user data
         userDocRef.get()
             .addOnSuccessListener { document ->
@@ -114,13 +114,13 @@ class AccountService {
 
         // Get current authenticated users id
         val userId = currentUser.uid
-        db.collection("ryttere").document(userId).get()
+        db.collection("users").document(userId).get()
             .addOnSuccessListener { collection ->
                 // Get stable ID
                 stableId = collection.getString("stableId").toString()
 
-                // Get reference to the "ryttere" collection
-                val userCollectionRef = db.collection("ryttere")
+                // Get reference to the "users" collection
+                val userCollectionRef = db.collection("users")
 
                 // Query to filter documents based on stable ID
                 val query = userCollectionRef.whereEqualTo("stableId", stableId)
@@ -166,7 +166,7 @@ class AccountService {
         // Get current authenticated users id
         val userId = currentUser.uid
         // get reference to the users document in firebase database
-        val userDocRef = db.collection("ryttere").document(userId)
+        val userDocRef = db.collection("users").document(userId)
 
         // Update the users data
         // TODO: Update to follow new data class structure
