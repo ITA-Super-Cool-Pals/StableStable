@@ -27,7 +27,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.TextButton
 import androidx.compose.ui.res.stringResource
 import com.example.stablestable.R
-import com.example.stablestable.ui.Screen
+import com.example.stablestable.navigation.Screen
 
 
 @Composable

@@ -1,4 +1,4 @@
-package com.example.stablestable.ui.stable
+package com.example.stablestable.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
