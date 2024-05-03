@@ -33,7 +33,6 @@ fun SingleUserSmall(
         Spacer(modifier = Modifier.width(width=16.dp))
         Text(text = userName, fontSize = 20.sp, modifier = Modifier.align(Alignment.CenterVertically))
     }
-
 }
 
 @Preview
