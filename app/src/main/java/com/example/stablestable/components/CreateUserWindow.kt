@@ -24,6 +24,11 @@ import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.stablestable.ui.login.LoginViewModel
 
+/*
+ * Create User Window
+ * Code by Emily
+ */
+
 @Composable
 fun CreateUserWindow(
     onConfirm: (String, String, String, String, String) -> Unit,
@@ -37,7 +42,7 @@ fun CreateUserWindow(
                 .background(Color.White, shape = RoundedCornerShape(10.dp))
                 .padding(25.dp)
         ) {
-            val loginViewModel = viewModel<LoginViewModel>()
+            val viewModel = viewModel<LoginViewModel>()
 
             Column {
                 Text(
@@ -51,16 +56,16 @@ fun CreateUserWindow(
 
                 // Email field
                 OutlinedTextField(
-                    value = loginViewModel.email,
-                    onValueChange = { loginViewModel.email = it },
+                    value = viewModel.email,
+                    onValueChange = { viewModel.email = it },
                     label = { Text("Email") },
                     keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Email)
                 )
 
                 // Password field
                 OutlinedTextField(
-                    value = loginViewModel.password,
-                    onValueChange = { loginViewModel.password = it },
+                    value = viewModel.password,
+                    onValueChange = { viewModel.password = it },
                     label = { Text("Kodeord") },
                     visualTransformation = PasswordVisualTransformation(), // Hide password text
                     keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Password)
@@ -68,23 +73,23 @@ fun CreateUserWindow(
 
                 // First name
                 OutlinedTextField(
-                    value = loginViewModel.firstName,
-                    onValueChange = { loginViewModel.firstName = it },
+                    value = viewModel.firstName,
+                    onValueChange = { viewModel.firstName = it },
                     label = { Text("Fornavn") }
                 )
                 // Last name
                 OutlinedTextField(
-                    value = loginViewModel.lastName,
-                    onValueChange = { loginViewModel.lastName = it },
+                    value = viewModel.lastName,
+                    onValueChange = { viewModel.lastName = it },
                     label = { Text("Efternavn") }
                 )
 
                 // Phone Field
                 OutlinedTextField(
-                    value = loginViewModel.phone,
+                    value = viewModel.phone,
                     onValueChange = {
                         if (it.all { char -> char.isDigit() }) {
-                            loginViewModel.phone = it
+                            viewModel.phone = it
                         }
                     },
                     label = { Text("Telefon") },
@@ -96,11 +101,11 @@ fun CreateUserWindow(
                 Button(
                     onClick = {
                         onConfirm(
-                            loginViewModel.email,
-                            loginViewModel.password,
-                            loginViewModel.firstName,
-                            loginViewModel.lastName,
-                            loginViewModel.phone
+                            viewModel.email,
+                            viewModel.password,
+                            viewModel.firstName,
+                            viewModel.lastName,
+                            viewModel.phone
                         )
                     },
                     modifier = Modifier
@@ -111,9 +116,9 @@ fun CreateUserWindow(
                     Text("Opret Bruger")
                 }
 
-                if (loginViewModel.createUserErrorMessage != "") {
+                if (viewModel.createUserErrorMessage != "") {
                     Text(
-                        loginViewModel.createUserErrorMessage,
+                        viewModel.createUserErrorMessage,
                         style = MaterialTheme.typography.bodySmall,
                         color = Color.Red,
                         modifier = Modifier.padding(top = 8.dp)

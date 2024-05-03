@@ -40,7 +40,7 @@ fun MyProfileScreen(
                     .size(100.dp) // Adjust the size as needed
             )
             Spacer(modifier = Modifier.width(width = 16.dp))
-            Text(text = profileViewModel.fullname, fontSize = 26.sp, modifier = Modifier
+            Text(text = profileViewModel.fullName, fontSize = 26.sp, modifier = Modifier
                 .align(Alignment.CenterVertically))
         }
         Row(modifier=Modifier.padding(start = 16.dp,top = 50.dp)) {
