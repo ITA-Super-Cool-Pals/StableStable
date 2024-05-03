@@ -17,14 +17,14 @@ class AccountServiceImpl(): AccountService {
     override val currentUserId: String = auth.currentUser!!.uid
 
     override suspend fun getUser(userId: String): UserProfile? =
-        firestore.collection("ryttere").document(userId).get().await().toObject<UserProfile>()
+        firestore.collection("users").document(userId).get().await().toObject<UserProfile>()
 
     override suspend fun getCurrentUser(): UserProfile? =
-        firestore.collection("ryttere").document(currentUserId).get().await().toObject<UserProfile>()
+        firestore.collection("users").document(currentUserId).get().await().toObject<UserProfile>()
 
     override suspend fun createUser(user: UserProfile, pwd:String) {
         auth.createUserWithEmailAndPassword(user.email,pwd).await()
-        val userDocRef = firestore.collection("ryttere").document(currentUserId)
+        val userDocRef = firestore.collection("users").document(currentUserId)
         userDocRef.set(user)
     }
 
