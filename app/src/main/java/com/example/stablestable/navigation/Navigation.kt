@@ -25,8 +25,7 @@ fun SetupNavGraph(
             route = Screen.LoginScreen.route
         ) {
             LoginScreen(
-                onRegistrationSuccess = { navController.navigate(Screen.HomeScreen.route) },
-                onRegistrationFailure = {}
+                onRegistrationSuccess = { navController.navigate(Screen.HomeScreen.route) }
             )
         }
 

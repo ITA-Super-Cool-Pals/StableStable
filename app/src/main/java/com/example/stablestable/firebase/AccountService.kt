@@ -2,6 +2,7 @@ package com.example.stablestable.firebase
 
 import android.content.ContentValues.TAG
 import android.util.Log
+import com.example.stablestable.data.UserProfileClass
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
@@ -51,7 +52,14 @@ class AccountService {
             val userDocRef = db.collection("ryttere").document(userId)
 
             // Add user data to Firestore
-            val userData = hashMapOf(
+            val userData = UserProfileClass(
+                firstName = firstName,
+                lastName = lastName,
+                email = currentUser.email,
+                phone = phone
+            )
+
+            /*val userData = hashMapOf(
                 "firstname" to firstName,
                 "lastname" to lastName,
                 "contact-information" to hashMapOf(
@@ -60,7 +68,7 @@ class AccountService {
                 ),
                 "stable-id" to "69"
                 // TODO: Add more data fields for account creation
-            )
+            )*/
 
             // Set the user document
             userDocRef.set(userData)
