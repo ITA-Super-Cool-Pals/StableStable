@@ -4,10 +4,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import com.example.stablestable.data.classes.UserProfile
+import com.example.stablestable.data.repositories.impl.AccountServiceImpl
 import com.example.stablestable.firebase.AccountService
 
 class LoginViewModel : ViewModel() {
     private val accountService: AccountService = AccountService()
+    private val userRepo: AccountServiceImpl = AccountServiceImpl()
 
     // State variable to hold error message
     var loginErrorMessage by mutableStateOf("")
@@ -19,6 +22,10 @@ class LoginViewModel : ViewModel() {
     var firstName by mutableStateOf("")
     var lastName by mutableStateOf("")
     var phone by mutableStateOf("")
+
+    fun checkInput():Boolean{
+        return email.isNotEmpty() && password.isNotEmpty() && firstName.isNotEmpty() && lastName.isNotEmpty() && phone.isNotEmpty()
+    }
 
     // Create user function
     fun userCreate(navigateOnSuccess: () -> Unit, navigateOnFailure: () -> Unit) {
@@ -34,6 +41,13 @@ class LoginViewModel : ViewModel() {
                 })
         } else {
             createUserErrorMessage = "All fields are required to be filled"
+        }
+
+    }
+    suspend fun userCreateBranchAlt(){
+        if (checkInput()){
+            val newUser: UserProfile = UserProfile(firstName,lastName,email,phone,"69")
+            userRepo.createUser(newUser,password)
         }
 
     }

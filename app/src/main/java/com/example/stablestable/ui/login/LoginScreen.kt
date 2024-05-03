@@ -27,11 +27,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import com.example.stablestable.ui.Screen
 
 @Composable
 fun LoginScreen(
-    onRegistrationSuccess: () -> Unit,
-    onRegistrationFailure: () -> Unit
+    navController: NavController
 ) {
     // Variable to track user window creation state
     var createUserWindowVisible by remember { mutableStateOf(false) }
@@ -91,7 +92,7 @@ fun LoginScreen(
                 Button(
                     onClick = {
                         loginViewModel.userLogin(
-                            onRegistrationSuccess,
+                            { navController.navigate(route = Screen.HomeScreen.route)  },
                             navigateOnFailure = { errorMessage ->
                                 loginViewModel.loginErrorMessage = errorMessage
                             }
@@ -141,7 +142,7 @@ fun LoginScreen(
                     loginViewModel.password = password
                     loginViewModel.userCreate(
                         navigateOnSuccess = {
-                            onRegistrationSuccess()
+                            navController.navigate(route = Screen.HomeScreen.route)
                             createUserWindowVisible = false
                         },
                         navigateOnFailure = {
