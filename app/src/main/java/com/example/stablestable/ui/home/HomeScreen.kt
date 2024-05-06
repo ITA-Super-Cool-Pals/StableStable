@@ -28,6 +28,8 @@ import androidx.compose.material3.TextButton
 import androidx.compose.ui.res.stringResource
 import com.example.stablestable.R
 import com.example.stablestable.navigation.Screen
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
 
 @Composable
@@ -60,6 +62,10 @@ fun HomeScreen(navController: NavController) {
                     textAlign = TextAlign.Left,
                     fontSize = 35.sp
                 )
+
+                Button(onClick = { Firebase.auth.signOut()}) {
+                    Text(text = "Logout")
+                }
                 Image(
                     painter = painterResource(R.drawable.bell_01),
                     contentDescription = "Notification Bell",
