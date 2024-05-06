@@ -54,12 +54,12 @@ fun HomeScreen(
                     goToProfile()
                 }
                 CreateHomeButton(
-                    textOnButton = stringResource(R.string.foderplan),
+                    textOnButton = stringResource(R.string.feedingSchedule),
                 ) {
 
                 }
                 CreateHomeButton(
-                    textOnButton = stringResource(R.string.kalender),
+                    textOnButton = stringResource(R.string.calendar),
                 ) {
 
                 }
@@ -71,22 +71,22 @@ fun HomeScreen(
             }
             Column{
                 CreateHomeButton(
-                    textOnButton = stringResource(R.string.vagtplan),
+                    textOnButton = stringResource(R.string.shifts),
                 ) {
 
                 }
                 CreateHomeButton(
-                    textOnButton = stringResource(R.string.ryttere),
+                    textOnButton = stringResource(R.string.riders),
                 ) {
 
                 }
                 CreateHomeButton(
-                    textOnButton = stringResource(R.string.heste),
+                    textOnButton = stringResource(R.string.horses),
                 ) {
 
                 }
                 CreateHomeButton(
-                    textOnButton = stringResource(R.string.rytterstuen),
+                    textOnButton = stringResource(R.string.ridersRoom),
                 ) {
 
                 }

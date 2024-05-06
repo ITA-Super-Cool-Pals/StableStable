@@ -23,7 +23,7 @@ import com.example.stablestable.ui.home.HomeViewModel
         },
         title = {
             Text(
-                text = stringResource(R.string.notifikationer)
+                text = stringResource(R.string.notifications)
             ) },
         text = {
             Text(
@@ -37,7 +37,7 @@ import com.example.stablestable.ui.home.HomeViewModel
                 }
             ) {
                 Text(
-                    text = stringResource(R.string.luk)
+                    text = stringResource(R.string.close)
                 )
             }
         },
