@@ -30,6 +30,8 @@ import com.example.stablestable.R
 import com.example.stablestable.components.CreateNotificationHeader
 import com.example.stablestable.components.NotificationsDialog
 import com.example.stablestable.navigation.Screen
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
 
 @Composable

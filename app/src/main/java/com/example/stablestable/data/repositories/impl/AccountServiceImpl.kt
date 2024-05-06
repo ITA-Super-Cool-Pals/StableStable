@@ -14,8 +14,7 @@ class AccountServiceImpl(): AccountService {
     private val db: FirebaseFirestore = Firebase.firestore
     private val auth: FirebaseAuth = Firebase.auth
 
-    override val currentUserId: String = "MAWP"
-    //override val currentUserId: String = auth.currentUser!!.uid
+    override val currentUserId: String = auth.currentUser?.uid ?: ""
 
     override suspend fun getUser(userId: String): UserProfile? =
         db.collection("users").document(userId).get().await().toObject<UserProfile>()

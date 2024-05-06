@@ -22,7 +22,7 @@ class AuthViewModel : ViewModel() {
         checkCurrentUser()
     }
 
-    private fun checkCurrentUser() {
+    fun checkCurrentUser() {
         val currentUser = Firebase.auth.currentUser
         _isLoggedIn.value = currentUser != null
     }
