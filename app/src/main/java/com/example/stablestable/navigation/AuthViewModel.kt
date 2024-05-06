@@ -6,6 +6,14 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 
+/*
+ * Viewmodel to help with authentication and redirection behaviour
+ * If a user is authenticated, the startDestination will be HomeScreen
+ * Otherwise it will be LoginScreen
+ *
+ * Code by Emily
+ */
+
 class AuthViewModel : ViewModel() {
     private val _isLoggedIn = mutableStateOf(false)
     val isLoggedIn: State<Boolean> = _isLoggedIn
