@@ -33,7 +33,9 @@ fun SetupNavGraph(
         composable(
             route = Screen.HomeScreen.route
         ) {
-            HomeScreen(navController = navController)
+            HomeScreen(
+                goToProfile = { navController.navigate(Screen.MyProfileScreen.route) }
+            )
         }
 
         // My Profile Screen Route

@@ -1,6 +1,13 @@
 <resources>
     <!-- Global -->
     <string name="appName" translatable="false">StableStable</string>
+    <string name="notifications">Notifikationer</string>
+    <string name="close">Luk</string>
+    <string name="firstName">Fornavn</string>
+    <string name="lastName">Efternavn</string>
+    <string name="phone">Telefon</string>
+    <string name="profil">Profil</string>
+    <string name="email">Email</string>
 
     <!-- Home Screen -->
     <string name="calendar">Kalender</string>
@@ -10,17 +17,10 @@
     <string name="ridersRoom">Rytterstuen</string>
     <string name="faq">FAQ</string>
     <string name="feedingSchedule">Foderplan</string>
-    <string name="notifikationer">Notifikationer</string>
-    <string name="close">Luk</string>
 
     <!-- Login Screen -->
-    <string name="email">Email</string>
     <string name="password">Kodeord</string>
     <string name="login">Login</string>
     <string name="createUser">Opret Bruger</string>
     <string name="userCreation">Bruger Oprettelse</string>
-    <string name="firstName">Fornavn</string>
-    <string name="lastName">Efternavn</string>
-    <string name="phone">Telefon</string>
-    <string name="profil">Profil</string>
 </resources>
