@@ -16,12 +16,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.stablestable.R
 
 /*
  * Create User Window
@@ -45,7 +47,7 @@ fun CreateUserWindow(
 
             Column {
                 Text(
-                    "Bruger Registrering",
+                    stringResource(R.string.userCreation),
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 10.dp),
@@ -57,7 +59,7 @@ fun CreateUserWindow(
                 OutlinedTextField(
                     value = viewModel.email,
                     onValueChange = { viewModel.email = it },
-                    label = { Text("Email") },
+                    label = { Text(stringResource(R.string.email)) },
                     keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Email)
                 )
 
@@ -65,7 +67,7 @@ fun CreateUserWindow(
                 OutlinedTextField(
                     value = viewModel.password,
                     onValueChange = { viewModel.password = it },
-                    label = { Text("Kodeord") },
+                    label = { Text(stringResource(R.string.password)) },
                     visualTransformation = PasswordVisualTransformation(), // Hide password text
                     keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Password)
                 )
@@ -74,13 +76,13 @@ fun CreateUserWindow(
                 OutlinedTextField(
                     value = viewModel.firstName,
                     onValueChange = { viewModel.firstName = it },
-                    label = { Text("Fornavn") }
+                    label = { Text(stringResource(R.string.firstName)) }
                 )
                 // Last name
                 OutlinedTextField(
                     value = viewModel.lastName,
                     onValueChange = { viewModel.lastName = it },
-                    label = { Text("Efternavn") }
+                    label = { Text(stringResource(R.string.lastName)) }
                 )
 
                 // Phone Field
@@ -91,7 +93,7 @@ fun CreateUserWindow(
                             viewModel.phone = it
                         }
                     },
-                    label = { Text("Telefon") },
+                    label = { Text(stringResource(R.string.phone)) },
                     keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
                 )
 
@@ -112,7 +114,7 @@ fun CreateUserWindow(
                         .fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp)
                 ) {
-                    Text("Opret Bruger")
+                    Text(stringResource(R.string.createUser))
                 }
 
                 if (viewModel.createUserErrorMessage != "") {

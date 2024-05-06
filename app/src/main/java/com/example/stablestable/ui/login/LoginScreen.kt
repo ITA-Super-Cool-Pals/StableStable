@@ -17,12 +17,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.stablestable.R
 
 /*
  * Login Screen
@@ -48,7 +50,7 @@ fun LoginScreen(
         ) {
             // StableStable Logo Text Header
             Text(
-                text = "StableStable",
+                text = stringResource(R.string.app_name),
                 modifier = Modifier
                     .padding(bottom = 25.dp),
                 textAlign = TextAlign.Center,
@@ -59,7 +61,7 @@ fun LoginScreen(
             OutlinedTextField(
                 value = viewModel.email,
                 onValueChange = { viewModel.email = it },
-                label = { Text("Email") },
+                label = { Text(stringResource(R.string.email)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 8.dp),
@@ -70,7 +72,7 @@ fun LoginScreen(
             OutlinedTextField(
                 value = viewModel.password,
                 onValueChange = { viewModel.password = it },
-                label = { Text("Kodeord") },
+                label = { Text(stringResource(R.string.password)) },
                 visualTransformation = PasswordVisualTransformation(), // Hide password text
                 modifier = Modifier
                     .fillMaxWidth()
@@ -99,7 +101,7 @@ fun LoginScreen(
                         .padding(end = 6.dp), // Add padding between buttons
                     shape = RoundedCornerShape(12.dp)
                 ) {
-                    Text("Login", fontSize = 16.sp)
+                    Text(text = stringResource(R.string.login), fontSize = 16.sp)
                 }
 
                 // Create User Button
@@ -112,7 +114,7 @@ fun LoginScreen(
                         .padding(start = 6.dp), // Add padding between buttons
                     shape = RoundedCornerShape(12.dp)
                 ) {
-                    Text("Opret Bruger", fontSize = 16.sp)
+                    Text(stringResource(R.string.createUser), fontSize = 16.sp)
                 }
             }
 
