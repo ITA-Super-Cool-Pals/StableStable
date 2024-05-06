@@ -9,6 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.stablestable.navigation.AuthViewModel
 import com.example.stablestable.navigation.SetupNavGraph
 import com.example.stablestable.ui.theme.StableStableTheme
 
@@ -26,7 +27,9 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     navController = rememberNavController()
-                    SetupNavGraph(navController = navController)
+                    SetupNavGraph(
+                        navController = navController,
+                        authViewModel = AuthViewModel())
                 }
             }
         }

@@ -10,34 +10,22 @@ import com.example.stablestable.ui.login.LoginScreen
 import com.example.stablestable.ui.profile.MyProfileScreen
 import com.example.stablestable.ui.stable.StableScreen
 import com.example.stablestable.components.StableUsers
-import com.google.firebase.Firebase
-import com.google.firebase.auth.auth
 
 @Composable
 fun SetupNavGraph(
-    navController: NavHostController
+    navController: NavHostController,
+    authViewModel: AuthViewModel
 ) {
-
-    /*
-     * Get current authenticated user, and set start route to HomeScreen
-     * If no current authenticated user, change start screen to LoginScreen
-     */
-    val currentUser = Firebase.auth.currentUser
-    var startRoute: String = Screen.HomeScreen.route
-    if (currentUser == null) {
-        startRoute = Screen.LoginScreen.route
-    }
-
     NavHost(
         navController = navController,
-        startDestination = startRoute
+        startDestination = if (authViewModel.isLoggedIn.value) Screen.HomeScreen.route else Screen.LoginScreen.route
     ) {
         // Login Screen Route
         composable(
             route = Screen.LoginScreen.route
         ) {
             LoginScreen(
-                onRegistrationSuccess = { navController.navigate(Screen.HomeScreen.route) }
+                onRegistrationSuccess = { authViewModel.setUserLoggedIn(true) }
             )
         }
 
