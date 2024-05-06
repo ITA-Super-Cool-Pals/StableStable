@@ -2,7 +2,7 @@ package com.example.stablestable.firebase
 
 import android.content.ContentValues.TAG
 import android.util.Log
-import com.example.stablestable.data.UserProfileClass
+import com.example.stablestable.data.classes.UserProfile
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
@@ -55,10 +55,10 @@ class AccountService {
         val userDocRef = db.collection("users").document(userId)
 
         // Add user data to Firestore
-        val userData = UserProfileClass(
+        val userData = UserProfile(
             firstName = firstName,
             lastName = lastName,
-            email = currentUser.email,
+            email = currentUser.email as String,
             phone = phone
         )
 
