@@ -117,7 +117,7 @@ fun HomeScreen(navController: NavController) {
                         shape = RoundedCornerShape(12.dp)
                     ) {
                         Text(
-                            text = stringResource(R.string.foderplan),
+                            text = stringResource(R.string.feedingSchedule),
                             fontSize = 10.sp)
                     }
                     Button(
@@ -133,7 +133,7 @@ fun HomeScreen(navController: NavController) {
                         shape = RoundedCornerShape(12.dp)
                     ) {
                         Text(
-                            text = stringResource(R.string.kalender),
+                            text = stringResource(R.string.calendar),
                             fontSize = 10.sp)
                     }
                     Button(
@@ -167,7 +167,7 @@ fun HomeScreen(navController: NavController) {
                         shape = RoundedCornerShape(12.dp)
                     ) {
                         Text(
-                            text = stringResource(R.string.vagtplan),
+                            text = stringResource(R.string.shifts),
                             fontSize = 10.sp)
                     }
                     Button(
@@ -181,7 +181,7 @@ fun HomeScreen(navController: NavController) {
                         shape = RoundedCornerShape(12.dp)
                     ) {
                         Text(
-                            text = stringResource(R.string.ryttere),
+                            text = stringResource(R.string.riders),
                             fontSize = 10.sp)
                     }
                     Button(
@@ -197,7 +197,7 @@ fun HomeScreen(navController: NavController) {
                         shape = RoundedCornerShape(12.dp)
                     ) {
                         Text(
-                            text = stringResource(R.string.heste),
+                            text = stringResource(R.string.horses),
                             fontSize = 10.sp)
                     }
                     Button(
@@ -249,7 +249,7 @@ private fun NotificationsDialog(
                 }
             ) {
                 Text(
-                    text = stringResource(R.string.luk)
+                    text = stringResource(R.string.close)
                 )
             }
         },
