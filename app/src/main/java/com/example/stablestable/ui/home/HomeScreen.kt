@@ -6,19 +6,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.TextButton
 import androidx.compose.ui.res.stringResource
 import com.example.stablestable.R
 import com.example.stablestable.components.CreateNotificationHeader
@@ -35,9 +27,9 @@ fun HomeScreen(
         modifier = Modifier
             .fillMaxSize()
             .padding(
-                start = 30.dp,
+                start = 35.dp,
                 top = 20.dp,
-                end = 30.dp,
+                end = 35.dp,
                 bottom = 10.dp
             )
 
@@ -55,132 +47,48 @@ fun HomeScreen(
             horizontalArrangement = Arrangement.SpaceBetween
         )
         {
-            Column(modifier = Modifier.padding(horizontal = 10.dp)) {
-                // Login Button
-                Button(
-                    onClick = {
-                        // TODO: Implement login logic
-                        goToProfile()
-                    },
-                    modifier = Modifier
-                        .width(100.dp)
-                        .height(100.dp)
-                        .padding(vertical = 15.dp), // Add padding between buttons
-                    shape = RoundedCornerShape(12.dp)
+            Column{
+                CreateHomeButton(
+                    textOnButton = stringResource(R.string.profil),
                 ) {
-                    Text(
-                        text = stringResource(R.string.profil),
-                        fontSize = 10.sp)
+                    goToProfile()
                 }
-                Button(
-                    enabled = false,
-                    onClick = {
-                        // TODO: Implement login logic
-                        /* navController.navigate(route = Screen.FodderPlanScreen.route)*/
-                    },
-                    modifier = Modifier
-                        .width(100.dp)
-                        .height(100.dp)
-                        .padding(vertical = 15.dp), // Add padding between buttons
-                    shape = RoundedCornerShape(12.dp)
+                CreateHomeButton(
+                    textOnButton = stringResource(R.string.foderplan),
                 ) {
-                    Text(
-                        text = stringResource(R.string.foderplan),
-                        fontSize = 10.sp)
+
                 }
-                Button(
-                    enabled = false,
-                    onClick = {
-                        // TODO: Implement login logic
-                        /* navController.navigate(route = Screen.HorsesScreen.route)*/
-                    },
-                    modifier = Modifier
-                        .width(100.dp)
-                        .height(100.dp)
-                        .padding(vertical = 15.dp), // Add padding between buttons
-                    shape = RoundedCornerShape(12.dp)
+                CreateHomeButton(
+                    textOnButton = stringResource(R.string.kalender),
                 ) {
-                    Text(
-                        text = stringResource(R.string.kalender),
-                        fontSize = 10.sp)
+
                 }
-                Button(
-                    enabled = false,
-                    onClick = {
-                        // TODO: Implement login logic
-                        /*navController.navigate(route = Screen.FaqScreen.route)*/
-                    },
-                    modifier = Modifier
-                        .width(100.dp)
-                        .height(100.dp)
-                        .padding(vertical = 15.dp), // Add padding between buttons
-                    shape = RoundedCornerShape(12.dp)
+                CreateHomeButton(
+                    textOnButton = stringResource(R.string.faq),
                 ) {
-                    Text(
-                        text = stringResource(R.string.faq),
-                        fontSize = 10.sp)
+
                 }
             }
             Column{
-                Button(
-                    enabled = false,
-                    onClick = {
-                        // TODO: Implement login logic
+                CreateHomeButton(
+                    textOnButton = stringResource(R.string.vagtplan),
+                ) {
 
-                    },
-                    modifier = Modifier
-                        .width(100.dp)
-                        .height(100.dp)
-                        .padding(vertical = 15.dp), // Add padding between buttons
-                    shape = RoundedCornerShape(12.dp)
-                ) {
-                    Text(
-                        text = stringResource(R.string.vagtplan),
-                        fontSize = 10.sp)
                 }
-                Button(
-                    onClick = {
+                CreateHomeButton(
+                    textOnButton = stringResource(R.string.ryttere),
+                ) {
 
-                    },
-                    modifier = Modifier
-                        .width(100.dp)
-                        .height(100.dp)
-                        .padding(vertical = 15.dp), // Add padding between buttons
-                    shape = RoundedCornerShape(12.dp)
-                ) {
-                    Text(
-                        text = stringResource(R.string.ryttere),
-                        fontSize = 10.sp)
                 }
-                Button(
-                    enabled = false,
-                    onClick = {
-                        // TODO: Implement login logic
-                        /* navController.navigate(route = Screen.RidersScreen.route)*/
-                    },
-                    modifier = Modifier
-                        .width(100.dp)
-                        .height(100.dp)
-                        .padding(vertical = 15.dp), // Add padding between buttons
-                    shape = RoundedCornerShape(12.dp)
+                CreateHomeButton(
+                    textOnButton = stringResource(R.string.heste),
                 ) {
-                    Text(
-                        text = stringResource(R.string.heste),
-                        fontSize = 10.sp)
+
                 }
-                Button(
-                    enabled = false,
-                    onClick = {
-                        // TODO: Implement login logic
-                        /* navController.navigate(route = Screen.BoardScreen.route)*/
-                    },
-                    modifier = Modifier
-                        .width(100.dp)
-                        .height(100.dp)
-                        .padding(vertical = 15.dp), // Add padding between buttons
-                    shape = RoundedCornerShape(12.dp)
+                CreateHomeButton(
+                    textOnButton = stringResource(R.string.rytterstuen),
                 ) {
-                    Text("Bulletin Board", fontSize = 10.sp)
+
                 }
             }
         }
