@@ -41,155 +41,145 @@ fun HomeScreen(
             )
 
     ){
-        Box(
+        CreateNotificationHeader(stableName = "Stald Navn")
+        Row (
             modifier = Modifier
-
-        ){
-            CreateNotificationHeader(stableName = "Stald Navn")
-        }
-        Box(
-            modifier = Modifier
+                .fillMaxWidth()
+                .padding(
+                    start = 15.dp,
+                    top = 200.dp,
+                    end = 15.dp,
+                    bottom = 20.dp
+                ),
+            horizontalArrangement = Arrangement.SpaceBetween
         )
         {
-            Row (
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        start = 15.dp,
-                        top = 200.dp,
-                        end = 15.dp,
-                        bottom = 20.dp
-                    ),
-                horizontalArrangement = Arrangement.SpaceBetween
-            )
-            {
-                Column(modifier = Modifier.padding(horizontal = 10.dp)) {
-                    // Login Button
-                    Button(
-                        onClick = {
-                            // TODO: Implement login logic
-                            goToProfile()
-                        },
-                        modifier = Modifier
-                            .width(100.dp)
-                            .height(100.dp)
-                            .padding(vertical = 15.dp), // Add padding between buttons
-                        shape = RoundedCornerShape(12.dp)
-                    ) {
-                        Text(
-                            text = stringResource(R.string.profil),
-                            fontSize = 10.sp)
-                    }
-                    Button(
-                        enabled = false,
-                        onClick = {
-                            // TODO: Implement login logic
-                            /* navController.navigate(route = Screen.FodderPlanScreen.route)*/
-                        },
-                        modifier = Modifier
-                            .width(100.dp)
-                            .height(100.dp)
-                            .padding(vertical = 15.dp), // Add padding between buttons
-                        shape = RoundedCornerShape(12.dp)
-                    ) {
-                        Text(
-                            text = stringResource(R.string.foderplan),
-                            fontSize = 10.sp)
-                    }
-                    Button(
-                        enabled = false,
-                        onClick = {
-                            // TODO: Implement login logic
-                            /* navController.navigate(route = Screen.HorsesScreen.route)*/
-                        },
-                        modifier = Modifier
-                            .width(100.dp)
-                            .height(100.dp)
-                            .padding(vertical = 15.dp), // Add padding between buttons
-                        shape = RoundedCornerShape(12.dp)
-                    ) {
-                        Text(
-                            text = stringResource(R.string.kalender),
-                            fontSize = 10.sp)
-                    }
-                    Button(
-                        enabled = false,
-                        onClick = {
-                            // TODO: Implement login logic
-                            /*navController.navigate(route = Screen.FaqScreen.route)*/
-                        },
-                        modifier = Modifier
-                            .width(100.dp)
-                            .height(100.dp)
-                            .padding(vertical = 15.dp), // Add padding between buttons
-                        shape = RoundedCornerShape(12.dp)
-                    ) {
-                        Text(
-                            text = stringResource(R.string.faq),
-                            fontSize = 10.sp)
-                    }
+            Column(modifier = Modifier.padding(horizontal = 10.dp)) {
+                // Login Button
+                Button(
+                    onClick = {
+                        // TODO: Implement login logic
+                        goToProfile()
+                    },
+                    modifier = Modifier
+                        .width(100.dp)
+                        .height(100.dp)
+                        .padding(vertical = 15.dp), // Add padding between buttons
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Text(
+                        text = stringResource(R.string.profil),
+                        fontSize = 10.sp)
                 }
-                Column{
-                    Button(
-                        enabled = false,
-                        onClick = {
-                            // TODO: Implement login logic
+                Button(
+                    enabled = false,
+                    onClick = {
+                        // TODO: Implement login logic
+                        /* navController.navigate(route = Screen.FodderPlanScreen.route)*/
+                    },
+                    modifier = Modifier
+                        .width(100.dp)
+                        .height(100.dp)
+                        .padding(vertical = 15.dp), // Add padding between buttons
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Text(
+                        text = stringResource(R.string.foderplan),
+                        fontSize = 10.sp)
+                }
+                Button(
+                    enabled = false,
+                    onClick = {
+                        // TODO: Implement login logic
+                        /* navController.navigate(route = Screen.HorsesScreen.route)*/
+                    },
+                    modifier = Modifier
+                        .width(100.dp)
+                        .height(100.dp)
+                        .padding(vertical = 15.dp), // Add padding between buttons
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Text(
+                        text = stringResource(R.string.kalender),
+                        fontSize = 10.sp)
+                }
+                Button(
+                    enabled = false,
+                    onClick = {
+                        // TODO: Implement login logic
+                        /*navController.navigate(route = Screen.FaqScreen.route)*/
+                    },
+                    modifier = Modifier
+                        .width(100.dp)
+                        .height(100.dp)
+                        .padding(vertical = 15.dp), // Add padding between buttons
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Text(
+                        text = stringResource(R.string.faq),
+                        fontSize = 10.sp)
+                }
+            }
+            Column{
+                Button(
+                    enabled = false,
+                    onClick = {
+                        // TODO: Implement login logic
 
-                        },
-                        modifier = Modifier
-                            .width(100.dp)
-                            .height(100.dp)
-                            .padding(vertical = 15.dp), // Add padding between buttons
-                        shape = RoundedCornerShape(12.dp)
-                    ) {
-                        Text(
-                            text = stringResource(R.string.vagtplan),
-                            fontSize = 10.sp)
-                    }
-                    Button(
-                        onClick = {
+                    },
+                    modifier = Modifier
+                        .width(100.dp)
+                        .height(100.dp)
+                        .padding(vertical = 15.dp), // Add padding between buttons
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Text(
+                        text = stringResource(R.string.vagtplan),
+                        fontSize = 10.sp)
+                }
+                Button(
+                    onClick = {
 
-                        },
-                        modifier = Modifier
-                            .width(100.dp)
-                            .height(100.dp)
-                            .padding(vertical = 15.dp), // Add padding between buttons
-                        shape = RoundedCornerShape(12.dp)
-                    ) {
-                        Text(
-                            text = stringResource(R.string.ryttere),
-                            fontSize = 10.sp)
-                    }
-                    Button(
-                        enabled = false,
-                        onClick = {
-                            // TODO: Implement login logic
-                            /* navController.navigate(route = Screen.RidersScreen.route)*/
-                        },
-                        modifier = Modifier
-                            .width(100.dp)
-                            .height(100.dp)
-                            .padding(vertical = 15.dp), // Add padding between buttons
-                        shape = RoundedCornerShape(12.dp)
-                    ) {
-                        Text(
-                            text = stringResource(R.string.heste),
-                            fontSize = 10.sp)
-                    }
-                    Button(
-                        enabled = false,
-                        onClick = {
-                            // TODO: Implement login logic
-                            /* navController.navigate(route = Screen.BoardScreen.route)*/
-                        },
-                        modifier = Modifier
-                            .width(100.dp)
-                            .height(100.dp)
-                            .padding(vertical = 15.dp), // Add padding between buttons
-                        shape = RoundedCornerShape(12.dp)
-                    ) {
-                        Text("Bulletin Board", fontSize = 10.sp)
-                    }
+                    },
+                    modifier = Modifier
+                        .width(100.dp)
+                        .height(100.dp)
+                        .padding(vertical = 15.dp), // Add padding between buttons
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Text(
+                        text = stringResource(R.string.ryttere),
+                        fontSize = 10.sp)
+                }
+                Button(
+                    enabled = false,
+                    onClick = {
+                        // TODO: Implement login logic
+                        /* navController.navigate(route = Screen.RidersScreen.route)*/
+                    },
+                    modifier = Modifier
+                        .width(100.dp)
+                        .height(100.dp)
+                        .padding(vertical = 15.dp), // Add padding between buttons
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Text(
+                        text = stringResource(R.string.heste),
+                        fontSize = 10.sp)
+                }
+                Button(
+                    enabled = false,
+                    onClick = {
+                        // TODO: Implement login logic
+                        /* navController.navigate(route = Screen.BoardScreen.route)*/
+                    },
+                    modifier = Modifier
+                        .width(100.dp)
+                        .height(100.dp)
+                        .padding(vertical = 15.dp), // Add padding between buttons
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Text("Bulletin Board", fontSize = 10.sp)
                 }
             }
         }
