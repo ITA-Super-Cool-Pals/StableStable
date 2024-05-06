@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="calendar">Calendar</string>
+    <string name="horses">Horses</string>
+    <string name="riders">Riders</string>
+    <string name="faq">FAQ</string>
+    <string name="notifications">Notifications</string>
+    <string name="close">Close</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="createUser">Create User</string>
+    <string name="userCreation">User Registration</string>
+    <string name="firstName">First Name</string>
+    <string name="lastName">Last Name</string>
+    <string name="phone">Phone</string>
+    <string name="profil">Profile</string>
+    <string name="shifts">Shifts</string>
+    <string name="feedingSchedule">feedingSchedule</string>
+    <string name="ridersRoom">Rider\'s Room</string>
+</resources>

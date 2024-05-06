@@ -13,19 +13,19 @@ import com.example.stablestable.components.StableUsers
 
 @Composable
 fun SetupNavGraph(
-    navController: NavHostController
+    navController: NavHostController,
+    authViewModel: AuthViewModel
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.LoginScreen.route
+        startDestination = if (authViewModel.isLoggedIn.value) Screen.HomeScreen.route else Screen.LoginScreen.route
     ) {
         // Login Screen Route
-
         composable(
             route = Screen.LoginScreen.route
         ) {
             LoginScreen(
-                onRegistrationSuccess = { navController.navigate(Screen.HomeScreen.route) }
+                onRegistrationSuccess = { authViewModel.setUserLoggedIn(true) }
             )
         }
 
@@ -33,7 +33,9 @@ fun SetupNavGraph(
         composable(
             route = Screen.HomeScreen.route
         ) {
-            HomeScreen(navController = navController)
+            HomeScreen(
+                goToProfile = { navController.navigate(Screen.MyProfileScreen.route) }
+            )
         }
 
         // My Profile Screen Route
