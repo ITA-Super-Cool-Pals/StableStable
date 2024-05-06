@@ -2,11 +2,13 @@ package com.example.stablestable.ui.login
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.stablestable.data.classes.UserProfile
+import com.example.stablestable.data.repositories.impl.AccountServiceImpl
 import com.example.stablestable.firebase.AccountService
+import kotlinx.coroutines.launch
 
 
 /*
@@ -15,7 +17,8 @@ import com.example.stablestable.firebase.AccountService
  */
 
 class LoginViewModel : ViewModel() {
-    private val accountService: AccountService = AccountService()
+    private val accountService: AccountServiceImpl = AccountServiceImpl()
+    //private val accountServiceOld: AccountService = AccountService()
 
     // Control visibility of user creation window
     var showCreateUserWindow by mutableStateOf(false)
@@ -32,27 +35,39 @@ class LoginViewModel : ViewModel() {
     var phone by mutableStateOf("")
 
     // Create user function
-    fun userCreate(navigateOnSuccess: () -> Unit, navigateOnFailure: () -> Unit) {
+    fun userCreate(navigateOnSuccess: () -> Unit) {
         // Check if fields are empty, show error message if they are
         if (email.isEmpty() || password.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || phone.isEmpty()) {
             createUserErrorMessage = "Alle felter skal udfyldes"
             return
         }
 
+        viewModelScope.launch {
+            try {
+                val userProfile = UserProfile(
+                    firstName = firstName,
+                    lastName = lastName,
+                    email = email,
+                    phone = phone
+                )
+                accountService.createUser(userProfile, password)
+                navigateOnSuccess()
+            } catch (e: Exception) {
+                createUserErrorMessage = e.message ?: "Account creation failed: Unknown error"
+            }
+        }
         // Create user
-        accountService.userCreate(email, password,
+        /*accountServiceOld.userCreate(email, password,
             onResult = {
-                accountService.createUserInFirestore(firstName, lastName, phone)
+                accountServiceOld.createUserInFirestore(firstName, lastName, phone)
                 navigateOnSuccess()
             },
             onFailure = { errorMessage ->
                 createUserErrorMessage = errorMessage
-                navigateOnFailure()
-            })
-
+            })*/
     }
 
-    fun userLogin(navigateOnSuccess: () -> Unit, navigateOnFailure: (String) -> Unit) {
+    fun userLogin(navigateOnSuccess: () -> Unit) {
         // Check if fields are empty, show error message if they are
         if (email.isEmpty() || password.isEmpty()) {
             loginErrorMessage = "Email og kodeord påkrævet"
@@ -60,6 +75,14 @@ class LoginViewModel : ViewModel() {
         }
 
         // Login user
-        accountService.userLogin(email, password, navigateOnSuccess, navigateOnFailure)
+        viewModelScope.launch {
+            try {
+                accountService.login(email, password)
+                navigateOnSuccess()
+            } catch (e: Exception) {
+                loginErrorMessage = e.message ?: "Login failed: Unknown Error"
+            }
+        }
+        //accountServiceOld.userLogin(email, password, navigateOnSuccess)
     }
 }

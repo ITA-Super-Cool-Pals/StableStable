@@ -11,25 +11,26 @@ import kotlinx.coroutines.tasks.await
 import com.google.firebase.firestore.toObject
 
 class AccountServiceImpl(): AccountService {
-    private val firestore: FirebaseFirestore = Firebase.firestore
+    private val db: FirebaseFirestore = Firebase.firestore
     private val auth: FirebaseAuth = Firebase.auth
 
-    override val currentUserId: String = auth.currentUser!!.uid
+    override val currentUserId: String = "MAWP"
+    //override val currentUserId: String = auth.currentUser!!.uid
 
     override suspend fun getUser(userId: String): UserProfile? =
-        firestore.collection("users").document(userId).get().await().toObject<UserProfile>()
+        db.collection("users").document(userId).get().await().toObject<UserProfile>()
 
     override suspend fun getCurrentUser(): UserProfile? =
-        firestore.collection("users").document(currentUserId).get().await().toObject<UserProfile>()
+        db.collection("users").document(currentUserId).get().await().toObject<UserProfile>()
 
-    override suspend fun createUser(user: UserProfile, pwd:String) {
-        auth.createUserWithEmailAndPassword(user.email,pwd).await()
-        val userDocRef = firestore.collection("users").document(currentUserId)
+    override suspend fun createUser(user: UserProfile, password: String) {
+        auth.createUserWithEmailAndPassword(user.email, password).await()
+        val userDocRef = db.collection("users").document(currentUserId)
         userDocRef.set(user)
     }
 
-    override suspend fun login(email: String, pwd: String) {
-        auth.signInWithEmailAndPassword(email,pwd).await()
+    override suspend fun login(email: String, password: String) {
+        auth.signInWithEmailAndPassword(email, password).await()
     }
 
 }

@@ -6,7 +6,6 @@ import com.example.stablestable.data.classes.UserProfile
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
-import com.google.firebase.firestore.toObject
 
 /*
  * Firebase Account and Database integration
@@ -26,13 +25,13 @@ class AccountService {
     }
 
     // Login User
-    fun userLogin(email: String, password: String, onResult: () -> Unit, onFailure: (String) -> Unit) {
+    fun userLogin(email: String, password: String, onResult: () -> Unit) {
         Firebase.auth.signInWithEmailAndPassword(email, password)
             .addOnSuccessListener {
                 onResult()
             }
             .addOnFailureListener { exception ->
-                onFailure(exception.message?: "Login failed: Unknown error")
+                //onFailure(exception.message?: "Login failed: Unknown error")
             }
     }
 
