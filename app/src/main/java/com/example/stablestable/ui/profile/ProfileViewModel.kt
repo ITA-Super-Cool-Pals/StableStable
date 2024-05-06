@@ -38,5 +38,8 @@ class ProfileViewModel: ViewModel() {
         }
     }
 
+    init {
+        getCurrentUser()
+    }
 
 }
