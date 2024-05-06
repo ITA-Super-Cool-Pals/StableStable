@@ -22,6 +22,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.ui.res.stringResource
 import com.example.stablestable.R
 import com.example.stablestable.components.CreateNotificationHeader
+import com.example.stablestable.components.NotificationsDialog
 
 
 @Composable
@@ -188,39 +189,4 @@ fun HomeScreen(
         NotificationsDialog()
     }
 }
-@Composable
-private fun NotificationsDialog(
-    //listOfNotifications: List<String>,
-    modifier: Modifier = Modifier
-) {
-    val viewModel = viewModel<HomeViewModel>()
 
-    AlertDialog(
-        onDismissRequest = {
-            viewModel.setNotificationDialogStateToFalse()
-        },
-        title = {
-            Text(
-                text = stringResource(R.string.notifikationer)
-            ) },
-        text = {
-               Text(
-                   text = "Test-notifikation 01"
-               ) },
-        modifier = modifier,
-        dismissButton = {
-            TextButton(
-                onClick = {
-                    viewModel.setNotificationDialogStateToFalse()
-                }
-            ) {
-                Text(
-                    text = stringResource(R.string.luk)
-                )
-            }
-        },
-        confirmButton = {
-
-        }
-    )
-}
