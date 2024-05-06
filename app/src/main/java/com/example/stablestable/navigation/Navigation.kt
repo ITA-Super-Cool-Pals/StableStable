@@ -17,7 +17,7 @@ fun SetupNavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.LoginScreen.route
+        startDestination = Screen.HomeScreen.route
     ) {
         // Login Screen Route
 
@@ -33,7 +33,9 @@ fun SetupNavGraph(
         composable(
             route = Screen.HomeScreen.route
         ) {
-            HomeScreen(navController = navController)
+            HomeScreen(
+                goToProfile = { navController.navigate(Screen.MyProfileScreen.route) }
+            )
         }
 
         // My Profile Screen Route

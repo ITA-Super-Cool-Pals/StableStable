@@ -1,8 +1,6 @@
 package com.example.stablestable.ui.home
 
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -11,15 +9,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
@@ -27,11 +21,13 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.TextButton
 import androidx.compose.ui.res.stringResource
 import com.example.stablestable.R
-import com.example.stablestable.navigation.Screen
+import com.example.stablestable.components.CreateNotificationHeader
 
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(
+    goToProfile: () -> Unit
+) {
     val viewModel = viewModel<HomeViewModel>()
 
     Box(
@@ -49,27 +45,7 @@ fun HomeScreen(navController: NavController) {
             modifier = Modifier
 
         ){
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ){
-                Text(
-                    text = "Stald Navn",
-                    modifier = Modifier,
-                    textAlign = TextAlign.Left,
-                    fontSize = 35.sp
-                )
-                Image(
-                    painter = painterResource(R.drawable.bell_01),
-                    contentDescription = "Notification Bell",
-                    modifier = Modifier
-                        .size(30.dp) // Adjust the size as needed
-                        .clickable {
-                            viewModel.setNotificationDialogStateToTrue()
-                        }
-                )
-            }
+            CreateNotificationHeader(stableName = "Stald Navn")
         }
         Box(
             modifier = Modifier
@@ -92,7 +68,7 @@ fun HomeScreen(navController: NavController) {
                     Button(
                         onClick = {
                             // TODO: Implement login logic
-                            navController.navigate(route = Screen.MyProfileScreen.route)
+                            goToProfile()
                         },
                         modifier = Modifier
                             .width(100.dp)
@@ -158,7 +134,7 @@ fun HomeScreen(navController: NavController) {
                         enabled = false,
                         onClick = {
                             // TODO: Implement login logic
-                            navController.navigate(route = Screen.CalendarScreen.route)
+
                         },
                         modifier = Modifier
                             .width(100.dp)
@@ -172,7 +148,7 @@ fun HomeScreen(navController: NavController) {
                     }
                     Button(
                         onClick = {
-                            navController.navigate(route = Screen.StableUsers.route)
+
                         },
                         modifier = Modifier
                             .width(100.dp)
