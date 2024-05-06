@@ -1,26 +1,26 @@
 <resources>
     <!-- Global -->
-    <string name="app_name">StableStable</string>
+    <string name="appName" translatable="false">StableStable</string>
 
     <!-- Home Screen -->
-    <string name="profil">Profil</string>
-    <string name="kalender">Kalender</string>
-    <string name="vagtplan">Vagtplan</string>
-    <string name="heste">Heste</string>
-    <string name="ryttere">Ryttere</string>
-    <string name="rytterstuen">Rytterstuen</string>
+    <string name="calendar">Kalender</string>
+    <string name="shifts">Vagtplan</string>
+    <string name="horses">Heste</string>
+    <string name="riders">Ryttere</string>
+    <string name="ridersRoom">Rytterstuen</string>
     <string name="faq">FAQ</string>
-    <string name="foderplan">Foderplan</string>
+    <string name="feedingSchedule">Foderplan</string>
     <string name="notifikationer">Notifikationer</string>
-    <string name="luk">Luk</string>
+    <string name="close">Luk</string>
 
     <!-- Login Screen -->
     <string name="email">Email</string>
-    <string name="password">Password</string>
+    <string name="password">Kodeord</string>
     <string name="login">Login</string>
     <string name="createUser">Opret Bruger</string>
     <string name="userCreation">Bruger Oprettelse</string>
     <string name="firstName">Fornavn</string>
     <string name="lastName">Efternavn</string>
     <string name="phone">Telefon</string>
+    <string name="profil">Profil</string>
 </resources>

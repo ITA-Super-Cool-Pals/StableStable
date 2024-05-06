@@ -50,7 +50,7 @@ fun LoginScreen(
         ) {
             // StableStable Logo Text Header
             Text(
-                text = stringResource(R.string.app_name),
+                text = stringResource(R.string.appName),
                 modifier = Modifier
                     .padding(bottom = 25.dp),
                 textAlign = TextAlign.Center,
