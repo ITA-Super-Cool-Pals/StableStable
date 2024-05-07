@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.stablestable.data.classes.UserProfile
 import com.example.stablestable.data.repositories.impl.AccountServiceImpl
-import com.example.stablestable.firebase.AccountService
 import kotlinx.coroutines.launch
 
 
@@ -42,6 +41,7 @@ class LoginViewModel : ViewModel() {
             return
         }
 
+        // Create the user
         viewModelScope.launch {
             try {
                 val userProfile = UserProfile(
@@ -56,15 +56,6 @@ class LoginViewModel : ViewModel() {
                 createUserErrorMessage = e.message ?: "Account creation failed: Unknown error"
             }
         }
-        // Create user
-        /*accountServiceOld.userCreate(email, password,
-            onResult = {
-                accountServiceOld.createUserInFirestore(firstName, lastName, phone)
-                navigateOnSuccess()
-            },
-            onFailure = { errorMessage ->
-                createUserErrorMessage = errorMessage
-            })*/
     }
 
     fun userLogin(navigateOnSuccess: () -> Unit) {
@@ -74,7 +65,7 @@ class LoginViewModel : ViewModel() {
             return
         }
 
-        // Login user
+        // Login the user
         viewModelScope.launch {
             try {
                 accountService.login(email, password)
@@ -83,6 +74,5 @@ class LoginViewModel : ViewModel() {
                 loginErrorMessage = e.message ?: "Login failed: Unknown Error"
             }
         }
-        //accountServiceOld.userLogin(email, password, navigateOnSuccess)
     }
 }

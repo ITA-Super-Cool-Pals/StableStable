@@ -22,9 +22,9 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 
 @Composable
-fun CreateNotificationHeader(stableName: String) {
+fun CreateNotificationHeader(stableName: String, onLogout: () -> Unit) {
     val viewModel = viewModel<HomeViewModel>()
-    val viewmodel2 = viewModel<AuthViewModel>()
+    val authViewModel = viewModel<AuthViewModel>()
     Row(
         modifier = Modifier
             .fillMaxWidth(),
@@ -39,7 +39,7 @@ fun CreateNotificationHeader(stableName: String) {
 
         Button(onClick = {
             Firebase.auth.signOut()
-            viewmodel2.checkCurrentUser()
+            onLogout()
         }) {
             Text(text = "Logout")
         }

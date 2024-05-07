@@ -34,7 +34,8 @@ fun SetupNavGraph(
             route = Screen.HomeScreen.route
         ) {
             HomeScreen(
-                goToProfile = { navController.navigate(Screen.MyProfileScreen.route) }
+                goToProfile = { navController.navigate(Screen.MyProfileScreen.route) },
+                onLogout = { authViewModel.setUserLoggedIn(false) }
             )
         }
 
