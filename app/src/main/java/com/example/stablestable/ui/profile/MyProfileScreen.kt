@@ -21,16 +21,19 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.stablestable.R
+import com.example.stablestable.components.NavigationHeader
 
 
 @Composable
 fun MyProfileScreen(
-    navController: NavController
+    goToHomeScreen:() -> Unit
 ) {
     val profileViewModel = viewModel<ProfileViewModel>()
     Column(modifier = Modifier
         .fillMaxWidth()
         .padding(16.dp)) {
+        NavigationHeader(goToHomeScreen)
+
         Row {
             // Profile pic + Name
             Image(
@@ -60,8 +63,4 @@ fun MyProfileScreen(
     }
 }
 
-@Preview
-@Composable
-fun MyProfileScreenPreview(){
-    MyProfileScreen(rememberNavController())
-}
+

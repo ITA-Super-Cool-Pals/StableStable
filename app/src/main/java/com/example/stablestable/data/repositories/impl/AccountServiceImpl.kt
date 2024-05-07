@@ -45,8 +45,7 @@ class AccountServiceImpl: AccountService {
 
     override suspend fun createUser(user: UserProfile, password: String) {
         auth.createUserWithEmailAndPassword(user.email, password).await()
-        val userDocRef = db.collection("users").document(currentUserId)
-        userDocRef.set(user)
+        db.collection("users").document(currentUserId).set(user).await()
     }
 
     override suspend fun login(email: String, password: String) {

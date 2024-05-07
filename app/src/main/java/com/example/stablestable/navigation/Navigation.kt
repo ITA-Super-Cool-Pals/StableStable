@@ -44,7 +44,9 @@ fun SetupNavGraph(
         composable(
             route = Screen.MyProfileScreen.route
         ) {
-            MyProfileScreen(navController = navController)
+            MyProfileScreen(
+                goToHomeScreen = { navController.navigate(Screen.HomeScreen.route)}
+            )
         }
 
         // Stable Screen Route
