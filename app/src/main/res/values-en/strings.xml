@@ -16,6 +16,6 @@
     <string name="phone">Phone</string>
     <string name="profil">Profile</string>
     <string name="shifts">Shifts</string>
-    <string name="feedingSchedule">feedingSchedule</string>
+    <string name="feedingSchedule">Feeding Schedule</string>
     <string name="ridersRoom">Rider\'s Room</string>
 </resources>
