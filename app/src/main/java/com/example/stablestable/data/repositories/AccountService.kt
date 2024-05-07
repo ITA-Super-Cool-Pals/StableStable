@@ -7,6 +7,8 @@ interface AccountService {
 
     suspend fun getUser(userId: String): UserProfile?
     suspend fun getCurrentUser(): UserProfile?
+    suspend fun getCurrentStableId(): String?
+    suspend fun getAllUsersInStable(stableId:String): List<UserProfile?>
     suspend fun createUser(user: UserProfile, password: String)
     suspend fun login(email: String, password: String)
 

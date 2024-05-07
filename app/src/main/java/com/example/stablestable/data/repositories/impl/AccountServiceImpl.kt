@@ -22,6 +22,27 @@ class AccountServiceImpl: AccountService {
     override suspend fun getCurrentUser(): UserProfile? =
         db.collection("users").document(currentUserId).get().await().toObject<UserProfile>()
 
+    override suspend fun getCurrentStableId(): String? =
+        db.collection("users").document(currentUserId).get().await().toObject<UserProfile>()?.stableId
+
+
+    override suspend fun getAllUsersInStable(stableId:String): List<UserProfile?> {
+        val userDataList = mutableListOf<UserProfile>()
+        val query = db.collection("users").whereEqualTo("stableId", stableId)
+
+        val dataSnapshot = query.get().await()
+
+        for (document in dataSnapshot.documents) {
+            // populate return list with data
+            val userData = document.toObject<UserProfile>()
+            if (userData != null) {
+                userDataList.add(userData)
+            }
+        }
+
+        return userDataList
+    }
+
     override suspend fun createUser(user: UserProfile, password: String) {
         auth.createUserWithEmailAndPassword(user.email, password).await()
         val userDocRef = db.collection("users").document(currentUserId)
