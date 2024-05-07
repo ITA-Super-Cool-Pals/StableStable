@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.stablestable.data.classes.UserProfile
 import com.example.stablestable.data.repositories.impl.AccountServiceImpl
-import com.example.stablestable.firebase.AccountService
 import kotlinx.coroutines.launch
 
 class StableUsersViewModel: ViewModel() {

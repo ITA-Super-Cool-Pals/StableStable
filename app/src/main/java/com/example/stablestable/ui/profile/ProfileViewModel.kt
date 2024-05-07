@@ -1,7 +1,6 @@
 package com.example.stablestable.ui.profile
 
 import android.content.ContentValues.TAG
-import android.nfc.Tag
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -10,7 +9,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.stablestable.data.classes.UserProfile
 import com.example.stablestable.data.repositories.impl.AccountServiceImpl
-import com.example.stablestable.firebase.AccountService
 import kotlinx.coroutines.launch
 
 
