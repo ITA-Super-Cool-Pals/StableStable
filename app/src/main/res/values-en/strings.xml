@@ -22,4 +22,5 @@
     <string name="addHorse">Add your horse</string>
     <string name="sex">Sex</string>
     <string name="date">Date</string>
+    <string name="birthDate">Age</string>
 </resources>
