@@ -4,27 +4,41 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
-import com.example.stablestable.firebase.AccountService
+import androidx.lifecycle.viewModelScope
+import com.example.stablestable.data.classes.UserProfile
+import com.example.stablestable.data.repositories.impl.AccountServiceImpl
+import kotlinx.coroutines.launch
 
 class StableUsersViewModel: ViewModel() {
-    private val accountService: AccountService = AccountService()
+    private val accountService: AccountServiceImpl = AccountServiceImpl()
     var nameList = mutableStateListOf<String>()
 
 
 
-    private fun fetchUserList(){
-        accountService.fetchAllUserData(onSuccess = {l:List<Map<String,Any>> ->
-            for (map in l) {
-                val firstName = map["firstName"] as String
-                val lastName = map["lastName"] as String
-                nameList.add("$firstName $lastName")
-            }
 
-        }, onFailure={s:String -> Log.d(TAG,s)})
+    private fun fetchUserList(){
+        viewModelScope.launch {
+            try {
+                val stableId = accountService.getCurrentStableId() as String
+                val userList: List<UserProfile?> = accountService.getAllUsersInStable(stableId)
+
+                userList.forEach { elem ->
+                    if (elem != null) {
+                        nameList.add("${elem.firstName} ${elem.lastName}")
+                    }
+                }
+
+
+            } catch (e: Exception){
+                Log.d(TAG,"Message: ${e.message.toString()}")
+            }
+        }
     }
+
+
+
     init {
         fetchUserList()
-        Log.d(TAG,"Success")
     }
 
 }

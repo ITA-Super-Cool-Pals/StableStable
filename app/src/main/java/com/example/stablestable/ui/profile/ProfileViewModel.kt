@@ -6,11 +6,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.example.stablestable.firebase.AccountService
+import androidx.lifecycle.viewModelScope
+import com.example.stablestable.data.classes.UserProfile
+import com.example.stablestable.data.repositories.impl.AccountServiceImpl
+import kotlinx.coroutines.launch
 
 
 class ProfileViewModel: ViewModel() {
-    private val accountService: AccountService = AccountService()
+    private val accountService: AccountServiceImpl = AccountServiceImpl()
     // This should be looked at if database change structure
     var fullName by mutableStateOf("")
     var phone by mutableStateOf("")
@@ -18,19 +21,24 @@ class ProfileViewModel: ViewModel() {
 
 
     // Fetch current user details and pass it to ViewModel
-    private fun fetchOne() {
-        accountService.fetchUserData(onSuccess = {r: Map<String, Any> ->
-            fullName = r["firstName"].toString()+" "+r["lastName"].toString()
+    private fun getCurrentUser() {
+        viewModelScope.launch{
+             try {
+                 val currentUser: UserProfile? = accountService.getCurrentUser()
+                 if (currentUser != null) {
+                     fullName = currentUser.firstName + currentUser.lastName
+                     phone = currentUser.phone
+                     email = currentUser.email
+                 }
 
-            phone = r["phone"].toString()
-            email = r["email"].toString()
-
-        }, onFailure = {Log.d(TAG,"faliure")})
-
+            } catch (e:Exception){
+                Log.d(TAG,"Message: ${e.message.toString()}")
+            }
+        }
     }
 
     init {
-        // TODO: This call should be made on login, and save the profile to local memory. Possibly via Object
-        fetchOne()
+        getCurrentUser()
     }
+
 }

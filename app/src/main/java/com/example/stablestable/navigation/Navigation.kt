@@ -34,7 +34,9 @@ fun SetupNavGraph(
             route = Screen.HomeScreen.route
         ) {
             HomeScreen(
-                goToProfile = { navController.navigate(Screen.MyProfileScreen.route) }
+                goToProfile = { navController.navigate(Screen.MyProfileScreen.route) },
+                goToRiders = { navController.navigate(Screen.StableUsers.route) },
+                onLogout = { authViewModel.setUserLoggedIn(false) }
             )
         }
 

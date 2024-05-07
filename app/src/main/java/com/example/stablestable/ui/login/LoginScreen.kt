@@ -90,10 +90,7 @@ fun LoginScreen(
                 Button(
                     onClick = {
                         viewModel.userLogin(
-                            onRegistrationSuccess,
-                            navigateOnFailure = { errorMessage ->
-                                viewModel.loginErrorMessage = errorMessage
-                            }
+                            onRegistrationSuccess
                         )
                     },
                     modifier = Modifier
@@ -142,8 +139,6 @@ fun LoginScreen(
                         navigateOnSuccess = {
                             onRegistrationSuccess()
                             viewModel.showCreateUserWindow = false
-                        },
-                        navigateOnFailure = {
                         }
                     )
                 },
