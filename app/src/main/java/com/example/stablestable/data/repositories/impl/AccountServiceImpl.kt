@@ -10,7 +10,7 @@ import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.tasks.await
 import com.google.firebase.firestore.toObject
 
-class AccountServiceImpl(): AccountService {
+class AccountServiceImpl: AccountService {
     private val db: FirebaseFirestore = Firebase.firestore
     private val auth: FirebaseAuth = Firebase.auth
 
