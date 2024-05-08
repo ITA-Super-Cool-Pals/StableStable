@@ -92,7 +92,8 @@ fun HorseCreateScreen() {
 
             // Age dropdown
             // .clickable modifier on OutlinedTextField didn't work properly
-            // ExposedDropdownMenuBox let me get around
+            // (clickable portion is *behind* text field, amazing..)
+            // ExposedDropdownMenuBox lets me get around it without an extra button
             ExposedDropdownMenuBox(
                 expanded = viewModel.showDateWindow,
                 onExpandedChange = {
