@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -14,7 +13,6 @@ import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -22,6 +20,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.stablestable.R
+import com.example.stablestable.components.datePicker.ShowDatePicker
+
+/*
+ * Horse creation/add screen
+ * Code by Emily
+ */
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
@@ -96,7 +100,7 @@ fun HorseCreateScreen() {
                 }
             ) {
                 OutlinedTextField(
-                    value = viewModel.birthDate,
+                    value = viewModel.birthDateFormatted,
                     onValueChange = { },
                     label = { Text(stringResource(R.string.birthDate)) },
                     trailingIcon = {
@@ -108,19 +112,17 @@ fun HorseCreateScreen() {
                 )
             }
             if (viewModel.showDateWindow) {
-                ShowDate()
+                ShowDatePicker(
+                    dateMillis = viewModel.birthDateMillis,
+                    dateFormatted = viewModel.birthDateFormatted,
+                ) { millis, formattedDate ->
+                    viewModel.birthDateMillis = millis
+                    viewModel.birthDateFormatted = formattedDate
+                }
             }
 
             // Breed
+            // TODO: Dropdown with options or let user write?
         }
     }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun ShowDate() {
-    val dateState = rememberDatePickerState()
-    DatePicker(
-        state = dateState
-    )
 }
