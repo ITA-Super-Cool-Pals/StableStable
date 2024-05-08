@@ -80,6 +80,6 @@ fun ShiftsScreen(
 @Preview
 @Composable
 fun ShiftsScreenPreview(){
-    ShiftsScreen({})
+    ShiftsScreen(){}
 }
 
