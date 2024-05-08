@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <service
-            android:name=".data.repositories.impl.NotificationsFCM.FCMNotificationService" android:exported="false">
+            android:name=".data.repositories.impl.notificationsFCM.FCMNotificationService" android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
