@@ -13,14 +13,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ShiftsScreenMatrix(){
+fun ShiftsScreenMatrix(
+    onBoxOneClick:()->Unit
+){
     val weekDayList: List<String> = listOf("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday")
     Column(modifier = Modifier
         .padding(8.dp)
     ) {
 
         for (day in weekDayList){
-            ShiftsSingleDay(currentShiftDay = day)
+            ShiftsSingleDay(currentShiftDay = day, onBoxOneClick = { onBoxOneClick() })
         }
 
     }
@@ -29,6 +31,6 @@ fun ShiftsScreenMatrix(){
 @Preview
 @Composable
 fun ShiftsScreenMatrixPreview(){
-    ShiftsScreenMatrix()
+    ShiftsScreenMatrix({})
 }
 

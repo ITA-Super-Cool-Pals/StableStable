@@ -34,7 +34,11 @@ import com.example.stablestable.data.classes.Shift
 import java.time.LocalDate
 
 @Composable
-fun ShiftsSingleDay(currentShiftDay: String ){
+fun ShiftsSingleDay(
+    currentShiftDay: String,
+    onBoxOneClick: () -> Unit
+
+){
     Row(modifier = Modifier
         .fillMaxWidth()
         .heightIn(max=100.dp)
@@ -58,6 +62,7 @@ fun ShiftsSingleDay(currentShiftDay: String ){
             .fillMaxWidth(0.5f)
             .padding(8.dp)
             .size(48.dp)
+            .clickable { onBoxOneClick() }
 
         ) {
             // TODO: Find en måde at indsætte en bruger her
@@ -87,7 +92,7 @@ fun ShiftsSingleDay(currentShiftDay: String ){
 @Preview
 @Composable
 fun ShiftsSingleDayPreview(){
-    ShiftsSingleDay("sampleShift")
+    ShiftsSingleDay("sampleShift",{})
 }
 
 

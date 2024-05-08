@@ -10,6 +10,7 @@ import com.example.stablestable.ui.login.LoginScreen
 import com.example.stablestable.ui.profile.MyProfileScreen
 import com.example.stablestable.ui.stable.StableScreen
 import com.example.stablestable.components.StableUsers
+import com.example.stablestable.ui.shifts.ShiftsScreen
 
 @Composable
 fun SetupNavGraph(
@@ -18,7 +19,7 @@ fun SetupNavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = if (authViewModel.isLoggedIn.value) Screen.HomeScreen.route else Screen.LoginScreen.route
+        startDestination = if (authViewModel.isLoggedIn.value) Screen.ShiftsScreen.route else Screen.LoginScreen.route
     ) {
         // Login Screen Route
         composable(
@@ -36,6 +37,7 @@ fun SetupNavGraph(
             HomeScreen(
                 goToProfile = { navController.navigate(Screen.MyProfileScreen.route) },
                 goToRiders = { navController.navigate(Screen.StableUsers.route) },
+                goToShifts = { navController.navigate(Screen.ShiftsScreen.route) },
                 onLogout = { authViewModel.setUserLoggedIn(false) }
             )
         }
@@ -67,6 +69,15 @@ fun SetupNavGraph(
             route = Screen.StableUsers.route
         ) {
             StableUsers(navController = navController)
+        }
+
+        //Route to shifts
+        composable(
+            route = Screen.ShiftsScreen.route
+        ){
+            ShiftsScreen(
+                goToHomeScreen = { navController.navigate(Screen.HomeScreen.route)}
+            )
         }
     }
 }
