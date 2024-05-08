@@ -1,4 +1,4 @@
-package com.example.stablestable.data.repositories.impl.NotificationsFCM
+package com.example.stablestable.data.repositories.impl.notificationsFCM
 
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
