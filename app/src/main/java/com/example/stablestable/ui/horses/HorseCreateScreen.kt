@@ -103,12 +103,12 @@ fun HorseCreateScreen() {
                 OutlinedTextField(
                     value = viewModel.birthDateFormatted,
                     onValueChange = { },
+                    readOnly = true,
                     label = { Text(stringResource(R.string.birthDate)) },
                     trailingIcon = {
                         ExposedDropdownMenuDefaults.TrailingIcon(
                             expanded = viewModel.showDateWindow)
                     },
-                    readOnly = true,
                     modifier = Modifier.menuAnchor()
                 )
             }

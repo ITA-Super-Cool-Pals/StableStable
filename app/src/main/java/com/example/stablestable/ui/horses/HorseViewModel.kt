@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat
 
 @RequiresApi(Build.VERSION_CODES.O)
 class HorseViewModel : ViewModel() {
-    // Horse input field options
+    // Horse name input field
     var name by mutableStateOf("")
 
     // Sex selection dropdown
@@ -25,12 +25,12 @@ class HorseViewModel : ViewModel() {
     var selectedSex by mutableStateOf("") // Current sex selected
     var expandedSex by mutableStateOf(false) // Expanded check
 
-    // Birth date
+    // Birth date dialog window
     var birthDateMillis by mutableLongStateOf(0L) // Milliseconds since epoch
     var birthDateFormatted by mutableStateOf("") // Human-readable format
     var showDateWindow by mutableStateOf(false)
 
-    // Breed type
+    // Breed type input field
     var breed by mutableStateOf("")
 
 }
