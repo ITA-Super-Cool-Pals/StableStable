@@ -13,13 +13,20 @@ import com.google.firebase.messaging.RemoteMessage
 
 class FCMNotificationService : FirebaseMessagingService() {
 
+    override fun onNewToken(token: String) {
+        super.onNewToken(token)
+        // update server
+    }
+/*
     companion object{
         private const val TAG = "FCM notification"
         const val DEFAULT_NOTIFICATION_ID = 0
     }
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        // Handle FCM message received here
+
+        // Respond to received messages
         // This method is called when a message is received while the app is in the foreground
+
         val title = remoteMessage.notification?.title
         val body = remoteMessage.notification?.body
 
@@ -81,4 +88,6 @@ fun NotificationManager.createNotificationChannelIfNotExists(
         )
         this.createNotificationChannel(channel)
     }
+
+ */
 }
