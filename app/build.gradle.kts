@@ -65,6 +65,9 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation("androidx.navigation:navigation-runtime-ktx:2.7.7")
     implementation("androidx.navigation:navigation-compose:2.7.7")
+
+    // When using the BoM, don't specify versions in Firebase dependencies
+    // https://firebase.google.com/docs/android/setup#available-libraries
     implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
 
     // TODO: Add the dependencies for Firebase products you want to use
@@ -75,6 +78,9 @@ dependencies {
     //FCM
     implementation("com.google.firebase:firebase-messaging:24.0.0")
 
+    //Analytics
+    implementation("com.google.firebase:firebase-analytics-ktx")
+
     //Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
@@ -83,9 +89,6 @@ dependencies {
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
 
-
-    // When using the BoM, don't specify versions in Firebase dependencies
-    // https://firebase.google.com/docs/android/setup#available-libraries
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
