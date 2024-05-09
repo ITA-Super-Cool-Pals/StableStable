@@ -2,10 +2,14 @@ package com.example.stablestable.ui.horses
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -14,6 +18,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -35,16 +40,21 @@ fun HorseCreateScreen() {
 
     Box {
 
-        Column {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .padding(top = 30.dp)
+        ) {
             // Title information
             Text(
                 stringResource(R.string.addHorse),
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 10.dp),
-                style = MaterialTheme.typography.headlineSmall,
+                    .fillMaxWidth(),
+                style = MaterialTheme.typography.headlineMedium,
                 textAlign = TextAlign.Center
             )
+
+            Spacer(modifier = Modifier.padding(10.dp))
 
             // Name field
             OutlinedTextField(
@@ -52,6 +62,17 @@ fun HorseCreateScreen() {
                 onValueChange = { viewModel.name = it },
                 label = { Text(stringResource(R.string.name)) },
             )
+
+            Spacer(modifier = Modifier.padding(5.dp))
+
+            // Breed
+            OutlinedTextField(
+                value = viewModel.breed,
+                onValueChange = { viewModel.breed = it },
+                label = { Text(stringResource(R.string.breed)) },
+            )
+
+            Spacer(modifier = Modifier.padding(5.dp))
 
             // Sex option dropdown
             ExposedDropdownMenuBox(
@@ -90,6 +111,8 @@ fun HorseCreateScreen() {
                 }
             }
 
+            Spacer(modifier = Modifier.padding(5.dp))
+
             // Age dropdown
             // .clickable modifier on OutlinedTextField didn't work properly
             // (clickable portion is *behind* text field, amazing..)
@@ -122,12 +145,25 @@ fun HorseCreateScreen() {
                 headline = stringResource(R.string.birthDateWhen)
             )
 
-            // Breed
-            OutlinedTextField(
-                value = viewModel.breed,
-                onValueChange = { viewModel.breed = it },
-                label = { Text(stringResource(R.string.breed)) },
-            )
+            Spacer(modifier = Modifier.padding(10.dp))
+
+            // Button row
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .fillMaxWidth(0.5f)
+            ) {
+                Button(
+                    onClick = { /* TODO: Accept functionality - send data to Firebase, go back */ }
+                ) {
+                    Text("OK")
+                }
+                Button(
+                    onClick = { /* TODO: Cancel functionality - go back */ }
+                ) {
+                    Text("Cancel")
+                }
+            }
         }
     }
 }
