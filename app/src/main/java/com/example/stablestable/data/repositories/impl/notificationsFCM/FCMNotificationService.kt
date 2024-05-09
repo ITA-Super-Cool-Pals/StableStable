@@ -2,6 +2,7 @@ package com.example.stablestable.data.repositories.impl.notificationsFCM
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.graphics.Color
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
@@ -22,18 +23,28 @@ class FCMNotificationService : FirebaseMessagingService() {
         val title = remoteMessage.notification?.title
         val body = remoteMessage.notification?.body
 
+        val notificationBuilder = NotificationCompat.Builder(applicationContext, "1")
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-        val notificationBuilder = if (Build.VERSION_CODES.0 <= Build.VERSION.SDK_INT) {
-            NotificationCompat.Builder(applicationContext, "1")
-        } else {
-            NotificationCompat.Builder(applicationContext)
+
+// Create notification channel if API level is Oreo or higher
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                "1",
+                "Default",
+                NotificationManager.IMPORTANCE_HIGH
+            )
+            channel.enableLights(true)
+            channel.lightColor = Color.RED
+            channel.enableVibration(true)
+            channel.description = "Default notification channel"
+            notificationManager.createNotificationChannel(channel)
         }
-        notificationBuilder = notificationBuilder
+
+        notificationBuilder
             .setSmallIcon(R.drawable.bell_01)
             .setContentTitle(title)
             .setContentText(body)
-            .setAutoChannel(true)
-        initNotificationChannel(notificationManager)
+
         notificationManager.notify(DEFAULT_NOTIFICATION_ID, notificationBuilder.build())
     }
 
@@ -44,16 +55,17 @@ class FCMNotificationService : FirebaseMessagingService() {
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         initNotificationChannel(notificationManager)
     }
-    private fun initNotificationChannel(notificationManager: NotificationManager){
-        if (Build.VERSION_CODES.0 <= Build.VERSION.SDK_INT) {
+    private fun initNotificationChannel(notificationManager: NotificationManager) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             notificationManager.createNotificationChannelIfNotExists(
                 channelId = "1",
                 channelName = "Default"
             )
         }
     }
+
 }
-@RequiresApi(Build.VERSION_CODES.0) //older versions 24 and 25 will not work
+@RequiresApi(Build.VERSION_CODES.O)
 fun NotificationManager.createNotificationChannelIfNotExists(
     channelId: String,
     channelName: String,
