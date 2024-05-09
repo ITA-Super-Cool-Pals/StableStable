@@ -1,6 +1,5 @@
 package com.example.stablestable.ui.horses
 
-import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.getValue
@@ -8,8 +7,6 @@ import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import java.sql.Date
-import java.text.SimpleDateFormat
 
 /*
  * Code by Emily
