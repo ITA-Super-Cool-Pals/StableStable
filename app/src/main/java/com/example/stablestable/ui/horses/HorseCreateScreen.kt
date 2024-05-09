@@ -112,18 +112,22 @@ fun HorseCreateScreen() {
                     modifier = Modifier.menuAnchor()
                 )
             }
-            if (viewModel.showDateWindow) {
-                ShowDatePicker(
-                    dateMillis = viewModel.birthDateMillis,
-                    dateFormatted = viewModel.birthDateFormatted,
-                ) { millis, formattedDate ->
+            ShowDatePicker(
+                showDialog = viewModel.showDateWindow,
+                onDialogDismiss = { viewModel.showDateWindow = false },
+                onDateSelected = { millis, formattedDate ->
                     viewModel.birthDateMillis = millis
                     viewModel.birthDateFormatted = formattedDate
-                }
-            }
+                },
+                headline = stringResource(R.string.birthDateWhen)
+            )
 
             // Breed
-            // TODO: Dropdown with options or let user write?
+            OutlinedTextField(
+                value = viewModel.breed,
+                onValueChange = { viewModel.breed = it },
+                label = { Text(stringResource(R.string.breed)) },
+            )
         }
     }
 }

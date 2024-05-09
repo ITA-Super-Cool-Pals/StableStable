@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="selectDate">Select Date</string>
     <string name="calendar">Calendar</string>
     <string name="horses">Horses</string>
     <string name="riders">Riders</string>
@@ -23,4 +24,6 @@
     <string name="sex">Sex</string>
     <string name="date">Date</string>
     <string name="birthDate">Age</string>
+    <string name="birthDateWhen">When was your horse born</string>
+    <string name="breed">Breed</string>
 </resources>

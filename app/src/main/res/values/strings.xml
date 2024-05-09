@@ -10,6 +10,7 @@
     <string name="profil">Profil</string>
     <string name="email">Email</string>
     <string name="date">Dato</string>
+    <string name ="selectDate">Vælg Dato</string>
 
     <!-- Home Screen -->
     <string name="calendar">Kalender</string>
@@ -30,4 +31,6 @@
     <string name="addHorse">Tilføj din hest</string>
     <string name="sex">Køn</string>
     <string name="birthDate">Alder</string>
+    <string name="birthDateWhen">Hvornår blev din hest født</string>
+    <string name="breed">Race</string>
 </resources>

@@ -38,6 +38,6 @@ class HorseViewModel : ViewModel() {
     }
 
     // Breed type
-    val breedOptions = listOf("Arabian", "Caspian", "Icelandic")
+    var breed by mutableStateOf("")
 
 }
