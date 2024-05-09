@@ -30,13 +30,6 @@ class HorseViewModel : ViewModel() {
     var birthDateFormatted by mutableStateOf("") // Human-readable format
     var showDateWindow by mutableStateOf(false)
 
-    // Function to convert millis to date for human display
-    @SuppressLint("SimpleDateFormat")
-    fun convertMillisToDate(millis: Long): String {
-        val formatter = SimpleDateFormat("dd/MM/yyyy")
-        return formatter.format(Date(millis))
-    }
-
     // Breed type
     var breed by mutableStateOf("")
 
