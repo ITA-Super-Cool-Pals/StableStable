@@ -70,6 +70,8 @@ class LoginViewModel : ViewModel() {
             try {
                 accountService.login(email, password)
                 navigateOnSuccess()
+
+
             } catch (e: Exception) {
                 loginErrorMessage = e.message ?: "Login failed: Unknown Error"
             }

@@ -1,14 +1,30 @@
 package com.example.stablestable
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.stablestable.navigation.AuthViewModel
@@ -30,25 +46,90 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                   /*
                     navController = rememberNavController()
                     SetupNavGraph(
                         navController = navController,
                         authViewModel = AuthViewModel())
 
-                    //Lykke
-                    //FCM
-                    FirebaseMessaging.getInstance().token
-                        .addOnCompleteListener(OnCompleteListener { task ->
-                            if (!task.isSuccessful) {
-                                Log.d("FCM notify", "Fetching FCM registration token failed", task.exception)
-                                return@OnCompleteListener
-                            }
-                            //Get new token
-                            val token: String? = task.result
-                            Log.d("FCM token", token, task.exception)
-                            Toast.makeText(this, token, Toast.LENGTH_SHORT).show()
-                        })
+                    */
+                    CreatePermissionButtonWindow()
+
                 }
+            }
+        }
+    }
+
+    //Lykke
+    //FCM
+    fun requestNotificationPermission() {
+        // This is only necessary for API level >= 33 (TIRAMISU)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) ==
+                PackageManager.PERMISSION_GRANTED
+            ) {
+
+            } else if (shouldShowRequestPermissionRationale(android.Manifest.permission.POST_NOTIFICATIONS)) {
+
+            } else {
+                // Directly ask for the permission
+                requestPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }else{
+            FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.w("FirebaseLogs", "Fetching FCM registration token failed", task.exception)
+                    return@OnCompleteListener
+                }
+
+                // Get new FCM registration token
+                val token = task.result
+                Log.w("FirebaseLogs", "Fetching FCM registration token: $token")
+
+            })
+        }
+
+    }
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission(),
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+
+            FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.w("FirebaseLogs", "Fetching FCM registration token failed", task.exception)
+                    return@OnCompleteListener
+                }
+
+                // Get new FCM registration token
+                val token = task.result
+
+            })
+
+        } else {
+
+        }
+    }
+
+    @Composable
+    fun CreatePermissionButtonWindow(){
+        Dialog(
+            onDismissRequest = {}
+        ){
+            Button(
+                onClick = {
+                    requestNotificationPermission()
+
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(75.dp),
+                shape = RoundedCornerShape(12.dp)
+            ) {
+                Text(
+                    text = "Allow Stable Stable to send notifications",
+                    fontSize = 14.sp)
             }
         }
     }

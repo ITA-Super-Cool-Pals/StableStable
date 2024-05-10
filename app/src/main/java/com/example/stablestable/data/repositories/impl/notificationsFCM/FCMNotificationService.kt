@@ -17,6 +17,7 @@ class FCMNotificationService : FirebaseMessagingService() {
         super.onNewToken(token)
         // update server
     }
+
 /*
     companion object{
         private const val TAG = "FCM notification"
