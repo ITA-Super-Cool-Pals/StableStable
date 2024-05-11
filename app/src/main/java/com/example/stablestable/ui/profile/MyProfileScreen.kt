@@ -70,9 +70,9 @@ fun MyProfileScreen() {
         }
         if (profileViewModel.showHorseCreateWindow) {
             HorseCreateScreen(
-                onConfirm = {  },
+                onConfirm = { },
                 onDismiss = { profileViewModel.showHorseCreateWindow = false }
             )
-
+        }
     }
 }

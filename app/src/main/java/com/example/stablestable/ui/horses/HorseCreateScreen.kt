@@ -2,6 +2,7 @@ package com.example.stablestable.ui.horses
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -37,7 +39,7 @@ import com.example.stablestable.components.datePicker.ShowDatePicker
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HorseCreateScreen(
-    onConfirm: (String, String, String, String) -> Unit,
+    onConfirm: () -> Unit,
     onDismiss: () -> Unit
 ) {
     Dialog(
@@ -45,7 +47,10 @@ fun HorseCreateScreen(
     ) {
         val viewModel = viewModel<HorseViewModel>()
 
-        Box {
+        Box(
+            modifier = Modifier
+                .background(MaterialTheme.colorScheme.background, shape = RoundedCornerShape(10.dp))
+        ) {
 
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -162,12 +167,7 @@ fun HorseCreateScreen(
                 ) {
                     Button(
                         onClick = {
-                            onConfirm(
-                                viewModel.name,
-                                viewModel.breed,
-                                viewModel.selectedSex,
-                                viewModel.birthDateFormatted
-                            )
+                            onDismiss()
                         }
                     ) {
                         Text("OK")
@@ -178,6 +178,8 @@ fun HorseCreateScreen(
                         Text("Cancel")
                     }
                 }
+
+                Spacer(modifier = Modifier.padding(10.dp))
             }
         }
     }
