@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.stablestable.R
 import com.example.stablestable.components.datePicker.ShowDatePicker
@@ -35,135 +36,150 @@ import com.example.stablestable.components.datePicker.ShowDatePicker
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HorseCreateScreen() {
-    val viewModel = viewModel<HorseViewModel>()
+fun HorseCreateScreen(
+    onConfirm: (String, String, String, String) -> Unit,
+    onDismiss: () -> Unit
+) {
+    Dialog(
+        onDismissRequest = onDismiss
+    ) {
+        val viewModel = viewModel<HorseViewModel>()
 
-    Box {
+        Box {
 
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .padding(top = 30.dp)
-        ) {
-            // Title information
-            Text(
-                stringResource(R.string.addHorse),
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
-                    .fillMaxWidth(),
-                style = MaterialTheme.typography.headlineMedium,
-                textAlign = TextAlign.Center
-            )
-
-            Spacer(modifier = Modifier.padding(10.dp))
-
-            // Name field
-            OutlinedTextField(
-                value = viewModel.name,
-                onValueChange = { viewModel.name = it },
-                label = { Text(stringResource(R.string.name)) },
-            )
-
-            Spacer(modifier = Modifier.padding(5.dp))
-
-            // Breed
-            OutlinedTextField(
-                value = viewModel.breed,
-                onValueChange = { viewModel.breed = it },
-                label = { Text(stringResource(R.string.breed)) },
-            )
-
-            Spacer(modifier = Modifier.padding(5.dp))
-
-            // Sex option dropdown
-            ExposedDropdownMenuBox(
-                expanded = viewModel.expandedSex,
-                onExpandedChange = {
-                    viewModel.expandedSex = !viewModel.expandedSex
-                }
+                    .padding(top = 30.dp)
             ) {
-                OutlinedTextField(
-                    value = viewModel.selectedSex,
-                    onValueChange = { },
-                    readOnly = true,
-                    label = { Text(stringResource(R.string.sex)) },
-                    trailingIcon = {
-                        ExposedDropdownMenuDefaults.TrailingIcon(
-                            expanded = viewModel.expandedSex
-                        )
-                    },
-                    modifier = Modifier.menuAnchor()
+                // Title information
+                Text(
+                    stringResource(R.string.addHorse),
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    style = MaterialTheme.typography.headlineMedium,
+                    textAlign = TextAlign.Center
                 )
-                ExposedDropdownMenu(
+
+                Spacer(modifier = Modifier.padding(10.dp))
+
+                // Name field
+                OutlinedTextField(
+                    value = viewModel.name,
+                    onValueChange = { viewModel.name = it },
+                    label = { Text(stringResource(R.string.name)) },
+                )
+
+                Spacer(modifier = Modifier.padding(5.dp))
+
+                // Breed
+                OutlinedTextField(
+                    value = viewModel.breed,
+                    onValueChange = { viewModel.breed = it },
+                    label = { Text(stringResource(R.string.breed)) },
+                )
+
+                Spacer(modifier = Modifier.padding(5.dp))
+
+                // Sex option dropdown
+                ExposedDropdownMenuBox(
                     expanded = viewModel.expandedSex,
-                    onDismissRequest = {
-                        viewModel.expandedSex
+                    onExpandedChange = {
+                        viewModel.expandedSex = !viewModel.expandedSex
                     }
                 ) {
-                    viewModel.sexOptions.forEach { sex ->
-                        DropdownMenuItem(
-                            text = { Text(sex) },
-                            onClick = {
-                                viewModel.selectedSex = sex
-                                viewModel.expandedSex = false
-                            }
-                        )
+                    OutlinedTextField(
+                        value = viewModel.selectedSex,
+                        onValueChange = { },
+                        readOnly = true,
+                        label = { Text(stringResource(R.string.sex)) },
+                        trailingIcon = {
+                            ExposedDropdownMenuDefaults.TrailingIcon(
+                                expanded = viewModel.expandedSex
+                            )
+                        },
+                        modifier = Modifier.menuAnchor()
+                    )
+                    ExposedDropdownMenu(
+                        expanded = viewModel.expandedSex,
+                        onDismissRequest = {
+                            viewModel.expandedSex
+                        }
+                    ) {
+                        viewModel.sexOptions.forEach { sex ->
+                            DropdownMenuItem(
+                                text = { Text(sex) },
+                                onClick = {
+                                    viewModel.selectedSex = sex
+                                    viewModel.expandedSex = false
+                                }
+                            )
+                        }
                     }
                 }
-            }
 
-            Spacer(modifier = Modifier.padding(5.dp))
+                Spacer(modifier = Modifier.padding(5.dp))
 
-            // Age dropdown
-            // .clickable modifier on OutlinedTextField didn't work properly
-            // (clickable portion is *behind* text field, amazing..)
-            // ExposedDropdownMenuBox lets me get around it without an extra button
-            ExposedDropdownMenuBox(
-                expanded = viewModel.showDateWindow,
-                onExpandedChange = {
-                    viewModel.showDateWindow = !viewModel.showDateWindow
+                // Age picker
+                // .clickable modifier on OutlinedTextField didn't work properly
+                // (clickable portion is *behind* text field, amazing..)
+                // ExposedDropdownMenuBox lets me get around it without an extra button
+                ExposedDropdownMenuBox(
+                    expanded = viewModel.showDateWindow,
+                    onExpandedChange = {
+                        viewModel.showDateWindow = !viewModel.showDateWindow
+                    }
+                ) {
+                    OutlinedTextField(
+                        value = viewModel.birthDateFormatted,
+                        onValueChange = { },
+                        readOnly = true,
+                        label = { Text(stringResource(R.string.birthDate)) },
+                        trailingIcon = {
+                            ExposedDropdownMenuDefaults.TrailingIcon(
+                                expanded = viewModel.showDateWindow)
+                            },
+                        modifier = Modifier.menuAnchor()
+                    )
                 }
-            ) {
-                OutlinedTextField(
-                    value = viewModel.birthDateFormatted,
-                    onValueChange = { },
-                    readOnly = true,
-                    label = { Text(stringResource(R.string.birthDate)) },
-                    trailingIcon = {
-                        ExposedDropdownMenuDefaults.TrailingIcon(
-                            expanded = viewModel.showDateWindow)
+                ShowDatePicker(
+                    showDialog = viewModel.showDateWindow,
+                    onDialogDismiss = { viewModel.showDateWindow = false },
+                    onDateSelected = { millis, formattedDate ->
+                        viewModel.birthDateMillis = millis
+                        viewModel.birthDateFormatted = formattedDate
                     },
-                    modifier = Modifier.menuAnchor()
+                    headline = stringResource(R.string.birthDateWhen)
                 )
-            }
-            ShowDatePicker(
-                showDialog = viewModel.showDateWindow,
-                onDialogDismiss = { viewModel.showDateWindow = false },
-                onDateSelected = { millis, formattedDate ->
-                    viewModel.birthDateMillis = millis
-                    viewModel.birthDateFormatted = formattedDate
-                },
-                headline = stringResource(R.string.birthDateWhen)
-            )
 
-            Spacer(modifier = Modifier.padding(10.dp))
+                Spacer(modifier = Modifier.padding(10.dp))
 
-            // Button row
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .fillMaxWidth(0.5f)
-            ) {
-                Button(
-                    onClick = { /* TODO: Accept functionality - send data to Firebase, go back */ }
+                // Button row
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier
+                        .fillMaxWidth(0.5f)
                 ) {
-                    Text("OK")
-                }
-                Button(
-                    onClick = { /* TODO: Cancel functionality - go back */ }
-                ) {
-                    Text("Cancel")
+                    Button(
+                        onClick = {
+                            onConfirm(
+                                viewModel.name,
+                                viewModel.breed,
+                                viewModel.selectedSex,
+                                viewModel.birthDateFormatted
+                            )
+                        }
+                    ) {
+                        Text("OK")
+                    }
+                    Button(
+                        onClick = { onDismiss() }
+                    ) {
+                        Text("Cancel")
+                    }
                 }
             }
         }
     }
 }
+

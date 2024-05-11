@@ -1,5 +1,7 @@
 package com.example.stablestable.navigation
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -12,6 +14,7 @@ import com.example.stablestable.ui.stable.StableScreen
 import com.example.stablestable.components.StableUsers
 import com.example.stablestable.ui.horses.HorseCreateScreen
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun SetupNavGraph(
     navController: NavHostController,
@@ -19,8 +22,8 @@ fun SetupNavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.HorseCreateScreen.route
-        //startDestination = if (authViewModel.isLoggedIn.value) Screen.HomeScreen.route else Screen.LoginScreen.route
+        //startDestination = Screen.HorseCreateScreen.route
+        startDestination = if (authViewModel.isLoggedIn.value) Screen.HomeScreen.route else Screen.LoginScreen.route
     ) {
         // Login Screen Route
         composable(
@@ -46,14 +49,9 @@ fun SetupNavGraph(
         composable(
             route = Screen.MyProfileScreen.route
         ) {
-            MyProfileScreen(navController = navController)
-        }
+            MyProfileScreen(
 
-        // Horse Creation Screen Route
-        composable(
-            route = Screen.HorseCreateScreen.route
-        ) {
-            HorseCreateScreen()
+            )
         }
 
         // Stable Screen Route

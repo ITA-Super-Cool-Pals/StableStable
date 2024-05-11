@@ -1,5 +1,7 @@
 package com.example.stablestable.ui.profile
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -8,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,12 +24,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.stablestable.R
+import com.example.stablestable.ui.horses.HorseCreateScreen
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun MyProfileScreen(
-    navController: NavController
-) {
+fun MyProfileScreen() {
     val profileViewModel = viewModel<ProfileViewModel>()
     Column(modifier = Modifier
         .fillMaxWidth()
@@ -57,11 +60,19 @@ fun MyProfileScreen(
                 .padding(start = 15.dp),fontSize = 16.sp)
 
         }
-    }
-}
 
-@Preview
-@Composable
-fun MyProfileScreenPreview(){
-    MyProfileScreen(rememberNavController())
+        Button(
+            onClick = {
+                profileViewModel.showHorseCreateWindow = true
+            }
+        ) {
+            Text("Add Horse")
+        }
+        if (profileViewModel.showHorseCreateWindow) {
+            HorseCreateScreen(
+                onConfirm = {  },
+                onDismiss = { profileViewModel.showHorseCreateWindow = false }
+            )
+
+    }
 }

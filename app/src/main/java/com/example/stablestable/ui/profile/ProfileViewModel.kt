@@ -41,4 +41,6 @@ class ProfileViewModel: ViewModel() {
         getCurrentUser()
     }
 
+    var showHorseCreateWindow by mutableStateOf(false)
+
 }
