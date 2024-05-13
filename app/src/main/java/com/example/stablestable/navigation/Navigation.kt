@@ -4,12 +4,11 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.stablestable.ui.calendar.CalendarScreen
 import com.example.stablestable.ui.home.HomeScreen
 import com.example.stablestable.ui.login.LoginScreen
 import com.example.stablestable.ui.profile.MyProfileScreen
-import com.example.stablestable.ui.stable.StableScreen
-import com.example.stablestable.components.StableUsers
+import com.example.stablestable.ui.riders.StableScreen
+import com.example.stablestable.ui.riders.StableUsers
 
 @Composable
 fun SetupNavGraph(
@@ -51,20 +50,13 @@ fun SetupNavGraph(
         composable(
             route = Screen.StableScreen.route
         ) {
-            StableScreen(navController = navController)
-        }
-
-        // Calendar Screen Route
-        composable(
-            route = Screen.CalendarScreen.route
-        ) {
-            CalendarScreen(navController = navController)
+            StableScreen()
         }
 
         composable(
             route = Screen.StableUsers.route
         ) {
-            StableUsers(navController = navController)
+            StableUsers()
         }
     }
 }
