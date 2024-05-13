@@ -1,34 +1,60 @@
 package com.example.stablestable.ui.shifts
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import com.example.stablestable.R
 
 @Composable
 fun ShiftsSingleDayDialog(
-    onDismissRequest: () -> Unit
-){
-    Dialog(onDismissRequest = { onDismissRequest() }) {
+    onDismissRequest: () -> Unit){
+    Dialog(onDismissRequest = { onDismissRequest() },
+        ) {
         Card(
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.surfaceVariant),
             modifier = Modifier
-            .size(width = 100.dp, height = 50.dp)
+            .size(width = 300.dp, height = 250.dp)
 
         ) {
-            Text(modifier = Modifier.clickable{ onDismissRequest() },
-                text = "LUK", )
+
+            CardContentEmpty()
+            Box(Modifier.fillMaxSize()) {
+                Text(modifier = Modifier
+                    .clickable { onDismissRequest() }
+                    .align(Alignment.BottomEnd), text = "LUK")
+            }
         }
     }
+}
+
+
+@Composable
+fun CardContentEmpty(){
+
+}
+
+@Composable
+fun CardContentFull(){
+
+}
+
+@Composable
+fun CardContentMe(){
 
 }
 

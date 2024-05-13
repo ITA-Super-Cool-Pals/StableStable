@@ -17,6 +17,7 @@ fun ShiftsScreenMatrix(
     onBoxOneClick:()->Unit
 ){
     val weekDayList: List<String> = listOf("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday")
+
     Column(modifier = Modifier
         .padding(8.dp)
     ) {
@@ -31,6 +32,6 @@ fun ShiftsScreenMatrix(
 @Preview
 @Composable
 fun ShiftsScreenMatrixPreview(){
-    ShiftsScreenMatrix({})
+    ShiftsScreenMatrix(){}
 }
 

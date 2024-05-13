@@ -34,7 +34,6 @@ fun ShiftsScreen(
 ){
     val viewModel = viewModel<ShiftsViewModel>()
 
-
     Column() {
         NavigationHeader(goToHomeScreen)
         Row(modifier = Modifier

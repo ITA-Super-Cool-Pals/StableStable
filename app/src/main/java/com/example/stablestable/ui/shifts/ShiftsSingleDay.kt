@@ -41,7 +41,7 @@ fun ShiftsSingleDay(
 ){
     Row(modifier = Modifier
         .fillMaxWidth()
-        .heightIn(max=100.dp)
+        .heightIn(max=80.dp)
         .padding(2.dp)
         .border(1.dp,Color.Black, RoundedCornerShape(8.dp))
         .background(Color(0x61CDDC39),RoundedCornerShape(8.dp))
