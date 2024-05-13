@@ -13,12 +13,15 @@ import com.example.stablestable.navigation.AuthViewModel
 import kotlinx.coroutines.launch
 
 
-class ProfileViewModel(private val authViewModel: AuthViewModel): ViewModel() {
+class ProfileViewModel: ViewModel() {
+    private val authViewModel: AuthViewModel = AuthViewModel()
 
     // This should be looked at if database change structure
     var fullName by mutableStateOf("")
     var phone by mutableStateOf("")
     var email by mutableStateOf("")
+
+
 
     init {
         viewModelScope.launch {
