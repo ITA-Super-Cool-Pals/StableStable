@@ -36,8 +36,6 @@ class AuthViewModel : ViewModel() {
     private val _currentUserProfile = MutableStateFlow<UserProfile?>(null)
     val currentUserProfile: StateFlow<UserProfile?> = _currentUserProfile
 
-    var stableId = currentUserProfile.value?.stableId ?: ""
-
     init {
         checkCurrentUser()
     }
