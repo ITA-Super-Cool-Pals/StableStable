@@ -20,17 +20,28 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.stablestable.R
+import com.example.stablestable.navigation.AuthViewModel
 import com.example.stablestable.ui.horses.HorseCreateScreen
 
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun MyProfileScreen() {
-    val profileViewModel = viewModel<ProfileViewModel>()
+fun MyProfileScreen(
+    navController: NavController
+) {
+    val authViewModel: AuthViewModel = viewModel()
+    val profileViewModel: ProfileViewModel = viewModel(factory = object : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            return ProfileViewModel(authViewModel) as T
+        }
+    })
+
     Column(modifier = Modifier
         .fillMaxWidth()
         .padding(16.dp)) {
