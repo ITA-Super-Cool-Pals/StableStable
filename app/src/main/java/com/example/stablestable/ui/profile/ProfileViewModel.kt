@@ -9,36 +9,27 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.stablestable.data.classes.UserProfile
 import com.example.stablestable.data.repositories.impl.AccountServiceImpl
+import com.example.stablestable.navigation.AuthViewModel
 import kotlinx.coroutines.launch
 
 
-class ProfileViewModel: ViewModel() {
-    private val accountService: AccountServiceImpl = AccountServiceImpl()
+class ProfileViewModel(private val authViewModel: AuthViewModel): ViewModel() {
+
     // This should be looked at if database change structure
     var fullName by mutableStateOf("")
     var phone by mutableStateOf("")
     var email by mutableStateOf("")
 
-
-    // Fetch current user details and pass it to ViewModel
-    private fun getCurrentUser() {
-        viewModelScope.launch{
-             try {
-                 val currentUser: UserProfile? = accountService.getCurrentUser()
-                 if (currentUser != null) {
-                     fullName = currentUser.firstName + currentUser.lastName
-                     phone = currentUser.phone
-                     email = currentUser.email
-                 }
-
-            } catch (e:Exception){
-                Log.d(TAG,"Message: ${e.message.toString()}")
+    init {
+        viewModelScope.launch {
+            authViewModel.currentUserProfile.collect { currentUser ->
+                if (currentUser != null) {
+                    fullName = "${currentUser.firstName} ${currentUser.lastName}"
+                    phone = currentUser.phone
+                    email = currentUser.email
+                }
             }
         }
-    }
-
-    init {
-        getCurrentUser()
     }
 
 }

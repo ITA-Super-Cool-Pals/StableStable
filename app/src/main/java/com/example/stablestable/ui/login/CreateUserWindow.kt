@@ -40,7 +40,7 @@ fun CreateUserWindow(
     ) {
         Box(
             modifier = Modifier
-                .background(Color.White, shape = RoundedCornerShape(10.dp))
+                .background(MaterialTheme.colorScheme.surface, shape = RoundedCornerShape(10.dp))
                 .padding(25.dp)
         ) {
             val viewModel = viewModel<LoginViewModel>()
