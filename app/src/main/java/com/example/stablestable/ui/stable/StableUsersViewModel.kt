@@ -10,7 +10,8 @@ import com.example.stablestable.data.repositories.impl.AccountServiceImpl
 import com.example.stablestable.navigation.AuthViewModel
 import kotlinx.coroutines.launch
 
-class StableUsersViewModel(private val authViewModel: AuthViewModel): ViewModel() {
+class StableUsersViewModel: ViewModel() {
+    private val authViewModel: AuthViewModel = AuthViewModel()
     private val accountService: AccountServiceImpl = AccountServiceImpl()
     var nameList = mutableStateListOf<String>()
     private var stableId: String? = null

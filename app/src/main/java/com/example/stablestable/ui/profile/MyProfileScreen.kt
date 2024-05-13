@@ -30,12 +30,7 @@ import com.example.stablestable.navigation.AuthViewModel
 fun MyProfileScreen(
     navController: NavController
 ) {
-    val authViewModel: AuthViewModel = viewModel()
-    val profileViewModel: ProfileViewModel = viewModel(factory = object : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return ProfileViewModel(authViewModel) as T
-        }
-    })
+    val profileViewModel: ProfileViewModel = viewModel()
 
     Column(modifier = Modifier
         .fillMaxWidth()

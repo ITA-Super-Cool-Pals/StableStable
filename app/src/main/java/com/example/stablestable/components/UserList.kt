@@ -20,12 +20,7 @@ import com.example.stablestable.ui.stable.StableUsersViewModel
 fun StableUsers(
     navController: NavController,
 ) {
-    val authViewModel: AuthViewModel = viewModel()
-    val stableUsersViewModel: StableUsersViewModel = viewModel(factory = object : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return StableUsersViewModel(authViewModel) as T
-        }
-    })
+    val stableUsersViewModel: StableUsersViewModel = viewModel()
 
     val users = stableUsersViewModel.nameList
 
