@@ -26,4 +26,6 @@
     <string name="birthDate">Age</string>
     <string name="birthDateWhen">When was your horse born</string>
     <string name="breed">Breed</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">OK</string>
 </resources>

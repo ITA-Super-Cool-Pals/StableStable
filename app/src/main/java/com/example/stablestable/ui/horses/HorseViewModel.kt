@@ -41,14 +41,14 @@ class HorseViewModel: ViewModel() {
     var showDateWindow by mutableStateOf(false)
 
     // Get the current logged in users ID as owner
-    val ownerId: String
+    private val ownerId: String
         get() = authViewModel.userId ?: ""
 
     // Get the current logged in users Stable ID
-    val stableId: String
+    private val stableId: String
         get() = authViewModel.currentUserProfile.value?.stableId ?: ""
 
-    fun createHorseProfile(): HorseProfile {
+    private fun createHorseProfile(): HorseProfile {
         return HorseProfile(
             ownerId = ownerId,
             stableId = stableId,
@@ -64,10 +64,19 @@ class HorseViewModel: ViewModel() {
         viewModelScope.launch {
             try {
                 accountService.addHorse(horseProfile)
+                clearFields()
             } catch (e: Exception) {
                 Log.d(TAG, "Add Horse to database failed: ${e.message}")
             }
         }
+    }
+
+    private fun clearFields() {
+        name = ""
+        breed = ""
+        selectedSex = ""
+        birthDateMillis = 0L
+        birthDateFormatted = ""
     }
 
 

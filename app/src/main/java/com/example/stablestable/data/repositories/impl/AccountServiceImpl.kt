@@ -11,6 +11,11 @@ import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.tasks.await
 import com.google.firebase.firestore.toObject
 
+/*
+ * Firebase Account and Database interaction
+ * Code by Emily & Josef
+ */
+
 class AccountServiceImpl: AccountService {
     private val db: FirebaseFirestore = Firebase.firestore
     private val auth: FirebaseAuth = Firebase.auth
@@ -41,9 +46,26 @@ class AccountServiceImpl: AccountService {
         return userDataList
     }
 
+    // Add a horse to the database
     override suspend fun addHorse(horseProfile: HorseProfile) {
        val horseDocRef = db.collection("horses").document()
        horseDocRef.set(horseProfile)
+    }
+
+    override suspend fun getHorsesByOwnerId(ownerId: String): List<HorseProfile?> {
+        val horseDataList = mutableListOf<HorseProfile>()
+        val query = db.collection("horses").whereEqualTo("ownerId", ownerId)
+
+        val dataSnapshot = query.get().await()
+
+        for (document in dataSnapshot.documents) {
+            val horseData = document.toObject<HorseProfile>()
+            if (horseData != null) {
+                horseDataList.add(horseData)
+            }
+        }
+
+        return horseDataList
     }
 
     // Create a new user

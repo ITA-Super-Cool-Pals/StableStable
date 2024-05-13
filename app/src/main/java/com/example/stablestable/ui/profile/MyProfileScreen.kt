@@ -74,9 +74,15 @@ fun MyProfileScreen() {
         }
         if (profileViewModel.showHorseCreateWindow) {
             HorseCreateScreen(
-                onConfirm = { },
+                onConfirm = { profileViewModel.showHorseCreateWindow = false },
                 onDismiss = { profileViewModel.showHorseCreateWindow = false }
             )
+        }
+
+        Column {
+            profileViewModel.horseList.forEach {
+                Text(text = it)
+            }
         }
     }
 }

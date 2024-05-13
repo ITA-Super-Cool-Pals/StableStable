@@ -10,7 +10,9 @@
     <string name="profil">Profil</string>
     <string name="email">Email</string>
     <string name="date">Dato</string>
-    <string name ="selectDate">Vælg Dato</string>
+    <string name="selectDate">Vælg Dato</string>
+    <string name="confirm">OK</string>
+    <string name="cancel">Annuller</string>
 
     <!-- Home Screen -->
     <string name="calendar">Kalender</string>
