@@ -36,14 +36,6 @@ class AuthViewModel : ViewModel() {
     private val _currentUserProfile = MutableStateFlow<UserProfile?>(null)
     val currentUserProfile: StateFlow<UserProfile?> = _currentUserProfile
 
-    // Expose the stableId from the user profile to be easily accessible
-    val stableId: String?
-        get() {
-            val id = _currentUserProfile.value?.stableId
-            Log.d(TAG, "Accessing stableId: $id")
-            return id
-        }
-
     init {
         checkCurrentUser()
     }

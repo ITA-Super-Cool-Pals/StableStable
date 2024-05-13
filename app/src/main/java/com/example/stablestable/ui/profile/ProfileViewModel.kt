@@ -24,7 +24,7 @@ class ProfileViewModel(private val authViewModel: AuthViewModel): ViewModel() {
         viewModelScope.launch {
             authViewModel.currentUserProfile.collect { currentUser ->
                 if (currentUser != null) {
-                    fullName = currentUser.firstName + currentUser.lastName
+                    fullName = "${currentUser.firstName} ${currentUser.lastName}"
                     phone = currentUser.phone
                     email = currentUser.email
                 }

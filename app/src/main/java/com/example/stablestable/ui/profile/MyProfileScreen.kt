@@ -36,7 +36,7 @@ fun MyProfileScreen(
             return ProfileViewModel(authViewModel) as T
         }
     })
-    //val profileViewModel = viewModel<ProfileViewModel>()
+
     Column(modifier = Modifier
         .fillMaxWidth()
         .padding(16.dp)) {
@@ -67,10 +67,4 @@ fun MyProfileScreen(
 
         }
     }
-}
-
-@Preview
-@Composable
-fun MyProfileScreenPreview(){
-    MyProfileScreen(rememberNavController())
 }
