@@ -1,10 +1,14 @@
 package com.example.stablestable.ui.shifts
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -16,12 +20,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.example.stablestable.R
 
 @Composable
 fun ShiftsSingleDayDialog(
-    onDismissRequest: () -> Unit){
+    displayedDay: String,
+    onDismissRequest: () -> Unit,
+    onAddMeClick: () -> Unit
+){
     Dialog(onDismissRequest = { onDismissRequest() },
         ) {
         Card(
@@ -31,8 +39,11 @@ fun ShiftsSingleDayDialog(
             .size(width = 300.dp, height = 250.dp)
 
         ) {
+            Row {
+                Text(text = displayedDay)
+            }
+            CardContentEmpty(){onAddMeClick()}
 
-            CardContentEmpty()
             Box(Modifier.fillMaxSize()) {
                 Text(modifier = Modifier
                     .clickable { onDismissRequest() }
@@ -44,13 +55,42 @@ fun ShiftsSingleDayDialog(
 
 
 @Composable
-fun CardContentEmpty(){
+fun CardContentEmpty(
+    onAddMeClick: () -> Unit
+){
+    Row(modifier= Modifier.fillMaxWidth()
+        .padding(top = 6.dp),
+        horizontalArrangement = Arrangement.Center) {
+        Text(text = "This Shit empty", fontSize = 18.sp)
 
+    }
+    Row {
+        Button(onClick = {
+            onAddMeClick()
+        }) {
+            Text(text = "Add me to this shift")
+        }
+    }
 }
 
 @Composable
-fun CardContentFull(){
+fun CardContentFull(
+    nameOnShift: String,
+    onRemoveMeClick: ()-> Unit
+){
+    Row(modifier= Modifier.fillMaxWidth()
+        .padding(top = 6.dp),
+        horizontalArrangement = Arrangement.Center) {
+        Text(text = "This Shit Occupied: $nameOnShift", fontSize = 18.sp)
 
+    }
+    Row {
+        Button(onClick = {
+            onRemoveMeClick()
+        }) {
+            Text(text = "Remove me from this shift")
+        }
+    }
 }
 
 @Composable
@@ -61,5 +101,5 @@ fun CardContentMe(){
 @Preview
 @Composable
 fun DialogPreview(){
-    ShiftsSingleDayDialog(){}
+    ShiftsSingleDayDialog("Monday",{}){}
 }

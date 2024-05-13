@@ -36,12 +36,11 @@ import java.time.LocalDate
 @Composable
 fun ShiftsSingleDay(
     currentShiftDay: String,
-    onBoxOneClick: () -> Unit
-
+    onShiftsBoxClick: (String, String) -> Unit
 ){
     Row(modifier = Modifier
         .fillMaxWidth()
-        .heightIn(max=80.dp)
+        .heightIn(max = 80.dp)
         .padding(2.dp)
         .border(1.dp,Color.Black, RoundedCornerShape(8.dp))
         .background(Color(0x61CDDC39),RoundedCornerShape(8.dp))
@@ -62,7 +61,9 @@ fun ShiftsSingleDay(
             .fillMaxWidth(0.5f)
             .padding(8.dp)
             .size(48.dp)
-            .clickable { onBoxOneClick() }
+            .clickable {
+                onShiftsBoxClick(currentShiftDay,"morning")
+            }
 
         ) {
             // TODO: Find en måde at indsætte en bruger her
@@ -92,8 +93,7 @@ fun ShiftsSingleDay(
 @Preview
 @Composable
 fun ShiftsSingleDayPreview(){
-    ShiftsSingleDay("sampleShift",{})
+//ShiftsSingleDay("sampleShift",{})
 }
 
 
-private val sampleShift = Shift(LocalDate.now(),"Mig","Morning")

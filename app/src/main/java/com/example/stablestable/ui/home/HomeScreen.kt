@@ -30,6 +30,21 @@ import com.example.stablestable.R
 import com.example.stablestable.components.CreateNotificationHeader
 import com.example.stablestable.components.NotificationsDialog
 
+/*
+@Composabel
+fun himescreen(){
+    val viewModel = viewModel<HomeViewModel>()
+
+    HomeScreen(
+    goToProfile = viewModel.gotoprofile
+
+    )
+
+}
+
+ */
+
+
 @Composable
 fun HomeScreen(
     goToProfile: () -> Unit,

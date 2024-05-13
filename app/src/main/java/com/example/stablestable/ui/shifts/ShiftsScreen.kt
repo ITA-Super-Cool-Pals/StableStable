@@ -72,7 +72,11 @@ fun ShiftsScreen(
             horizontalArrangement = Arrangement.Center
         ) {
             // TODO: Indsæt Skema her.
-            ShiftsScreenMatrix(onBoxOneClick = { viewModel.openShiftDialog = true })
+            ShiftsScreenMatrix(onBoxOneClick = {s: String, s1:String ->
+                viewModel.viewedDay = s
+                viewModel.viewedSegment = s1
+                viewModel.openShiftDialog = true }
+            )
         }
 
     }
@@ -81,8 +85,9 @@ fun ShiftsScreen(
     when {
         viewModel.openShiftDialog -> {
             ShiftsSingleDayDialog(
-                onDismissRequest = {viewModel.openShiftDialog = false}
-            )
+                displayedDay = viewModel.viewedDay,
+                onDismissRequest = {viewModel.openShiftDialog = false},
+                onAddMeClick = { viewModel.createShift() })
         }
     }
 
