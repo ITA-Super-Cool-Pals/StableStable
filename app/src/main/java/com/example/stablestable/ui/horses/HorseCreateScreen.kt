@@ -49,7 +49,7 @@ fun HorseCreateScreen(
 
         Box(
             modifier = Modifier
-                .background(MaterialTheme.colorScheme.background, shape = RoundedCornerShape(10.dp))
+                .background(MaterialTheme.colorScheme.surface, shape = RoundedCornerShape(10.dp))
         ) {
 
             Column(
@@ -167,6 +167,7 @@ fun HorseCreateScreen(
                 ) {
                     Button(
                         onClick = {
+                            viewModel.addHorseToFirebase()
                             onDismiss()
                         }
                     ) {

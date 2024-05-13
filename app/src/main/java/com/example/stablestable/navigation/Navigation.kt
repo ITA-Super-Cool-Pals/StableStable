@@ -49,9 +49,7 @@ fun SetupNavGraph(
         composable(
             route = Screen.MyProfileScreen.route
         ) {
-            MyProfileScreen(
-
-            )
+            MyProfileScreen()
         }
 
         // Stable Screen Route

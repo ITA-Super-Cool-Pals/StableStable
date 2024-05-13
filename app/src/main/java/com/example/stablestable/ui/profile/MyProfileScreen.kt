@@ -32,9 +32,7 @@ import com.example.stablestable.ui.horses.HorseCreateScreen
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun MyProfileScreen(
-    navController: NavController
-) {
+fun MyProfileScreen() {
     val authViewModel: AuthViewModel = viewModel()
     val profileViewModel: ProfileViewModel = viewModel(factory = object : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
