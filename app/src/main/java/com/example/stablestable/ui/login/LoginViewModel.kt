@@ -17,7 +17,6 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel : ViewModel() {
     private val accountService: AccountServiceImpl = AccountServiceImpl()
-    //private val accountServiceOld: AccountService = AccountService()
 
     // Control visibility of user creation window
     var showCreateUserWindow by mutableStateOf(false)
@@ -50,7 +49,7 @@ class LoginViewModel : ViewModel() {
                     email = email,
                     phone = phone
                 )
-                accountService.createUser(userProfile, password)
+                accountService.userCreate(userProfile, password)
                 navigateOnSuccess()
             } catch (e: Exception) {
                 createUserErrorMessage = e.message ?: "Account creation failed: Unknown error"
@@ -68,7 +67,7 @@ class LoginViewModel : ViewModel() {
         // Login the user
         viewModelScope.launch {
             try {
-                accountService.login(email, password)
+                accountService.userLogin(email, password)
                 navigateOnSuccess()
             } catch (e: Exception) {
                 loginErrorMessage = e.message ?: "Login failed: Unknown Error"
