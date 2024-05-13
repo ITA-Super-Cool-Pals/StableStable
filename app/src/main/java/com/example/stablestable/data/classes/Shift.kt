@@ -4,6 +4,7 @@ import java.time.LocalDate
 
 data class Shift(
     val date: LocalDate,
+    val dayOfWeek: String = "",
     // TODO: Vi skal
     val user: String = "",
     // Morning/Evening
