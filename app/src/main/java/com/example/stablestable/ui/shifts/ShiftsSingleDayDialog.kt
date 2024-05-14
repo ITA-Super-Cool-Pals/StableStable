@@ -27,8 +27,10 @@ import com.example.stablestable.R
 @Composable
 fun ShiftsSingleDayDialog(
     displayedDay: String,
+    dialog: String,
     onDismissRequest: () -> Unit,
-    onAddMeClick: () -> Unit
+    onAddMeClick: () -> Unit,
+    onRemoveMeClick: () -> Unit
 ){
     Dialog(onDismissRequest = { onDismissRequest() },
         ) {
@@ -42,7 +44,12 @@ fun ShiftsSingleDayDialog(
             Row {
                 Text(text = displayedDay)
             }
-            CardContentEmpty(){onAddMeClick()}
+
+            when(dialog){
+                "empty" -> CardContentEmpty(){onAddMeClick()}
+                "full" -> CardContentFull("John"){onRemoveMeClick()}
+                else -> Text(text = "Error")
+            }
 
             Box(Modifier.fillMaxSize()) {
                 Text(modifier = Modifier
@@ -58,7 +65,8 @@ fun ShiftsSingleDayDialog(
 fun CardContentEmpty(
     onAddMeClick: () -> Unit
 ){
-    Row(modifier= Modifier.fillMaxWidth()
+    Row(modifier= Modifier
+        .fillMaxWidth()
         .padding(top = 6.dp),
         horizontalArrangement = Arrangement.Center) {
         Text(text = "This Shit empty", fontSize = 18.sp)
@@ -78,7 +86,8 @@ fun CardContentFull(
     nameOnShift: String,
     onRemoveMeClick: ()-> Unit
 ){
-    Row(modifier= Modifier.fillMaxWidth()
+    Row(modifier= Modifier
+        .fillMaxWidth()
         .padding(top = 6.dp),
         horizontalArrangement = Arrangement.Center) {
         Text(text = "This Shit Occupied: $nameOnShift", fontSize = 18.sp)
@@ -93,13 +102,10 @@ fun CardContentFull(
     }
 }
 
-@Composable
-fun CardContentMe(){
 
-}
 
 @Preview
 @Composable
 fun DialogPreview(){
-    ShiftsSingleDayDialog("Monday",{}){}
+    ShiftsSingleDayDialog("Monday","full",{},{}){}
 }

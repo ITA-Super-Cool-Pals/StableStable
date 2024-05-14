@@ -12,26 +12,50 @@ import com.example.stablestable.data.classes.Shift
 import com.example.stablestable.data.repositories.impl.ShiftsServiceImpl
 import kotlinx.coroutines.launch
 
-class ShiftsViewModel: ViewModel() {
+class ShiftsViewModel(
+    private val shiftsService: ShiftsServiceImpl = ShiftsServiceImpl()
+): ViewModel() {
 
     var openShiftDialog by  mutableStateOf(false)
 
-    val shiftsService: ShiftsServiceImpl = ShiftsServiceImpl()
+    val shiftsWithFlow = shiftsService.shiftsWithFlow
+
 
     var viewedWeek: Int = 13
     var viewedDay: String = ""
     var viewedSegment: String = ""
 
+    var currentShift: Shift = Shift(viewedWeek,viewedDay,"John",viewedSegment)
+
+
+
     fun createShift(){
-        val currentShift: Shift = Shift(viewedWeek,viewedDay,"John",viewedSegment)
         viewModelScope.launch {
+            val currentShift1: Shift = Shift(viewedWeek,viewedDay,"John",viewedSegment)
             try {
-                shiftsService.addShift(currentShift)
+                shiftsService.addShift(currentShift1)
             } catch (e: Exception){
                 Log.d(TAG, "Message: $e")
             }
         }
     }
+
+    fun removeShift(){
+        viewModelScope.launch {
+            try {
+                shiftsService.removeShift(currentShift.shiftCode)
+            } catch (e: Exception){
+                Log.d(TAG, "Message: $e")
+            }
+        }
+
+    }
+
+    fun getAllShifts(){
+
+    }
+
+
 
 
 }

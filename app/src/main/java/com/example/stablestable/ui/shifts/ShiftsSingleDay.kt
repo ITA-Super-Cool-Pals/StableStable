@@ -59,7 +59,8 @@ fun ShiftsSingleDay(
 
         Box(modifier = Modifier
             .fillMaxWidth(0.5f)
-            .padding(8.dp)
+            .fillMaxHeight()
+            //.padding(8.dp)
             .size(48.dp)
             .clickable {
                 onShiftsBoxClick(currentShiftDay,"morning")
@@ -67,7 +68,7 @@ fun ShiftsSingleDay(
 
         ) {
             // TODO: Find en måde at indsætte en bruger her
-            Text(text = "Box 1 content")
+
         }
 
         Divider(modifier = Modifier
@@ -78,11 +79,14 @@ fun ShiftsSingleDay(
 
         Box(modifier = Modifier
             .fillMaxWidth(1.0f)
-            .padding(8.dp)
+            .fillMaxHeight()
+            //.padding(8.dp)
             .size(48.dp)
+            .clickable {
+                onShiftsBoxClick(currentShiftDay,"evening")
+            }
         ) {
             // TODO: Find en måde at indsætte en bruger her
-            Text(text = "Box 2 Content")
         }
 
 
@@ -93,7 +97,7 @@ fun ShiftsSingleDay(
 @Preview
 @Composable
 fun ShiftsSingleDayPreview(){
-//ShiftsSingleDay("sampleShift",{})
+    ShiftsSingleDay("sampleShift") { s, s1 -> }
 }
 
 
