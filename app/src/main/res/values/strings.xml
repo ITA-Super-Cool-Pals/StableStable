@@ -29,8 +29,12 @@
     <string name="createUser">Opret Bruger</string>
     <string name="userCreation">Bruger Oprettelse</string>
 
+    <!-- My Profile Screen -->
+    <string name="myHorses">Mine heste</string>
+    <string name="addHorse">Tilføj en hest</string>
+
     <!-- Horse Create Screen -->
-    <string name="addHorse">Tilføj din hest</string>
+    <string name="addHorseHeader">Tilføj din hest</string>
     <string name="sex">Køn</string>
     <string name="birthDate">Alder</string>
     <string name="birthDateWhen">Hvornår blev din hest født</string>

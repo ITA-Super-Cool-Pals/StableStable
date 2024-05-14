@@ -119,7 +119,7 @@ fun LoginScreen(
                 Text(
                     viewModel.loginErrorMessage,
                     style = MaterialTheme.typography.bodySmall,
-                    color = Color.Red,
+                    color = MaterialTheme.colorScheme.error,
                     modifier = Modifier.padding(top = 8.dp)
                 )
             }

@@ -20,7 +20,8 @@
     <string name="feedingSchedule">Feeding Schedule</string>
     <string name="ridersRoom">Rider\'s Room</string>
     <string name="name">Name</string>
-    <string name="addHorse">Add your horse</string>
+    <string name="addHorse">Add a horse</string>
+    <string name="addHorseHeader">Add your horse</string>
     <string name="sex">Sex</string>
     <string name="date">Date</string>
     <string name="birthDate">Age</string>
@@ -28,4 +29,5 @@
     <string name="breed">Breed</string>
     <string name="cancel">Cancel</string>
     <string name="confirm">OK</string>
+    <string name="myHorses">My Horses</string>
 </resources>

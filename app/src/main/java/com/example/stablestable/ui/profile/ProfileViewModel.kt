@@ -12,6 +12,7 @@ import com.example.stablestable.data.classes.HorseProfile
 import com.example.stablestable.data.classes.UserProfile
 import com.example.stablestable.data.repositories.impl.AccountServiceImpl
 import com.example.stablestable.navigation.AuthViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 
@@ -29,7 +30,7 @@ class ProfileViewModel: ViewModel() {
     var email by mutableStateOf("")
 
     // Save list of users current horses
-    var horseList = mutableStateListOf<String>()
+    var horseList = MutableStateFlow<List<String>>(emptyList())
     // Save state for showing horse creation window
     var showHorseCreateWindow by mutableStateOf(false)
 
@@ -49,11 +50,13 @@ class ProfileViewModel: ViewModel() {
         viewModelScope.launch {
             try {
                 val horses: List<HorseProfile?> = accountService.getHorsesByOwnerId(ownerId)
+                val horseNames = mutableListOf<String>()
                 horses.forEach { elem ->
                     if (elem != null) {
-                        horseList.add(elem.name)
+                        horseNames.add(elem.name)
                     }
                 }
+                horseList.value = horseNames
             } catch (e: Exception){
                 Log.d(TAG,"Get Horses Error: ${e.message.toString()}")
             }

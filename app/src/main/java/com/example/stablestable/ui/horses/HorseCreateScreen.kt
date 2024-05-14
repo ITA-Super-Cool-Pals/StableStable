@@ -158,24 +158,32 @@ fun HorseCreateScreen(
                     headline = stringResource(R.string.birthDateWhen)
                 )
 
-                Spacer(modifier = Modifier.padding(10.dp))
+                Spacer(modifier = Modifier.padding(5.dp))
+
+                // Show error message if not all fields are filled
+                Text(
+                    text = viewModel.errorMessage,
+                    color = MaterialTheme.colorScheme.error,
+                    modifier = Modifier
+                        .padding(bottom = 5.dp)
+                )
 
                 // Button row
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     modifier = Modifier
-                        .fillMaxWidth(0.5f)
+                        .fillMaxWidth()
+                        .padding(horizontal = 50.dp)
                 ) {
                     Button(
-                        onClick = {
-                            viewModel.addHorseToFirebase()
-                            onConfirm()
-                        }
+                        onClick = { viewModel.addHorseToFirebase { onConfirm() } },
+                        shape = RoundedCornerShape(5.dp)
                     ) {
                         Text(stringResource(R.string.confirm))
                     }
                     Button(
-                        onClick = { onDismiss() }
+                        onClick = { onDismiss() },
+                        shape = RoundedCornerShape(5.dp)
                     ) {
                         Text(stringResource(R.string.cancel))
                     }

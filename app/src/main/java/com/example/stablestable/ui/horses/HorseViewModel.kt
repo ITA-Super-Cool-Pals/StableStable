@@ -24,6 +24,8 @@ class HorseViewModel: ViewModel() {
     private val authViewModel: AuthViewModel = AuthViewModel()
     private val accountService: AccountServiceImpl = AccountServiceImpl()
 
+    var errorMessage by mutableStateOf("")
+
     // Horse name input field
     var name by mutableStateOf("")
 
@@ -59,12 +61,19 @@ class HorseViewModel: ViewModel() {
         )
     }
 
-    fun addHorseToFirebase() {
+    fun addHorseToFirebase(onConfirm: () -> Unit) {
+        // Check if all fields are filled
+        if (name.isEmpty() || breed.isEmpty() || selectedSex.isEmpty() || birthDateMillis == 0L) {
+            errorMessage = "Please fill in all fields"
+            return
+        }
+
         val horseProfile = createHorseProfile()
         viewModelScope.launch {
             try {
                 accountService.addHorse(horseProfile)
                 clearFields()
+                onConfirm()
             } catch (e: Exception) {
                 Log.d(TAG, "Add Horse to database failed: ${e.message}")
             }
