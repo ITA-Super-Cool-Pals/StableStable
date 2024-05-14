@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
  */
 
 @RequiresApi(Build.VERSION_CODES.O)
-class HorseViewModel: ViewModel() {
+class HorseCreateViewModel: ViewModel() {
     private val authViewModel: AuthViewModel = AuthViewModel()
     private val accountService: AccountServiceImpl = AccountServiceImpl()
 
@@ -103,6 +103,4 @@ class HorseViewModel: ViewModel() {
             }
         }
     }
-
-
 }

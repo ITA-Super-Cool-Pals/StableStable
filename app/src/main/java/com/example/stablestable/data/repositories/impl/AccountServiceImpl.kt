@@ -20,8 +20,8 @@ class AccountServiceImpl: AccountService {
     private val db: FirebaseFirestore = Firebase.firestore
     private val auth: FirebaseAuth = Firebase.auth
 
-    // Get a specific user
-    override suspend fun getUser(userId: String): UserProfile? =
+    // Get a specific user by ID
+    override suspend fun getUserById(userId: String): UserProfile? =
         db.collection("users").document(userId).get().await().toObject<UserProfile>()
 
     // Get the currently logged in user
@@ -52,6 +52,7 @@ class AccountServiceImpl: AccountService {
        horseDocRef.set(horseProfile)
     }
 
+    // Get all horses by owner id
     override suspend fun getHorsesByOwnerId(ownerId: String): List<Pair<String, HorseProfile?>> {
         val horseDataList = mutableListOf<Pair<String, HorseProfile?>>()
         val query = db.collection("horses").whereEqualTo("ownerId", ownerId)
@@ -64,13 +65,31 @@ class AccountServiceImpl: AccountService {
                 horseDataList.add(Pair(document.id, horseData))
             }
         }
-
+        // Return list of horses belonging to the given owner
         return horseDataList
     }
 
     // Get a specific horse by ID
     override suspend fun getHorseById(horseId: String): HorseProfile? =
         db.collection("horses").document(horseId).get().await().toObject<HorseProfile>()
+
+    // Get all horses in a stable
+    override suspend fun getHorsesByStableId(stableId: String): List<Pair<String, HorseProfile?>> {
+        val horseDataList = mutableListOf<Pair<String, HorseProfile?>>()
+        val query = db.collection("horses").whereEqualTo("stableId", stableId)
+        println("acc stable id: $stableId")
+        val dataSnapshot = query.get().await()
+
+        for (document in dataSnapshot.documents) {
+            val horseData = document.toObject<HorseProfile>()
+            if (horseData != null) {
+                horseDataList.add(Pair(document.id, horseData))
+            }
+        }
+        println("acc horseDataList: $horseDataList")
+        // Return list of horses belonging to the given stable
+        return horseDataList
+    }
 
     // Create a new user
     override suspend fun userCreate(user: UserProfile, password: String) {

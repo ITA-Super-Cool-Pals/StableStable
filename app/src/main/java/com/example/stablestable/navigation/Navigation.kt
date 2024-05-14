@@ -14,6 +14,7 @@ import com.example.stablestable.ui.stable.StableScreen
 import com.example.stablestable.components.StableUsers
 import com.example.stablestable.ui.horses.HorseCreateScreen
 import com.example.stablestable.ui.horses.HorseProfileScreen
+import com.example.stablestable.ui.horses.HorsesStableScreen
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -41,6 +42,7 @@ fun SetupNavGraph(
             HomeScreen(
                 goToProfile = { navController.navigate(Screen.MyProfileScreen.route) },
                 goToRiders = { navController.navigate(Screen.StableUsers.route) },
+                goToHorses = { navController.navigate(Screen.HorsesScreen.route) },
                 onLogout = { authViewModel.setUserLoggedIn(false) }
             )
         }
@@ -50,6 +52,16 @@ fun SetupNavGraph(
             route = Screen.MyProfileScreen.route
         ) {
             MyProfileScreen(
+                onHorseClick = {
+                    horseId -> navController.navigate(Screen.HorseProfileScreen.route.replace("{horseId}", horseId))
+                }
+            )
+        }
+
+        composable(
+            route = Screen.HorsesScreen.route
+        ) {
+            HorsesStableScreen(
                 onHorseClick = {
                     horseId -> navController.navigate(Screen.HorseProfileScreen.route.replace("{horseId}", horseId))
                 }

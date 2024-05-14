@@ -1,20 +1,27 @@
 package com.example.stablestable.ui.horses
 
+import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.stablestable.navigation.AuthViewModel
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun HorseProfileScreen(horseId: String) {
-    val horseViewModel: HorseViewModel = viewModel()
+    val viewModel: HorseProfileViewModel = viewModel()
 
     LaunchedEffect(horseId) {
-        horseViewModel.getHorse(horseId)
+        viewModel.getHorse(horseId)
     }
 
-    Text(text = "Horse name: ${horseViewModel.horseProfile.value.name}")
+    Column {
+        Text(text = "Horse name: ${viewModel.horseProfile.value.name}")
+        Text(text = "Owner: ${viewModel.ownerProfile.value.firstName}")
+    }
 }

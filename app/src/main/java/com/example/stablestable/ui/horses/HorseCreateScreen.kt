@@ -46,7 +46,7 @@ fun HorseCreateScreen(
     Dialog(
         onDismissRequest = onDismiss
     ) {
-        val viewModel = viewModel<HorseViewModel>()
+        val viewModel: HorseCreateViewModel = viewModel()
 
         Box(
             modifier = Modifier
