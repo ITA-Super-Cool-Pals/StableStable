@@ -17,6 +17,7 @@ import com.example.stablestable.navigation.AuthViewModel
 import kotlinx.coroutines.launch
 
 /*
+ * Viewmodel to handle adding a horse to the database
  * Code by Emily
  */
 
@@ -51,6 +52,7 @@ class HorseCreateViewModel: ViewModel() {
     private val stableId: String
         get() = authViewModel.currentUserProfile.value?.stableId ?: ""
 
+    // Create a new horse profile object
     private fun createHorseProfile(): HorseProfile {
         return HorseProfile(
             ownerId = ownerId,
@@ -62,6 +64,7 @@ class HorseCreateViewModel: ViewModel() {
         )
     }
 
+    // Add a horse to the database
     fun addHorseToFirebase(onConfirm: () -> Unit) {
         // Check if all fields are filled
         if (name.isEmpty() || breed.isEmpty() || selectedSex.isEmpty() || birthDateMillis == 0L) {
@@ -82,25 +85,12 @@ class HorseCreateViewModel: ViewModel() {
         }
     }
 
+    // Clear all the input fields
     private fun clearFields() {
         name = ""
         breed = ""
         selectedSex = ""
         birthDateMillis = 0L
         birthDateFormatted = ""
-    }
-
-    var horseProfile = mutableStateOf(HorseProfile())
-
-    fun getHorse(horseId: String) {
-        viewModelScope.launch {
-            try {
-                val horse: HorseProfile? = accountService.getHorseById(horseId)
-                Log.d(TAG, "Fetched horse: $horse")
-                horseProfile.value = horse ?: HorseProfile()
-            } catch (e: Exception) {
-                Log.d(TAG, "Get Horse Error: ${e.message.toString()}")
-            }
-        }
     }
 }

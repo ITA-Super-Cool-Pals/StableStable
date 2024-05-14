@@ -11,6 +11,11 @@ import com.example.stablestable.data.repositories.impl.AccountServiceImpl
 import com.example.stablestable.navigation.AuthViewModel
 import kotlinx.coroutines.launch
 
+/*
+ * Viewmodel to handle displaying all horses in a stable
+ * Code by Emily
+ */
+
 class HorsesStableViewModel: ViewModel() {
     private val authViewModel: AuthViewModel = AuthViewModel()
     private val accountService: AccountServiceImpl = AccountServiceImpl()

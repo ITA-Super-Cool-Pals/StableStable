@@ -10,6 +10,10 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.stablestable.navigation.AuthViewModel
 
+/*
+ * Code by Emily
+ */
+
 @SuppressLint("StateFlowValueCalledInComposition")
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable

@@ -7,13 +7,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 
+/*
+ * Code by Emily
+ */
+
 @Composable
 fun HorsesStableScreen(onHorseClick: (String) -> Unit) {
     val viewModel: HorsesStableViewModel = viewModel()
 
     Column {
         Text(text = "List of all horses in stable")
-        
+
         viewModel.horseList.forEach { horseItem ->
             Text(
                 text = horseItem.horseName,

@@ -42,7 +42,7 @@ class AccountServiceImpl: AccountService {
                 userDataList.add(userData)
             }
         }
-
+        // Return list of users in the stable
         return userDataList
     }
 
@@ -86,7 +86,6 @@ class AccountServiceImpl: AccountService {
                 horseDataList.add(Pair(document.id, horseData))
             }
         }
-        println("acc horseDataList: $horseDataList")
         // Return list of horses belonging to the given stable
         return horseDataList
     }

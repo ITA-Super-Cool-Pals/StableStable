@@ -18,6 +18,7 @@ import com.example.stablestable.navigation.AuthViewModel
 import kotlinx.coroutines.launch
 
 /*
+ * Viewmodel to handle displaying a horses information
  * Code by Emily
  */
 
