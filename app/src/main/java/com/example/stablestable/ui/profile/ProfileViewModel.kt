@@ -8,6 +8,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.stablestable.data.classes.HorseItem
 import com.example.stablestable.data.classes.HorseProfile
 import com.example.stablestable.data.classes.UserProfile
 import com.example.stablestable.data.repositories.impl.AccountServiceImpl
@@ -30,7 +31,7 @@ class ProfileViewModel: ViewModel() {
     var email by mutableStateOf("")
 
     // Save list of users current horses
-    var horseList = MutableStateFlow<List<String>>(emptyList())
+    var horseList = mutableStateListOf<HorseItem>()
     // Save state for showing horse creation window
     var showHorseCreateWindow by mutableStateOf(false)
 
@@ -46,17 +47,16 @@ class ProfileViewModel: ViewModel() {
         }
     }
 
-    private fun getHorses() {
+    fun getHorses() {
         viewModelScope.launch {
             try {
-                val horses: List<HorseProfile?> = accountService.getHorsesByOwnerId(ownerId)
-                val horseNames = mutableListOf<String>()
-                horses.forEach { elem ->
-                    if (elem != null) {
-                        horseNames.add(elem.name)
+                val horses: List<Pair<String, HorseProfile?>> = accountService.getHorsesByOwnerId(ownerId)
+                horseList.clear()
+                horses.forEach { (horseId, horseProfile) ->
+                    if (horseProfile != null) {
+                        horseList.add(HorseItem(horseId, horseProfile.name))
                     }
                 }
-                horseList.value = horseNames
             } catch (e: Exception){
                 Log.d(TAG,"Get Horses Error: ${e.message.toString()}")
             }

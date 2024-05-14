@@ -52,8 +52,8 @@ class AccountServiceImpl: AccountService {
        horseDocRef.set(horseProfile)
     }
 
-    override suspend fun getHorsesByOwnerId(ownerId: String): List<HorseProfile?> {
-        val horseDataList = mutableListOf<HorseProfile>()
+    override suspend fun getHorsesByOwnerId(ownerId: String): List<Pair<String, HorseProfile?>> {
+        val horseDataList = mutableListOf<Pair<String, HorseProfile?>>()
         val query = db.collection("horses").whereEqualTo("ownerId", ownerId)
 
         val dataSnapshot = query.get().await()
@@ -61,12 +61,16 @@ class AccountServiceImpl: AccountService {
         for (document in dataSnapshot.documents) {
             val horseData = document.toObject<HorseProfile>()
             if (horseData != null) {
-                horseDataList.add(horseData)
+                horseDataList.add(Pair(document.id, horseData))
             }
         }
 
         return horseDataList
     }
+
+    // Get a specific horse by ID
+    override suspend fun getHorseById(horseId: String): HorseProfile? =
+        db.collection("horses").document(horseId).get().await().toObject<HorseProfile>()
 
     // Create a new user
     override suspend fun userCreate(user: UserProfile, password: String) {

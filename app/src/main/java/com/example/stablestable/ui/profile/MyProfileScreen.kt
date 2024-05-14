@@ -3,6 +3,7 @@ package com.example.stablestable.ui.profile
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -37,7 +38,7 @@ import com.example.stablestable.ui.horses.HorseCreateScreen
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun MyProfileScreen() {
+fun MyProfileScreen(onHorseClick: (String) -> Unit) {
     val profileViewModel: ProfileViewModel = viewModel()
 
     Column(modifier = Modifier
@@ -79,7 +80,7 @@ fun MyProfileScreen() {
                     .fillMaxWidth()
                     .padding(horizontal = 50.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
-            ){
+            ) {
                 Text(
                     text = stringResource(R.string.myHorses),
                     fontSize = 20.sp,
@@ -98,20 +99,25 @@ fun MyProfileScreen() {
             }
 
             Column {
-                profileViewModel.horseList.collectAsState().value.forEach {
-                    Text(text = it)
+                profileViewModel.horseList.forEach { horseItem ->
+                    Text(
+                        text = horseItem.horseName,
+                        modifier = Modifier.clickable {
+                            onHorseClick(horseItem.horseId)
+                        }
+                    )
                 }
             }
 
+            if (profileViewModel.showHorseCreateWindow) {
+                HorseCreateScreen(
+                    onConfirm = {
+                        profileViewModel.showHorseCreateWindow = false
+                        profileViewModel.getHorses()
+                    },
+                    onDismiss = { profileViewModel.showHorseCreateWindow = false }
+                )
+            }
         }
-
-        if (profileViewModel.showHorseCreateWindow) {
-            HorseCreateScreen(
-                onConfirm = { profileViewModel.showHorseCreateWindow = false },
-                onDismiss = { profileViewModel.showHorseCreateWindow = false }
-            )
-        }
-
-
     }
 }

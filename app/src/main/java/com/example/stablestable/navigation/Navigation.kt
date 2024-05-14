@@ -13,6 +13,7 @@ import com.example.stablestable.ui.profile.MyProfileScreen
 import com.example.stablestable.ui.stable.StableScreen
 import com.example.stablestable.components.StableUsers
 import com.example.stablestable.ui.horses.HorseCreateScreen
+import com.example.stablestable.ui.horses.HorseProfileScreen
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -22,7 +23,6 @@ fun SetupNavGraph(
 ) {
     NavHost(
         navController = navController,
-        //startDestination = Screen.HorseCreateScreen.route
         startDestination = if (authViewModel.isLoggedIn.value) Screen.HomeScreen.route else Screen.LoginScreen.route
     ) {
         // Login Screen Route
@@ -49,7 +49,18 @@ fun SetupNavGraph(
         composable(
             route = Screen.MyProfileScreen.route
         ) {
-            MyProfileScreen()
+            MyProfileScreen(
+                onHorseClick = {
+                    horseId -> navController.navigate(Screen.HorseProfileScreen.route.replace("{horseId}", horseId))
+                }
+            )
+        }
+
+        // Horse Profile Screen Route
+        composable(
+            route = Screen.HorseProfileScreen.route
+        ) { backStackEntry ->
+            HorseProfileScreen(backStackEntry.arguments?.getString("horseId") ?: "")
         }
 
         // Stable Screen Route

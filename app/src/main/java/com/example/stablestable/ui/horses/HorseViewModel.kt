@@ -8,6 +8,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.stablestable.data.classes.HorseProfile
@@ -74,6 +75,7 @@ class HorseViewModel: ViewModel() {
                 accountService.addHorse(horseProfile)
                 clearFields()
                 onConfirm()
+
             } catch (e: Exception) {
                 Log.d(TAG, "Add Horse to database failed: ${e.message}")
             }
@@ -86,6 +88,20 @@ class HorseViewModel: ViewModel() {
         selectedSex = ""
         birthDateMillis = 0L
         birthDateFormatted = ""
+    }
+
+    var horseProfile = mutableStateOf(HorseProfile())
+
+    fun getHorse(horseId: String) {
+        viewModelScope.launch {
+            try {
+                val horse: HorseProfile? = accountService.getHorseById(horseId)
+                Log.d(TAG, "Fetched horse: $horse")
+                horseProfile.value = horse ?: HorseProfile()
+            } catch (e: Exception) {
+                Log.d(TAG, "Get Horse Error: ${e.message.toString()}")
+            }
+        }
     }
 
 
