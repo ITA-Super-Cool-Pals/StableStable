@@ -17,7 +17,8 @@ fun SetupNavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = if (authViewModel.isLoggedIn.value) Screen.HomeScreen.route else Screen.LoginScreen.route
+        startDestination = Screen.HomeScreen.route
+        // if (authViewModel.isLoggedIn.value) Screen.HomeScreen.route else Screen.LoginScreen.route
     ) {
         // Login Screen Route
         composable(
@@ -34,7 +35,7 @@ fun SetupNavGraph(
         ) {
             HomeScreen(
                 goToProfile = { navController.navigate(Screen.MyProfileScreen.route) },
-                goToRiders = { navController.navigate(Screen.StableUsers.route) },
+                //goToRiders = { navController.navigate(Screen.StableUsers.route) },
                 onLogout = { authViewModel.setUserLoggedIn(false) }
             )
         }
