@@ -3,8 +3,12 @@ package com.example.stablestable.ui.profile
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -14,25 +18,22 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.stablestable.R
-import com.example.stablestable.navigation.AuthViewModel
 import com.example.stablestable.ui.horses.HorseCreateScreen
 
 
@@ -44,79 +45,156 @@ fun MyProfileScreen(onHorseClick: (String) -> Unit) {
     Column(modifier = Modifier
         .fillMaxWidth()
         .padding(16.dp)) {
+        // Profile picture and name
         Row {
-            // Profile pic + Name
+            // Profile picture
             Image(
                 painter = painterResource(R.drawable.profile_placeholder),
                 contentDescription = "Placeholder Profile pic",
                 modifier = Modifier
                     .size(100.dp) // Adjust the size as needed
             )
+
             Spacer(modifier = Modifier.width(width = 16.dp))
-            Text(text = profileViewModel.fullName, fontSize = 26.sp, modifier = Modifier
-                .align(Alignment.CenterVertically))
-        }
-        Row(modifier=Modifier.padding(start = 16.dp,top = 50.dp)) {
-            Text(text = "Tlf:", fontSize = 16.sp, textAlign = TextAlign.Center)
-            Text(text = profileViewModel.phone, modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 26.dp),fontSize = 16.sp)
 
-        }
-        Row(modifier=Modifier.padding(start = 16.dp,top = 16.dp)) {
-            Text(text = "Mail:",fontSize = 16.sp)
-            Text(text = profileViewModel.email, modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 15.dp),fontSize = 16.sp)
-
+            // Name
+            Text(
+                text = profileViewModel.fullName,
+                fontSize = 26.sp,
+                modifier = Modifier
+                    .align(Alignment.CenterVertically)
+            )
         }
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        // My Horses section
-        Column {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 50.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = stringResource(R.string.myHorses),
-                    fontSize = 20.sp,
-                    modifier = Modifier
-                        .align(Alignment.CenterVertically)
-                )
-
-                Button(
-                    onClick = {
-                        profileViewModel.showHorseCreateWindow = true
-                    },
-                    shape = RoundedCornerShape(5.dp)
-                ) {
-                    Text(stringResource(R.string.addHorse))
-                }
-            }
-
+        // Phone and Email
+        Box(
+            modifier = Modifier
+                .border(1.dp, Color.Red, RoundedCornerShape(20.dp, 20.dp, 10.dp, 10.dp))
+                .fillMaxWidth()
+                .padding(bottom = 5.dp)
+        ) {
             Column {
-                profileViewModel.horseList.forEach { horseItem ->
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(
+                            Color.LightGray, // TODO: Change to material colorscheme
+                            shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp)
+                        )
+                ) {
                     Text(
-                        text = horseItem.horseName,
-                        modifier = Modifier.clickable {
-                            onHorseClick(horseItem.horseId)
-                        }
+                        text = stringResource(R.string.contactInfo),
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 5.dp)
                     )
                 }
-            }
+                Column(
+                    modifier = Modifier
+                        .padding(start = 10.dp)
+                ) {
+                    // Phone
+                    Text(text = stringResource(R.string.phone), color = Color.Gray)
+                    Text(text = profileViewModel.phone, fontSize = 22.sp)
 
-            if (profileViewModel.showHorseCreateWindow) {
-                HorseCreateScreen(
-                    onConfirm = {
-                        profileViewModel.showHorseCreateWindow = false
-                        profileViewModel.getHorses()
-                    },
-                    onDismiss = { profileViewModel.showHorseCreateWindow = false }
-                )
+                    Spacer(modifier = Modifier.height(20.dp))
+
+                    // Email
+                    Text(text = stringResource(R.string.email), color = Color.Gray)
+                    Text(text = profileViewModel.email, fontSize = 22.sp)
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        // My horses section
+        Box(
+            modifier = Modifier
+                .border(1.dp, Color.Red, RoundedCornerShape(20.dp, 20.dp, 10.dp, 10.dp))
+                .fillMaxWidth()
+                .padding(bottom = 5.dp)
+        ) {
+            Column {
+                // Header section
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(
+                            Color.LightGray, // TODO: Change to material colorscheme
+                            shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp)
+                        )
+                ) {
+                    Text(
+                        text = stringResource(R.string.myHorses),
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 5.dp)
+                    )
+                }
+
+                // My horses list
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    profileViewModel.horseList.forEach { horseItem ->
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            modifier = Modifier
+                                .clickable { onHorseClick(horseItem.horseId) }
+                                .fillMaxWidth()
+                                .padding(start = 20.dp, end = 20.dp)
+                        ) {
+                            Text(
+                                text = horseItem.horseName,
+                                fontSize = 30.sp
+                            )
+                            Icon(
+                                imageVector = Icons.Default.Visibility,
+                                contentDescription = "View Horse Profile"
+                            )
+                        }
+                        // Underline
+                        Spacer(
+                            modifier = Modifier
+                                .fillMaxWidth(0.9f)
+                                .height(1.dp)
+                                .background(Color.Gray)
+                        )
+                    }
+                }
+
+                // Add horse button
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 20.dp)
+                ) {
+                    Button(
+                        onClick = {
+                            profileViewModel.showHorseCreateWindow = true
+                        },
+                        shape = RoundedCornerShape(5.dp)
+                    ) {
+                        Text(stringResource(R.string.addHorse))
+                    }
+
+                    if (profileViewModel.showHorseCreateWindow) {
+                        HorseCreateScreen(
+                            onConfirm = {
+                                profileViewModel.showHorseCreateWindow = false
+                                profileViewModel.getHorses()
+                            },
+                            onDismiss = { profileViewModel.showHorseCreateWindow = false }
+                        )
+                    }
+                }
             }
         }
     }

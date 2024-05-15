@@ -35,6 +35,7 @@
     <!-- My Profile Screen -->
     <string name="myHorses">Mine heste</string>
     <string name="addHorse">Tilføj en hest</string>
+    <string name="contactInfo">Kontakt Information</string>
 
     <!-- Horse Create Screen -->
     <string name="addHorseHeader">Tilføj din hest</string>

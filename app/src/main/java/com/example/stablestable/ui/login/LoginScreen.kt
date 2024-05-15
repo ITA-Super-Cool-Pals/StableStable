@@ -4,12 +4,19 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Password
+import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -62,6 +69,12 @@ fun LoginScreen(
                 value = viewModel.email,
                 onValueChange = { viewModel.email = it },
                 label = { Text(stringResource(R.string.email)) },
+                trailingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Email,
+                        contentDescription = stringResource(R.string.email)
+                    )
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 8.dp),
@@ -73,6 +86,12 @@ fun LoginScreen(
                 value = viewModel.password,
                 onValueChange = { viewModel.password = it },
                 label = { Text(stringResource(R.string.password)) },
+                trailingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Password,
+                        contentDescription = stringResource(R.string.password)
+                    )
+                },
                 visualTransformation = PasswordVisualTransformation(), // Hide password text
                 modifier = Modifier
                     .fillMaxWidth()
@@ -94,12 +113,13 @@ fun LoginScreen(
                         )
                     },
                     modifier = Modifier
-                        .weight(1f) // Assign equal weight to both buttons to ensure same size
-                        .padding(end = 6.dp), // Add padding between buttons
-                    shape = RoundedCornerShape(12.dp)
+                        .weight(1f), // Assign equal weight to both buttons to ensure same size
+                    shape = RoundedCornerShape(5.dp)
                 ) {
                     Text(text = stringResource(R.string.login), fontSize = 16.sp)
                 }
+
+                Spacer(modifier = Modifier.width(30.dp))
 
                 // Create User Button
                 Button(
@@ -107,9 +127,8 @@ fun LoginScreen(
                         viewModel.showCreateUserWindow = true
                     },
                     modifier = Modifier
-                        .weight(1f) // Assign equal weight to both buttons to ensure same size
-                        .padding(start = 6.dp), // Add padding between buttons
-                    shape = RoundedCornerShape(12.dp)
+                        .weight(1f), // Assign equal weight to both buttons to ensure same size
+                    shape = RoundedCornerShape(5.dp)
                 ) {
                     Text(stringResource(R.string.createUser), fontSize = 16.sp)
                 }

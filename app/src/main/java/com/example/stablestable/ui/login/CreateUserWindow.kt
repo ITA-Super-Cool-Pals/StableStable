@@ -1,15 +1,28 @@
 package com.example.stablestable.ui.login
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Password
+import androidx.compose.material.icons.filled.PermIdentity
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -60,6 +73,12 @@ fun CreateUserWindow(
                     value = viewModel.email,
                     onValueChange = { viewModel.email = it },
                     label = { Text(stringResource(R.string.email)) },
+                    leadingIcon = {
+                        Icon(
+                            imageVector = Icons.Default.Email,
+                            contentDescription = stringResource(R.string.email)
+                        )
+                    },
                     keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Email)
                 )
 
@@ -68,6 +87,12 @@ fun CreateUserWindow(
                     value = viewModel.password,
                     onValueChange = { viewModel.password = it },
                     label = { Text(stringResource(R.string.password)) },
+                    trailingIcon = {
+                        Icon(
+                            imageVector = Icons.Default.Password,
+                            contentDescription = stringResource(R.string.password)
+                        )
+                    },
                     visualTransformation = PasswordVisualTransformation(), // Hide password text
                     keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Password)
                 )
@@ -76,13 +101,25 @@ fun CreateUserWindow(
                 OutlinedTextField(
                     value = viewModel.firstName,
                     onValueChange = { viewModel.firstName = it },
-                    label = { Text(stringResource(R.string.firstName)) }
+                    label = { Text(stringResource(R.string.firstName)) },
+                    trailingIcon = {
+                        Icon(
+                            imageVector = Icons.Default.Person,
+                            contentDescription = stringResource(R.string.firstName)
+                        )
+                    }
                 )
                 // Last name
                 OutlinedTextField(
                     value = viewModel.lastName,
                     onValueChange = { viewModel.lastName = it },
-                    label = { Text(stringResource(R.string.lastName)) }
+                    label = { Text(stringResource(R.string.lastName)) },
+                    trailingIcon = {
+                        Icon(
+                            imageVector = Icons.Default.Person,
+                            contentDescription = stringResource(R.string.lastName)
+                        )
+                    }
                 )
 
                 // Phone Field
@@ -94,27 +131,50 @@ fun CreateUserWindow(
                         }
                     },
                     label = { Text(stringResource(R.string.phone)) },
+                    trailingIcon = {
+                        Icon(
+                            imageVector = Icons.Default.Phone,
+                            contentDescription = stringResource(R.string.phone)
+                        )
+                    },
                     keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                Button(
-                    onClick = {
-                        onConfirm(
-                            viewModel.email,
-                            viewModel.password,
-                            viewModel.firstName,
-                            viewModel.lastName,
-                            viewModel.phone
-                        )
-                    },
+                Row(
                     modifier = Modifier
-                        .padding(vertical = 8.dp)
-                        .fillMaxWidth(),
-                    shape = RoundedCornerShape(12.dp)
+                        .fillMaxWidth()
+                        .padding(top = 8.dp),
+                    horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    Text(stringResource(R.string.createUser))
+                    Button(
+                        onClick = {
+                            onConfirm(
+                                viewModel.email,
+                                viewModel.password,
+                                viewModel.firstName,
+                                viewModel.lastName,
+                                viewModel.phone
+                            )
+                        },
+                        shape = RoundedCornerShape(5.dp),
+                        modifier = Modifier
+                            .weight(1f)
+                    ) {
+                        Text(stringResource(R.string.createUser))
+                    }
+
+                    Spacer(modifier = Modifier.width(20.dp))
+
+                    Button(
+                        onClick = onDismiss,
+                        shape = RoundedCornerShape(5.dp),
+                        modifier = Modifier
+                            .weight(1f)
+                    ) {
+                        Text(stringResource(R.string.cancel))
+                    }
                 }
 
                 if (viewModel.createUserErrorMessage != "") {
