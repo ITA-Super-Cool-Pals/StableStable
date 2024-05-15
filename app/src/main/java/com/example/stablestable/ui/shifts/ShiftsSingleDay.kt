@@ -21,7 +21,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -56,10 +56,11 @@ fun ShiftsSingleDay(
             .padding(8.dp)
             ,text = currentShiftDay)
 
-        Divider(modifier = Modifier
-            .fillMaxHeight()
-            .width(1.dp)
-            .padding(vertical = 4.dp)
+        HorizontalDivider(
+            modifier = Modifier
+                .fillMaxHeight()
+                .width(1.dp)
+                .padding(vertical = 4.dp)
         )
 
         Box(modifier = Modifier
@@ -79,10 +80,11 @@ fun ShiftsSingleDay(
 
         }
 
-        Divider(modifier = Modifier
-            .fillMaxHeight()
-            .width(1.dp)
-            .padding(vertical = 4.dp)
+        HorizontalDivider(
+            modifier = Modifier
+                .fillMaxHeight()
+                .width(1.dp)
+                .padding(vertical = 4.dp)
         )
 
         Box(modifier = Modifier

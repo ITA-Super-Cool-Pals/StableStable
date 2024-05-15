@@ -18,7 +18,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -56,10 +56,8 @@ fun ShiftsScreen(
     )
     when {
         viewModel.openShiftDialog -> {
-            val shiftCode = viewModel.currentShift.shiftCode
             ShiftsSingleDayDialog(
                 displayedDay = viewModel.viewedDay,
-                //TODO: dialog needs to change to "full", if the day is occupied
                 dialog = viewModel.dialogContentState,
                 onDismissRequest = {viewModel.openShiftDialog = false},
                 onAddMeClick = { viewModel.createShift() },
@@ -77,9 +75,7 @@ fun ShiftsScreenContent(
     onBoxOneClick: (String, String,Shift?) -> Unit
 ){
 
-    Column(
-        //modifier = Modifier.verticalScroll(rememberScrollState())
-    ) {
+    Column {
         NavigationHeader(goToHomeScreen)
         Row(modifier = Modifier
             .fillMaxWidth(),
@@ -95,8 +91,9 @@ fun ShiftsScreenContent(
             // TODO: Ændres, Man skal kunne vælge andre uger.
             Text(text = "Uge 13")
         }
-        Divider(modifier = Modifier
-            .padding(start = 100.dp, end = 100.dp,bottom = 15.dp),
+        HorizontalDivider(
+            modifier = Modifier
+                .padding(start = 100.dp, end = 100.dp,bottom = 15.dp),
             thickness = 2.dp
         )
         Row(modifier = Modifier
@@ -135,8 +132,6 @@ fun ShiftsScreenContent(
 
 
     }
-
-
 
 
 

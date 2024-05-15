@@ -15,6 +15,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -46,7 +47,8 @@ fun ShiftsSingleDayDialog(
             }
 
             when(dialog){
-                "empty" -> CardContentEmpty(){onAddMeClick()}
+                "empty" -> CardContentEmpty {onAddMeClick()}
+                // TODO: NameOnShift skal ændres til det der egentlig er på shiftet
                 "full" -> CardContentFull("John"){onRemoveMeClick()}
                 else -> Text(text = "Error")
             }

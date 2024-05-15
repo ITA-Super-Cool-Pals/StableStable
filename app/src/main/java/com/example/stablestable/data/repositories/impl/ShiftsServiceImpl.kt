@@ -11,7 +11,7 @@ import com.google.firebase.firestore.toObject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.tasks.await
 
-class ShiftsServiceImpl() : ShiftsService {
+class ShiftsServiceImpl : ShiftsService {
     private val db: FirebaseFirestore = Firebase.firestore
 
     override val shiftsWithFlow: Flow<List<Shift>>
