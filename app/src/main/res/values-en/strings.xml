@@ -30,4 +30,8 @@
     <string name="cancel">Cancel</string>
     <string name="confirm">OK</string>
     <string name="myHorses">My Horses</string>
+    <string name="ownerInfo">Owner Information</string>
+    <string name="horseInfo">Horse Information</string>
+    <string name="years">years</string>
+    <string name="months">months</string>
 </resources>

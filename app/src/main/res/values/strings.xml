@@ -13,6 +13,9 @@
     <string name="selectDate">Vælg Dato</string>
     <string name="confirm">OK</string>
     <string name="cancel">Annuller</string>
+    <string name="sex">Køn</string>
+    <string name="birthDate">Alder</string>
+    <string name="breed">Race</string>
 
     <!-- Home Screen -->
     <string name="calendar">Kalender</string>
@@ -35,8 +38,11 @@
 
     <!-- Horse Create Screen -->
     <string name="addHorseHeader">Tilføj din hest</string>
-    <string name="sex">Køn</string>
-    <string name="birthDate">Alder</string>
     <string name="birthDateWhen">Hvornår blev din hest født</string>
-    <string name="breed">Race</string>
+
+    <!-- Horse Profile Screen -->
+    <string name="ownerInfo">Ejer Information</string>
+    <string name="horseInfo">Hest Information</string>
+    <string name="years">år</string>
+    <string name="months">måneder</string>
 </resources>
