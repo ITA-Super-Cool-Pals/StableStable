@@ -61,7 +61,7 @@ class HorseCreateViewModel: ViewModel() {
             name = name,
             breed = breed,
             sex = selectedSex,
-            age = birthDateMillis.toString()
+            age = com.google.firebase.Timestamp(birthDateMillis / 1000, 0)
         )
     }
 

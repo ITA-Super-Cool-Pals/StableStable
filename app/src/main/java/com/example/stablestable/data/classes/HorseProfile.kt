@@ -6,5 +6,5 @@ data class HorseProfile(
     val name: String = "",
     val breed: String = "",
     val sex: String = "",
-    val age: String = ""
+    val age: com.google.firebase.Timestamp = com.google.firebase.Timestamp.now()
 )

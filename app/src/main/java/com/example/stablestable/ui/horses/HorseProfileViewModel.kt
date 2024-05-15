@@ -16,6 +16,7 @@ import com.example.stablestable.data.classes.HorseProfile
 import com.example.stablestable.data.classes.UserProfile
 import com.example.stablestable.data.repositories.impl.AccountServiceImpl
 import com.example.stablestable.navigation.AuthViewModel
+import com.google.firebase.Timestamp
 import kotlinx.coroutines.launch
 import java.time.Instant
 import java.time.LocalDate
@@ -58,12 +59,12 @@ class HorseProfileViewModel: ViewModel() {
     }
 
     // Convert the horses age from millis to "x years y months" format
-    fun getHorseAge(birthDateMillis: String) {
-        if (birthDateMillis.isBlank()) return
+    private fun getHorseAge(age: Timestamp) {
+        val birthDateMillis = age.seconds * 1000
 
-        val birthDate = Instant.ofEpochMilli(birthDateMillis.toLong()).atZone(ZoneId.systemDefault()).toLocalDate()
+        val birthDateLocal = Instant.ofEpochMilli(birthDateMillis).atZone(ZoneId.systemDefault()).toLocalDate()
         val currentDate = LocalDate.now()
-        val period = Period.between(birthDate, currentDate)
+        val period = Period.between(birthDateLocal, currentDate)
 
         ageYears = period.years
         ageMonths = period.months
