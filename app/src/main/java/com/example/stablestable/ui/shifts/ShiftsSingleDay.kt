@@ -35,16 +35,21 @@ import java.time.LocalDate
 
 @Composable
 fun ShiftsSingleDay(
+    shifts: List<Shift>,
     currentShiftDay: String,
-    onShiftsBoxClick: (String, String) -> Unit
+    onShiftsBoxClick: (String, String, Shift?) -> Unit
 ){
     Row(modifier = Modifier
         .fillMaxWidth()
         .heightIn(max = 80.dp)
         .padding(2.dp)
-        .border(1.dp,Color.Black, RoundedCornerShape(8.dp))
-        .background(Color(0x61CDDC39),RoundedCornerShape(8.dp))
+        .border(1.dp, Color.Black, RoundedCornerShape(8.dp))
+        .background(Color(0x61CDDC39), RoundedCornerShape(8.dp))
     ){
+        val shiftEve:Shift? = shifts.find { it.shiftTime == "evening" }
+        val shiftMorn:Shift? = shifts.find { it.shiftTime == "morning" }
+
+
         Text(modifier = Modifier
             .width(100.dp)
             .align(Alignment.CenterVertically)
@@ -63,11 +68,14 @@ fun ShiftsSingleDay(
             //.padding(8.dp)
             .size(48.dp)
             .clickable {
-                onShiftsBoxClick(currentShiftDay,"morning")
+                onShiftsBoxClick(currentShiftDay, "morning",shiftMorn)
             }
 
         ) {
             // TODO: Find en måde at indsætte en bruger her
+            if (shiftMorn != null) {
+                Text(modifier = Modifier.align(Alignment.Center),text = shiftMorn.user)
+            }
 
         }
 
@@ -83,10 +91,14 @@ fun ShiftsSingleDay(
             //.padding(8.dp)
             .size(48.dp)
             .clickable {
-                onShiftsBoxClick(currentShiftDay,"evening")
+                onShiftsBoxClick(currentShiftDay, "evening",shiftEve)
             }
         ) {
             // TODO: Find en måde at indsætte en bruger her
+            if (shiftEve != null) {
+                Text(modifier = Modifier.align(Alignment.Center),text = shiftEve.user)
+            }
+
         }
 
 
@@ -97,7 +109,17 @@ fun ShiftsSingleDay(
 @Preview
 @Composable
 fun ShiftsSingleDayPreview(){
-    ShiftsSingleDay("sampleShift") { s, s1 -> }
+    ShiftsSingleDay(
+        listOf(
+            Shift(
+                13,
+                "Monday",
+                "John",
+                "morning"
+            )
+        ),
+        "Monday"
+    ) { s, s1,d -> }
 }
 
 

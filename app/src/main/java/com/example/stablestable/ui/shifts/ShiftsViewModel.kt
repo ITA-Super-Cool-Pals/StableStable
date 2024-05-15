@@ -17,6 +17,7 @@ class ShiftsViewModel(
 ): ViewModel() {
 
     var openShiftDialog by  mutableStateOf(false)
+    var dialogContentState by mutableStateOf("")
 
     val shiftsWithFlow = shiftsService.shiftsWithFlow
 
@@ -25,7 +26,9 @@ class ShiftsViewModel(
     var viewedDay: String = ""
     var viewedSegment: String = ""
 
-    var currentShift: Shift = Shift(viewedWeek,viewedDay,"John",viewedSegment)
+    val currentShift: Shift
+        get()=
+            Shift(viewedWeek,viewedDay,"John",viewedSegment)
 
 
 
@@ -44,6 +47,7 @@ class ShiftsViewModel(
         viewModelScope.launch {
             try {
                 shiftsService.removeShift(currentShift.shiftCode)
+                Log.d(TAG, "Message: Removed")
             } catch (e: Exception){
                 Log.d(TAG, "Message: $e")
             }
@@ -54,8 +58,4 @@ class ShiftsViewModel(
     fun getAllShifts(){
 
     }
-
-
-
-
 }

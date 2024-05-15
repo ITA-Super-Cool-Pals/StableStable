@@ -107,5 +107,5 @@ fun CardContentFull(
 @Preview
 @Composable
 fun DialogPreview(){
-    ShiftsSingleDayDialog("Monday","full",{},{}){}
+    //ShiftsSingleDayDialog("Monday","full",{},{}){}
 }

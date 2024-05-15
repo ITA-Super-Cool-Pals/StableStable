@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Divider
@@ -37,25 +39,53 @@ import com.example.stablestable.data.classes.Shift
 
 @Composable
 fun ShiftsScreen(
-    goToHomeScreen:() -> Unit
+    goToHomeScreen:() -> Unit,
+    viewModel: ShiftsViewModel = viewModel<ShiftsViewModel>()
 ){
-    val viewModel = viewModel<ShiftsViewModel>()
+    val shiftsWithFlowState = viewModel.shiftsWithFlow.collectAsState(emptyList())
 
-    val shiftsWithFlowState = viewModel.shiftsWithFlow.collectAsStateWithLifecycle(emptyList())
-    val shiftsWithFlowValues = shiftsWithFlowState.value
-    val shift1 = shiftsWithFlowValues[0]
-    // TODO: Need to figure out how to use these values
-    //Log.d(TAG,"${shiftsWithFlowValues[1].weekNumber}")
+    ShiftsScreenContent(
+        shifts = shiftsWithFlowState.value,
+        goToHomeScreen = { goToHomeScreen() },
+        onBoxOneClick = {s: String, s1:String, s2:Shift? ->
+            viewModel.viewedDay = s
+            viewModel.viewedSegment = s1
+            viewModel.openShiftDialog = true
+            viewModel.dialogContentState = if (s2 != null) {"full"} else {"empty"}
+        }
+    )
+    when {
+        viewModel.openShiftDialog -> {
+            val shiftCode = viewModel.currentShift.shiftCode
+            ShiftsSingleDayDialog(
+                displayedDay = viewModel.viewedDay,
+                //TODO: dialog needs to change to "full", if the day is occupied
+                dialog = viewModel.dialogContentState,
+                onDismissRequest = {viewModel.openShiftDialog = false},
+                onAddMeClick = { viewModel.createShift() },
+                onRemoveMeClick = { viewModel.removeShift() })
+        }
+    }
+
+
+}
+
+@Composable
+fun ShiftsScreenContent(
+    shifts: List<Shift>,
+    goToHomeScreen:() -> Unit,
+    onBoxOneClick: (String, String,Shift?) -> Unit
+){
 
     Column(
-        modifier = Modifier.verticalScroll(rememberScrollState())
+        //modifier = Modifier.verticalScroll(rememberScrollState())
     ) {
         NavigationHeader(goToHomeScreen)
         Row(modifier = Modifier
             .fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
         ) {
-            Text(text = shiftsWithFlowValues.toString(), fontSize = 36.sp, fontWeight = FontWeight.Medium)
+            Text(text = "Vagtplan", fontSize = 36.sp, fontWeight = FontWeight.Medium)
         }
         Row(modifier = Modifier
             .fillMaxWidth()
@@ -88,28 +118,26 @@ fun ShiftsScreen(
             horizontalArrangement = Arrangement.Center
         ) {
             // TODO: Indsæt Skema her.
-            ShiftsScreenMatrix(onBoxOneClick = {s: String, s1:String ->
-                viewModel.viewedDay = s
-                viewModel.viewedSegment = s1
-                viewModel.openShiftDialog = true }
-            )
+            ShiftsScreenMatrix(shifts, onBoxOneClick = {s:String,s1:String, s2:Shift? -> onBoxOneClick(s,s1,s2) })
+
+            /*
+            LazyColumn {
+                item {
+                }
+
+                items(shifts){shiftItem->
+
+                    Text(text = shiftItem.weekNumber.toString())
+                }
+            }*/
         }
+
+
 
     }
 
 
-    when {
-        viewModel.openShiftDialog -> {
-            val shiftCode = viewModel.currentShift.shiftCode
-            ShiftsSingleDayDialog(
-                displayedDay = viewModel.viewedDay,
-                //TODO: dialog needs to change to "full", if the day is occupied
-                dialog = "empty",
-                onDismissRequest = {viewModel.openShiftDialog = false},
-                onAddMeClick = { viewModel.createShift() },
-                onRemoveMeClick = { viewModel.removeShift() })
-        }
-    }
+
 
 
 }
@@ -117,6 +145,33 @@ fun ShiftsScreen(
 @Preview
 @Composable
 fun ShiftsScreenPreview(){
-    ShiftsScreen(){}
+    ShiftsScreenContent(
+    shifts = listOf(
+        Shift(
+            13,
+            "Monday",
+            "John",
+            "morning"
+        ),
+        Shift(
+            13,
+            "Friday",
+            "Jane",
+            "morning"
+        ),
+        Shift(
+            13,
+            "Tuesday",
+            "John",
+            "evening"
+        ),
+        Shift(
+            13,
+            "Sunday",
+            "John",
+            "evening"
+        ),
+    ),{}
+    ){s, s1,s2 ->}
 }
 
