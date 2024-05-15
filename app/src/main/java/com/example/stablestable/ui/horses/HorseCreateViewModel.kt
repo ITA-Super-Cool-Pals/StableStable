@@ -15,6 +15,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.stablestable.data.classes.HorseProfile
 import com.example.stablestable.data.repositories.impl.AccountServiceImpl
 import com.example.stablestable.navigation.AuthViewModel
+import com.google.firebase.Timestamp
 import kotlinx.coroutines.launch
 
 /*
@@ -61,7 +62,7 @@ class HorseCreateViewModel: ViewModel() {
             name = name,
             breed = breed,
             sex = selectedSex,
-            age = com.google.firebase.Timestamp(birthDateMillis / 1000, 0)
+            age = Timestamp(birthDateMillis / 1000, 0)
         )
     }
 
