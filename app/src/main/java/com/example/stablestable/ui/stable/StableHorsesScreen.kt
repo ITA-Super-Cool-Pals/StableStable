@@ -1,4 +1,4 @@
-package com.example.stablestable.ui.horses
+package com.example.stablestable.ui.stable
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column

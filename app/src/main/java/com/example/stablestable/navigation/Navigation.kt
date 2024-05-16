@@ -12,7 +12,7 @@ import com.example.stablestable.ui.login.LoginScreen
 import com.example.stablestable.ui.stable.StableScreen
 import com.example.stablestable.ui.stable.StableUsersScreen
 import com.example.stablestable.ui.horses.HorseProfileScreen
-import com.example.stablestable.ui.horses.StableHorsesScreen
+import com.example.stablestable.ui.stable.StableHorsesScreen
 import com.example.stablestable.ui.profile.UserProfileScreen
 
 @RequiresApi(Build.VERSION_CODES.O)

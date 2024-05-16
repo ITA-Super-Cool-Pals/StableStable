@@ -1,4 +1,4 @@
-package com.example.stablestable.ui.horses
+package com.example.stablestable.ui.stable
 
 import android.content.ContentValues
 import android.util.Log
