@@ -15,13 +15,9 @@ import com.example.stablestable.navigation.AuthViewModel
 import kotlinx.coroutines.launch
 
 
-class ProfileViewModel: ViewModel() {
+class UserProfileViewModel: ViewModel() {
     private val authViewModel: AuthViewModel = AuthViewModel()
     private val accountService: AccountServiceImpl = AccountServiceImpl()
-
-    // Get the current logged in users ID as owner
-    private val ownerId: String
-        get() = authViewModel.userId ?: ""
 
     // This should be looked at if database change structure
     var fullName by mutableStateOf("")
@@ -33,22 +29,36 @@ class ProfileViewModel: ViewModel() {
     // Save state for showing horse creation window
     var showHorseCreateWindow by mutableStateOf(false)
 
-    private fun getCurrentUserProfile() {
+    fun loadUserProfile(userId: String) {
         viewModelScope.launch {
-            authViewModel.currentUserProfile.collect { currentUser ->
-                if (currentUser != null) {
-                    fullName = "${currentUser.firstName} ${currentUser.lastName}"
-                    phone = currentUser.phone
-                    email = currentUser.email
+            try {
+                if (userId == authViewModel.userId) {
+                    authViewModel.currentUserProfile.collect { currentUser ->
+                        if (currentUser != null) {
+                            fullName = "${currentUser.firstName} ${currentUser.lastName}"
+                            phone = currentUser.phone
+                            email = currentUser.email
+                        }
+                    }
+                } else {
+                    val userProfile = accountService.getUserById(userId)
+                    if (userProfile != null) {
+                        fullName = "${userProfile.firstName} ${userProfile.lastName}"
+                        phone = userProfile.phone
+                        email = userProfile.email
+                    }
                 }
+            } catch (e: Exception) {
+                Log.d(TAG, "Error loading user profile: ${e.message.toString()}")
+
             }
         }
     }
 
-    fun getHorses() {
+    fun getHorses(userId: String) {
         viewModelScope.launch {
             try {
-                val horses: List<Pair<String, HorseProfile?>> = accountService.getHorsesByOwnerId(ownerId)
+                val horses: List<Pair<String, HorseProfile?>> = accountService.getHorsesByOwnerId(userId)
                 horseList.clear()
                 horses.forEach { (horseId, horseProfile) ->
                     if (horseProfile != null) {
@@ -59,10 +69,5 @@ class ProfileViewModel: ViewModel() {
                 Log.d(TAG,"Get Horses Error: ${e.message.toString()}")
             }
         }
-    }
-
-    init {
-        getCurrentUserProfile()
-        getHorses()
     }
 }

@@ -1,4 +1,4 @@
-package com.example.stablestable.components
+package com.example.stablestable.ui.stable
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
@@ -9,13 +9,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.stablestable.ui.stable.StableUsersViewModel
 
 @Composable
-fun StableUsers() {
+fun StableUsers(onUserClick: (String) -> Unit) {
     val stableUsersViewModel: StableUsersViewModel = viewModel()
 
-    val users = stableUsersViewModel.nameList
+    val users = stableUsersViewModel.userList
 
     LazyColumn(
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
@@ -26,13 +25,10 @@ fun StableUsers() {
 
         items(
             items = users,
-            itemContent = {
-                SingleUserSmall(userName = it)
+            itemContent = { user ->
+                val (userId, userName) = user
+                SingleUserSmall(userName = userName, userId = userId, onUserClick = onUserClick)
             }
         )
     }
 }
-
-
-
-

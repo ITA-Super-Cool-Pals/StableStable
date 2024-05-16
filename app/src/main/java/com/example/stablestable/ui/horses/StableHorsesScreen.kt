@@ -12,8 +12,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
  */
 
 @Composable
-fun HorsesStableScreen(onHorseClick: (String) -> Unit) {
-    val viewModel: HorsesStableViewModel = viewModel()
+fun StableHorsesScreen(onHorseClick: (String) -> Unit) {
+    val viewModel: StableHorsesViewModel = viewModel()
 
     Column {
         Text(text = "List of all horses in stable")

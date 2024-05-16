@@ -23,6 +23,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -37,8 +38,13 @@ import com.example.stablestable.ui.horses.HorseCreateScreen
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun MyProfileScreen(onHorseClick: (String) -> Unit) {
-    val profileViewModel: ProfileViewModel = viewModel()
+fun UserProfileScreen(userId: String, onHorseClick: (String) -> Unit) {
+    val userProfileViewModel: UserProfileViewModel = viewModel()
+
+    LaunchedEffect(userId) {
+        userProfileViewModel.loadUserProfile(userId)
+        userProfileViewModel.getHorses(userId)
+    }
 
     Column(modifier = Modifier
         .fillMaxWidth()
@@ -56,7 +62,7 @@ fun MyProfileScreen(onHorseClick: (String) -> Unit) {
 
             // Name
             Text(
-                text = profileViewModel.fullName,
+                text = userProfileViewModel.fullName,
                 fontSize = 26.sp,
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
@@ -95,13 +101,13 @@ fun MyProfileScreen(onHorseClick: (String) -> Unit) {
                 ) {
                     // Phone
                     Text(text = stringResource(R.string.phone), color = Color.Gray)
-                    Text(text = profileViewModel.phone, fontSize = 22.sp)
+                    Text(text = userProfileViewModel.phone, fontSize = 22.sp)
 
                     Spacer(modifier = Modifier.height(20.dp))
 
                     // Email
                     Text(text = stringResource(R.string.email), color = Color.Gray)
-                    Text(text = profileViewModel.email, fontSize = 22.sp)
+                    Text(text = userProfileViewModel.email, fontSize = 22.sp)
                 }
             }
         }
@@ -138,7 +144,7 @@ fun MyProfileScreen(onHorseClick: (String) -> Unit) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    profileViewModel.horseList.forEach { horseItem ->
+                    userProfileViewModel.horseList.forEach { horseItem ->
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.SpaceBetween,
@@ -175,20 +181,20 @@ fun MyProfileScreen(onHorseClick: (String) -> Unit) {
                 ) {
                     Button(
                         onClick = {
-                            profileViewModel.showHorseCreateWindow = true
+                            userProfileViewModel.showHorseCreateWindow = true
                         },
                         shape = RoundedCornerShape(5.dp)
                     ) {
                         Text(stringResource(R.string.addHorse))
                     }
 
-                    if (profileViewModel.showHorseCreateWindow) {
+                    if (userProfileViewModel.showHorseCreateWindow) {
                         HorseCreateScreen(
                             onConfirm = {
-                                profileViewModel.showHorseCreateWindow = false
-                                profileViewModel.getHorses()
+                                userProfileViewModel.showHorseCreateWindow = false
+                                userProfileViewModel.getHorses(userId)
                             },
-                            onDismiss = { profileViewModel.showHorseCreateWindow = false }
+                            onDismiss = { userProfileViewModel.showHorseCreateWindow = false }
                         )
                     }
                 }
