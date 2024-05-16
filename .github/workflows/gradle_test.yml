@@ -36,6 +36,9 @@ jobs:
         DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
       run: echo $DATA | base64 -di > app/google-services.json
 
+    - name: Grand execute permissions to gradlew
+      run: chmod +x gradlew
+
     # Configure Gradle for optimal use in GiHub Actions, including caching of downloaded dependencies.
     # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
     - name: Setup Gradle
