@@ -8,7 +8,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.stablestable.ui.home.HomeScreen
 import com.example.stablestable.ui.login.LoginScreen
-import com.example.stablestable.ui.stable.StableScreen
 import com.example.stablestable.ui.stable.StableUsersScreen
 import com.example.stablestable.ui.horses.HorseProfileScreen
 import com.example.stablestable.ui.stable.StableHorsesScreen
@@ -40,8 +39,8 @@ fun SetupNavGraph(
         ) {
             HomeScreen(
                 goToProfile = { navController.navigate(Screen.UserProfileScreen.route.replace("{userId}", authViewModel.userId ?: "")) },
-                goToRiders = { navController.navigate(Screen.StableUsers.route) },
-                goToHorses = { navController.navigate(Screen.StableHorses.route) },
+                //goToRiders = { navController.navigate(Screen.StableUsers.route) },
+                //goToHorses = { navController.navigate(Screen.StableHorses.route) },
                 onLogout = { authViewModel.setUserLoggedIn(false) }
             )
         }
@@ -85,20 +84,6 @@ fun SetupNavGraph(
             route = Screen.HorseProfileScreen.route
         ) { backStackEntry ->
             HorseProfileScreen(backStackEntry.arguments?.getString("horseId") ?: "")
-        }
-
-        // Stable Screen Route
-        composable(
-            route = Screen.StableScreen.route
-        ) {
-            StableScreen(navController = navController)
-        }
-
-        // Calendar Screen Route
-        composable(
-            route = Screen.CalendarScreen.route
-        ) {
-            CalendarScreen(navController = navController)
         }
     }
 }

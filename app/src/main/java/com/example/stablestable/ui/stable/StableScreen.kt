@@ -1,4 +1,4 @@
-package com.example.stablestable.ui.riders
+package com.example.stablestable.ui.stable
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
