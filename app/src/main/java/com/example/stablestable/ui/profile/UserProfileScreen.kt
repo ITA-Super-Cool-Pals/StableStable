@@ -18,6 +18,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
@@ -101,13 +103,34 @@ fun UserProfileScreen(userId: String, onHorseClick: (String) -> Unit) {
                 ) {
                     // Phone
                     Text(text = stringResource(R.string.phone), color = Color.Gray)
-                    Text(text = userProfileViewModel.phone, fontSize = 22.sp)
+                    Row {
+                        Icon(
+                            imageVector = Icons.Default.Phone,
+                            contentDescription = "Phone",
+                            modifier = Modifier
+                                .size(25.dp)
+                                .padding(end = 5.dp)
+                                .align(Alignment.CenterVertically)
+                        )
+                        Text(text = userProfileViewModel.phone, fontSize = 22.sp)
+                    }
+
 
                     Spacer(modifier = Modifier.height(20.dp))
 
                     // Email
                     Text(text = stringResource(R.string.email), color = Color.Gray)
-                    Text(text = userProfileViewModel.email, fontSize = 22.sp)
+                    Row {
+                        Icon(
+                            imageVector = Icons.Default.Email,
+                            contentDescription = "Phone",
+                            modifier = Modifier
+                                .size(25.dp)
+                                .padding(end = 5.dp)
+                                .align(Alignment.CenterVertically)
+                        )
+                        Text(text = userProfileViewModel.email, fontSize = 22.sp)
+                    }
                 }
             }
         }
