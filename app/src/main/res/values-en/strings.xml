@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="selectDate">Select Date</string>
     <string name="calendar">Calendar</string>
     <string name="horses">Horses</string>
     <string name="riders">Riders</string>
@@ -16,6 +17,22 @@
     <string name="phone">Phone</string>
     <string name="profil">Profile</string>
     <string name="shifts">Shifts</string>
-    <string name="feedingSchedule">feedingSchedule</string>
+    <string name="feedingSchedule">Feeding Schedule</string>
     <string name="ridersRoom">Rider\'s Room</string>
+    <string name="name">Name</string>
+    <string name="addHorse">Add a horse</string>
+    <string name="addHorseHeader">Add your horse</string>
+    <string name="sex">Sex</string>
+    <string name="date">Date</string>
+    <string name="birthDate">Age</string>
+    <string name="birthDateWhen">When was your horse born</string>
+    <string name="breed">Breed</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">OK</string>
+    <string name="myHorses">My Horses</string>
+    <string name="ownerInfo">Owner Information</string>
+    <string name="horseInfo">Horse Information</string>
+    <string name="years">years</string>
+    <string name="months">months</string>
+    <string name="contactInfo">Contact Information</string>
 </resources>

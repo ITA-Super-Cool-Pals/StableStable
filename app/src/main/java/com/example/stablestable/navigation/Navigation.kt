@@ -1,5 +1,7 @@
 package com.example.stablestable.navigation
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -10,7 +12,10 @@ import com.example.stablestable.ui.login.LoginScreen
 import com.example.stablestable.ui.profile.MyProfileScreen
 import com.example.stablestable.ui.stable.StableScreen
 import com.example.stablestable.components.StableUsers
+import com.example.stablestable.ui.horses.HorseProfileScreen
+import com.example.stablestable.ui.horses.HorsesStableScreen
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun SetupNavGraph(
     navController: NavHostController,
@@ -36,6 +41,7 @@ fun SetupNavGraph(
             HomeScreen(
                 goToProfile = { navController.navigate(Screen.MyProfileScreen.route) },
                 goToRiders = { navController.navigate(Screen.StableUsers.route) },
+                goToHorses = { navController.navigate(Screen.HorsesScreen.route) },
                 onLogout = { authViewModel.setUserLoggedIn(false) }
             )
         }
@@ -44,7 +50,28 @@ fun SetupNavGraph(
         composable(
             route = Screen.MyProfileScreen.route
         ) {
-            MyProfileScreen(navController = navController)
+            MyProfileScreen(
+                onHorseClick = {
+                    horseId -> navController.navigate(Screen.HorseProfileScreen.route.replace("{horseId}", horseId))
+                }
+            )
+        }
+
+        composable(
+            route = Screen.HorsesScreen.route
+        ) {
+            HorsesStableScreen(
+                onHorseClick = {
+                    horseId -> navController.navigate(Screen.HorseProfileScreen.route.replace("{horseId}", horseId))
+                }
+            )
+        }
+
+        // Horse Profile Screen Route
+        composable(
+            route = Screen.HorseProfileScreen.route
+        ) { backStackEntry ->
+            HorseProfileScreen(backStackEntry.arguments?.getString("horseId") ?: "")
         }
 
         // Stable Screen Route
@@ -64,7 +91,7 @@ fun SetupNavGraph(
         composable(
             route = Screen.StableUsers.route
         ) {
-            StableUsers(navController = navController)
+            StableUsers()
         }
     }
 }

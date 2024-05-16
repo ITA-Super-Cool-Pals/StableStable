@@ -84,4 +84,6 @@ dependencies {
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android")
 
+    // Google material icon import
+    implementation("androidx.compose.material:material-icons-extended:1.6.7")
 }

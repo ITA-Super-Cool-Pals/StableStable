@@ -8,18 +8,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.stablestable.navigation.AuthViewModel
-import com.example.stablestable.ui.profile.ProfileViewModel
 import com.example.stablestable.ui.stable.StableUsersViewModel
 
 @Composable
-fun StableUsers(
-    navController: NavController,
-) {
+fun StableUsers() {
     val stableUsersViewModel: StableUsersViewModel = viewModel()
 
     val users = stableUsersViewModel.nameList

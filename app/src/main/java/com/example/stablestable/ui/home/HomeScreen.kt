@@ -34,6 +34,7 @@ import com.example.stablestable.components.NotificationsDialog
 fun HomeScreen(
     goToProfile: () -> Unit,
     goToRiders: () -> Unit,
+    goToHorses: () -> Unit,
     onLogout: () -> Unit
 ) {
     val viewModel = viewModel<HomeViewModel>()
@@ -98,7 +99,7 @@ fun HomeScreen(
                 CreateHomeButton(
                     textOnButton = stringResource(R.string.horses),
                 ) {
-
+                    goToHorses()
                 }
                 CreateHomeButton(
                     textOnButton = stringResource(R.string.ridersRoom),
