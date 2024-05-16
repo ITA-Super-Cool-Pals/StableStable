@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
@@ -47,12 +48,11 @@ fun MyProfileScreen(onHorseClick: (String) -> Unit) {
         .padding(16.dp)) {
         // Profile picture and name
         Row {
-            // Profile picture
-            Image(
-                painter = painterResource(R.drawable.profile_placeholder),
-                contentDescription = "Placeholder Profile pic",
-                modifier = Modifier
-                    .size(100.dp) // Adjust the size as needed
+            // Profile picture - default to an icon if no profile image is available
+            Icon(
+                imageVector = Icons.Default.AccountCircle,
+                contentDescription = "Profile Picture",
+                modifier = Modifier.size(100.dp)
             )
 
             Spacer(modifier = Modifier.width(width = 16.dp))
