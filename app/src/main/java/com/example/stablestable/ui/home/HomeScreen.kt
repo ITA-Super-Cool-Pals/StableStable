@@ -1,6 +1,5 @@
 package com.example.stablestable.ui.home
 
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.Composable
 import com.example.stablestable.components.CreateScaffold
 
@@ -9,9 +8,9 @@ fun HomeScreen(
     goToProfile: () -> Unit,
     onLogout: () -> Unit
 ) {
-    val viewModel = viewModel<HomeViewModel>()
-
-    CreateScaffold()
+    CreateScaffold(content = {paddingValues ->
+        CreateHomeScreen(paddingValues)
+    })
 
 }
 
@@ -26,8 +25,4 @@ val viewModel = viewModel<HomeViewModel>()
 
                 }
             }
-
-    if (viewModel.showNotificationDialog) {
-        NotificationsDialog()
-    }
  */
