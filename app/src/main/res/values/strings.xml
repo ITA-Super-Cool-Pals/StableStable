@@ -3,11 +3,19 @@
     <string name="appName" translatable="false">StableStable</string>
     <string name="notifications">Notifikationer</string>
     <string name="close">Luk</string>
+    <string name="name">Navn</string>
     <string name="firstName">Fornavn</string>
     <string name="lastName">Efternavn</string>
     <string name="phone">Telefon</string>
     <string name="profil">Profil</string>
     <string name="email">Email</string>
+    <string name="date">Dato</string>
+    <string name="selectDate">Vælg Dato</string>
+    <string name="confirm">OK</string>
+    <string name="cancel">Annuller</string>
+    <string name="sex">Køn</string>
+    <string name="birthDate">Alder</string>
+    <string name="breed">Race</string>
 
     <!-- Home Screen -->
     <string name="calendar">Kalender</string>
@@ -23,4 +31,19 @@
     <string name="login">Login</string>
     <string name="createUser">Opret Bruger</string>
     <string name="userCreation">Bruger Oprettelse</string>
+
+    <!-- My Profile Screen -->
+    <string name="myHorses">Mine heste</string>
+    <string name="addHorse">Tilføj en hest</string>
+    <string name="contactInfo">Kontakt Information</string>
+
+    <!-- Horse Create Screen -->
+    <string name="addHorseHeader">Tilføj din hest</string>
+    <string name="birthDateWhen">Hvornår blev din hest født</string>
+
+    <!-- Horse Profile Screen -->
+    <string name="ownerInfo">Ejer Information</string>
+    <string name="horseInfo">Hest Information</string>
+    <string name="years">år</string>
+    <string name="months">måneder</string>
 </resources>

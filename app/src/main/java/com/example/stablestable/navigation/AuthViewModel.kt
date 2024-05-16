@@ -1,7 +1,5 @@
 package com.example.stablestable.navigation
 
-import android.content.ContentValues.TAG
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
