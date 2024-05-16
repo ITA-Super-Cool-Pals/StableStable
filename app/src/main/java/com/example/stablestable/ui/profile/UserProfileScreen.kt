@@ -172,30 +172,37 @@ fun UserProfileScreen(userId: String, onHorseClick: (String) -> Unit) {
                     }
                 }
 
-                // Add horse button
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 20.dp)
-                ) {
-                    Button(
-                        onClick = {
-                            userProfileViewModel.showHorseCreateWindow = true
-                        },
-                        shape = RoundedCornerShape(5.dp)
+                /*
+                 * Add Horse Button
+                 * Check if the current authenticated user matches the user profile being viewed
+                 * If match, show the add horse button, if not don't show the button
+                 */
+                if (userProfileViewModel.showAddHorseButton) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 20.dp)
                     ) {
-                        Text(stringResource(R.string.addHorse))
-                    }
-
-                    if (userProfileViewModel.showHorseCreateWindow) {
-                        HorseCreateScreen(
-                            onConfirm = {
-                                userProfileViewModel.showHorseCreateWindow = false
-                                userProfileViewModel.getHorses(userId)
+                        Button(
+                            onClick = {
+                                userProfileViewModel.showHorseCreateWindow = true
                             },
-                            onDismiss = { userProfileViewModel.showHorseCreateWindow = false }
-                        )
+                            shape = RoundedCornerShape(5.dp)
+                        ) {
+                            Text(stringResource(R.string.addHorse))
+                        }
+
+                        // Show the creation window if button is pressed
+                        if (userProfileViewModel.showHorseCreateWindow) {
+                            HorseCreateScreen(
+                                onConfirm = {
+                                    userProfileViewModel.showHorseCreateWindow = false
+                                    userProfileViewModel.getHorses(userId)
+                                },
+                                onDismiss = { userProfileViewModel.showHorseCreateWindow = false }
+                            )
+                        }
                     }
                 }
             }

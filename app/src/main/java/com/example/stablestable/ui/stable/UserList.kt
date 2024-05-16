@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun StableUsers(onUserClick: (String) -> Unit) {
+fun StableUsersScreen(onUserClick: (String) -> Unit) {
     val stableUsersViewModel: StableUsersViewModel = viewModel()
 
     val users = stableUsersViewModel.userList
@@ -27,7 +27,7 @@ fun StableUsers(onUserClick: (String) -> Unit) {
             items = users,
             itemContent = { user ->
                 val (userId, userName) = user
-                SingleUserSmall(userName = userName, userId = userId, onUserClick = onUserClick)
+                StableUserListItem(userName = userName, userId = userId, onUserClick = onUserClick)
             }
         )
     }

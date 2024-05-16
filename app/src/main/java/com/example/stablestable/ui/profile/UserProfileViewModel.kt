@@ -26,26 +26,36 @@ class UserProfileViewModel: ViewModel() {
 
     // Save list of users current horses
     var horseList = mutableStateListOf<HorseItem>()
+    // Save state for showing horse add button
+    var showAddHorseButton by mutableStateOf(false)
     // Save state for showing horse creation window
     var showHorseCreateWindow by mutableStateOf(false)
 
+    // Load the user profile
     fun loadUserProfile(userId: String) {
         viewModelScope.launch {
             try {
+                // Check if the current authenticated user matches the user ID
+                // If yes, fetch from locally stored data from authViewModel
                 if (userId == authViewModel.userId) {
                     authViewModel.currentUserProfile.collect { currentUser ->
                         if (currentUser != null) {
                             fullName = "${currentUser.firstName} ${currentUser.lastName}"
                             phone = currentUser.phone
                             email = currentUser.email
+                            // Add the add horse button to the screen
+                            showAddHorseButton = true
                         }
                     }
                 } else {
+                    // Fetch from firestore database if user ID don't match the current authenticated user
                     val userProfile = accountService.getUserById(userId)
                     if (userProfile != null) {
                         fullName = "${userProfile.firstName} ${userProfile.lastName}"
                         phone = userProfile.phone
                         email = userProfile.email
+                        // Ensure the add horse button is not visible
+                        showAddHorseButton = false
                     }
                 }
             } catch (e: Exception) {
@@ -55,6 +65,7 @@ class UserProfileViewModel: ViewModel() {
         }
     }
 
+    // List all horses based on user ID
     fun getHorses(userId: String) {
         viewModelScope.launch {
             try {

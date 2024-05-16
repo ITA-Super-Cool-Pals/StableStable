@@ -10,7 +10,7 @@ import com.example.stablestable.ui.calendar.CalendarScreen
 import com.example.stablestable.ui.home.HomeScreen
 import com.example.stablestable.ui.login.LoginScreen
 import com.example.stablestable.ui.stable.StableScreen
-import com.example.stablestable.ui.stable.StableUsers
+import com.example.stablestable.ui.stable.StableUsersScreen
 import com.example.stablestable.ui.horses.HorseProfileScreen
 import com.example.stablestable.ui.horses.StableHorsesScreen
 import com.example.stablestable.ui.profile.UserProfileScreen
@@ -50,7 +50,7 @@ fun SetupNavGraph(
         composable(
             route = Screen.StableUsers.route
         ) {
-            StableUsers(
+            StableUsersScreen(
                 onUserClick = {
                         userId -> navController.navigate(Screen.UserProfileScreen.route.replace("{userId}", userId))
                 }
