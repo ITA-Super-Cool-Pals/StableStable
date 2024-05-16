@@ -1,4 +1,4 @@
-package com.example.stablestable.ui.horses
+package com.example.stablestable.ui.stable
 
 import android.content.ContentValues
 import android.util.Log
@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
  * Code by Emily
  */
 
-class HorsesStableViewModel: ViewModel() {
+class StableHorsesViewModel: ViewModel() {
     private val authViewModel: AuthViewModel = AuthViewModel()
     private val accountService: AccountServiceImpl = AccountServiceImpl()
     // Get current users Stable ID

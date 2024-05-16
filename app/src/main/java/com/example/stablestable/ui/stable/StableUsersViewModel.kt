@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.stablestable.data.classes.HorseProfile
+import com.example.stablestable.data.classes.UserItem
 import com.example.stablestable.data.classes.UserProfile
 import com.example.stablestable.data.repositories.impl.AccountServiceImpl
 import com.example.stablestable.navigation.AuthViewModel
@@ -13,23 +15,20 @@ import kotlinx.coroutines.launch
 class StableUsersViewModel: ViewModel() {
     private val authViewModel: AuthViewModel = AuthViewModel()
     private val accountService: AccountServiceImpl = AccountServiceImpl()
-    var nameList = mutableStateListOf<String>()
     private var stableId: String? = null
+    var userList = mutableStateListOf<Pair<String, String>>()
 
-    private fun fetchUserList(){
+    private fun getUsers() {
         viewModelScope.launch {
             try {
-                if (stableId != null) {
-                    val userList: List<UserProfile?> = accountService.getAllUsersInStable(stableId!!)
-
-                    userList.forEach { elem ->
-                        if (elem != null) {
-                            nameList.add("${elem.firstName} ${elem.lastName}")
-                        }
+                val users: List<Pair<String, UserProfile?>> = accountService.getAllUsersInStable(stableId!!)
+                users.forEach { (userId, userProfile) ->
+                    if (userProfile != null) {
+                        userList.add(Pair(userId, "${userProfile.firstName} ${userProfile.lastName}"))
                     }
                 }
-            } catch (e: Exception){
-                Log.d(TAG,"Message: ${e.message.toString()}")
+            } catch (e: Exception) {
+                Log.d(TAG, "Get Users Error: ${e.message.toString()}")
             }
         }
     }
@@ -39,7 +38,7 @@ class StableUsersViewModel: ViewModel() {
             authViewModel.currentUserProfile.collect { currentUser ->
                 if (currentUser != null) {
                     stableId = currentUser.stableId
-                    fetchUserList()
+                    getUsers()
                 }
             }
         }

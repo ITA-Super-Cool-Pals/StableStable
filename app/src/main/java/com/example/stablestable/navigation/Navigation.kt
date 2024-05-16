@@ -9,11 +9,11 @@ import androidx.navigation.compose.composable
 import com.example.stablestable.ui.calendar.CalendarScreen
 import com.example.stablestable.ui.home.HomeScreen
 import com.example.stablestable.ui.login.LoginScreen
-import com.example.stablestable.ui.profile.MyProfileScreen
 import com.example.stablestable.ui.stable.StableScreen
-import com.example.stablestable.components.StableUsers
+import com.example.stablestable.ui.stable.StableUsersScreen
 import com.example.stablestable.ui.horses.HorseProfileScreen
-import com.example.stablestable.ui.horses.HorsesStableScreen
+import com.example.stablestable.ui.stable.StableHorsesScreen
+import com.example.stablestable.ui.profile.UserProfileScreen
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -39,30 +39,43 @@ fun SetupNavGraph(
             route = Screen.HomeScreen.route
         ) {
             HomeScreen(
-                goToProfile = { navController.navigate(Screen.MyProfileScreen.route) },
+                goToProfile = { navController.navigate(Screen.UserProfileScreen.route.replace("{userId}", authViewModel.userId ?: "")) },
                 goToRiders = { navController.navigate(Screen.StableUsers.route) },
-                goToHorses = { navController.navigate(Screen.HorsesScreen.route) },
+                goToHorses = { navController.navigate(Screen.StableHorses.route) },
                 onLogout = { authViewModel.setUserLoggedIn(false) }
+            )
+        }
+
+        // List of users in stable route
+        composable(
+            route = Screen.StableUsers.route
+        ) {
+            StableUsersScreen(
+                onUserClick = {
+                        userId -> navController.navigate(Screen.UserProfileScreen.route.replace("{userId}", userId))
+                }
+            )
+        }
+
+        // List of horses in stable route
+        composable(
+            route = Screen.StableHorses.route
+        ) {
+            StableHorsesScreen(
+                onHorseClick = {
+                        horseId -> navController.navigate(Screen.HorseProfileScreen.route.replace("{horseId}", horseId))
+                }
             )
         }
 
         // My Profile Screen Route
         composable(
-            route = Screen.MyProfileScreen.route
-        ) {
-            MyProfileScreen(
+            route = Screen.UserProfileScreen.route
+        ) {backStackEntry ->
+            UserProfileScreen(
+                backStackEntry.arguments?.getString("userId") ?: "",
                 onHorseClick = {
-                    horseId -> navController.navigate(Screen.HorseProfileScreen.route.replace("{horseId}", horseId))
-                }
-            )
-        }
-
-        composable(
-            route = Screen.HorsesScreen.route
-        ) {
-            HorsesStableScreen(
-                onHorseClick = {
-                    horseId -> navController.navigate(Screen.HorseProfileScreen.route.replace("{horseId}", horseId))
+                        horseId -> navController.navigate(Screen.HorseProfileScreen.route.replace("{horseId}", horseId))
                 }
             )
         }
@@ -86,12 +99,6 @@ fun SetupNavGraph(
             route = Screen.CalendarScreen.route
         ) {
             CalendarScreen(navController = navController)
-        }
-
-        composable(
-            route = Screen.StableUsers.route
-        ) {
-            StableUsers()
         }
     }
 }

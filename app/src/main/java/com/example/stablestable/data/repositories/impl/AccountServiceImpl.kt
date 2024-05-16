@@ -29,8 +29,8 @@ class AccountServiceImpl: AccountService {
         db.collection("users").document(userId).get().await().toObject<UserProfile>()
 
     // Get all users matching a stable id
-    override suspend fun getAllUsersInStable(stableId:String): List<UserProfile?> {
-        val userDataList = mutableListOf<UserProfile>()
+    override suspend fun getAllUsersInStable(stableId: String): List<Pair<String, UserProfile?>> {
+        val userDataList = mutableListOf<Pair<String, UserProfile?>>()
         val query = db.collection("users").whereEqualTo("stableId", stableId)
 
         val dataSnapshot = query.get().await()
@@ -39,7 +39,7 @@ class AccountServiceImpl: AccountService {
             // populate return list with data
             val userData = document.toObject<UserProfile>()
             if (userData != null) {
-                userDataList.add(userData)
+                userDataList.add(Pair(document.id, userData))
             }
         }
         // Return list of users in the stable

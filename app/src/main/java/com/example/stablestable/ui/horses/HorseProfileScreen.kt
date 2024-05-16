@@ -7,11 +7,18 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -88,28 +95,60 @@ fun HorseProfileScreen(horseId: String) {
                         // TODO: Change font colors to material colorscheme
                         // Name
                         Text(text = stringResource(R.string.name), color = Color.Gray)
-                        Text(
-                            text = "${viewModel.ownerProfile.value.firstName} ${viewModel.ownerProfile.value.lastName}",
-                            fontSize = 22.sp
-                        )
+                        Row {
+                            Icon(
+                                imageVector = Icons.Default.AccountCircle,
+                                contentDescription = "Profile Picture",
+                                modifier = Modifier
+                                    .size(25.dp)
+                                    .padding(end = 5.dp)
+                                    .align(Alignment.CenterVertically)
+                            )
+                            Text(
+                                text = "${viewModel.ownerProfile.value.firstName} ${viewModel.ownerProfile.value.lastName}",
+                                fontSize = 22.sp,
+                                modifier = Modifier.align(Alignment.CenterVertically)
+                            )
+                        }
 
                         Spacer(modifier = Modifier.height(16.dp))
 
                         // Phone
                         Text(text = stringResource(R.string.phone), color = Color.Gray)
-                        Text(
-                            text = viewModel.ownerProfile.value.phone,
-                            fontSize = 22.sp
-                        )
+                        Row {
+                            Icon(
+                                imageVector = Icons.Default.Phone,
+                                contentDescription = "Phone",
+                                modifier = Modifier
+                                    .size(25.dp)
+                                    .padding(end = 5.dp)
+                                    .align(Alignment.CenterVertically)
+                            )
+                            Text(
+                                text = viewModel.ownerProfile.value.phone,
+                                fontSize = 22.sp
+                            )
+                        }
 
                         Spacer(modifier = Modifier.height(16.dp))
 
                         // Email
                         Text(text = stringResource(R.string.email), color = Color.Gray)
-                        Text(
-                            text = viewModel.ownerProfile.value.email,
-                            fontSize = 22.sp
-                        )
+                        Row {
+                            Icon(
+                                imageVector = Icons.Default.Email,
+                                contentDescription = "Phone",
+                                modifier = Modifier
+                                    .size(25.dp)
+                                    .padding(end = 5.dp)
+                                    .align(Alignment.CenterVertically)
+                            )
+                            Text(
+                                text = viewModel.ownerProfile.value.email,
+                                fontSize = 22.sp
+                            )
+                        }
+
                     }
                 }
             }

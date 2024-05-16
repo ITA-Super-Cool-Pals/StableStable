@@ -18,11 +18,14 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -37,8 +40,13 @@ import com.example.stablestable.ui.horses.HorseCreateScreen
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun MyProfileScreen(onHorseClick: (String) -> Unit) {
-    val profileViewModel: ProfileViewModel = viewModel()
+fun UserProfileScreen(userId: String, onHorseClick: (String) -> Unit) {
+    val userProfileViewModel: UserProfileViewModel = viewModel()
+
+    LaunchedEffect(userId) {
+        userProfileViewModel.loadUserProfile(userId)
+        userProfileViewModel.getHorses(userId)
+    }
 
     Column(modifier = Modifier
         .fillMaxWidth()
@@ -56,7 +64,7 @@ fun MyProfileScreen(onHorseClick: (String) -> Unit) {
 
             // Name
             Text(
-                text = profileViewModel.fullName,
+                text = userProfileViewModel.fullName,
                 fontSize = 26.sp,
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
@@ -95,13 +103,34 @@ fun MyProfileScreen(onHorseClick: (String) -> Unit) {
                 ) {
                     // Phone
                     Text(text = stringResource(R.string.phone), color = Color.Gray)
-                    Text(text = profileViewModel.phone, fontSize = 22.sp)
+                    Row {
+                        Icon(
+                            imageVector = Icons.Default.Phone,
+                            contentDescription = "Phone",
+                            modifier = Modifier
+                                .size(25.dp)
+                                .padding(end = 5.dp)
+                                .align(Alignment.CenterVertically)
+                        )
+                        Text(text = userProfileViewModel.phone, fontSize = 22.sp)
+                    }
+
 
                     Spacer(modifier = Modifier.height(20.dp))
 
                     // Email
                     Text(text = stringResource(R.string.email), color = Color.Gray)
-                    Text(text = profileViewModel.email, fontSize = 22.sp)
+                    Row {
+                        Icon(
+                            imageVector = Icons.Default.Email,
+                            contentDescription = "Phone",
+                            modifier = Modifier
+                                .size(25.dp)
+                                .padding(end = 5.dp)
+                                .align(Alignment.CenterVertically)
+                        )
+                        Text(text = userProfileViewModel.email, fontSize = 22.sp)
+                    }
                 }
             }
         }
@@ -138,7 +167,7 @@ fun MyProfileScreen(onHorseClick: (String) -> Unit) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    profileViewModel.horseList.forEach { horseItem ->
+                    userProfileViewModel.horseList.forEach { horseItem ->
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.SpaceBetween,
@@ -166,30 +195,37 @@ fun MyProfileScreen(onHorseClick: (String) -> Unit) {
                     }
                 }
 
-                // Add horse button
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 20.dp)
-                ) {
-                    Button(
-                        onClick = {
-                            profileViewModel.showHorseCreateWindow = true
-                        },
-                        shape = RoundedCornerShape(5.dp)
+                /*
+                 * Add Horse Button
+                 * Check if the current authenticated user matches the user profile being viewed
+                 * If match, show the add horse button, if not don't show the button
+                 */
+                if (userProfileViewModel.showAddHorseButton) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 20.dp)
                     ) {
-                        Text(stringResource(R.string.addHorse))
-                    }
-
-                    if (profileViewModel.showHorseCreateWindow) {
-                        HorseCreateScreen(
-                            onConfirm = {
-                                profileViewModel.showHorseCreateWindow = false
-                                profileViewModel.getHorses()
+                        Button(
+                            onClick = {
+                                userProfileViewModel.showHorseCreateWindow = true
                             },
-                            onDismiss = { profileViewModel.showHorseCreateWindow = false }
-                        )
+                            shape = RoundedCornerShape(5.dp)
+                        ) {
+                            Text(stringResource(R.string.addHorse))
+                        }
+
+                        // Show the creation window if button is pressed
+                        if (userProfileViewModel.showHorseCreateWindow) {
+                            HorseCreateScreen(
+                                onConfirm = {
+                                    userProfileViewModel.showHorseCreateWindow = false
+                                    userProfileViewModel.getHorses(userId)
+                                },
+                                onDismiss = { userProfileViewModel.showHorseCreateWindow = false }
+                            )
+                        }
                     }
                 }
             }
