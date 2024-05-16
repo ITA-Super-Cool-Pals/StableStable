@@ -6,16 +6,13 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.stablestable.data.classes.HorseProfile
 import com.example.stablestable.data.classes.UserProfile
 import com.example.stablestable.data.repositories.impl.AccountServiceImpl
-import com.example.stablestable.navigation.AuthViewModel
 import com.google.firebase.Timestamp
 import kotlinx.coroutines.launch
 import java.time.Instant

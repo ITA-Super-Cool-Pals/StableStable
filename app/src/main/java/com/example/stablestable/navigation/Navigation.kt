@@ -12,7 +12,6 @@ import com.example.stablestable.ui.login.LoginScreen
 import com.example.stablestable.ui.profile.MyProfileScreen
 import com.example.stablestable.ui.stable.StableScreen
 import com.example.stablestable.components.StableUsers
-import com.example.stablestable.ui.horses.HorseCreateScreen
 import com.example.stablestable.ui.horses.HorseProfileScreen
 import com.example.stablestable.ui.horses.HorsesStableScreen
 
@@ -92,7 +91,7 @@ fun SetupNavGraph(
         composable(
             route = Screen.StableUsers.route
         ) {
-            StableUsers(navController = navController)
+            StableUsers()
         }
     }
 }
