@@ -40,14 +40,15 @@ import com.example.stablestable.ui.home.HomeViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CreateScaffold(
-    content: @Composable (PaddingValues) -> Unit
+    content: @Composable (PaddingValues) -> Unit,
+    goToStable: () -> Unit
 ) {
     val viewModel = viewModel<HomeViewModel>()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
     val items = listOf(
         NavigationBarItem(
-            title = "Riders/Horses",
+            title = "Stable",
             selectedIcon = Icons.Filled.Person,
             unselectedIcon = Icons.Outlined.Person,
             hasNews = false,
@@ -110,7 +111,12 @@ fun CreateScaffold(
                 items.forEachIndexed { index, item ->
                     NavigationBarItem(
                         selected = selectedItemIndex == index,
-                        onClick = { selectedItemIndex = index },
+                        onClick = {
+                            selectedItemIndex = index
+                            if (item.title == "Stable")  {
+                                goToStable()
+                            }
+                                  },
                         icon = {
                             BadgedBox(
                                 badge = {

@@ -5,12 +5,14 @@ import com.example.stablestable.components.CreateScaffold
 
 @Composable
 fun HomeScreen(
-    goToProfile: () -> Unit,
+    goToStable: () -> Unit,
     onLogout: () -> Unit
 ) {
     CreateScaffold(content = {paddingValues ->
         CreateHomeScreen(paddingValues)
-    })
+    },
+        {goToStable()}
+    )
 
 }
 
