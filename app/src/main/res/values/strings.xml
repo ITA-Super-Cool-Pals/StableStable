@@ -41,6 +41,9 @@
     <!-- Horse Create Screen -->
     <string name="addHorseHeader">Tilføj din hest</string>
     <string name="birthDateWhen">Hvornår blev din hest født</string>
+    <string name="mare">Hoppe</string>
+    <string name="stallion">Hingst</string>
+    <string name="gelding">Vallak</string>
 
     <!-- Horse Profile Screen -->
     <string name="ownerInfo">Ejer Information</string>
