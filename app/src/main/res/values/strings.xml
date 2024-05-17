@@ -48,6 +48,11 @@
     <!-- Horse Profile Screen -->
     <string name="ownerInfo">Ejer Information</string>
     <string name="horseInfo">Hest Information</string>
+    <string name="feedInfo">Foder Information</string>
     <string name="years">år</string>
     <string name="months">måneder</string>
+    <string name="roughage">Grovfoder</string>
+    <string name="subsidy">Tilskud</string>
+    <string name="vitamins">Vitaminer</string>
+    <string name="medicine">Medicin</string>
 </resources>

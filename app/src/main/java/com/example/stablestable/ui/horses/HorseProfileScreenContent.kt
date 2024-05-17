@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -34,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.stablestable.R
+import com.example.stablestable.ui.horses.horseDisplayBoxes.HorseFeedBox
 import com.example.stablestable.ui.horses.horseDisplayBoxes.HorseInfoBox
 import com.example.stablestable.ui.horses.horseDisplayBoxes.HorseOwnerBox
 
@@ -74,28 +76,40 @@ fun HorseProfileScreenContent(
             Spacer(modifier = Modifier.height(10.dp))
 
             // General information about the horse
-            Column(
+            LazyColumn(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
-                // Owner information box
-                HorseOwnerBox(
-                    firstName = viewModel.ownerProfile.value.firstName,
-                    lastName = viewModel.ownerProfile.value.lastName,
-                    phone = viewModel.ownerProfile.value.phone,
-                    email = viewModel.ownerProfile.value.email
-                )
+                item {
+                    // Owner information box
+                    HorseOwnerBox(
+                        firstName = viewModel.ownerProfile.value.firstName,
+                        lastName = viewModel.ownerProfile.value.lastName,
+                        phone = viewModel.ownerProfile.value.phone,
+                        email = viewModel.ownerProfile.value.email
+                    )
 
-                Spacer(modifier = Modifier.height(10.dp))
+                    Spacer(modifier = Modifier.height(10.dp))
+                }
 
-                // Horse information box
-                HorseInfoBox(
-                    breed = viewModel.horseProfile.value.breed,
-                    sex = viewModel.horseProfile.value.sex,
-                    ageYears = viewModel.ageYears,
-                    ageMonths = viewModel.ageMonths
-                )
+                item {
+                    // Horse information box
+                    HorseInfoBox(
+                        breed = viewModel.horseProfile.value.breed,
+                        sex = viewModel.horseProfile.value.sex,
+                        ageYears = viewModel.ageYears,
+                        ageMonths = viewModel.ageMonths
+                    )
+
+                    Spacer(modifier = Modifier.height(10.dp))
+                }
+
+                item {
+                    // Horse feed box
+                    HorseFeedBox()
+                }
+
             }
         }
     }

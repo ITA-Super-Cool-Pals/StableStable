@@ -39,4 +39,9 @@
     <string name="mare">Mare</string>
     <string name="gelding">Gelding</string>
     <string name="stallion">Stallion</string>
+    <string name="feedInfo">Feed Information</string>
+    <string name="roughage">Roughage</string>
+    <string name="subsidy">Subsidy</string>
+    <string name="vitamins">Vitamins</string>
+    <string name="medicine">Medicine</string>
 </resources>

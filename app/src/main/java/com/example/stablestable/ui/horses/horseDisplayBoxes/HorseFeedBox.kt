@@ -20,12 +20,7 @@ import androidx.compose.ui.unit.sp
 import com.example.stablestable.R
 
 @Composable
-fun HorseInfoBox(
-    breed: String,
-    sex: String,
-    ageYears: Int,
-    ageMonths: Int
-) {
+fun HorseFeedBox() {
     Box(
         modifier = Modifier
             .border(1.dp, Color.LightGray, RoundedCornerShape(20.dp, 20.dp, 10.dp, 10.dp))
@@ -42,7 +37,7 @@ fun HorseInfoBox(
                     )
             ) {
                 Text(
-                    text = stringResource(R.string.horseInfo),
+                    text = stringResource(R.string.feedInfo),
                     textAlign = TextAlign.Center,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -54,28 +49,37 @@ fun HorseInfoBox(
                     .padding(start = 10.dp)
             ) {
                 // TODO: Change font colors to material colorscheme
-                // Name
-                Text(text = stringResource(R.string.breed), color = Color.Gray, fontSize = 14.sp)
+                // Roughage
+                Text(text = stringResource(R.string.roughage), color = Color.Gray, fontSize = 14.sp)
                 Text(
-                    text = breed,
+                    text = "roughage",
                     fontSize = 20.sp
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Phone
-                Text(text = stringResource(R.string.sex), color = Color.Gray, fontSize = 14.sp)
+                // Subsidy
+                Text(text = stringResource(R.string.subsidy), color = Color.Gray, fontSize = 14.sp)
                 Text(
-                    text = sex,
+                    text = "subsidy",
                     fontSize = 20.sp
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Age
-                Text(text = stringResource(R.string.age), color = Color.Gray, fontSize = 14.sp)
+                // Vitamins
+                Text(text = stringResource(R.string.vitamins), color = Color.Gray, fontSize = 14.sp)
                 Text(
-                    text = "$ageYears ${stringResource(R.string.years)}, $ageMonths ${stringResource(R.string.months)}",
+                    text = "vitamins",
+                    fontSize = 20.sp
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // Medicine
+                Text(text = stringResource(R.string.medicine), color = Color.Gray, fontSize = 14.sp)
+                Text(
+                    text = "medicine",
                     fontSize = 20.sp
                 )
             }

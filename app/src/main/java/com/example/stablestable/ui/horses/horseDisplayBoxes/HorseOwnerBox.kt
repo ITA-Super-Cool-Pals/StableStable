@@ -42,7 +42,7 @@ fun HorseOwnerBox(
 ) {
     Box(
         modifier = Modifier
-            .border(1.dp, Color.Red, RoundedCornerShape(20.dp, 20.dp, 10.dp, 10.dp))
+            .border(1.dp, Color.LightGray, RoundedCornerShape(20.dp, 20.dp, 10.dp, 10.dp))
             .fillMaxWidth()
             .padding(bottom = 5.dp)
     ) {
@@ -69,7 +69,7 @@ fun HorseOwnerBox(
             ) {
                 // TODO: Change font colors to material colorscheme
                 // Name
-                Text(text = stringResource(R.string.name), color = Color.Gray)
+                Text(text = stringResource(R.string.name), color = Color.Gray, fontSize = 14.sp)
                 Row {
                     Icon(
                         imageVector = Icons.Default.AccountCircle,
@@ -81,7 +81,7 @@ fun HorseOwnerBox(
                     )
                     Text(
                         text = "$firstName $lastName",
-                        fontSize = 22.sp,
+                        fontSize = 20.sp,
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                 }
@@ -89,7 +89,7 @@ fun HorseOwnerBox(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 // Phone
-                Text(text = stringResource(R.string.phone), color = Color.Gray)
+                Text(text = stringResource(R.string.phone), color = Color.Gray, fontSize = 14.sp)
                 Row {
                     Icon(
                         imageVector = Icons.Default.Phone,
@@ -101,14 +101,14 @@ fun HorseOwnerBox(
                     )
                     Text(
                         text = phone,
-                        fontSize = 22.sp
+                        fontSize = 20.sp
                     )
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
 
                 // Email
-                Text(text = stringResource(R.string.email), color = Color.Gray)
+                Text(text = stringResource(R.string.email), color = Color.Gray, fontSize = 14.sp)
                 Row {
                     Icon(
                         imageVector = Icons.Default.Email,
@@ -120,7 +120,7 @@ fun HorseOwnerBox(
                     )
                     Text(
                         text = email,
-                        fontSize = 22.sp
+                        fontSize = 20.sp
                     )
                 }
 
