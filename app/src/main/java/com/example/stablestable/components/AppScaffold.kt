@@ -41,7 +41,7 @@ import com.example.stablestable.ui.home.HomeViewModel
 @Composable
 fun CreateScaffold(
     content: @Composable (PaddingValues) -> Unit,
-    goToStable: () -> Unit,
+    goToRiders: () -> Unit,
     goToHome: () -> Unit,
     //goToShifts: () -> Unit
 ) {
@@ -50,9 +50,15 @@ fun CreateScaffold(
 
     val items = listOf(
         NavigationBarItem(
-            title = "Stable",
+            title = "Riders",
             selectedIcon = Icons.Filled.Person,
             unselectedIcon = Icons.Outlined.Person,
+            hasNews = false,
+        ),
+        NavigationBarItem(
+            title = "Horses",
+            selectedIcon = Icons.Filled.DateRange,
+            unselectedIcon = Icons.Outlined.DateRange,
             hasNews = false,
         ),
         NavigationBarItem(
@@ -63,6 +69,12 @@ fun CreateScaffold(
         ),
         NavigationBarItem(
             title = "Shifts",
+            selectedIcon = Icons.Filled.DateRange,
+            unselectedIcon = Icons.Outlined.DateRange,
+            hasNews = false,
+        ),
+        NavigationBarItem(
+            title = "Riders Hall",
             selectedIcon = Icons.Filled.DateRange,
             unselectedIcon = Icons.Outlined.DateRange,
             hasNews = false,
@@ -116,7 +128,7 @@ fun CreateScaffold(
                         onClick = {
                             selectedItemIndex = index
                             when (item.title) {
-                                "Stable" -> goToStable()
+                                "Riders" -> goToRiders()
                                 "Home" -> goToHome()
                                 // "Shifts" -> goToShifts()
                             }

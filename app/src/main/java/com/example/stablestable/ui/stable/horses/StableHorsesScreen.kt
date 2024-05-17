@@ -6,7 +6,7 @@ import com.example.stablestable.ui.stable.riders.StableUsersScreenContent
 
 @Composable
 fun StableHorsesScreen(
-    goToStable: () -> Unit,
+    goToRiders: () -> Unit,
     goToHome: () -> Unit,
     onHorseClick: (String) -> Unit
 ){
@@ -15,6 +15,6 @@ fun StableHorsesScreen(
             StableUsersScreenContent(paddingValues, onHorseClick)
         },
         goToHome = goToHome,
-        goToStable = goToStable
+        goToRiders = goToRiders
     )
 }

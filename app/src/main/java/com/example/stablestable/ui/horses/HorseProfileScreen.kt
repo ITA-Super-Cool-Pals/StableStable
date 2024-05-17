@@ -8,7 +8,7 @@ import com.example.stablestable.components.CreateScaffold
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun HorseProfileScreen(
-    goToStable: () -> Unit,
+    goToRiders: () -> Unit,
     goToHome: () -> Unit,
     horseId: String
 ){
@@ -17,7 +17,7 @@ fun HorseProfileScreen(
             HorseProfileScreenContent(horseId, paddingValues)
         },
         goToHome = goToHome,
-        goToStable = goToStable
+        goToRiders = goToRiders
     )
 }
 

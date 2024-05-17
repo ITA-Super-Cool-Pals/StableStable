@@ -8,7 +8,7 @@ import com.example.stablestable.components.CreateScaffold
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun UserProfileScreen(
-    goToStable: () -> Unit,
+    goToRiders: () -> Unit,
     goToHome: () -> Unit,
     onHorseClick: (String) -> Unit,
     userId: String
@@ -18,6 +18,6 @@ fun UserProfileScreen(
             UserProfileScreenContent(userId, onHorseClick, paddingValues)
         },
         goToHome = goToHome,
-        goToStable = goToStable
+        goToRiders = goToRiders
     )
 }

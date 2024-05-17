@@ -5,7 +5,7 @@ import com.example.stablestable.components.CreateScaffold
 
 @Composable
 fun StableUsersScreen(
-    goToStable: () -> Unit,
+    goToRiders: () -> Unit,
     goToHome: () -> Unit,
     onUserClick: (String) -> Unit
 ){
@@ -14,6 +14,6 @@ fun StableUsersScreen(
             StableUsersScreenContent(paddingValues, onUserClick)
         },
         goToHome = goToHome,
-        goToStable = goToStable
+        goToRiders = goToRiders
     )
 }

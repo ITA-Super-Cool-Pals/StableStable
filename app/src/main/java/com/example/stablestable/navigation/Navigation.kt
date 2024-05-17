@@ -39,7 +39,7 @@ fun SetupNavGraph(
             route = Screen.HomeScreen.route
         ) {
             HomeScreen(
-                goToStable = { navController.navigate(Screen.StableUsers.route) },
+                goToRiders = { navController.navigate(Screen.StableUsers.route) },
                 goToHome = { navController.navigate(Screen.HomeScreen.route) }
                 //goToShifts = { navController.navigate(Screen.StableUsers.route) },
                 //goToProfile = { navController.navigate(Screen.UserProfileScreen.route.replace("{userId}", authViewModel.userId ?: "")) },
@@ -56,7 +56,7 @@ fun SetupNavGraph(
                 onUserClick = {
                         userId -> navController.navigate(Screen.UserProfileScreen.route.replace("{userId}", userId))
                 },
-                goToStable = { navController.navigate(Screen.StableUsers.route) },
+                goToRiders = { navController.navigate(Screen.StableUsers.route) },
                 goToHome = { navController.navigate(Screen.HomeScreen.route) }
             )
         }
@@ -69,7 +69,7 @@ fun SetupNavGraph(
                 onHorseClick = {
                         horseId -> navController.navigate(Screen.HorseProfileScreen.route.replace("{horseId}", horseId))
                 },
-                goToStable = { navController.navigate(Screen.StableUsers.route) },
+                goToRiders = { navController.navigate(Screen.StableUsers.route) },
                 goToHome = { navController.navigate(Screen.HomeScreen.route) }
             )
         }
@@ -84,7 +84,7 @@ fun SetupNavGraph(
                 onHorseClick = {
                         horseId -> navController.navigate(Screen.HorseProfileScreen.route.replace("{horseId}", horseId))
                 },
-                goToStable = { navController.navigate(Screen.StableUsers.route) },
+                goToRiders = { navController.navigate(Screen.StableUsers.route) },
                 goToHome = { navController.navigate(Screen.HomeScreen.route) }
             )
         }
@@ -96,7 +96,7 @@ fun SetupNavGraph(
         ) { backStackEntry ->
             HorseProfileScreen(
                 horseId = backStackEntry.arguments?.getString("horseId") ?: "",
-            goToStable = { navController.navigate(Screen.StableUsers.route) },
+            goToRiders = { navController.navigate(Screen.StableUsers.route) },
             goToHome = { navController.navigate(Screen.HomeScreen.route) }
             )
         }
