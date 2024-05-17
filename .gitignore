@@ -2,7 +2,9 @@
 .gradle
 /local.properties
 /.idea/deploymentTargetDropDown.xml
+/.idea/deploymentTargetSelector.xml
 /.idea/caches
+/.idea/codeStyles
 /.idea/libraries
 /.idea/modules.xml
 /.idea/workspace.xml
