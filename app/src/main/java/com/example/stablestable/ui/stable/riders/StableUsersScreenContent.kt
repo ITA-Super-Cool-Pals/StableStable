@@ -1,9 +1,10 @@
-package com.example.stablestable.ui.stable
+package com.example.stablestable.ui.stable.riders
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -20,10 +21,16 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun StableUsersScreen(onUserClick: (String) -> Unit) {
+fun StableUsersScreenContent(
+    paddingValues: PaddingValues,
+    onUserClick: (String) -> Unit) {
     val stableUsersViewModel: StableUsersViewModel = viewModel()
 
-    Column {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(paddingValues)
+    ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier

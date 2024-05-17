@@ -41,7 +41,9 @@ import com.example.stablestable.ui.home.HomeViewModel
 @Composable
 fun CreateScaffold(
     content: @Composable (PaddingValues) -> Unit,
-    goToStable: () -> Unit
+    goToStable: () -> Unit,
+    goToHome: () -> Unit,
+    //goToShifts: () -> Unit
 ) {
     val viewModel = viewModel<HomeViewModel>()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
@@ -115,6 +117,10 @@ fun CreateScaffold(
                             selectedItemIndex = index
                             if (item.title == "Stable")  {
                                 goToStable()
+                            } else if (item.title == "Home") {
+                                goToHome()
+                            } else {
+                                //goToShifts()
                             }
                                   },
                         icon = {
