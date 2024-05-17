@@ -43,7 +43,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.stablestable.components.NavigationHeader
 import com.example.stablestable.data.classes.Shift
 
 @Composable
@@ -105,7 +104,6 @@ fun ShiftsScreenContent(
 ) {
 
     Column {
-        NavigationHeader(goToHomeScreen)
         Row(
             modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
         ) {
