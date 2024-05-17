@@ -107,7 +107,13 @@ fun HorseProfileScreenContent(
 
                 item {
                     // Horse feed box
-                    HorseFeedBox()
+                    HorseFeedBox(
+                        isOwner = viewModel.isOwner,
+                        roughage = viewModel.horseProfile.value.roughage,
+                        subsidy = viewModel.horseProfile.value.subsidy,
+                        vitamins = viewModel.horseProfile.value.vitamins,
+                        medicine = viewModel.horseProfile.value.medicine
+                    )
                 }
 
             }

@@ -13,7 +13,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.stablestable.data.classes.HorseProfile
 import com.example.stablestable.data.classes.UserProfile
 import com.example.stablestable.data.repositories.impl.AccountServiceImpl
+import com.google.firebase.Firebase
 import com.google.firebase.Timestamp
+import com.google.firebase.auth.auth
 import kotlinx.coroutines.launch
 import java.time.Instant
 import java.time.LocalDate
@@ -35,6 +37,9 @@ class HorseProfileViewModel: ViewModel() {
     var ageYears by mutableIntStateOf(0)
     var ageMonths by mutableIntStateOf(0)
 
+    var isOwner by mutableStateOf(false)
+
+
     fun getHorse(horseId: String) {
         viewModelScope.launch {
             try {
@@ -49,6 +54,13 @@ class HorseProfileViewModel: ViewModel() {
 
                 // Convert the horses age from millis to "x years y months" format
                 getHorseAge(horseProfile.value.age)
+
+                // Check if the current user id matches owner id
+                val userId = Firebase.auth.currentUser?.uid
+                if (userId == horseProfile.value.ownerId) {
+                    isOwner = true
+                    println("you are owner")
+                }
             } catch (e: Exception) {
                 Log.d(TAG, "Get Horse Error: ${e.message.toString()}")
             }

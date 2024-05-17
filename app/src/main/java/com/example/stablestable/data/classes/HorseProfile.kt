@@ -9,4 +9,8 @@ data class HorseProfile(
     val breed: String = "",
     val sex: String = "",
     val age: Timestamp = Timestamp.now(),
+    val roughage: String = "",
+    val subsidy: String = "",
+    val vitamins: String = "",
+    val medicine: String = ""
 )
