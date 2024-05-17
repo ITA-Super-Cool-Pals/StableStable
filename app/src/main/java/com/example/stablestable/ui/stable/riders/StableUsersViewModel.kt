@@ -1,12 +1,10 @@
-package com.example.stablestable.ui.stable
+package com.example.stablestable.ui.stable.riders
 
 import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.stablestable.data.classes.HorseProfile
-import com.example.stablestable.data.classes.UserItem
 import com.example.stablestable.data.classes.UserProfile
 import com.example.stablestable.data.repositories.impl.AccountServiceImpl
 import com.example.stablestable.navigation.AuthViewModel

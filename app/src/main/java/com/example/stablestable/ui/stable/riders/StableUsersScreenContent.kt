@@ -1,9 +1,10 @@
-package com.example.stablestable.ui.stable
+package com.example.stablestable.ui.stable.riders
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -19,15 +20,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
-/*
- * Code by Emily
- */
-
 @Composable
-fun StableHorsesScreen(onHorseClick: (String) -> Unit) {
-    val viewModel: StableHorsesViewModel = viewModel()
+fun StableUsersScreenContent(
+    paddingValues: PaddingValues,
+    onUserClick: (String) -> Unit) {
 
-    Column {
+    val stableUsersViewModel: StableUsersViewModel = viewModel()
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(paddingValues)
+    ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
@@ -35,7 +39,7 @@ fun StableHorsesScreen(onHorseClick: (String) -> Unit) {
                 .padding(top = 15.dp, bottom = 20.dp)
         ) {
             Text(
-                text = "List of all horses in this stable",
+                text = "List of all users in this stable",
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(bottom = 10.dp)
@@ -48,17 +52,15 @@ fun StableHorsesScreen(onHorseClick: (String) -> Unit) {
             )
         }
 
-        // Column for displaying the list of horses
+        // Column for displaying the list of users
         LazyColumn(
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
         ) {
             items(
-                items = viewModel.horseList,
-                itemContent = { horseItem ->
-                    StableHorseListItem(
-                        horse = horseItem,
-                        onHorseClick = onHorseClick
-                    )
+                items = stableUsersViewModel.userList,
+                itemContent = { user ->
+                    val (userId, userName) = user
+                    StableUserListItem(userName = userName, userId = userId, onUserClick = onUserClick)
                 }
             )
         }
