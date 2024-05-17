@@ -1,4 +1,4 @@
-package com.example.stablestable.ui.stable.riders
+package com.example.stablestable.ui.stable.horses
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -20,12 +20,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
-@Composable
-fun StableUsersScreenContent(
-    paddingValues: PaddingValues,
-    onUserClick: (String) -> Unit) {
+/*
+ * Code by Emily
+ */
 
-    val stableUsersViewModel: StableUsersViewModel = viewModel()
+@Composable
+fun StableHorsesScreenContent(
+    onHorseClick: (String) -> Unit,
+    paddingValues: PaddingValues
+){
+
+    val viewModel: StableHorsesViewModel = viewModel()
 
     Column(
         modifier = Modifier
@@ -39,7 +44,7 @@ fun StableUsersScreenContent(
                 .padding(top = 15.dp, bottom = 20.dp)
         ) {
             Text(
-                text = "List of all users in this stable",
+                text = "List of all horses in this stable",
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(bottom = 10.dp)
@@ -52,15 +57,17 @@ fun StableUsersScreenContent(
             )
         }
 
-        // Column for displaying the list of users
+        // Column for displaying the list of horses
         LazyColumn(
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
         ) {
             items(
-                items = stableUsersViewModel.userList,
-                itemContent = { user ->
-                    val (userId, userName) = user
-                    StableUserListItem(userName = userName, userId = userId, onUserClick = onUserClick)
+                items = viewModel.horseList,
+                itemContent = { horseItem ->
+                    StableHorseListItem(
+                        horse = horseItem,
+                        onHorseClick = onHorseClick
+                    )
                 }
             )
         }

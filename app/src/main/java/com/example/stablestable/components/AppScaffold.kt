@@ -115,14 +115,12 @@ fun CreateScaffold(
                         selected = selectedItemIndex == index,
                         onClick = {
                             selectedItemIndex = index
-                            if (item.title == "Stable")  {
-                                goToStable()
-                            } else if (item.title == "Home") {
-                                goToHome()
-                            } else {
-                                //goToShifts()
+                            when (item.title) {
+                                "Stable" -> goToStable()
+                                "Home" -> goToHome()
+                                // "Shifts" -> goToShifts()
                             }
-                                  },
+                        },
                         icon = {
                             BadgedBox(
                                 badge = {
