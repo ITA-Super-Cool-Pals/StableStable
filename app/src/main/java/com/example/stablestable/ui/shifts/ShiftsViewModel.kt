@@ -9,11 +9,13 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.stablestable.data.classes.Shift
+import com.example.stablestable.data.repositories.impl.AccountServiceImpl
 import com.example.stablestable.data.repositories.impl.ShiftsServiceImpl
 import kotlinx.coroutines.launch
 
 class ShiftsViewModel(
-    private val shiftsService: ShiftsServiceImpl = ShiftsServiceImpl()
+    private val shiftsService: ShiftsServiceImpl = ShiftsServiceImpl(),
+    private val accountServiceImpl: AccountServiceImpl = AccountServiceImpl()
 ): ViewModel() {
 
     var openShiftDialog by  mutableStateOf(false)
@@ -22,19 +24,23 @@ class ShiftsViewModel(
     val shiftsWithFlow = shiftsService.shiftsWithFlow
 
 
+
+
     var viewedWeek: Int = 13
     var viewedDay: String = ""
     var viewedSegment: String = ""
+    var viewedUser: String = ""
 
     val currentShift: Shift
         get()=
-            Shift(viewedWeek,viewedDay,"John",viewedSegment)
+            Shift(viewedWeek,viewedDay,viewedUser,viewedSegment)
 
 
 
     fun createShift(){
         viewModelScope.launch {
-            val currentShift1: Shift = Shift(viewedWeek,viewedDay,"John",viewedSegment)
+            val currentUserName: String = accountServiceImpl.getCurrentUser()?.firstName ?: ""
+            val currentShift1: Shift = Shift(viewedWeek,viewedDay,currentUserName,viewedSegment)
             try {
                 shiftsService.addShift(currentShift1)
             } catch (e: Exception){
@@ -55,7 +61,5 @@ class ShiftsViewModel(
 
     }
 
-    fun getAllShifts(){
 
-    }
 }

@@ -37,7 +37,7 @@ import java.time.LocalDate
 fun ShiftsSingleDay(
     shifts: List<Shift>,
     currentShiftDay: String,
-    onShiftsBoxClick: (String, String, Shift?) -> Unit
+    onShiftsBoxClick: (String, String, String, Shift?) -> Unit
 ){
     Row(modifier = Modifier
         .fillMaxWidth()
@@ -69,11 +69,14 @@ fun ShiftsSingleDay(
             //.padding(8.dp)
             .size(48.dp)
             .clickable {
-                onShiftsBoxClick(currentShiftDay, "morning",shiftMorn)
+                if (shiftMorn == null) {
+                    onShiftsBoxClick(currentShiftDay, "morning", "", shiftMorn)
+                } else {
+                    onShiftsBoxClick(currentShiftDay, "morning", shiftMorn.user, shiftMorn)
+                }
             }
 
         ) {
-            // TODO: Find en måde at indsætte en bruger her
             if (shiftMorn != null) {
                 Text(modifier = Modifier.align(Alignment.Center),text = shiftMorn.user)
             }
@@ -93,10 +96,13 @@ fun ShiftsSingleDay(
             //.padding(8.dp)
             .size(48.dp)
             .clickable {
-                onShiftsBoxClick(currentShiftDay, "evening",shiftEve)
+                if (shiftEve == null) {
+                    onShiftsBoxClick(currentShiftDay, "evening", "", shiftEve)
+                } else {
+                    onShiftsBoxClick(currentShiftDay, "evening", shiftEve.user, shiftEve)
+                }
             }
         ) {
-            // TODO: Find en måde at indsætte en bruger her
             if (shiftEve != null) {
                 Text(modifier = Modifier.align(Alignment.Center),text = shiftEve.user)
             }
@@ -121,7 +127,7 @@ fun ShiftsSingleDayPreview(){
             )
         ),
         "Monday"
-    ) { s, s1,d -> }
+    ) { s, s1, s2,d -> }
 }
 
 

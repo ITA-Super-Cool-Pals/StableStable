@@ -28,6 +28,7 @@ import com.example.stablestable.R
 @Composable
 fun ShiftsSingleDayDialog(
     displayedDay: String,
+    currentShiftName: String,
     dialog: String,
     onDismissRequest: () -> Unit,
     onAddMeClick: () -> Unit,
@@ -49,7 +50,7 @@ fun ShiftsSingleDayDialog(
             when(dialog){
                 "empty" -> CardContentEmpty {onAddMeClick()}
                 // TODO: NameOnShift skal ændres til det der egentlig er på shiftet
-                "full" -> CardContentFull("John"){onRemoveMeClick()}
+                "full" -> CardContentFull(currentShiftName){onRemoveMeClick()}
                 else -> Text(text = "Error")
             }
 
