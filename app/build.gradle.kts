@@ -70,10 +70,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
     // TODO: Add the dependencies for Firebase products you want to use
     implementation("com.google.firebase:firebase-auth") // Firebase Authentication
-    implementation("com.google.firebase:firebase-firestore-ktx")
-    implementation("androidx.lifecycle:lifecycle-runtime-compose-android:2.8.0-rc01")
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
-    implementation("androidx.compose.material3:material3-android:1.2.1") // Firestore
+    implementation("com.google.firebase:firebase-firestore-ktx") // Firestore
 
     // When using the BoM, don't specify versions in Firebase dependencies
     // https://firebase.google.com/docs/android/setup#available-libraries
@@ -88,4 +85,7 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
+
+    // Google material icon import
+    implementation("androidx.compose.material:material-icons-extended:1.6.7")
 }
