@@ -34,6 +34,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.stablestable.R
+import com.example.stablestable.ui.horses.horseDisplayBoxes.HorseInfoBox
+import com.example.stablestable.ui.horses.horseDisplayBoxes.HorseOwnerBox
 
 /*
  * Code by Emily
@@ -75,155 +77,25 @@ fun HorseProfileScreenContent(
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
-                    .fillMaxWidth(0.85f)
+                    .fillMaxWidth()
             ) {
                 // Owner information box
-                Box(
-                    modifier = Modifier
-                        .border(1.dp, Color.Red, RoundedCornerShape(20.dp, 20.dp, 10.dp, 10.dp))
-                        .fillMaxWidth()
-                        .padding(bottom = 5.dp)
-                ) {
-                    Column {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .background(
-                                    Color.LightGray, // TODO: Change to material colorscheme
-                                    shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp)
-                                )
-                        ) {
-                            Text(
-                                text = stringResource(R.string.ownerInfo),
-                                textAlign = TextAlign.Center,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(vertical = 5.dp)
-                            )
-                        }
-                        Column(
-                            modifier = Modifier
-                                .padding(start = 10.dp)
-                        ) {
-                            // TODO: Change font colors to material colorscheme
-                            // Name
-                            Text(text = stringResource(R.string.name), color = Color.Gray)
-                            Row {
-                                Icon(
-                                    imageVector = Icons.Default.AccountCircle,
-                                    contentDescription = "Profile Picture",
-                                    modifier = Modifier
-                                        .size(25.dp)
-                                        .padding(end = 5.dp)
-                                        .align(Alignment.CenterVertically)
-                                )
-                                Text(
-                                    text = "${viewModel.ownerProfile.value.firstName} ${viewModel.ownerProfile.value.lastName}",
-                                    fontSize = 22.sp,
-                                    modifier = Modifier.align(Alignment.CenterVertically)
-                                )
-                            }
-
-                            Spacer(modifier = Modifier.height(16.dp))
-
-                            // Phone
-                            Text(text = stringResource(R.string.phone), color = Color.Gray)
-                            Row {
-                                Icon(
-                                    imageVector = Icons.Default.Phone,
-                                    contentDescription = "Phone",
-                                    modifier = Modifier
-                                        .size(25.dp)
-                                        .padding(end = 5.dp)
-                                        .align(Alignment.CenterVertically)
-                                )
-                                Text(
-                                    text = viewModel.ownerProfile.value.phone,
-                                    fontSize = 22.sp
-                                )
-                            }
-
-                            Spacer(modifier = Modifier.height(16.dp))
-
-                            // Email
-                            Text(text = stringResource(R.string.email), color = Color.Gray)
-                            Row {
-                                Icon(
-                                    imageVector = Icons.Default.Email,
-                                    contentDescription = "Phone",
-                                    modifier = Modifier
-                                        .size(25.dp)
-                                        .padding(end = 5.dp)
-                                        .align(Alignment.CenterVertically)
-                                )
-                                Text(
-                                    text = viewModel.ownerProfile.value.email,
-                                    fontSize = 22.sp
-                                )
-                            }
-
-                        }
-                    }
-                }
+                HorseOwnerBox(
+                    firstName = viewModel.ownerProfile.value.firstName,
+                    lastName = viewModel.ownerProfile.value.lastName,
+                    phone = viewModel.ownerProfile.value.phone,
+                    email = viewModel.ownerProfile.value.email
+                )
 
                 Spacer(modifier = Modifier.height(10.dp))
 
                 // Horse information box
-                Box(
-                    modifier = Modifier
-                        .border(1.dp, Color.Red, RoundedCornerShape(20.dp, 20.dp, 10.dp, 10.dp))
-                        .fillMaxWidth()
-                        .padding(bottom = 5.dp)
-                ) {
-                    Column {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .background(
-                                    Color.LightGray, // TODO: Change to material colorscheme
-                                    shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp)
-                                )
-                        ) {
-                            Text(
-                                text = stringResource(R.string.horseInfo),
-                                textAlign = TextAlign.Center,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(vertical = 5.dp)
-                            )
-                        }
-                        Column(
-                            modifier = Modifier
-                                .padding(start = 10.dp)
-                        ) {
-                            // TODO: Change font colors to material colorscheme
-                            // Name
-                            Text(text = stringResource(R.string.breed), color = Color.Gray)
-                            Text(
-                                text = viewModel.horseProfile.value.breed,
-                                fontSize = 22.sp
-                            )
-
-                            Spacer(modifier = Modifier.height(16.dp))
-
-                            // Phone
-                            Text(text = stringResource(R.string.sex), color = Color.Gray)
-                            Text(
-                                text = viewModel.horseProfile.value.sex,
-                                fontSize = 22.sp
-                            )
-
-                            Spacer(modifier = Modifier.height(16.dp))
-
-                            // Email
-                            Text(text = stringResource(R.string.birthDate), color = Color.Gray)
-                            Text(
-                                text = "${viewModel.ageYears} ${stringResource(R.string.years)}, ${viewModel.ageMonths} ${stringResource(R.string.months)}",
-                                fontSize = 22.sp
-                            )
-                        }
-                    }
-                }
+                HorseInfoBox(
+                    breed = viewModel.horseProfile.value.breed,
+                    sex = viewModel.horseProfile.value.sex,
+                    ageYears = viewModel.ageYears,
+                    ageMonths = viewModel.ageMonths
+                )
             }
         }
     }
