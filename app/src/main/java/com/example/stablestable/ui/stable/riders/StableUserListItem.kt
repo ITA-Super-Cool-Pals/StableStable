@@ -1,4 +1,4 @@
-package com.example.stablestable.ui.stable
+package com.example.stablestable.ui.stable.riders
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
