@@ -19,7 +19,7 @@ fun SetupNavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = if (authViewModel.isLoggedIn.value) Screen.ShiftsScreen.route else Screen.LoginScreen.route
+        startDestination = if (authViewModel.isLoggedIn.value) Screen.HomeScreen.route else Screen.LoginScreen.route
     ) {
         // Login Screen Route
         composable(
