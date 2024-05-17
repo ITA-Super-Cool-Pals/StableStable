@@ -14,7 +14,8 @@
     <string name="confirm">OK</string>
     <string name="cancel">Annuller</string>
     <string name="sex">Køn</string>
-    <string name="birthDate">Alder</string>
+    <string name="birthDate">Fødselsdag</string>
+    <string name="age">Alder</string>
     <string name="breed">Race</string>
 
     <!-- Home Screen -->
