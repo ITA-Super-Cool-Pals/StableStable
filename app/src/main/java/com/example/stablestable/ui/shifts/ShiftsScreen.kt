@@ -2,6 +2,7 @@ package com.example.stablestable.ui.shifts
 
 import android.content.ContentValues.TAG
 import android.util.Log
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,6 +20,12 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -43,10 +50,18 @@ import com.example.stablestable.data.classes.Shift
 fun ShiftsScreen(
     goToHomeScreen: () -> Unit, viewModel: ShiftsViewModel = viewModel<ShiftsViewModel>()
 ) {
-    val shiftsWithFlowState = viewModel.shiftsWithFlow.collectAsState(emptyList())
+    val shiftsWithFlowState = viewModel.getCurrentShifts(viewModel.currentWeek).collectAsState(emptyList())
 
-    ShiftsScreenContent(shifts = shiftsWithFlowState.value,
+    ShiftsScreenContent(
+        week = viewModel.currentWeek,
+        shifts = shiftsWithFlowState.value,
         goToHomeScreen = { goToHomeScreen() },
+        onNextWeek = {
+            viewModel.currentWeek ++
+            viewModel.viewedWeek = viewModel.currentWeek },
+        onPreviousWeek = {
+            viewModel.currentWeek --
+            viewModel.viewedWeek = viewModel.currentWeek },
         onBoxOneClick = { s: String, s1: String, s2: String, sh: Shift? ->
             viewModel.viewedDay = s
             viewModel.viewedSegment = s1
@@ -81,8 +96,11 @@ fun ShiftsScreen(
 
 @Composable
 fun ShiftsScreenContent(
+    week: Int,
     shifts: List<Shift>,
     goToHomeScreen: () -> Unit,
+    onPreviousWeek: () -> Unit,
+    onNextWeek: () -> Unit,
     onBoxOneClick: (String, String, String, Shift?) -> Unit
 ) {
 
@@ -97,10 +115,31 @@ fun ShiftsScreenContent(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(height = 30.dp),
-            horizontalArrangement = Arrangement.Center
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             // TODO: Ændres, Man skal kunne vælge andre uger.
-            Text(text = "Uge 13")
+            Icon(
+                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                contentDescription = "Arrow forward",
+                modifier = Modifier
+                    .size(25.dp)
+                    .padding(end = 5.dp)
+                    .clickable {
+                        onPreviousWeek()
+                    }
+            )
+            Text(text = "Uge ${week.toString()}", modifier = Modifier, fontWeight = FontWeight.Medium)
+            Icon(
+                imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                contentDescription = "Arrow forward",
+                modifier = Modifier
+                    .size(25.dp)
+                    .padding(end = 5.dp)
+                    .clickable {
+                        onNextWeek()
+                    }
+            )
         }
         HorizontalDivider(
             modifier = Modifier.padding(start = 100.dp, end = 100.dp, bottom = 15.dp),
@@ -148,7 +187,9 @@ fun ShiftsScreenContent(
 @Preview
 @Composable
 fun ShiftsScreenPreview() {
-    ShiftsScreenContent(shifts = listOf(
+    ShiftsScreenContent(
+        week = 21,
+        shifts = listOf(
         Shift(
             13, "Monday", "John", "morning"
         ),
@@ -161,6 +202,6 @@ fun ShiftsScreenPreview() {
         Shift(
             13, "Sunday", "John", "evening"
         ),
-    ), {}) { s, s1, s2, sh -> }
+    ), {},{},{}) { s, s1, s2, sh -> }
 }
 
