@@ -18,7 +18,7 @@
     <string name="profil">Profile</string>
     <string name="shifts">Shifts</string>
     <string name="feedingSchedule">Feeding Schedule</string>
-    <string name="ridersRoom">Rider\'s Room</string>
+    <string name="board">Board</string>
     <string name="name">Name</string>
     <string name="addHorse">Add a horse</string>
     <string name="addHorseHeader">Add your horse</string>
@@ -35,4 +35,5 @@
     <string name="years">years</string>
     <string name="months">months</string>
     <string name="contactInfo">Contact Information</string>
+    <string name="home">Home</string>
 </resources>

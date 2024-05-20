@@ -3,11 +3,15 @@ package com.example.stablestable.components
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Message
+import androidx.compose.material.icons.automirrored.outlined.Message
+import androidx.compose.material.icons.filled.BedroomBaby
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.outlined.BedroomBaby
 import androidx.compose.material.icons.outlined.DateRange
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Person
@@ -32,7 +36,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.stablestable.R
 import com.example.stablestable.data.classes.NavigationBarItem
 import com.example.stablestable.ui.home.HomeViewModel
 
@@ -41,35 +47,49 @@ import com.example.stablestable.ui.home.HomeViewModel
 @Composable
 fun CreateScaffold(
     content: @Composable (PaddingValues) -> Unit,
-    goToStable: () -> Unit,
+    screen: String,
+    goToRiders: () -> Unit,
     goToHome: () -> Unit,
-    //goToShifts: () -> Unit
+    goToShifts: () -> Unit,
+    goToHorses: () -> Unit
 ) {
     val viewModel = viewModel<HomeViewModel>()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
     val items = listOf(
         NavigationBarItem(
-            title = "Stable",
+            title = stringResource(R.string.riders),
             selectedIcon = Icons.Filled.Person,
             unselectedIcon = Icons.Outlined.Person,
             hasNews = false,
         ),
         NavigationBarItem(
-            title = "Home",
+            title = stringResource(R.string.horses),
+            selectedIcon = Icons.Filled.BedroomBaby,
+            unselectedIcon = Icons.Outlined.BedroomBaby,
+            hasNews = false,
+        ),
+        NavigationBarItem(
+            title = stringResource(R.string.home),
             selectedIcon = Icons.Filled.Home,
             unselectedIcon = Icons.Outlined.Home,
             hasNews = false,
         ),
         NavigationBarItem(
-            title = "Shifts",
+            title = stringResource(R.string.shifts),
             selectedIcon = Icons.Filled.DateRange,
             unselectedIcon = Icons.Outlined.DateRange,
+            hasNews = false,
+        ),
+        NavigationBarItem(
+            title = stringResource(R.string.board),
+            selectedIcon = Icons.AutoMirrored.Filled.Message,
+            unselectedIcon = Icons.AutoMirrored.Outlined.Message,
             hasNews = false,
         )
     )
     var selectedItemIndex by rememberSaveable {
-        mutableStateOf(1)
+        mutableStateOf(2)
     }
 
     Scaffold(
@@ -84,7 +104,7 @@ fun CreateScaffold(
                 ),
                 title = {
                     Text(
-                        "Hvor er jeg? (parameter)",
+                        screen,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -116,10 +136,14 @@ fun CreateScaffold(
                         onClick = {
                             selectedItemIndex = index
                             when (item.title) {
-                                "Stable" -> goToStable()
+                                "Riders" -> goToRiders()
                                 "Home" -> goToHome()
-                                // "Shifts" -> goToShifts()
+                                "Shifts" -> goToShifts()
+                                "Horses" -> goToHorses()
                             }
+                        },
+                        label = {
+                                Text(text = item.title)
                         },
                         icon = {
                             BadgedBox(

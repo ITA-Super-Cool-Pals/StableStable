@@ -3,13 +3,17 @@ package com.example.stablestable.ui.profile
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
+import com.example.stablestable.R
 import com.example.stablestable.components.CreateScaffold
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun UserProfileScreen(
-    goToStable: () -> Unit,
+    goToRiders: () -> Unit,
     goToHome: () -> Unit,
+    goToShifts: () -> Unit,
+    goToHorses: () -> Unit,
     onHorseClick: (String) -> Unit,
     userId: String
 ){
@@ -18,6 +22,9 @@ fun UserProfileScreen(
             UserProfileScreenContent(userId, onHorseClick, paddingValues)
         },
         goToHome = goToHome,
-        goToStable = goToStable
+        goToRiders = goToRiders,
+        goToShifts = goToShifts,
+        goToHorses = goToHorses,
+        screen = stringResource(R.string.riders)
     )
 }
