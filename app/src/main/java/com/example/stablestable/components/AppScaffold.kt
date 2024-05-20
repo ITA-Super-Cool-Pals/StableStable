@@ -47,7 +47,8 @@ fun CreateScaffold(
     content: @Composable (PaddingValues) -> Unit,
     goToRiders: () -> Unit,
     goToHome: () -> Unit,
-    //goToShifts: () -> Unit
+    goToShifts: () -> Unit,
+    goToHorses: () -> Unit
 ) {
     val viewModel = viewModel<HomeViewModel>()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
@@ -134,7 +135,8 @@ fun CreateScaffold(
                             when (item.title) {
                                 "Riders" -> goToRiders()
                                 "Home" -> goToHome()
-                                // "Shifts" -> goToShifts()
+                                "Shifts" -> goToShifts()
+                                "Horses" -> goToHorses()
                             }
                         },
                         label = {

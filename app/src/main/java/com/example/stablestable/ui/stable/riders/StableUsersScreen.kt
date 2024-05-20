@@ -7,6 +7,8 @@ import com.example.stablestable.components.CreateScaffold
 fun StableUsersScreen(
     goToRiders: () -> Unit,
     goToHome: () -> Unit,
+    goToShifts: () -> Unit,
+    goToHorses: () -> Unit,
     onUserClick: (String) -> Unit
 ){
     CreateScaffold(
@@ -14,6 +16,9 @@ fun StableUsersScreen(
             StableUsersScreenContent(paddingValues, onUserClick)
         },
         goToHome = goToHome,
-        goToRiders = goToRiders
+        goToRiders = goToRiders,
+        goToShifts = goToShifts,
+        goToHorses = goToHorses
+
     )
 }

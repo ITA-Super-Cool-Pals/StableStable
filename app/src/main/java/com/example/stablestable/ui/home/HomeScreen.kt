@@ -6,14 +6,17 @@ import com.example.stablestable.components.CreateScaffold
 @Composable
 fun HomeScreen(
     goToRiders: () -> Unit,
-    goToHome: () -> Unit
-    //goToShifts: () -> Unit
+    goToHome: () -> Unit,
+    goToShifts: () -> Unit,
+    goToHorses: () -> Unit
 ) {
     CreateScaffold(
         content = {paddingValues ->
         CreateHomeScreen(paddingValues)
         },
         goToHome = goToHome,
-        goToRiders = goToRiders
+        goToRiders = goToRiders,
+        goToShifts = goToShifts,
+        goToHorses = goToHorses
     )
 }

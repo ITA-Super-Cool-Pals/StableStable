@@ -10,6 +10,8 @@ import com.example.stablestable.components.CreateScaffold
 fun UserProfileScreen(
     goToRiders: () -> Unit,
     goToHome: () -> Unit,
+    goToShifts: () -> Unit,
+    goToHorses: () -> Unit,
     onHorseClick: (String) -> Unit,
     userId: String
 ){
@@ -18,6 +20,8 @@ fun UserProfileScreen(
             UserProfileScreenContent(userId, onHorseClick, paddingValues)
         },
         goToHome = goToHome,
-        goToRiders = goToRiders
+        goToRiders = goToRiders,
+        goToShifts = goToShifts,
+        goToHorses = goToHorses
     )
 }
