@@ -3,11 +3,15 @@ package com.example.stablestable.components
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Message
+import androidx.compose.material.icons.automirrored.outlined.Message
+import androidx.compose.material.icons.filled.BedroomBaby
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.outlined.BedroomBaby
 import androidx.compose.material.icons.outlined.DateRange
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Person
@@ -57,8 +61,8 @@ fun CreateScaffold(
         ),
         NavigationBarItem(
             title = "Horses",
-            selectedIcon = Icons.Filled.DateRange,
-            unselectedIcon = Icons.Outlined.DateRange,
+            selectedIcon = Icons.Filled.BedroomBaby,
+            unselectedIcon = Icons.Outlined.BedroomBaby,
             hasNews = false,
         ),
         NavigationBarItem(
@@ -74,14 +78,14 @@ fun CreateScaffold(
             hasNews = false,
         ),
         NavigationBarItem(
-            title = "Riders Hall",
-            selectedIcon = Icons.Filled.DateRange,
-            unselectedIcon = Icons.Outlined.DateRange,
+            title = "Board",
+            selectedIcon = Icons.AutoMirrored.Filled.Message,
+            unselectedIcon = Icons.AutoMirrored.Outlined.Message,
             hasNews = false,
         )
     )
     var selectedItemIndex by rememberSaveable {
-        mutableStateOf(1)
+        mutableStateOf(2)
     }
 
     Scaffold(
@@ -132,6 +136,9 @@ fun CreateScaffold(
                                 "Home" -> goToHome()
                                 // "Shifts" -> goToShifts()
                             }
+                        },
+                        label = {
+                                Text(text = item.title)
                         },
                         icon = {
                             BadgedBox(
