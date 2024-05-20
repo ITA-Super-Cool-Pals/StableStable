@@ -57,8 +57,8 @@ android {
 dependencies {
 
     implementation("androidx.core:core-ktx:1.13.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.0")
     implementation("androidx.activity:activity-compose:1.9.0")
     implementation(platform("androidx.compose:compose-bom:2024.05.00"))
     implementation("androidx.compose.ui:ui")
@@ -70,7 +70,8 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
     // TODO: Add the dependencies for Firebase products you want to use
     implementation("com.google.firebase:firebase-auth") // Firebase Authentication
-    implementation("com.google.firebase:firebase-firestore-ktx") // Firestore
+    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation("androidx.compose.material3:material3-android:1.2.1") // Firestore
 
     // When using the BoM, don't specify versions in Firebase dependencies
     // https://firebase.google.com/docs/android/setup#available-libraries

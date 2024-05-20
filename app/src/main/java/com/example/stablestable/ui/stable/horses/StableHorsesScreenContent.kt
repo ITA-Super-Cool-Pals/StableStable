@@ -26,8 +26,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun StableHorsesScreenContent(
-    onHorseClick: (String) -> Unit,
-    paddingValues: PaddingValues
+    paddingValues: PaddingValues,
+    onHorseClick: (String) -> Unit
 ){
 
     val viewModel: StableHorsesViewModel = viewModel()

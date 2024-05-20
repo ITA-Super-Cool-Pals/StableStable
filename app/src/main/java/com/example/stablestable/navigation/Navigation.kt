@@ -41,11 +41,11 @@ fun SetupNavGraph(
             route = Screen.HomeScreen.route
         ) {
             HomeScreen(
-                goToStable = { navController.navigate(Screen.StableUsers.route) },
-                goToHome = { navController.navigate(Screen.HomeScreen.route) }
-                //goToShifts = { navController.navigate(Screen.StableUsers.route) },
+                goToRiders = { navController.navigate(Screen.StableUsers.route) },
+                goToHome = { navController.navigate(Screen.HomeScreen.route) },
+                goToShifts = { navController.navigate(Screen.ShiftsScreen.route) },
                 //goToProfile = { navController.navigate(Screen.UserProfileScreen.route.replace("{userId}", authViewModel.userId ?: "")) },
-                //goToHorses = { navController.navigate(Screen.StableHorses.route) },
+                goToHorses = { navController.navigate(Screen.StableHorses.route) }
                 //onLogout = { authViewModel.setUserLoggedIn(false) }
             )
         }
@@ -58,8 +58,10 @@ fun SetupNavGraph(
                 onUserClick = {
                         userId -> navController.navigate(Screen.UserProfileScreen.route.replace("{userId}", userId))
                 },
-                goToStable = { navController.navigate(Screen.StableUsers.route) },
-                goToHome = { navController.navigate(Screen.HomeScreen.route) }
+                goToRiders = { navController.navigate(Screen.StableUsers.route) },
+                goToHome = { navController.navigate(Screen.HomeScreen.route) },
+                goToShifts = { navController.navigate(Screen.ShiftsScreen.route) },
+                goToHorses = { navController.navigate(Screen.StableHorses.route) }
             )
         }
 
@@ -71,8 +73,11 @@ fun SetupNavGraph(
                 onHorseClick = {
                         horseId -> navController.navigate(Screen.HorseProfileScreen.route.replace("{horseId}", horseId))
                 },
-                goToStable = { navController.navigate(Screen.StableUsers.route) },
-                goToHome = { navController.navigate(Screen.HomeScreen.route) }
+                goToRiders = { navController.navigate(Screen.StableUsers.route) },
+                goToHome = { navController.navigate(Screen.HomeScreen.route) },
+                goToShifts = { navController.navigate(Screen.ShiftsScreen.route) },
+                goToHorses = { navController.navigate(Screen.StableHorses.route) }
+
             )
         }
 
@@ -86,8 +91,11 @@ fun SetupNavGraph(
                 onHorseClick = {
                         horseId -> navController.navigate(Screen.HorseProfileScreen.route.replace("{horseId}", horseId))
                 },
-                goToStable = { navController.navigate(Screen.StableUsers.route) },
-                goToHome = { navController.navigate(Screen.HomeScreen.route) }
+                goToRiders = { navController.navigate(Screen.StableUsers.route) },
+                goToHome = { navController.navigate(Screen.HomeScreen.route) },
+                goToShifts = { navController.navigate(Screen.ShiftsScreen.route) },
+                goToHorses = { navController.navigate(Screen.StableHorses.route) }
+
             )
         }
 
@@ -98,8 +106,11 @@ fun SetupNavGraph(
         ) { backStackEntry ->
             HorseProfileScreen(
                 horseId = backStackEntry.arguments?.getString("horseId") ?: "",
-            goToStable = { navController.navigate(Screen.StableUsers.route) },
-            goToHome = { navController.navigate(Screen.HomeScreen.route) }
+                goToRiders = { navController.navigate(Screen.StableUsers.route) },
+                goToHome = { navController.navigate(Screen.HomeScreen.route) },
+                goToShifts = { navController.navigate(Screen.ShiftsScreen.route) },
+                goToHorses = { navController.navigate(Screen.StableHorses.route) }
+
             )
         }
         //Route to shifts
@@ -107,7 +118,10 @@ fun SetupNavGraph(
             route = Screen.ShiftsScreen.route
         ){
             ShiftsScreen(
-                goToHomeScreen = { navController.navigate(Screen.HomeScreen.route)}
+                goToHome = { navController.navigate(Screen.HomeScreen.route)},
+                goToRiders = { navController.navigate(Screen.StableUsers.route) },
+                goToShifts = { navController.navigate(Screen.ShiftsScreen.route) },
+                goToHorses = { navController.navigate(Screen.StableHorses.route) }
             )
         }
     }
