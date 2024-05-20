@@ -16,13 +16,14 @@
     <string name="sex">Køn</string>
     <string name="birthDate">Alder</string>
     <string name="breed">Race</string>
+    <string name="home">Hjem</string>
 
     <!-- Home Screen -->
     <string name="calendar">Kalender</string>
     <string name="shifts">Vagtplan</string>
     <string name="horses">Heste</string>
     <string name="riders">Ryttere</string>
-    <string name="ridersRoom">Rytterstuen</string>
+    <string name="board">Tavle</string>
     <string name="faq">FAQ</string>
     <string name="feedingSchedule">Foderplan</string>
 
