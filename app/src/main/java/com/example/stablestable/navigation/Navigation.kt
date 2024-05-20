@@ -13,7 +13,9 @@ import com.example.stablestable.ui.login.LoginScreen
 import com.example.stablestable.ui.horses.HorseProfileScreen
 import com.example.stablestable.ui.stable.horses.StableHorsesScreen
 import com.example.stablestable.ui.profile.UserProfileScreen
+import com.example.stablestable.ui.shifts.ShiftsScreen
 import com.example.stablestable.ui.stable.riders.StableUsersScreen
+
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -98,6 +100,14 @@ fun SetupNavGraph(
                 horseId = backStackEntry.arguments?.getString("horseId") ?: "",
             goToRiders = { navController.navigate(Screen.StableUsers.route) },
             goToHome = { navController.navigate(Screen.HomeScreen.route) }
+            )
+        }
+        //Route to shifts
+        composable(
+            route = Screen.ShiftsScreen.route
+        ){
+            ShiftsScreen(
+                goToHomeScreen = { navController.navigate(Screen.HomeScreen.route)}
             )
         }
     }
