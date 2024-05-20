@@ -1,6 +1,8 @@
 package com.example.stablestable.ui.stable.riders
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
+import com.example.stablestable.R
 import com.example.stablestable.components.CreateScaffold
 
 @Composable
@@ -18,7 +20,8 @@ fun StableUsersScreen(
         goToHome = goToHome,
         goToRiders = goToRiders,
         goToShifts = goToShifts,
-        goToHorses = goToHorses
+        goToHorses = goToHorses,
+        screen = stringResource(R.string.riders)
 
     )
 }

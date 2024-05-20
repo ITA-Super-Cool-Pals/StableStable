@@ -3,6 +3,8 @@ package com.example.stablestable.ui.profile
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
+import com.example.stablestable.R
 import com.example.stablestable.components.CreateScaffold
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -22,6 +24,7 @@ fun UserProfileScreen(
         goToHome = goToHome,
         goToRiders = goToRiders,
         goToShifts = goToShifts,
-        goToHorses = goToHorses
+        goToHorses = goToHorses,
+        screen = stringResource(R.string.riders)
     )
 }

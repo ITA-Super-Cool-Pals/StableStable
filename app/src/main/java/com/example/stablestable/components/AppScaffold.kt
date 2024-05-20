@@ -36,7 +36,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.stablestable.R
 import com.example.stablestable.data.classes.NavigationBarItem
 import com.example.stablestable.ui.home.HomeViewModel
 
@@ -45,6 +47,7 @@ import com.example.stablestable.ui.home.HomeViewModel
 @Composable
 fun CreateScaffold(
     content: @Composable (PaddingValues) -> Unit,
+    screen: String,
     goToRiders: () -> Unit,
     goToHome: () -> Unit,
     goToShifts: () -> Unit,
@@ -55,31 +58,31 @@ fun CreateScaffold(
 
     val items = listOf(
         NavigationBarItem(
-            title = "Riders",
+            title = stringResource(R.string.riders),
             selectedIcon = Icons.Filled.Person,
             unselectedIcon = Icons.Outlined.Person,
             hasNews = false,
         ),
         NavigationBarItem(
-            title = "Horses",
+            title = stringResource(R.string.horses),
             selectedIcon = Icons.Filled.BedroomBaby,
             unselectedIcon = Icons.Outlined.BedroomBaby,
             hasNews = false,
         ),
         NavigationBarItem(
-            title = "Home",
+            title = stringResource(R.string.home),
             selectedIcon = Icons.Filled.Home,
             unselectedIcon = Icons.Outlined.Home,
             hasNews = false,
         ),
         NavigationBarItem(
-            title = "Shifts",
+            title = stringResource(R.string.shifts),
             selectedIcon = Icons.Filled.DateRange,
             unselectedIcon = Icons.Outlined.DateRange,
             hasNews = false,
         ),
         NavigationBarItem(
-            title = "Board",
+            title = stringResource(R.string.board),
             selectedIcon = Icons.AutoMirrored.Filled.Message,
             unselectedIcon = Icons.AutoMirrored.Outlined.Message,
             hasNews = false,
@@ -101,7 +104,7 @@ fun CreateScaffold(
                 ),
                 title = {
                     Text(
-                        "Hvor er jeg? (parameter)",
+                        screen,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )

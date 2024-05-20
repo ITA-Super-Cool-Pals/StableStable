@@ -2,7 +2,9 @@ package com.example.stablestable.ui.shifts
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.stablestable.R
 import com.example.stablestable.components.CreateScaffold
 import com.example.stablestable.data.classes.Shift
 
@@ -43,7 +45,8 @@ fun ShiftsScreen(
         goToHome = goToHome,
         goToRiders = goToRiders,
         goToShifts = goToShifts,
-        goToHorses = goToHorses
+        goToHorses = goToHorses,
+        screen = stringResource(R.string.shifts)
 
     )
 
