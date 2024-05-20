@@ -41,7 +41,7 @@ fun SetupNavGraph(
             HomeScreen(
                 goToRiders = { navController.navigate(Screen.StableUsers.route) },
                 goToHome = { navController.navigate(Screen.HomeScreen.route) }
-                //goToShifts = { navController.navigate(Screen.StableUsers.route) },
+                goToShifts = { navController.navigate(Screen.StableUsers.route) },
                 //goToProfile = { navController.navigate(Screen.UserProfileScreen.route.replace("{userId}", authViewModel.userId ?: "")) },
                 //goToHorses = { navController.navigate(Screen.StableHorses.route) },
                 //onLogout = { authViewModel.setUserLoggedIn(false) }
