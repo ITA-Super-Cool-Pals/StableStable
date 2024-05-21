@@ -23,6 +23,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.stablestable.R
 import com.example.stablestable.ui.horses.HorseProfileViewModel
 
+/*
+ * Horse feed edit dialog
+ * Code by Emily
+ */
+
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun HorseFeedEditDialog(

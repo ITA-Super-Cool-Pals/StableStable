@@ -103,6 +103,7 @@ class HorseProfileViewModel: ViewModel() {
         showFeedEditDialog = !showFeedEditDialog
     }
 
+    // Function to update the horses feed information
     fun updateFeed() {
         viewModelScope.launch {
             try {

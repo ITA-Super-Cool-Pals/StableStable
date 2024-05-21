@@ -21,6 +21,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.stablestable.R
 
+/*
+ * Horse general information box
+ * Code by Emily
+ */
+
 @Composable
 fun HorseInfoBox(
     breed: String,

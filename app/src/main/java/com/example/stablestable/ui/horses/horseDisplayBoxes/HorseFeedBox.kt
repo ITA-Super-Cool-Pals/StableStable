@@ -32,6 +32,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.stablestable.R
 import com.example.stablestable.ui.horses.HorseProfileViewModel
 
+/*
+ * Horse Feed info box
+ * Code by Emily
+ */
+
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun HorseFeedBox(
