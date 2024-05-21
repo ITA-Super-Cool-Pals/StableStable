@@ -11,13 +11,13 @@
     <string name="password">Mot de passe</string>
     <string name="login">Connexion</string>
     <string name="createUser">Créer un utilisateur</string>
-    <string name="userCreation">Enregistrement de l'utilisateur</string>
+    <string name="userCreation">Enregistrement de l\'utilisateur</string>
     <string name="firstName">Prénom</string>
     <string name="lastName">Nom</string>
     <string name="phone">Téléphone</string>
     <string name="profil">Profil</string>
     <string name="shifts">Horaires</string>
-    <string name="feedingSchedule">Programme d'alimentation</string>
+    <string name="feedingSchedule">Programme d\'alimentation</string>
     <string name="board">Panneau</string>
     <string name="name">Nom</string>
     <string name="addHorse">Ajouter un cheval</string>
@@ -40,10 +40,10 @@
     <string name="mare">Jument</string>
     <string name="gelding">Hongre</string>
     <string name="stallion">Étalon</string>
-    <string name="feedInfo">Informations sur l'alimentation</string>
+    <string name="feedInfo">Informations sur l\'alimentation</string>
     <string name="roughage">Fourrage grossier</string>
     <string name="subsidy">Suppléments</string>
     <string name="vitamins">Vitamines</string>
     <string name="medicine">Médicament</string>
-    <string name="editFeed">Modifier l'alimentation</string>
+    <string name="editFeed">Modifier l\'alimentation</string>
 </resources>
