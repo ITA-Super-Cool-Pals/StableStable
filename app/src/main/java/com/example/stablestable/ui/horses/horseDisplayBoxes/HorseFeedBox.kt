@@ -9,16 +9,19 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -34,7 +37,11 @@ fun HorseFeedBox(
 ) {
     Box(
         modifier = Modifier
-            .border(1.dp, Color.LightGray, RoundedCornerShape(20.dp, 20.dp, 10.dp, 10.dp))
+            .border(
+                2.dp,
+                MaterialTheme.colorScheme.secondaryContainer,
+                RoundedCornerShape(10.dp, 10.dp, 10.dp, 10.dp)
+            )
             .fillMaxWidth()
             .padding(bottom = 5.dp)
     ) {
@@ -43,14 +50,19 @@ fun HorseFeedBox(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(
-                        Color.LightGray, // TODO: Change to material colorscheme
-                        shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp)
+                        MaterialTheme.colorScheme.secondaryContainer,
+                        shape = RoundedCornerShape(10.dp, 10.dp, 0.dp, 0.dp)
                     )
             ) {
                 Row {
+                    if (isOwner) {
+                        // Extra spacing with same width as icon to properly center align text
+                        Spacer(modifier = Modifier.width(24.dp))
+                    }
                     Text(
                         text = stringResource(R.string.feedInfo),
                         textAlign = TextAlign.Center,
+                        fontWeight = FontWeight.Bold,
                         modifier = Modifier
                             .weight(1f)
                             .padding(vertical = 5.dp)
