@@ -50,6 +50,7 @@
     <string name="ownerInfo">Ejer Information</string>
     <string name="horseInfo">Hest Information</string>
     <string name="feedInfo">Foder Information</string>
+    <string name="editFeed">Rediger Foder</string>
     <string name="years">år</string>
     <string name="months">måneder</string>
     <string name="roughage">Grovfoder</string>

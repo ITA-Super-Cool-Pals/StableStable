@@ -45,4 +45,5 @@
     <string name="subsidy">Subsidy</string>
     <string name="vitamins">Vitamins</string>
     <string name="medicine">Medicine</string>
+    <string name="editFeed">Edit Feed</string>
 </resources>

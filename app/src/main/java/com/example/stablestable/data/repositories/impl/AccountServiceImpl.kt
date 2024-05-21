@@ -1,5 +1,6 @@
 package com.example.stablestable.data.repositories.impl
 
+import com.example.stablestable.data.classes.HorseFeed
 import com.example.stablestable.data.classes.HorseProfile
 import com.example.stablestable.data.classes.UserProfile
 import com.example.stablestable.data.repositories.AccountService
@@ -88,6 +89,11 @@ class AccountServiceImpl: AccountService {
         }
         // Return list of horses belonging to the given stable
         return horseDataList
+    }
+
+    override suspend fun updateHorseFeed(horseId: String, horseFeed: HorseFeed) {
+        val horseDocRef = db.collection("horses").document(horseId)
+        horseDocRef.update("horseFeed", horseFeed)
     }
 
     // Create a new user

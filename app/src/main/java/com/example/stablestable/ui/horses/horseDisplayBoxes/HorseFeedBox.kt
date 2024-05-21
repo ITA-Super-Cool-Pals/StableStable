@@ -1,7 +1,10 @@
 package com.example.stablestable.ui.horses.horseDisplayBoxes
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,16 +28,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.stablestable.R
+import com.example.stablestable.ui.horses.HorseProfileViewModel
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun HorseFeedBox(
     isOwner: Boolean,
-    roughage: String,
-    subsidy: String,
-    vitamins: String,
-    medicine: String
+    toggleDialog: () -> Unit
 ) {
+    val viewModel: HorseProfileViewModel = viewModel()
+
     Box(
         modifier = Modifier
             .border(
@@ -74,6 +79,7 @@ fun HorseFeedBox(
                             modifier = Modifier
                                 .align(Alignment.CenterVertically)
                                 .padding(end = 10.dp)
+                                .clickable { toggleDialog() }
                         )
                     }
                 }
@@ -85,7 +91,7 @@ fun HorseFeedBox(
                 // Roughage
                 Text(text = stringResource(R.string.roughage), color = Color.Gray, fontSize = 14.sp)
                 Text(
-                    text = "roughage",
+                    text = viewModel.roughage,
                     fontSize = 20.sp
                 )
 
@@ -94,7 +100,7 @@ fun HorseFeedBox(
                 // Subsidy
                 Text(text = stringResource(R.string.subsidy), color = Color.Gray, fontSize = 14.sp)
                 Text(
-                    text = "subsidy",
+                    text = viewModel.subsidy,
                     fontSize = 20.sp
                 )
 
@@ -103,7 +109,7 @@ fun HorseFeedBox(
                 // Vitamins
                 Text(text = stringResource(R.string.vitamins), color = Color.Gray, fontSize = 14.sp)
                 Text(
-                    text = "vitamins",
+                    text = viewModel.vitamins,
                     fontSize = 20.sp
                 )
 
@@ -112,10 +118,16 @@ fun HorseFeedBox(
                 // Medicine
                 Text(text = stringResource(R.string.medicine), color = Color.Gray, fontSize = 14.sp)
                 Text(
-                    text = "medicine",
+                    text = viewModel.medicine,
                     fontSize = 20.sp
                 )
             }
         }
+    }
+
+    if (viewModel.showFeedEditDialog) {
+        HorseFeedEditDialog(
+            toggleDialog = toggleDialog
+        )
     }
 }
