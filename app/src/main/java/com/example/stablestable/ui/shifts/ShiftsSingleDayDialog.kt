@@ -27,13 +27,23 @@ import com.example.stablestable.R
 
 @Composable
 fun ShiftsSingleDayDialog(
-    displayedDay: String,
+    displayedDay: Int,
     currentShiftName: String,
     dialog: String,
     onDismissRequest: () -> Unit,
     onAddMeClick: () -> Unit,
     onRemoveMeClick: () -> Unit
 ){
+    val weekDayList: List<String> = listOf(
+        stringResource(id = R.string.mon),
+        stringResource(id = R.string.tue),
+        stringResource(id = R.string.wed),
+        stringResource(id = R.string.thu),
+        stringResource(id = R.string.fri),
+        stringResource(id = R.string.sat),
+        stringResource(id = R.string.sun)
+    )
+
     Dialog(onDismissRequest = { onDismissRequest() },
         ) {
         Card(
@@ -44,7 +54,7 @@ fun ShiftsSingleDayDialog(
 
         ) {
             Row {
-                Text(text = displayedDay)
+                Text(text = weekDayList[displayedDay])
             }
 
             when(dialog){

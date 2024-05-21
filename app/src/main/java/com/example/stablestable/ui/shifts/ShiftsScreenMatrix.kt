@@ -6,26 +6,30 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.stablestable.R
 import com.example.stablestable.data.classes.Shift
 
 @Composable
 fun ShiftsScreenMatrix(
     shifts: List<Shift>,
-    onBoxOneClick:(String,String,String,Shift?)->Unit
+    onShiftsBoxClick:(Int,String,String,Shift?)->Unit
 ){
-    val weekDayList: List<String> = listOf("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday")
+
+
+
 
     Column(modifier = Modifier
         .padding(8.dp)
     ) {
 
-        for (day in weekDayList){
+        for (day in 0..6){
 
             val newShifts:List<Shift> = shifts.filter { it.dayOfWeek == day }
 
-            ShiftsSingleDay(newShifts, day, onShiftsBoxClick = { s: String, s1: String,s2: String, sh:Shift? -> onBoxOneClick(s, s1,s2,sh)})
+            ShiftsSingleDay(newShifts, day, onShiftsBoxClick = { i: Int, s: String,s1: String, sh:Shift? -> onShiftsBoxClick(i, s,s1,sh)})
         }
 
     }
@@ -38,25 +42,25 @@ fun ShiftsScreenMatrixPreview(){
         shifts = listOf(
             Shift(
                 13,
-                "Monday",
+                0,
                 "John",
                 "morning"
             ),
             Shift(
                 13,
-                "Friday",
+                4,
                 "Jane",
                 "morning"
             ),
             Shift(
                 13,
-                "Tuesday",
+                1,
                 "John",
                 "evening"
             ),
             Shift(
                 13,
-                "Sunday",
+                6,
                 "John",
                 "evening"
             ),

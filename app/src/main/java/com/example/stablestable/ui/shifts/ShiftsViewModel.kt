@@ -43,18 +43,19 @@ class ShiftsViewModel(
     var currentWeek by mutableIntStateOf(currentWeekOfYear)
 
     var viewedWeek: Int = currentWeek
-    var viewedDay: String = ""
+    var viewedDay: Int = 0
     var viewedSegment: String = ""
     var viewedUser by mutableStateOf("")
 
-    val currentShift: Shift
+    private val currentShift: Shift
         get() =
             Shift(viewedWeek, viewedDay, viewedUser, viewedSegment)
 
 
     fun getCurrentShifts(week:Int): Flow<List<Shift>>{
         return shiftsService.shiftsWithFlow
-            .map {it.filter { item -> item.weekNumber == week }}
+            .map { it.filter { item -> item.weekNumber == week } }
+
     }
 
     fun createShift() {

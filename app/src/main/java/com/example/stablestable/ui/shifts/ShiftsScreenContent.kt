@@ -36,7 +36,7 @@ fun ShiftsScreenContent(
     shifts: List<Shift>,
     onPreviousWeek: () -> Unit,
     onNextWeek: () -> Unit,
-    onBoxOneClick: (String, String, String, Shift?) -> Unit
+    onShiftsBoxClick: (Int, String, String, Shift?) -> Unit
 ) {
 
     Column(
@@ -108,9 +108,9 @@ fun ShiftsScreenContent(
         ) {
             ShiftsScreenMatrix(
                 shifts,
-                onBoxOneClick = { s: String, s1: String, s2: String, sh: Shift? ->
-                    onBoxOneClick(
-                        s, s1, s2, sh
+                onShiftsBoxClick = { i: Int, s: String, s1: String, sh: Shift? ->
+                    onShiftsBoxClick(
+                        i, s, s1, sh
                     )
                 })
 

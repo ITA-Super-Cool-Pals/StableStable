@@ -30,10 +30,10 @@ fun ShiftsScreen(
                 onPreviousWeek = {
                     viewModel.currentWeek --
                     viewModel.viewedWeek = viewModel.currentWeek },
-                onBoxOneClick = { s: String, s1: String, s2: String, sh: Shift? ->
-                    viewModel.viewedDay = s
-                    viewModel.viewedSegment = s1
-                    viewModel.viewedUser = s2
+                onShiftsBoxClick = { i: Int, s: String, s1: String, sh: Shift? ->
+                    viewModel.viewedDay = i
+                    viewModel.viewedSegment = s
+                    viewModel.viewedUser = s1
                     viewModel.openShiftDialog = true
                     viewModel.dialogContentState = if (sh != null) {
                         "full"

@@ -47,4 +47,19 @@
     <string name="horseInfo">Hest Information</string>
     <string name="years">år</string>
     <string name="months">måneder</string>
+
+    <!-- Shifts Screen -->
+    <string name="mon">MAN</string>
+    <string name="tue">TIR</string>
+    <string name="wed">ONS</string>
+    <string name="thu">TOR</string>
+    <string name="fri">FRE</string>
+    <string name="sat">LØR</string>
+    <string name="sun">SØN</string>
+
+    <string name="week">UGE</string>
+
+
+
+
 </resources>

@@ -9,8 +9,6 @@ interface ShiftsService {
 
     suspend fun getCurrentWeekShifts(week:Int): List<Shift>
 
-
-
     suspend fun getCurrentShift(): Shift
 
     suspend fun addShift(data: Shift)

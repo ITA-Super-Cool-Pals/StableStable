@@ -28,17 +28,29 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Red
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.stablestable.R
 import com.example.stablestable.data.classes.Shift
 import java.time.LocalDate
 
 @Composable
 fun ShiftsSingleDay(
     shifts: List<Shift>,
-    currentShiftDay: String,
-    onShiftsBoxClick: (String, String, String, Shift?) -> Unit
+    currentShiftDay: Int,
+    onShiftsBoxClick: (Int, String, String, Shift?) -> Unit
 ){
+    val weekDayList: List<String> = listOf(
+        stringResource(id = R.string.mon),
+        stringResource(id = R.string.tue),
+        stringResource(id = R.string.wed),
+        stringResource(id = R.string.thu),
+        stringResource(id = R.string.fri),
+        stringResource(id = R.string.sat),
+        stringResource(id = R.string.sun)
+    )
+
     Row(modifier = Modifier
         .fillMaxWidth()
         .heightIn(max = 80.dp)
@@ -54,7 +66,7 @@ fun ShiftsSingleDay(
             .width(100.dp)
             .align(Alignment.CenterVertically)
             .padding(8.dp)
-            ,text = currentShiftDay)
+            ,text = weekDayList[currentShiftDay])
 
         HorizontalDivider(
             modifier = Modifier
@@ -121,12 +133,12 @@ fun ShiftsSingleDayPreview(){
         listOf(
             Shift(
                 13,
-                "Monday",
+                3,
                 "John",
                 "morning"
             )
         ),
-        "Monday"
+        0
     ) { s, s1, s2,d -> }
 }
 
