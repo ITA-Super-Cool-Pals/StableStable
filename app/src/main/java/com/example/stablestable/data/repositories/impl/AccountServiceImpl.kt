@@ -91,6 +91,7 @@ class AccountServiceImpl: AccountService {
         return horseDataList
     }
 
+    // Update a horse's feed information
     override suspend fun updateHorseFeed(horseId: String, horseFeed: HorseFeed) {
         val horseDocRef = db.collection("horses").document(horseId)
         horseDocRef.update("horseFeed", horseFeed)
