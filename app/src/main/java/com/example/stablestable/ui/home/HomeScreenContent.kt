@@ -27,7 +27,8 @@ fun CreateHomeScreen(paddingValues: PaddingValues) {
             style = MaterialTheme.typography.headlineLarge.copy(
                 fontSize = 45.sp,
                 fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onBackground
             ),
             modifier = Modifier.padding(top = 80.dp)
         )
