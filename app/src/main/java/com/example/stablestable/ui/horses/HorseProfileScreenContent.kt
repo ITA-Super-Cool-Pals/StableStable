@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.stablestable.R
+import com.example.stablestable.components.ArrowBack
 
 /*
  * Code by Emily
@@ -44,13 +45,16 @@ import com.example.stablestable.R
 @Composable
 fun HorseProfileScreenContent(
     horseId: String,
-    paddingValues: PaddingValues) {
+    paddingValues: PaddingValues,
+    onArrowBack: () -> Unit
+) {
 
     val viewModel: HorseProfileViewModel = viewModel()
 
     LaunchedEffect(horseId) {
         viewModel.getHorse(horseId)
     }
+
 
     Box(
         modifier = Modifier
@@ -63,6 +67,8 @@ fun HorseProfileScreenContent(
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            ArrowBack{ onArrowBack()}
+
             // Display the horse's name as title
             Text(
                 text = viewModel.horseProfile.value.name,

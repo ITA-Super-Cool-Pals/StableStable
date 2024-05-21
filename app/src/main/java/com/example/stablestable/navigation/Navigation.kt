@@ -94,7 +94,9 @@ fun SetupNavGraph(
                 goToRiders = { navController.navigate(Screen.StableUsers.route) },
                 goToHome = { navController.navigate(Screen.HomeScreen.route) },
                 goToShifts = { navController.navigate(Screen.ShiftsScreen.route) },
-                goToHorses = { navController.navigate(Screen.StableHorses.route) }
+                goToHorses = { navController.navigate(Screen.StableHorses.route) },
+                onArrowBack = { if (navController.previousBackStackEntry != null){navController.navigateUp()}else { null }}
+
 
             )
         }
@@ -109,8 +111,8 @@ fun SetupNavGraph(
                 goToRiders = { navController.navigate(Screen.StableUsers.route) },
                 goToHome = { navController.navigate(Screen.HomeScreen.route) },
                 goToShifts = { navController.navigate(Screen.ShiftsScreen.route) },
-                goToHorses = { navController.navigate(Screen.StableHorses.route) }
-
+                goToHorses = { navController.navigate(Screen.StableHorses.route) },
+                onArrowBack = { if (navController.previousBackStackEntry != null){navController.navigateUp()}else { null }}
             )
         }
         //Route to shifts
