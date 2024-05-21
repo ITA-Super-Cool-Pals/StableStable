@@ -43,7 +43,7 @@ fun HorseInfoBox(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(
-                        MaterialTheme.colorScheme.secondaryContainer, // TODO: Change to material colorscheme
+                        MaterialTheme.colorScheme.secondaryContainer,
                         shape = RoundedCornerShape(10.dp, 10.dp, 0.dp, 0.dp)
                     )
             ) {
@@ -60,7 +60,6 @@ fun HorseInfoBox(
                 modifier = Modifier
                     .padding(start = 10.dp)
             ) {
-                // TODO: Change font colors to material colorscheme
                 // Name
                 Text(text = stringResource(R.string.breed), color = Color.Gray, fontSize = 14.sp)
                 Text(

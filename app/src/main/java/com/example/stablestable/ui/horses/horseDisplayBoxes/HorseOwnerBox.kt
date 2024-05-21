@@ -57,7 +57,7 @@ fun HorseOwnerBox(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(
-                        MaterialTheme.colorScheme.secondaryContainer, // TODO: Change to material colorscheme
+                        MaterialTheme.colorScheme.secondaryContainer,
                         shape = RoundedCornerShape(10.dp, 10.dp, 0.dp, 0.dp)
                     )
             ) {

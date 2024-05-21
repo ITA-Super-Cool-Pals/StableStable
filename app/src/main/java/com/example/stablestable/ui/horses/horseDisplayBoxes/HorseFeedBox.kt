@@ -82,7 +82,6 @@ fun HorseFeedBox(
                 modifier = Modifier
                     .padding(start = 10.dp)
             ) {
-                // TODO: Change font colors to material colorscheme
                 // Roughage
                 Text(text = stringResource(R.string.roughage), color = Color.Gray, fontSize = 14.sp)
                 Text(
