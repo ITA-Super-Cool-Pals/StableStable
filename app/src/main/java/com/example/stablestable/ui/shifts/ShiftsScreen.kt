@@ -14,6 +14,7 @@ fun ShiftsScreen(
     goToRiders: () -> Unit,
     goToShifts: () -> Unit,
     goToHorses: () -> Unit,
+    goToMyProfile: () -> Unit,
     onLogout: () -> Unit,
     viewModel: ShiftsViewModel = viewModel<ShiftsViewModel>()
 ) {
@@ -47,6 +48,7 @@ fun ShiftsScreen(
         goToRiders = goToRiders,
         goToShifts = goToShifts,
         goToHorses = goToHorses,
+        goToMyProfile = goToMyProfile,
         onLogout = onLogout,
         screen = stringResource(R.string.shifts)
 

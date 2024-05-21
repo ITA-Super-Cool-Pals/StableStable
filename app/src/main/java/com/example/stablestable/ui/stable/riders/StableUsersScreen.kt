@@ -11,6 +11,7 @@ fun StableUsersScreen(
     goToHome: () -> Unit,
     goToShifts: () -> Unit,
     goToHorses: () -> Unit,
+    goToMyProfile: () -> Unit,
     onLogout: () -> Unit,
     onUserClick: (String) -> Unit
 ){
@@ -22,8 +23,8 @@ fun StableUsersScreen(
         goToRiders = goToRiders,
         goToShifts = goToShifts,
         goToHorses = goToHorses,
+        goToMyProfile = goToMyProfile,
         onLogout = onLogout,
         screen = stringResource(R.string.riders)
-
     )
 }

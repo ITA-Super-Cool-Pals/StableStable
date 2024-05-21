@@ -46,9 +46,9 @@ fun SetupNavGraph(
                 goToRiders = { navController.navigate(Screen.StableUsers.route) },
                 goToHome = { navController.navigate(Screen.HomeScreen.route) },
                 goToShifts = { navController.navigate(Screen.ShiftsScreen.route) },
-                //goToProfile = { navController.navigate(Screen.UserProfileScreen.route.replace("{userId}", authViewModel.userId ?: "")) },
+                goToMyProfile = { navController.navigate(Screen.UserProfileScreen.route.replace("{userId}", authViewModel.userId ?: "")) },
                 goToHorses = { navController.navigate(Screen.StableHorses.route) },
-                onLogout = { authViewModel.setUserLoggedIn(false) }
+                onLogout = { Firebase.auth.signOut(); authViewModel.setUserLoggedIn(false) }
             )
         }
 
@@ -64,7 +64,8 @@ fun SetupNavGraph(
                 goToHome = { navController.navigate(Screen.HomeScreen.route) },
                 goToShifts = { navController.navigate(Screen.ShiftsScreen.route) },
                 goToHorses = { navController.navigate(Screen.StableHorses.route) },
-                onLogout = { authViewModel.setUserLoggedIn(false); Firebase.auth.signOut() }
+                goToMyProfile = { navController.navigate(Screen.UserProfileScreen.route.replace("{userId}", authViewModel.userId ?: "")) },
+                onLogout = { Firebase.auth.signOut(); authViewModel.setUserLoggedIn(false) }
             )
         }
 
@@ -80,7 +81,8 @@ fun SetupNavGraph(
                 goToHome = { navController.navigate(Screen.HomeScreen.route) },
                 goToShifts = { navController.navigate(Screen.ShiftsScreen.route) },
                 goToHorses = { navController.navigate(Screen.StableHorses.route) },
-                onLogout = { authViewModel.setUserLoggedIn(false); Firebase.auth.signOut() }
+                goToMyProfile = { navController.navigate(Screen.UserProfileScreen.route.replace("{userId}", authViewModel.userId ?: "")) },
+                onLogout = { Firebase.auth.signOut(); authViewModel.setUserLoggedIn(false) }
             )
         }
 
@@ -98,10 +100,9 @@ fun SetupNavGraph(
                 goToHome = { navController.navigate(Screen.HomeScreen.route) },
                 goToShifts = { navController.navigate(Screen.ShiftsScreen.route) },
                 goToHorses = { navController.navigate(Screen.StableHorses.route) },
-                onLogout = { authViewModel.setUserLoggedIn(false); Firebase.auth.signOut() },
+                goToMyProfile = { navController.navigate(Screen.UserProfileScreen.route.replace("{userId}", authViewModel.userId ?: "")) },
+                onLogout = { Firebase.auth.signOut(); authViewModel.setUserLoggedIn(false) },
                 onArrowBack = { if (navController.previousBackStackEntry != null){navController.navigateUp()}else { null }}
-
-
             )
         }
 
@@ -116,7 +117,8 @@ fun SetupNavGraph(
                 goToHome = { navController.navigate(Screen.HomeScreen.route) },
                 goToShifts = { navController.navigate(Screen.ShiftsScreen.route) },
                 goToHorses = { navController.navigate(Screen.StableHorses.route) },
-                onLogout = { authViewModel.setUserLoggedIn(false); Firebase.auth.signOut() },
+                goToMyProfile = { navController.navigate(Screen.UserProfileScreen.route.replace("{userId}", authViewModel.userId ?: "")) },
+                onLogout = { Firebase.auth.signOut(); authViewModel.setUserLoggedIn(false) },
                 onArrowBack = { if (navController.previousBackStackEntry != null){navController.navigateUp()}else { null }}
             )
         }
@@ -129,7 +131,8 @@ fun SetupNavGraph(
                 goToRiders = { navController.navigate(Screen.StableUsers.route) },
                 goToShifts = { navController.navigate(Screen.ShiftsScreen.route) },
                 goToHorses = { navController.navigate(Screen.StableHorses.route) },
-                onLogout = { authViewModel.setUserLoggedIn(false); Firebase.auth.signOut() }
+                goToMyProfile = { navController.navigate(Screen.UserProfileScreen.route.replace("{userId}", authViewModel.userId ?: "")) },
+                onLogout = { Firebase.auth.signOut(); authViewModel.setUserLoggedIn(false) }
             )
         }
     }

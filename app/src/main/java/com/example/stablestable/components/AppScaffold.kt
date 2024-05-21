@@ -44,7 +44,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.stablestable.R
 import com.example.stablestable.data.classes.NavigationBarItem
-import com.example.stablestable.navigation.AuthViewModel
 import com.example.stablestable.ui.home.HomeViewModel
 import kotlinx.coroutines.launch
 
@@ -58,10 +57,10 @@ fun CreateScaffold(
     goToHome: () -> Unit,
     goToShifts: () -> Unit,
     goToHorses: () -> Unit,
+    goToMyProfile: () -> Unit,
     onLogout: () -> Unit
 ) {
     val viewModel = viewModel<HomeViewModel>()
-    val authViewModel = viewModel<AuthViewModel>()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
@@ -108,7 +107,7 @@ fun CreateScaffold(
             // Drawer Content
             BurgerMenu { destination ->
                 when (destination) {
-                    "Profile" -> goToRiders()
+                    "Profile" -> goToMyProfile()
                     "Logout" -> onLogout()
                 }
             }
