@@ -14,10 +14,14 @@ import com.example.stablestable.data.classes.Shift
 import com.example.stablestable.data.repositories.impl.AccountServiceImpl
 import com.example.stablestable.data.repositories.impl.ShiftsServiceImpl
 import com.example.stablestable.navigation.AuthViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.time.LocalDate
 import java.time.temporal.WeekFields
 import java.util.Locale
@@ -43,7 +47,7 @@ class ShiftsViewModel(
     var currentWeek by mutableIntStateOf(currentWeekOfYear)
 
     var viewedWeek: Int = currentWeek
-    var viewedDay: Int = 0
+    var viewedDay: String = ""
     var viewedSegment: String = ""
     var viewedUser by mutableStateOf("")
 
@@ -52,14 +56,28 @@ class ShiftsViewModel(
             Shift(viewedWeek, viewedDay, viewedUser, viewedSegment)
 
 
-    fun getCurrentShifts(week:Int): Flow<List<Shift>>{
-        return shiftsService.shiftsWithFlow
+
+    private val _shifts = MutableStateFlow<List<Shift>?>(null)
+    val shifts: StateFlow<List<Shift>?>
+        get() = _shifts
+
+    fun getCurrentShifts(week:Int){
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                shiftsService.shiftsWithFlow().collect {list->
+                    _shifts.value = list.filter { it.weekNumber == week }
+                }
+            }
+        }
+    /*
+        return shiftsService.shiftsWithFlow()
             .map { it.filter { item -> item.weekNumber == week } }
 
+     */
     }
 
     fun createShift() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 authViewModel.currentUserProfile.collect { currentUser ->
                     if (currentUser != null) {

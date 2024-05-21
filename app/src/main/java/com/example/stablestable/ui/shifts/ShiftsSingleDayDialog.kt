@@ -27,7 +27,7 @@ import com.example.stablestable.R
 
 @Composable
 fun ShiftsSingleDayDialog(
-    displayedDay: Int,
+    displayedDay: String,
     currentShiftName: String,
     dialog: String,
     onDismissRequest: () -> Unit,
@@ -54,7 +54,7 @@ fun ShiftsSingleDayDialog(
 
         ) {
             Row {
-                Text(text = weekDayList[displayedDay])
+                Text(text = weekDayList[0])
             }
 
             when(dialog){

@@ -8,7 +8,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.dataObjects
 import com.google.firebase.firestore.toObject
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 
@@ -17,9 +20,23 @@ class ShiftsServiceImpl : ShiftsService {
 
 
 
-    override val shiftsWithFlow: Flow<List<Shift>>
-        get() =
-            db.collection("shifts").dataObjects<Shift>()
+    override fun shiftsWithFlow(): Flow<List<Shift>>{
+        return callbackFlow {
+            val dbSnapshot = db.collection("shifts")
+
+            dbSnapshot.addSnapshotListener { value, error ->
+                error?.let{
+                    this.close(it)
+                }
+                value?.let{
+                    val data = value.toObjects(Shift::class.java)
+                    this.trySend(data)
+                }
+            }
+            awaitClose { this.cancel()}
+        }
+    }
+
 
 
 

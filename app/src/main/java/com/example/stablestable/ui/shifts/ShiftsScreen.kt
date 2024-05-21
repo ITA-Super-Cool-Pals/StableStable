@@ -16,31 +16,33 @@ fun ShiftsScreen(
     goToHorses: () -> Unit,
     viewModel: ShiftsViewModel = viewModel<ShiftsViewModel>()
 ) {
-    val shiftsWithFlowState = viewModel.getCurrentShifts(viewModel.currentWeek).collectAsState(emptyList())
+    val shiftsWithFlowState = viewModel.getCurrentShifts(viewModel.currentWeek)
 
     CreateScaffold(
         content = {paddingValues ->
-            ShiftsScreenContent(
-                paddingValues,
-                week = viewModel.currentWeek,
-                shifts = shiftsWithFlowState.value,
-                onNextWeek = {
-                    viewModel.currentWeek ++
-                    viewModel.viewedWeek = viewModel.currentWeek },
-                onPreviousWeek = {
-                    viewModel.currentWeek --
-                    viewModel.viewedWeek = viewModel.currentWeek },
-                onShiftsBoxClick = { i: Int, s: String, s1: String, sh: Shift? ->
-                    viewModel.viewedDay = i
-                    viewModel.viewedSegment = s
-                    viewModel.viewedUser = s1
-                    viewModel.openShiftDialog = true
-                    viewModel.dialogContentState = if (sh != null) {
-                        "full"
-                    } else {
-                        "empty"
-                    }
-                })
+            viewModel.shifts.value?.let {
+                ShiftsScreenContent(
+                    paddingValues,
+                    week = viewModel.currentWeek,
+                    shifts = it,
+                    onNextWeek = {
+                        viewModel.currentWeek ++
+                        viewModel.viewedWeek = viewModel.currentWeek },
+                    onPreviousWeek = {
+                        viewModel.currentWeek --
+                        viewModel.viewedWeek = viewModel.currentWeek },
+                    onShiftsBoxClick = { i: String, s: String, s1: String, sh: Shift? ->
+                        viewModel.viewedDay = i
+                        viewModel.viewedSegment = s
+                        viewModel.viewedUser = s1
+                        viewModel.openShiftDialog = true
+                        viewModel.dialogContentState = if (sh != null) {
+                            "full"
+                        } else {
+                            "empty"
+                        }
+                    })
+            }
         },
         goToHome = goToHome,
         goToRiders = goToRiders,
