@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.stablestable.data.classes.Shift
@@ -118,5 +119,17 @@ fun ShiftsScreenContent(
 
     }
 
+}
 
+@Preview
+@Composable
+fun VagtPrev(){
+    ShiftsScreenContent(
+        paddingValues = PaddingValues(6.dp),
+        week = 13,
+        shifts = listOf(),
+        onPreviousWeek = { /*TODO*/ },
+        onNextWeek = { /*TODO*/ }) {
+        s,s1,s2,s3 ->
+    }
 }
