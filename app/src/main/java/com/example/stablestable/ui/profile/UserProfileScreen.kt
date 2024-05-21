@@ -15,11 +15,12 @@ fun UserProfileScreen(
     goToShifts: () -> Unit,
     goToHorses: () -> Unit,
     onHorseClick: (String) -> Unit,
+    onArrowBack: () -> Unit,
     userId: String
 ){
     CreateScaffold(
         content = {paddingValues ->
-            UserProfileScreenContent(userId, onHorseClick, paddingValues)
+            UserProfileScreenContent(userId, onHorseClick, paddingValues, onArrowBack)
         },
         goToHome = goToHome,
         goToRiders = goToRiders,

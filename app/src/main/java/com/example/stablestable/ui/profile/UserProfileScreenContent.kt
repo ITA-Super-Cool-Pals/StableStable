@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.stablestable.R
+import com.example.stablestable.components.ArrowBack
 import com.example.stablestable.ui.horses.HorseCreateScreen
 
 
@@ -47,7 +48,8 @@ import com.example.stablestable.ui.horses.HorseCreateScreen
 fun UserProfileScreenContent(
     userId: String,
     onHorseClick: (String) -> Unit,
-    paddingValues: PaddingValues
+    paddingValues: PaddingValues,
+    onArrowBack: () -> Unit
 ){
 
     val userProfileViewModel: UserProfileViewModel = viewModel()
@@ -65,6 +67,9 @@ fun UserProfileScreenContent(
         Column(modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)) {
+            ArrowBack {
+                onArrowBack()
+            }
             // Profile picture and name
             Row {
                 // Profile picture - default to an icon if no profile image is available

@@ -20,6 +20,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.stablestable.R
+import com.example.stablestable.components.ArrowBack
 import com.example.stablestable.ui.horses.horseDisplayBoxes.HorseFeedBox
 import com.example.stablestable.ui.horses.horseDisplayBoxes.HorseInfoBox
 import com.example.stablestable.ui.horses.horseDisplayBoxes.HorseOwnerBox
@@ -33,13 +35,16 @@ import com.example.stablestable.ui.horses.horseDisplayBoxes.HorseOwnerBox
 @Composable
 fun HorseProfileScreenContent(
     horseId: String,
-    paddingValues: PaddingValues) {
+    paddingValues: PaddingValues,
+    onArrowBack: () -> Unit
+) {
 
     val viewModel: HorseProfileViewModel = viewModel()
 
     LaunchedEffect(horseId) {
         viewModel.getHorse(horseId)
     }
+
 
     Box(
         modifier = Modifier
@@ -52,6 +57,8 @@ fun HorseProfileScreenContent(
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            ArrowBack{ onArrowBack()}
+
             // Display the horse's name as title
             Text(
                 text = viewModel.horseProfile.value.name,
