@@ -14,6 +14,8 @@ fun ShiftsScreen(
     goToRiders: () -> Unit,
     goToShifts: () -> Unit,
     goToHorses: () -> Unit,
+    goToMyProfile: () -> Unit,
+    onLogout: () -> Unit,
     viewModel: ShiftsViewModel = viewModel<ShiftsViewModel>()
 ) {
     val shiftsWithFlowState = viewModel.getCurrentShifts(viewModel.currentWeek).collectAsState(emptyList())
@@ -46,6 +48,8 @@ fun ShiftsScreen(
         goToRiders = goToRiders,
         goToShifts = goToShifts,
         goToHorses = goToHorses,
+        goToMyProfile = goToMyProfile,
+        onLogout = onLogout,
         screen = stringResource(R.string.shifts)
 
     )

@@ -4,9 +4,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.stablestable.R
-import com.example.stablestable.components.ArrowBack
 import com.example.stablestable.components.CreateScaffold
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -16,6 +14,8 @@ fun HorseProfileScreen(
     goToHome: () -> Unit,
     goToShifts: () -> Unit,
     goToHorses: () -> Unit,
+    goToMyProfile: () -> Unit,
+    onLogout: () -> Unit,
     onArrowBack: () -> Unit,
     horseId: String
 ){
@@ -27,6 +27,8 @@ fun HorseProfileScreen(
         goToRiders = goToRiders,
         goToShifts = goToShifts,
         goToHorses = goToHorses,
+        goToMyProfile = goToMyProfile,
+        onLogout = onLogout,
         screen = stringResource(R.string.horses)
     )
 }
