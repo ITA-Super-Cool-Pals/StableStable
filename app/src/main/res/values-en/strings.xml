@@ -29,6 +29,7 @@
     <string name="breed">Breed</string>
     <string name="cancel">Cancel</string>
     <string name="confirm">OK</string>
+    <string name="myProfile">My Profile</string>
     <string name="myHorses">My Horses</string>
     <string name="ownerInfo">Owner Information</string>
     <string name="horseInfo">Horse Information</string>
@@ -46,4 +47,5 @@
     <string name="vitamins">Vitamins</string>
     <string name="medicine">Medicine</string>
     <string name="editFeed">Edit Feed</string>
+    <string name="logout">Logout</string>
 </resources>

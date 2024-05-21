@@ -11,6 +11,7 @@ fun StableUsersScreen(
     goToHome: () -> Unit,
     goToShifts: () -> Unit,
     goToHorses: () -> Unit,
+    onLogout: () -> Unit,
     onUserClick: (String) -> Unit
 ){
     CreateScaffold(
@@ -21,6 +22,7 @@ fun StableUsersScreen(
         goToRiders = goToRiders,
         goToShifts = goToShifts,
         goToHorses = goToHorses,
+        onLogout = onLogout,
         screen = stringResource(R.string.riders)
 
     )

@@ -14,6 +14,7 @@ fun UserProfileScreen(
     goToHome: () -> Unit,
     goToShifts: () -> Unit,
     goToHorses: () -> Unit,
+    onLogout: () -> Unit,
     onHorseClick: (String) -> Unit,
     onArrowBack: () -> Unit,
     userId: String
@@ -26,6 +27,7 @@ fun UserProfileScreen(
         goToRiders = goToRiders,
         goToShifts = goToShifts,
         goToHorses = goToHorses,
+        onLogout = onLogout,
         screen = stringResource(R.string.riders)
     )
 }

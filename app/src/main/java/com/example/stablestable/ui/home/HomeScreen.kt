@@ -10,7 +10,8 @@ fun HomeScreen(
     goToRiders: () -> Unit,
     goToHome: () -> Unit,
     goToShifts: () -> Unit,
-    goToHorses: () -> Unit
+    goToHorses: () -> Unit,
+    onLogout: () -> Unit
 ) {
     CreateScaffold(
         content = {paddingValues ->
@@ -20,6 +21,7 @@ fun HomeScreen(
         goToRiders = goToRiders,
         goToShifts = goToShifts,
         goToHorses = goToHorses,
+        onLogout = onLogout,
         screen = stringResource(R.string.home)
     )
 }

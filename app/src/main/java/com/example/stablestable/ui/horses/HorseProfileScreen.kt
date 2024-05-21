@@ -16,6 +16,7 @@ fun HorseProfileScreen(
     goToHome: () -> Unit,
     goToShifts: () -> Unit,
     goToHorses: () -> Unit,
+    onLogout: () -> Unit,
     onArrowBack: () -> Unit,
     horseId: String
 ){
@@ -27,6 +28,7 @@ fun HorseProfileScreen(
         goToRiders = goToRiders,
         goToShifts = goToShifts,
         goToHorses = goToHorses,
+        onLogout = onLogout,
         screen = stringResource(R.string.horses)
     )
 }
