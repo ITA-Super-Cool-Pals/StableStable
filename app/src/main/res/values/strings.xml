@@ -14,7 +14,8 @@
     <string name="confirm">OK</string>
     <string name="cancel">Annuller</string>
     <string name="sex">Køn</string>
-    <string name="birthDate">Alder</string>
+    <string name="birthDate">Fødselsdag</string>
+    <string name="age">Alder</string>
     <string name="breed">Race</string>
     <string name="home">Hjem</string>
 
@@ -41,10 +42,19 @@
     <!-- Horse Create Screen -->
     <string name="addHorseHeader">Tilføj din hest</string>
     <string name="birthDateWhen">Hvornår blev din hest født</string>
+    <string name="mare">Hoppe</string>
+    <string name="stallion">Hingst</string>
+    <string name="gelding">Vallak</string>
 
     <!-- Horse Profile Screen -->
     <string name="ownerInfo">Ejer Information</string>
     <string name="horseInfo">Hest Information</string>
+    <string name="feedInfo">Foder Information</string>
+    <string name="editFeed">Rediger Foder</string>
     <string name="years">år</string>
     <string name="months">måneder</string>
+    <string name="roughage">Grovfoder</string>
+    <string name="subsidy">Tilskud</string>
+    <string name="vitamins">Vitaminer</string>
+    <string name="medicine">Medicin</string>
 </resources>
