@@ -19,6 +19,7 @@
     <string name="breed">Race</string>
     <string name="home">Hjem</string>
     <string name="logout">Log ud</string>
+    <string name="fillAllFields">Alle felter skal udflydes</string>
 
     <!-- Home Screen -->
     <string name="calendar">Kalender</string>
