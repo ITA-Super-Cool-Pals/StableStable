@@ -5,7 +5,7 @@ data class Shift(
     // kode på uge/dag/time, fx. 13wedMORN eller 43tueEVEN
 
     val weekNumber: Int = 0,
-    val dayOfWeek: String = "",
+    val dayOfWeek: Int = 0,
     val user: String = "",
 
     // Morning/Evening
