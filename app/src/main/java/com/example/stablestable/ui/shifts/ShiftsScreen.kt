@@ -61,7 +61,9 @@ fun ShiftsScreen(
     // Opening and closing the dialog
     when {
         viewModel.openShiftDialog -> {
-            ShiftsSingleDayDialog(displayedDay = viewModel.viewedDay,
+            ShiftsSingleDayDialog(
+                displayedDay = viewModel.viewedDay,
+                displayedTime = viewModel.viewedSegment,
                 currentShiftName = viewModel.viewedUser,
                 dialog = viewModel.dialogContentState,
                 onDismissRequest = { viewModel.openShiftDialog = false },
