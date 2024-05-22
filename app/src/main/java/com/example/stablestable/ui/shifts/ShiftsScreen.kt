@@ -1,5 +1,7 @@
 package com.example.stablestable.ui.shifts
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.res.stringResource
@@ -16,22 +18,25 @@ fun ShiftsScreen(
     goToHorses: () -> Unit,
     viewModel: ShiftsViewModel = viewModel<ShiftsViewModel>()
 ) {
-    val shiftsWithFlowState = viewModel.getCurrentShifts(viewModel.currentWeek)
+    val shiftsWithFlowState = viewModel.shifts.collectAsState()
 
     CreateScaffold(
         content = {paddingValues ->
-            viewModel.shifts.value?.let {
+
                 ShiftsScreenContent(
                     paddingValues,
                     week = viewModel.currentWeek,
-                    shifts = it,
+                    shifts = shiftsWithFlowState.value,
                     onNextWeek = {
                         viewModel.currentWeek ++
-                        viewModel.viewedWeek = viewModel.currentWeek },
+                        viewModel.viewedWeek = viewModel.currentWeek
+                        viewModel.getCurrentShifts(viewModel.viewedWeek) },
                     onPreviousWeek = {
                         viewModel.currentWeek --
-                        viewModel.viewedWeek = viewModel.currentWeek },
-                    onShiftsBoxClick = { i: String, s: String, s1: String, sh: Shift? ->
+                        viewModel.viewedWeek = viewModel.currentWeek
+                        viewModel.getCurrentShifts(viewModel.viewedWeek)
+                                     Log.d(TAG,"erro: ${viewModel.shifts.value}")},
+                    onShiftsBoxClick = { i: Int, s: String, s1: String, sh: Shift? ->
                         viewModel.viewedDay = i
                         viewModel.viewedSegment = s
                         viewModel.viewedUser = s1
@@ -42,7 +47,8 @@ fun ShiftsScreen(
                             "empty"
                         }
                     })
-            }
+
+
         },
         goToHome = goToHome,
         goToRiders = goToRiders,

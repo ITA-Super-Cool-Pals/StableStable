@@ -15,7 +15,7 @@ import com.example.stablestable.data.classes.Shift
 @Composable
 fun ShiftsScreenMatrix(
     shifts: List<Shift>,
-    onShiftsBoxClick:(String,String,String,Shift?)->Unit
+    onShiftsBoxClick:(Int,String,String,Shift?)->Unit
 ){
 
 
@@ -27,9 +27,9 @@ fun ShiftsScreenMatrix(
 
         for (day in 0..6){
 
-            val newShifts:List<Shift> = shifts.filter { it.dayOfWeek == day.toString() }
+            val newShifts:List<Shift> = shifts.filter { it.dayOfWeek == day }
 
-            ShiftsSingleDay(newShifts, day, onShiftsBoxClick = { i: String, s: String,s1: String, sh:Shift? -> onShiftsBoxClick(i, s,s1,sh)})
+            ShiftsSingleDay(newShifts, day, onShiftsBoxClick = { i: Int, s: String,s1: String, sh:Shift? -> onShiftsBoxClick(i, s,s1,sh)})
         }
 
     }

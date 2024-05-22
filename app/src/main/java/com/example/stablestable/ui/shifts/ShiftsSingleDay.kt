@@ -39,7 +39,7 @@ import java.time.LocalDate
 fun ShiftsSingleDay(
     shifts: List<Shift>,
     currentShiftDay: Int,
-    onShiftsBoxClick: (String, String, String, Shift?) -> Unit
+    onShiftsBoxClick: (Int, String, String, Shift?) -> Unit
 ){
     val weekDayList: List<String> = listOf(
         stringResource(id = R.string.mon),
@@ -82,9 +82,9 @@ fun ShiftsSingleDay(
             .size(48.dp)
             .clickable {
                 if (shiftMorn == null) {
-                    onShiftsBoxClick(currentShiftDay.toString(), "morning", "", shiftMorn)
+                    onShiftsBoxClick(currentShiftDay, "morning", "", shiftMorn)
                 } else {
-                    onShiftsBoxClick(currentShiftDay.toString(), "morning", shiftMorn.user, shiftMorn)
+                    onShiftsBoxClick(currentShiftDay, "morning", shiftMorn.user, shiftMorn)
                 }
             }
 
@@ -109,9 +109,9 @@ fun ShiftsSingleDay(
             .size(48.dp)
             .clickable {
                 if (shiftEve == null) {
-                    onShiftsBoxClick(currentShiftDay.toString(), "evening", "", shiftEve)
+                    onShiftsBoxClick(currentShiftDay, "evening", "", shiftEve)
                 } else {
-                    onShiftsBoxClick(currentShiftDay.toString(), "evening", shiftEve.user, shiftEve)
+                    onShiftsBoxClick(currentShiftDay, "evening", shiftEve.user, shiftEve)
                 }
             }
         ) {
