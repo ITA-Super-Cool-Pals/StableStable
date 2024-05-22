@@ -1,5 +1,6 @@
 package com.example.stablestable.data.repositories
 
+import com.example.stablestable.data.classes.HorseFeed
 import com.example.stablestable.data.classes.HorseProfile
 import com.example.stablestable.data.classes.UserProfile
 
@@ -11,6 +12,7 @@ interface AccountService {
     suspend fun getHorsesByOwnerId(ownerId: String): List<Pair<String, HorseProfile?>>
     suspend fun getHorsesByStableId(stableId: String): List<Pair<String, HorseProfile?>>
     suspend fun getHorseById(horseId: String): HorseProfile?
+    suspend fun updateHorseFeed(horseId: String, horseFeed: HorseFeed)
     suspend fun userCreate(user: UserProfile, password: String)
     suspend fun userLogin(email: String, password: String)
 

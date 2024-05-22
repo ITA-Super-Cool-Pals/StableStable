@@ -14,17 +14,22 @@ fun UserProfileScreen(
     goToHome: () -> Unit,
     goToShifts: () -> Unit,
     goToHorses: () -> Unit,
+    goToMyProfile: () -> Unit,
+    onLogout: () -> Unit,
     onHorseClick: (String) -> Unit,
+    onArrowBack: () -> Unit,
     userId: String
 ){
     CreateScaffold(
         content = {paddingValues ->
-            UserProfileScreenContent(userId, onHorseClick, paddingValues)
+            UserProfileScreenContent(userId, onHorseClick, paddingValues, onArrowBack)
         },
         goToHome = goToHome,
         goToRiders = goToRiders,
         goToShifts = goToShifts,
         goToHorses = goToHorses,
+        goToMyProfile = goToMyProfile,
+        onLogout = onLogout,
         screen = stringResource(R.string.riders)
     )
 }
