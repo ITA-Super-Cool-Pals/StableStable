@@ -68,30 +68,35 @@ fun CreateScaffold(
     val items = listOf(
         NavigationBarItem(
             title = stringResource(R.string.riders),
+            route = "riders",
             selectedIcon = Icons.Filled.Person,
             unselectedIcon = Icons.Outlined.Person,
             hasNews = false,
         ),
         NavigationBarItem(
             title = stringResource(R.string.horses),
+            route = "horses",
             selectedIcon = Icons.Filled.BedroomBaby,
             unselectedIcon = Icons.Outlined.BedroomBaby,
             hasNews = false,
         ),
         NavigationBarItem(
             title = stringResource(R.string.home),
+            route = "home",
             selectedIcon = Icons.Filled.Home,
             unselectedIcon = Icons.Outlined.Home,
             hasNews = false,
         ),
         NavigationBarItem(
             title = stringResource(R.string.shifts),
+            route = "shifts",
             selectedIcon = Icons.Filled.DateRange,
             unselectedIcon = Icons.Outlined.DateRange,
             hasNews = false,
         ),
         NavigationBarItem(
             title = stringResource(R.string.board),
+            route = "board",
             selectedIcon = Icons.AutoMirrored.Filled.Message,
             unselectedIcon = Icons.AutoMirrored.Outlined.Message,
             hasNews = false,
@@ -164,11 +169,11 @@ fun CreateScaffold(
                                 selected = selectedItemIndex == index,
                                 onClick = {
                                     selectedItemIndex = index
-                                    when (item.title) {
-                                        "Riders" -> goToRiders()
-                                        "Home" -> goToHome()
-                                        "Shifts" -> goToShifts()
-                                        "Horses" -> goToHorses()
+                                    when (item.route) {
+                                        "riders" -> goToRiders()
+                                        "home" -> goToHome()
+                                        "shifts" -> goToShifts()
+                                        "horses" -> goToHorses()
                                     }
                                 },
                                 label = {
