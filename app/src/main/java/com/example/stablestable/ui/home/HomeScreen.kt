@@ -16,7 +16,12 @@ fun HomeScreen(
 ) {
     CreateScaffold(
         content = {paddingValues ->
-        CreateHomeScreen(paddingValues)
+        CreateHomeScreen(
+            paddingValues,
+            goToRiders = goToRiders,
+            goToHorses = goToHorses,
+            goToShifts = goToShifts
+        )
         },
         goToHome = goToHome,
         goToRiders = goToRiders,
