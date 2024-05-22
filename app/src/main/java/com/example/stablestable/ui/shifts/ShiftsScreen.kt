@@ -9,6 +9,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.stablestable.R
 import com.example.stablestable.components.CreateScaffold
 import com.example.stablestable.data.classes.Shift
+import com.example.stablestable.navigation.Screen
 
 @Composable
 fun ShiftsScreen(
@@ -58,8 +59,8 @@ fun ShiftsScreen(
         goToHorses = goToHorses,
         goToMyProfile = goToMyProfile,
         onLogout = onLogout,
-        screen = stringResource(R.string.shifts)
-
+        screen = stringResource(R.string.shifts),
+        currentScreen = Screen.ShiftsScreen.route
     )
 
     // Opening and closing the dialog
