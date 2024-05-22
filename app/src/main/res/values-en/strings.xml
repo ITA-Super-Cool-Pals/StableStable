@@ -58,4 +58,6 @@
     <string name="medicine">Medicine</string>
     <string name="editFeed">Edit Feed</string>
     <string name="logout">Logout</string>
+    <string name="fillAllFields">All fields must be filled</string>
+    <string name="emailPasswordRequired">Email and password required</string>
 </resources>
