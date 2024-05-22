@@ -25,6 +25,7 @@ import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -32,11 +33,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.stablestable.R
+import com.example.stablestable.components.ArrowBack
 import com.example.stablestable.ui.horses.HorseCreateScreen
 
 
@@ -45,7 +48,8 @@ import com.example.stablestable.ui.horses.HorseCreateScreen
 fun UserProfileScreenContent(
     userId: String,
     onHorseClick: (String) -> Unit,
-    paddingValues: PaddingValues
+    paddingValues: PaddingValues,
+    onArrowBack: () -> Unit
 ){
 
     val userProfileViewModel: UserProfileViewModel = viewModel()
@@ -63,6 +67,9 @@ fun UserProfileScreenContent(
         Column(modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)) {
+            ArrowBack {
+                onArrowBack()
+            }
             // Profile picture and name
             Row {
                 // Profile picture - default to an icon if no profile image is available
@@ -88,7 +95,11 @@ fun UserProfileScreenContent(
             // Phone and Email
             Box(
                 modifier = Modifier
-                    .border(1.dp, Color.Red, RoundedCornerShape(20.dp, 20.dp, 10.dp, 10.dp))
+                    .border(
+                        2.dp,
+                        MaterialTheme.colorScheme.secondaryContainer,
+                        RoundedCornerShape(10.dp, 10.dp, 10.dp, 10.dp)
+                    )
                     .fillMaxWidth()
                     .padding(bottom = 5.dp)
             ) {
@@ -97,13 +108,14 @@ fun UserProfileScreenContent(
                         modifier = Modifier
                             .fillMaxWidth()
                             .background(
-                                Color.LightGray, // TODO: Change to material colorscheme
-                                shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp)
+                                MaterialTheme.colorScheme.secondaryContainer,
+                                shape = RoundedCornerShape(10.dp, 10.dp, 0.dp, 0.dp)
                             )
                     ) {
                         Text(
                             text = stringResource(R.string.contactInfo),
                             textAlign = TextAlign.Center,
+                            fontWeight = FontWeight.Bold,
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(vertical = 5.dp)
@@ -152,7 +164,11 @@ fun UserProfileScreenContent(
             // My horses section
             Box(
                 modifier = Modifier
-                    .border(1.dp, Color.Red, RoundedCornerShape(20.dp, 20.dp, 10.dp, 10.dp))
+                    .border(
+                        2.dp,
+                        MaterialTheme.colorScheme.secondaryContainer,
+                        RoundedCornerShape(10.dp, 10.dp, 10.dp, 10.dp)
+                    )
                     .fillMaxWidth()
                     .padding(bottom = 5.dp)
             ) {
@@ -162,13 +178,14 @@ fun UserProfileScreenContent(
                         modifier = Modifier
                             .fillMaxWidth()
                             .background(
-                                Color.LightGray, // TODO: Change to material colorscheme
-                                shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp)
+                                MaterialTheme.colorScheme.secondaryContainer,
+                                shape = RoundedCornerShape(10.dp, 10.dp, 0.dp, 0.dp)
                             )
                     ) {
                         Text(
                             text = stringResource(R.string.myHorses),
                             textAlign = TextAlign.Center,
+                            fontWeight = FontWeight.Bold,
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(vertical = 5.dp)
@@ -202,7 +219,7 @@ fun UserProfileScreenContent(
                                 modifier = Modifier
                                     .fillMaxWidth(0.9f)
                                     .height(1.dp)
-                                    .background(Color.Gray)
+                                    .background(MaterialTheme.colorScheme.secondaryContainer)
                             )
                         }
                     }

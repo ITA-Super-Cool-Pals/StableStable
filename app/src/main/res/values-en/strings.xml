@@ -24,11 +24,12 @@
     <string name="addHorseHeader">Add your horse</string>
     <string name="sex">Sex</string>
     <string name="date">Date</string>
-    <string name="birthDate">Age</string>
+    <string name="birthDate">Birthdate</string>
     <string name="birthDateWhen">When was your horse born</string>
     <string name="breed">Breed</string>
     <string name="cancel">Cancel</string>
     <string name="confirm">OK</string>
+    <string name="myProfile">My Profile</string>
     <string name="myHorses">My Horses</string>
     <string name="ownerInfo">Owner Information</string>
     <string name="horseInfo">Horse Information</string>
@@ -46,4 +47,15 @@
     <string name="week">Week</string>
     <string name="morning">Morning</string>
     <string name="evening">Evening</string>
+    <string name="age">Age</string>
+    <string name="mare">Mare</string>
+    <string name="gelding">Gelding</string>
+    <string name="stallion">Stallion</string>
+    <string name="feedInfo">Feed Information</string>
+    <string name="roughage">Roughage</string>
+    <string name="subsidy">Subsidy</string>
+    <string name="vitamins">Vitamins</string>
+    <string name="medicine">Medicine</string>
+    <string name="editFeed">Edit Feed</string>
+    <string name="logout">Logout</string>
 </resources>

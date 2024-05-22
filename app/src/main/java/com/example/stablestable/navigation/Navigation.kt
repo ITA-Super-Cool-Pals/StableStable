@@ -15,6 +15,8 @@ import com.example.stablestable.ui.stable.horses.StableHorsesScreen
 import com.example.stablestable.ui.profile.UserProfileScreen
 import com.example.stablestable.ui.shifts.ShiftsScreen
 import com.example.stablestable.ui.stable.riders.StableUsersScreen
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -44,9 +46,9 @@ fun SetupNavGraph(
                 goToRiders = { navController.navigate(Screen.StableUsers.route) },
                 goToHome = { navController.navigate(Screen.HomeScreen.route) },
                 goToShifts = { navController.navigate(Screen.ShiftsScreen.route) },
-                //goToProfile = { navController.navigate(Screen.UserProfileScreen.route.replace("{userId}", authViewModel.userId ?: "")) },
-                goToHorses = { navController.navigate(Screen.StableHorses.route) }
-                //onLogout = { authViewModel.setUserLoggedIn(false) }
+                goToMyProfile = { navController.navigate(Screen.UserProfileScreen.route.replace("{userId}", authViewModel.userId ?: "")) },
+                goToHorses = { navController.navigate(Screen.StableHorses.route) },
+                onLogout = { Firebase.auth.signOut(); authViewModel.setUserLoggedIn(false) }
             )
         }
 
@@ -61,7 +63,9 @@ fun SetupNavGraph(
                 goToRiders = { navController.navigate(Screen.StableUsers.route) },
                 goToHome = { navController.navigate(Screen.HomeScreen.route) },
                 goToShifts = { navController.navigate(Screen.ShiftsScreen.route) },
-                goToHorses = { navController.navigate(Screen.StableHorses.route) }
+                goToHorses = { navController.navigate(Screen.StableHorses.route) },
+                goToMyProfile = { navController.navigate(Screen.UserProfileScreen.route.replace("{userId}", authViewModel.userId ?: "")) },
+                onLogout = { Firebase.auth.signOut(); authViewModel.setUserLoggedIn(false) }
             )
         }
 
@@ -76,8 +80,9 @@ fun SetupNavGraph(
                 goToRiders = { navController.navigate(Screen.StableUsers.route) },
                 goToHome = { navController.navigate(Screen.HomeScreen.route) },
                 goToShifts = { navController.navigate(Screen.ShiftsScreen.route) },
-                goToHorses = { navController.navigate(Screen.StableHorses.route) }
-
+                goToHorses = { navController.navigate(Screen.StableHorses.route) },
+                goToMyProfile = { navController.navigate(Screen.UserProfileScreen.route.replace("{userId}", authViewModel.userId ?: "")) },
+                onLogout = { Firebase.auth.signOut(); authViewModel.setUserLoggedIn(false) }
             )
         }
 
@@ -94,8 +99,10 @@ fun SetupNavGraph(
                 goToRiders = { navController.navigate(Screen.StableUsers.route) },
                 goToHome = { navController.navigate(Screen.HomeScreen.route) },
                 goToShifts = { navController.navigate(Screen.ShiftsScreen.route) },
-                goToHorses = { navController.navigate(Screen.StableHorses.route) }
-
+                goToHorses = { navController.navigate(Screen.StableHorses.route) },
+                goToMyProfile = { navController.navigate(Screen.UserProfileScreen.route.replace("{userId}", authViewModel.userId ?: "")) },
+                onLogout = { Firebase.auth.signOut(); authViewModel.setUserLoggedIn(false) },
+                onArrowBack = { if (navController.previousBackStackEntry != null){navController.navigateUp()}else { null }}
             )
         }
 
@@ -109,8 +116,10 @@ fun SetupNavGraph(
                 goToRiders = { navController.navigate(Screen.StableUsers.route) },
                 goToHome = { navController.navigate(Screen.HomeScreen.route) },
                 goToShifts = { navController.navigate(Screen.ShiftsScreen.route) },
-                goToHorses = { navController.navigate(Screen.StableHorses.route) }
-
+                goToHorses = { navController.navigate(Screen.StableHorses.route) },
+                goToMyProfile = { navController.navigate(Screen.UserProfileScreen.route.replace("{userId}", authViewModel.userId ?: "")) },
+                onLogout = { Firebase.auth.signOut(); authViewModel.setUserLoggedIn(false) },
+                onArrowBack = { if (navController.previousBackStackEntry != null){navController.navigateUp()}else { null }}
             )
         }
         //Route to shifts
@@ -121,7 +130,9 @@ fun SetupNavGraph(
                 goToHome = { navController.navigate(Screen.HomeScreen.route)},
                 goToRiders = { navController.navigate(Screen.StableUsers.route) },
                 goToShifts = { navController.navigate(Screen.ShiftsScreen.route) },
-                goToHorses = { navController.navigate(Screen.StableHorses.route) }
+                goToHorses = { navController.navigate(Screen.StableHorses.route) },
+                goToMyProfile = { navController.navigate(Screen.UserProfileScreen.route.replace("{userId}", authViewModel.userId ?: "")) },
+                onLogout = { Firebase.auth.signOut(); authViewModel.setUserLoggedIn(false) }
             )
         }
     }

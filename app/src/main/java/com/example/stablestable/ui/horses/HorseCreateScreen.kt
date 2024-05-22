@@ -114,7 +114,12 @@ fun HorseCreateScreen(
                             viewModel.expandedSex
                         }
                     ) {
-                        viewModel.sexOptions.forEach { sex ->
+                        // Sex options - set here instead of viewmodel so stringResource can be used
+                        val sexOptions = listOf(
+                            stringResource(R.string.mare),
+                            stringResource(R.string.stallion),
+                            stringResource(R.string.gelding))
+                        sexOptions.forEach { sex ->
                             DropdownMenuItem(
                                 text = { Text(sex) },
                                 onClick = {

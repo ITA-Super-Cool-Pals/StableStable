@@ -35,7 +35,6 @@ class HorseCreateViewModel: ViewModel() {
     var breed by mutableStateOf("")
 
     // Sex selection dropdown
-    val sexOptions = listOf("Female", "Male") // Options
     var selectedSex by mutableStateOf("") // Current sex selected
     var expandedSex by mutableStateOf(false) // Expanded check
 
