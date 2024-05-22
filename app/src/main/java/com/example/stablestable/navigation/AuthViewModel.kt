@@ -34,6 +34,8 @@ class AuthViewModel : ViewModel() {
     private val _currentUserProfile = MutableStateFlow<UserProfile?>(null)
     val currentUserProfile: StateFlow<UserProfile?> = _currentUserProfile
 
+    val currentScreen = mutableStateOf(Screen.LoginScreen.route)
+
     init {
         checkCurrentUser()
     }

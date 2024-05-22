@@ -25,6 +25,11 @@ fun SetupNavGraph(
     navController: NavHostController,
     authViewModel: AuthViewModel
 ) {
+    //listener to track the current screen
+    navController.addOnDestinationChangedListener { _, destination, _ ->
+        authViewModel.updateCurrentScreen(destination.route ?: "")
+    }
+
     NavHost(
         navController = navController,
         startDestination = if (authViewModel.isLoggedIn.value) Screen.HomeScreen.route else Screen.LoginScreen.route
