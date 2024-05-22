@@ -34,6 +34,7 @@ class AuthViewModel : ViewModel() {
     private val _currentUserProfile = MutableStateFlow<UserProfile?>(null)
     val currentUserProfile: StateFlow<UserProfile?> = _currentUserProfile
 
+    //Lykke
     private val _currentScreen = mutableStateOf<String?>(null)
 
 
@@ -61,7 +62,7 @@ class AuthViewModel : ViewModel() {
     fun setUserLoggedIn(isLoggedIn: Boolean) {
         _isLoggedIn.value = isLoggedIn
     }
-
+    //Lykke
     fun updateCurrentScreen(screen: String) {
         _currentScreen.value = screen
     }

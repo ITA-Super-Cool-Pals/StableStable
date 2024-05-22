@@ -25,6 +25,7 @@ fun SetupNavGraph(
     navController: NavHostController,
     authViewModel: AuthViewModel
 ) {
+    //Lykke
     //listener to track the current screen
     navController.addOnDestinationChangedListener { _, destination, _ ->
         authViewModel.updateCurrentScreen(destination.route ?: "")

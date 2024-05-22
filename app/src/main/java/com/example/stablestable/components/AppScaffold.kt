@@ -43,7 +43,7 @@ import com.example.stablestable.data.classes.NavigationBarItem
 import com.example.stablestable.ui.home.HomeViewModel
 import kotlinx.coroutines.launch
 
-
+//Lykke
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CreateScaffold(
@@ -99,7 +99,7 @@ fun CreateScaffold(
             hasNews = false,
         )
     )
-
+    //Emily
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
@@ -111,6 +111,7 @@ fun CreateScaffold(
                 }
             }
         },
+        //Lykke
         content = {
             Scaffold(
                 modifier = Modifier
