@@ -1,5 +1,6 @@
 package com.example.stablestable.ui.horses
 
+import android.app.Application
 import android.content.ContentValues.TAG
 import android.os.Build
 import android.util.Log
@@ -8,8 +9,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.stablestable.R
 import com.example.stablestable.data.classes.HorseProfile
 import com.example.stablestable.data.repositories.impl.AccountServiceImpl
 import com.example.stablestable.navigation.AuthViewModel
@@ -22,7 +24,7 @@ import kotlinx.coroutines.launch
  */
 
 @RequiresApi(Build.VERSION_CODES.O)
-class HorseCreateViewModel: ViewModel() {
+class HorseCreateViewModel(application: Application): AndroidViewModel(application) {
     private val authViewModel: AuthViewModel = AuthViewModel()
     private val accountService: AccountServiceImpl = AccountServiceImpl()
 
@@ -67,7 +69,7 @@ class HorseCreateViewModel: ViewModel() {
     fun addHorseToFirebase(onConfirm: () -> Unit) {
         // Check if all fields are filled
         if (name.isEmpty() || breed.isEmpty() || selectedSex.isEmpty() || birthDateMillis == 0L) {
-            errorMessage = "Please fill in all fields"
+            errorMessage = getApplication<Application>().getString(R.string.fillAllFields)
             return
         }
 
