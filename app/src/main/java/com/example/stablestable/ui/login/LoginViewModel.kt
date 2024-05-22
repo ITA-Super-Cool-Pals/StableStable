@@ -1,10 +1,12 @@
 package com.example.stablestable.ui.login
 
+import android.app.Application
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.stablestable.R
 import com.example.stablestable.data.classes.UserProfile
 import com.example.stablestable.data.repositories.impl.AccountServiceImpl
 import kotlinx.coroutines.launch
@@ -15,7 +17,7 @@ import kotlinx.coroutines.launch
  * Code by Emily
  */
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel(application: Application): AndroidViewModel(application) {
     private val accountService: AccountServiceImpl = AccountServiceImpl()
 
     // Control visibility of user creation window
@@ -36,7 +38,7 @@ class LoginViewModel : ViewModel() {
     fun userCreate(navigateOnSuccess: () -> Unit) {
         // Check if fields are empty, show error message if they are
         if (email.isEmpty() || password.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || phone.isEmpty()) {
-            createUserErrorMessage = "Alle felter skal udfyldes"
+            createUserErrorMessage = getApplication<Application>().getString(R.string.fillAllFields)
             return
         }
 
@@ -60,7 +62,7 @@ class LoginViewModel : ViewModel() {
     fun userLogin(navigateOnSuccess: () -> Unit) {
         // Check if fields are empty, show error message if they are
         if (email.isEmpty() || password.isEmpty()) {
-            loginErrorMessage = "Email og kodeord påkrævet"
+            loginErrorMessage = getApplication<Application>().getString(R.string.fillAllFields)
             return
         }
 
