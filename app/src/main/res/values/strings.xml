@@ -59,4 +59,19 @@
     <string name="subsidy">Tilskud</string>
     <string name="vitamins">Vitaminer</string>
     <string name="medicine">Medicin</string>
+
+    <!-- Shifts Screen -->
+    <string name="mon">MAN</string>
+    <string name="tue">TIR</string>
+    <string name="wed">ONS</string>
+    <string name="thu">TOR</string>
+    <string name="fri">FRE</string>
+    <string name="sat">LØR</string>
+    <string name="sun">SØN</string>
+    <string name="week">Uge</string>
+    <string name="morning">Morgen</string>
+    <string name="evening">Aften</string>
+
+
+    
 </resources>

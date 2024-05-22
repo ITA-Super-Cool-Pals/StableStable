@@ -5,11 +5,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface ShiftsService {
 
-    val shiftsWithFlow: Flow<List<Shift>>
+    fun shiftsWithFlow(): Flow<List<Shift>>
 
     suspend fun getCurrentWeekShifts(week:Int): List<Shift>
-
-
 
     suspend fun getCurrentShift(): Shift
 

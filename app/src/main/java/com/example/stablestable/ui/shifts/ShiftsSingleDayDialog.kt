@@ -1,14 +1,22 @@
 package com.example.stablestable.ui.shifts
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -18,22 +26,39 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.capitalize
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.example.stablestable.R
+import com.example.stablestable.ui.theme.StableStableTheme
+import java.util.Locale
 
 @Composable
 fun ShiftsSingleDayDialog(
-    displayedDay: String,
+    displayedDay: Int,
+    displayedTime: String,
     currentShiftName: String,
     dialog: String,
     onDismissRequest: () -> Unit,
     onAddMeClick: () -> Unit,
     onRemoveMeClick: () -> Unit
 ){
+    val weekDayList: List<String> = listOf(
+        stringResource(id = R.string.mon),
+        stringResource(id = R.string.tue),
+        stringResource(id = R.string.wed),
+        stringResource(id = R.string.thu),
+        stringResource(id = R.string.fri),
+        stringResource(id = R.string.sat),
+        stringResource(id = R.string.sun)
+    )
+
     Dialog(onDismissRequest = { onDismissRequest() },
         ) {
         Card(
@@ -42,9 +67,16 @@ fun ShiftsSingleDayDialog(
             modifier = Modifier
             .size(width = 300.dp, height = 250.dp)
 
+
         ) {
-            Row {
-                Text(text = displayedDay)
+            Row(modifier = Modifier.fillMaxWidth()
+                .background(MaterialTheme.colorScheme.tertiaryContainer)
+               ,
+                horizontalArrangement = Arrangement.SpaceAround
+
+            ) {
+                Text(text = weekDayList[displayedDay], fontWeight = FontWeight.Medium)
+                Text(text = displayedTime.replaceFirstChar { it.uppercase() },fontWeight = FontWeight.Medium)
             }
 
             when(dialog){
@@ -55,9 +87,13 @@ fun ShiftsSingleDayDialog(
             }
 
             Box(Modifier.fillMaxSize()) {
-                Text(modifier = Modifier
-                    .clickable { onDismissRequest() }
-                    .align(Alignment.BottomEnd), text = "LUK")
+                Button(onClick = { onDismissRequest()},
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        ) {
+
+                    Text(text = "Luk")
+                }
             }
         }
     }
@@ -68,19 +104,21 @@ fun ShiftsSingleDayDialog(
 fun CardContentEmpty(
     onAddMeClick: () -> Unit
 ){
-    Row(modifier= Modifier
-        .fillMaxWidth()
-        .padding(top = 6.dp),
-        horizontalArrangement = Arrangement.Center) {
-        Text(text = "This Shit empty", fontSize = 18.sp)
+    Column {
+        Row(modifier= Modifier
+            .fillMaxWidth()
+            .padding(6.dp),
+            horizontalArrangement = Arrangement.Center) {
+            Text(text = "This shift is empty", fontSize = 18.sp)
 
-    }
-    Row {
-        Button(onClick = {
-            onAddMeClick()
-        }) {
-            Text(text = "Add me to this shift")
         }
+        Row (modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center) {
+            Button(onClick = { onAddMeClick() }){
+                Text(text = "Add me to this shift")
+            }
+        }
+
     }
 }
 
@@ -89,19 +127,24 @@ fun CardContentFull(
     nameOnShift: String,
     onRemoveMeClick: ()-> Unit
 ){
-    Row(modifier= Modifier
-        .fillMaxWidth()
-        .padding(top = 6.dp),
-        horizontalArrangement = Arrangement.Center) {
-        Text(text = "This Shit Occupied: $nameOnShift", fontSize = 18.sp)
+    Column(modifier = Modifier.fillMaxWidth().padding(6.dp)) {
+        Text(text = "This shift is occupied by:",
+            fontSize = 18.sp,
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+        )
+        Text(text = nameOnShift,
+            fontSize = 18.sp,
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+        )
+        Button(modifier = Modifier
+            .align(Alignment.CenterHorizontally),
 
-    }
-    Row {
-        Button(onClick = {
-            onRemoveMeClick()
-        }) {
+            onClick = { onRemoveMeClick() }) {
             Text(text = "Remove me from this shift")
         }
+
     }
 }
 
@@ -110,5 +153,22 @@ fun CardContentFull(
 @Preview
 @Composable
 fun DialogPreview(){
-    //ShiftsSingleDayDialog("Monday","full",{},{}){}
+    StableStableTheme {
+        ShiftsSingleDayDialog(
+            displayedDay = 6,
+            displayedTime = "Evening",
+            currentShiftName = "John",
+            dialog ="full",
+            {},{}){}
+    }
+}
+
+@Preview
+@Composable
+fun DialogPreview2(){
+    StableStableTheme {
+        CardContentFull("John") {
+
+        }
+    }
 }
