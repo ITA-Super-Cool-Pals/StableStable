@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CrueltyFree
+import androidx.compose.material.icons.filled.BedroomBaby
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -32,7 +32,7 @@ fun StableHorseListItem(
     ) {
         // Horse image, default to standard icon
         Icon(
-            imageVector = Icons.Default.CrueltyFree,
+            imageVector = Icons.Default.BedroomBaby,
             contentDescription = "Profile Picture",
             modifier = Modifier.size(50.dp)
         )
