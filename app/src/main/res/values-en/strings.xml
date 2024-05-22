@@ -43,5 +43,7 @@
     <string name="fri">FRI</string>
     <string name="sat">SAT</string>
     <string name="sun">SUN</string>
-    <string name="week">WEEK</string>
+    <string name="week">Week</string>
+    <string name="morning">Morning</string>
+    <string name="evening">Evening</string>
 </resources>

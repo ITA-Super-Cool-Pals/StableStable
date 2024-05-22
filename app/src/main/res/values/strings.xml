@@ -58,8 +58,8 @@
     <string name="sun">SØN</string>
 
     <string name="week">UGE</string>
-
-
+    <string name="morning">Morgen</string>
+    <string name="evening">Aften</string>
 
 
 </resources>

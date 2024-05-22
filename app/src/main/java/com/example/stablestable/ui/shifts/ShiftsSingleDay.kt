@@ -22,17 +22,23 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.stablestable.R
 import com.example.stablestable.data.classes.Shift
+import com.example.stablestable.ui.theme.StableStableTheme
 import java.time.LocalDate
 
 @Composable
@@ -56,7 +62,10 @@ fun ShiftsSingleDay(
         .heightIn(max = 80.dp)
         .padding(2.dp)
         .border(1.dp, Color.Black, RoundedCornerShape(8.dp))
-        .background(Color(0x61CDDC39), RoundedCornerShape(8.dp))
+        .background(
+            color = MaterialTheme.colorScheme.secondaryContainer,
+            shape = RoundedCornerShape(8.dp)
+        )
     ){
         val shiftEve:Shift? = shifts.find { it.shiftTime == "evening" }
         val shiftMorn:Shift? = shifts.find { it.shiftTime == "morning" }
@@ -66,13 +75,16 @@ fun ShiftsSingleDay(
             .width(100.dp)
             .align(Alignment.CenterVertically)
             .padding(8.dp)
-            ,text = weekDayList[currentShiftDay])
+            ,text = weekDayList[currentShiftDay],
+            textAlign = TextAlign.Center)
 
-        HorizontalDivider(
+        VerticalDivider(
             modifier = Modifier
                 .fillMaxHeight()
                 .width(1.dp)
-                .padding(vertical = 4.dp)
+                .padding(vertical = 4.dp),
+            thickness = 3.dp,
+            color = MaterialTheme.colorScheme.outline
         )
 
         Box(modifier = Modifier
@@ -89,17 +101,25 @@ fun ShiftsSingleDay(
             }
 
         ) {
+            Text(text = stringResource(id = R.string.morning) ,modifier = Modifier.align(Alignment.TopCenter),
+                fontSize = 12.sp,
+                fontStyle = FontStyle.Italic,
+                color = MaterialTheme.colorScheme.outlineVariant
+            )
+
             if (shiftMorn != null) {
                 Text(modifier = Modifier.align(Alignment.Center),text = shiftMorn.user)
             }
 
         }
 
-        HorizontalDivider(
+        VerticalDivider(
             modifier = Modifier
                 .fillMaxHeight()
                 .width(1.dp)
-                .padding(vertical = 4.dp)
+                .padding(vertical = 4.dp),
+            thickness = 3.dp,
+            color = MaterialTheme.colorScheme.outline
         )
 
         Box(modifier = Modifier
@@ -115,6 +135,13 @@ fun ShiftsSingleDay(
                 }
             }
         ) {
+
+            Text(text = stringResource(id = R.string.evening) ,modifier = Modifier.align(Alignment.TopCenter),
+                fontSize = 12.sp,
+                fontStyle = FontStyle.Italic,
+                color = MaterialTheme.colorScheme.outlineVariant
+            )
+
             if (shiftEve != null) {
                 Text(modifier = Modifier.align(Alignment.Center),text = shiftEve.user)
             }
@@ -125,22 +152,22 @@ fun ShiftsSingleDay(
 
     }
 }
-/*
+
 @Preview
 @Composable
 fun ShiftsSingleDayPreview(){
-    ShiftsSingleDay(
-        listOf(
-            Shift(
-                13,
-                3,
-                "John",
-                "morning"
-            )
-        ),
-        0
-    ) { s, s1, s2,d -> }
+    StableStableTheme{
+        ShiftsSingleDay(
+            listOf(
+                Shift(
+                    13,
+                    3,
+                    "John",
+                    "morning"
+                )
+            ),
+            0
+        ) { s, s1, s2,d -> }
+    }
 }
 
-
-*/

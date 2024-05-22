@@ -1,5 +1,7 @@
 package com.example.stablestable.ui.shifts
 
+import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -23,6 +25,8 @@ fun ShiftsScreenMatrix(
 
     Column(modifier = Modifier
         .padding(8.dp)
+        .verticalScroll(rememberScrollState()),
+        verticalArrangement = Arrangement.spacedBy(6.dp)
     ) {
 
         for (day in 0..6){
