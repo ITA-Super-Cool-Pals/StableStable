@@ -75,6 +75,7 @@ fun ShiftsScreen(
                 isMyShift = viewModel.isMyShift,
                 onDismissRequest = { viewModel.openShiftDialog = false },
                 onAddMeClick = {
+                    viewModel.viewedUserId = viewModel.currentUserId
                     viewModel.createShift()
                     viewModel.dialogContentState = "full"
                     viewModel.checkCurrentUser(viewModel.viewedUserId)
