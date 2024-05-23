@@ -49,7 +49,7 @@ fun ShiftsSingleDayDialog(
     onDismissRequest: () -> Unit,
     onAddMeClick: () -> Unit,
     onRemoveMeClick: () -> Unit
-){
+) {
     val weekDayList: List<String> = listOf(
         stringResource(id = R.string.mon),
         stringResource(id = R.string.tue),
@@ -60,40 +60,45 @@ fun ShiftsSingleDayDialog(
         stringResource(id = R.string.sun)
     )
 
-    Dialog(onDismissRequest = { onDismissRequest() },
-        ) {
+    Dialog(
+        onDismissRequest = { onDismissRequest() },
+    ) {
         Card(
             colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant),
+                containerColor = MaterialTheme.colorScheme.surfaceVariant
+            ),
             modifier = Modifier
-            .size(width = 300.dp, height = 250.dp)
+                .size(width = 300.dp, height = 250.dp)
 
 
         ) {
-            Row(modifier = Modifier.fillMaxWidth()
-                .background(MaterialTheme.colorScheme.tertiaryContainer)
-               ,
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(MaterialTheme.colorScheme.tertiaryContainer),
                 horizontalArrangement = Arrangement.SpaceAround
 
             ) {
                 Text(text = weekDayList[displayedDay], fontWeight = FontWeight.Medium)
-                Text(text = displayedTime.replaceFirstChar { it.uppercase() },fontWeight = FontWeight.Medium)
+                Text(
+                    text = displayedTime.replaceFirstChar { it.uppercase() },
+                    fontWeight = FontWeight.Medium
+                )
             }
 
-            when(dialog){
-                "empty" -> CardContentEmpty {onAddMeClick()}
-                // TODO: NameOnShift skal ændres til det der egentlig er på shiftet
-                "full" -> CardContentFull(currentShiftName,isMyShift){onRemoveMeClick()}
-                else -> Text(text = "Error")
+            when (dialog) {
+                "empty" -> CardContentEmpty { onAddMeClick() }
+                "full" -> CardContentFull(currentShiftName, isMyShift) { onRemoveMeClick() }
+                else -> Text(text = stringResource(id = R.string.error))
             }
 
             Box(Modifier.fillMaxSize()) {
-                Button(onClick = { onDismissRequest()},
+                Button(
+                    onClick = { onDismissRequest() },
                     modifier = Modifier
                         .align(Alignment.BottomEnd)
-                        ) {
-
-                    Text(text = "Luk")
+                ) {
+                    Text(text = stringResource(id = R.string.close))
                 }
             }
         }
@@ -104,19 +109,23 @@ fun ShiftsSingleDayDialog(
 @Composable
 fun CardContentEmpty(
     onAddMeClick: () -> Unit
-){
+) {
     Column {
-        Row(modifier= Modifier
-            .fillMaxWidth()
-            .padding(6.dp),
-            horizontalArrangement = Arrangement.Center) {
-            Text(text = "This shift is empty", fontSize = 18.sp)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(6.dp),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text(text = stringResource(id = R.string.empty_shift), fontSize = 18.sp)
 
         }
-        Row (modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center) {
-            Button(onClick = { onAddMeClick() }){
-                Text(text = "Add me to this shift")
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Button(onClick = { onAddMeClick() }) {
+                Text(text = stringResource(id = R.string.add_shift))
             }
         }
 
@@ -127,15 +136,19 @@ fun CardContentEmpty(
 fun CardContentFull(
     nameOnShift: String,
     isMyShift: Boolean,
-    onRemoveMeClick: ()-> Unit
-){
-    Column(modifier = Modifier.fillMaxWidth().padding(6.dp)) {
-        Text(text = "This shift is occupied by:",
+    onRemoveMeClick: () -> Unit
+) {
+    Column(modifier = Modifier
+        .fillMaxWidth()
+        .padding(6.dp)) {
+        Text(
+            text = "${stringResource(id = R.string.full_shift)}:",
             fontSize = 18.sp,
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
         )
-        Text(text = nameOnShift,
+        Text(
+            text = nameOnShift,
             fontSize = 18.sp,
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
@@ -145,7 +158,7 @@ fun CardContentFull(
                 .align(Alignment.CenterHorizontally),
                 onClick = { onRemoveMeClick() }
             ) {
-                Text(text = "Remove me from this shift")
+                Text(text = stringResource(id = R.string.remove_shift))
             }
         }
 
@@ -153,26 +166,25 @@ fun CardContentFull(
 }
 
 
-
 @Preview
 @Composable
-fun DialogPreview(){
+fun DialogPreview() {
     StableStableTheme {
         ShiftsSingleDayDialog(
             displayedDay = 6,
             displayedTime = "Evening",
             currentShiftName = "John",
-            dialog ="full",
+            dialog = "full",
             isMyShift = false,
-            {},{}){}
+            {}, {}) {}
     }
 }
 
 @Preview
 @Composable
-fun DialogPreview2(){
+fun DialogPreview2() {
     StableStableTheme {
-        CardContentFull("John",false) {
+        CardContentFull("John", false) {
 
         }
     }
