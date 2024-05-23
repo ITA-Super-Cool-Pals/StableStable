@@ -63,11 +63,6 @@ class ShiftsServiceImpl : ShiftsService {
         return shiftList.toList()
     }
 
-
-    override suspend fun getCurrentShift(): Shift {
-        TODO("Not yet implemented")
-    }
-
     override suspend fun addShift(data: Shift) {
         db.collection("shifts").document(data.shiftCode).set(data).await()
     }

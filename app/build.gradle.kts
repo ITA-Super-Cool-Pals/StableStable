@@ -68,7 +68,6 @@ dependencies {
     implementation("androidx.navigation:navigation-runtime-ktx:2.7.7")
     implementation("androidx.navigation:navigation-compose:2.7.7")
     implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
-    // TODO: Add the dependencies for Firebase products you want to use
     implementation("com.google.firebase:firebase-auth") // Firebase Authentication
     implementation("com.google.firebase:firebase-firestore-ktx")
     implementation("androidx.compose.material3:material3-android:1.2.1") // Firestore

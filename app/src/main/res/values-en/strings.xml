@@ -60,4 +60,9 @@
     <string name="logout">Logout</string>
     <string name="fillAllFields">All fields must be filled</string>
     <string name="emailPasswordRequired">Email and password required</string>
+    <string name="error">Error</string>
+    <string name="empty_shift">This shift is empty</string>
+    <string name="add_shift">Add me to this shift</string>
+    <string name="full_shift">This shift is occupied by</string>
+    <string name="remove_shift">Remove me from this shift</string>
 </resources>

@@ -153,6 +153,7 @@ fun ShiftsSingleDay(
     }
 }
 
+@SuppressWarnings
 @Preview
 @Composable
 fun ShiftsSingleDayPreview(){

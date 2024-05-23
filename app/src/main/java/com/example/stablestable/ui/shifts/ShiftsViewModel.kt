@@ -2,24 +2,18 @@ package com.example.stablestable.ui.shifts
 
 import android.content.ContentValues.TAG
 import android.util.Log
-import androidx.compose.runtime.ProvidedValue
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.stablestable.data.classes.Shift
-import com.example.stablestable.data.repositories.impl.AccountServiceImpl
 import com.example.stablestable.data.repositories.impl.ShiftsServiceImpl
 import com.example.stablestable.navigation.AuthViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.time.LocalDate
@@ -39,7 +33,7 @@ class ShiftsViewModel(
 
     var openShiftDialog by mutableStateOf(false)
     var dialogContentState by mutableStateOf("")
-
+    var isMyShift by mutableStateOf(true)
 
 
     private val date: LocalDate = LocalDate.now();
@@ -50,11 +44,27 @@ class ShiftsViewModel(
     var viewedDay: Int = 0
     var viewedSegment: String = ""
     var viewedUser by mutableStateOf("")
+    var viewedUserId = ""
+
+
+
+
+
+
+    fun checkCurrentUser(id: String){
+        val currentUserId = authViewModel.userId?:""
+
+        isMyShift = currentUserId == id
+
+    }
+
+
+
+
 
     private val currentShift: Shift
         get() =
-            Shift(viewedWeek, viewedDay, viewedUser, viewedSegment)
-
+            Shift(viewedWeek, viewedDay, viewedUser,viewedUserId, viewedSegment)
 
 
     private val _shifts = MutableStateFlow<List<Shift>>(emptyList())
@@ -70,42 +80,33 @@ class ShiftsViewModel(
             }
         }
     }
-/*
-    fun filterShifts(week: Int){
-        viewModelScope.launch {
-            _shifts.map { it.filter { item-> item.weekNumber == week} }
-        }
-    }
-
- */
-    /*
-        return shiftsService.shiftsWithFlow()
-            .map { it.filter { item -> item.weekNumber == week } }
-
-     */
-
 
     fun createShift() {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                authViewModel.currentUserProfile.collect { currentUser ->
-                    if (currentUser != null) {
-                        val currentUserName = currentUser.firstName
-                        viewedUser = currentUser.firstName
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                try {
+                    authViewModel.currentUserProfile.collect { currentUser ->
+                        if (currentUser != null) {
+                            val currentUserName = currentUser.firstName
+                            viewedUser = currentUser.firstName
 
-                        shiftsService.addShift(
-                            Shift(
-                                viewedWeek,
-                                viewedDay,
-                                currentUserName,
-                                viewedSegment
+                            val currentUserId = authViewModel.userId ?: ""
+
+                            shiftsService.addShift(
+                                Shift(
+                                    viewedWeek,
+                                    viewedDay,
+                                    currentUserName,
+                                    currentUserId,
+                                    viewedSegment
+                                )
                             )
-                        )
 
+                        }
                     }
+                } catch (e: Exception) {
+                    Log.d(TAG, "Message: $e")
                 }
-            } catch (e: Exception) {
-                Log.d(TAG, "Message: $e")
             }
         }
     }
