@@ -45,7 +45,8 @@ fun ShiftsScreen(
                         viewModel.openShiftDialog = true
                          if (sh != null) {
                              viewModel.dialogContentState ="full"
-                             viewModel.checkCurrentUser(sh)
+                             viewModel.viewedUserId = sh.userId
+                             viewModel.checkCurrentUser(viewModel.viewedUserId)
                         } else {
                              viewModel.dialogContentState ="empty"
                         }
@@ -76,6 +77,7 @@ fun ShiftsScreen(
                 onAddMeClick = {
                     viewModel.createShift()
                     viewModel.dialogContentState = "full"
+                    viewModel.checkCurrentUser(viewModel.viewedUserId)
                 },
                 onRemoveMeClick = {
                     viewModel.removeShift()
