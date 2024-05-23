@@ -39,7 +39,7 @@ class ShiftsViewModel(
 
     var openShiftDialog by mutableStateOf(false)
     var dialogContentState by mutableStateOf("")
-
+    var isMyShift by mutableStateOf(true)
 
 
     private val date: LocalDate = LocalDate.now();
@@ -51,10 +51,30 @@ class ShiftsViewModel(
     var viewedSegment: String = ""
     var viewedUser by mutableStateOf("")
 
+
+
+
+
+
+    fun checkCurrentUser(sh: Shift){
+        val currentUserId = authViewModel.userId?:""
+        val shiftUser = sh.userId
+
+        isMyShift = if (currentUserId == shiftUser) {
+             true
+        } else {
+            false
+        }
+
+    }
+
+
+
+
+
     private val currentShift: Shift
         get() =
-            Shift(viewedWeek, viewedDay, viewedUser, viewedSegment)
-
+            Shift(viewedWeek, viewedDay, viewedUser,authViewModel.userId?:"", viewedSegment)
 
 
     private val _shifts = MutableStateFlow<List<Shift>>(emptyList())
@@ -70,42 +90,33 @@ class ShiftsViewModel(
             }
         }
     }
-/*
-    fun filterShifts(week: Int){
-        viewModelScope.launch {
-            _shifts.map { it.filter { item-> item.weekNumber == week} }
-        }
-    }
-
- */
-    /*
-        return shiftsService.shiftsWithFlow()
-            .map { it.filter { item -> item.weekNumber == week } }
-
-     */
-
 
     fun createShift() {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                authViewModel.currentUserProfile.collect { currentUser ->
-                    if (currentUser != null) {
-                        val currentUserName = currentUser.firstName
-                        viewedUser = currentUser.firstName
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                try {
+                    authViewModel.currentUserProfile.collect { currentUser ->
+                        if (currentUser != null) {
+                            val currentUserName = currentUser.firstName
+                            viewedUser = currentUser.firstName
 
-                        shiftsService.addShift(
-                            Shift(
-                                viewedWeek,
-                                viewedDay,
-                                currentUserName,
-                                viewedSegment
+                            val currentUserId = authViewModel.userId ?: ""
+
+                            shiftsService.addShift(
+                                Shift(
+                                    viewedWeek,
+                                    viewedDay,
+                                    currentUserName,
+                                    currentUserId,
+                                    viewedSegment
+                                )
                             )
-                        )
 
+                        }
                     }
+                } catch (e: Exception) {
+                    Log.d(TAG, "Message: $e")
                 }
-            } catch (e: Exception) {
-                Log.d(TAG, "Message: $e")
             }
         }
     }

@@ -104,6 +104,7 @@ fun ShiftsScreenContent(
 
 }
 
+@SuppressWarnings
 @Preview
 @Composable
 fun VagtPrev() {

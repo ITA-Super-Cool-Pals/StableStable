@@ -7,7 +7,7 @@ data class Shift(
     val weekNumber: Int = 0,
     val dayOfWeek: Int = 0,
     val user: String = "",
-
+    val userId: String = "",
     // Morning/Evening
     val shiftTime: String = ""
 )

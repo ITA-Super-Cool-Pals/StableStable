@@ -45,6 +45,7 @@ fun ShiftsSingleDayDialog(
     displayedTime: String,
     currentShiftName: String,
     dialog: String,
+    isMyShift: Boolean,
     onDismissRequest: () -> Unit,
     onAddMeClick: () -> Unit,
     onRemoveMeClick: () -> Unit
@@ -82,7 +83,7 @@ fun ShiftsSingleDayDialog(
             when(dialog){
                 "empty" -> CardContentEmpty {onAddMeClick()}
                 // TODO: NameOnShift skal ændres til det der egentlig er på shiftet
-                "full" -> CardContentFull(currentShiftName){onRemoveMeClick()}
+                "full" -> CardContentFull(currentShiftName,isMyShift){onRemoveMeClick()}
                 else -> Text(text = "Error")
             }
 
@@ -125,6 +126,7 @@ fun CardContentEmpty(
 @Composable
 fun CardContentFull(
     nameOnShift: String,
+    isMyShift: Boolean,
     onRemoveMeClick: ()-> Unit
 ){
     Column(modifier = Modifier.fillMaxWidth().padding(6.dp)) {
@@ -138,11 +140,13 @@ fun CardContentFull(
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
         )
-        Button(modifier = Modifier
-            .align(Alignment.CenterHorizontally),
-
-            onClick = { onRemoveMeClick() }) {
-            Text(text = "Remove me from this shift")
+        if (isMyShift) {
+            Button(modifier = Modifier
+                .align(Alignment.CenterHorizontally),
+                onClick = { onRemoveMeClick() }
+            ) {
+                Text(text = "Remove me from this shift")
+            }
         }
 
     }
@@ -159,6 +163,7 @@ fun DialogPreview(){
             displayedTime = "Evening",
             currentShiftName = "John",
             dialog ="full",
+            isMyShift = false,
             {},{}){}
     }
 }
@@ -167,7 +172,7 @@ fun DialogPreview(){
 @Composable
 fun DialogPreview2(){
     StableStableTheme {
-        CardContentFull("John") {
+        CardContentFull("John",false) {
 
         }
     }

@@ -43,10 +43,11 @@ fun ShiftsScreen(
                         viewModel.viewedSegment = s
                         viewModel.viewedUser = s1
                         viewModel.openShiftDialog = true
-                        viewModel.dialogContentState = if (sh != null) {
-                            "full"
+                         if (sh != null) {
+                             viewModel.dialogContentState ="full"
+                             viewModel.checkCurrentUser(sh)
                         } else {
-                            "empty"
+                             viewModel.dialogContentState ="empty"
                         }
                     })
 
@@ -70,6 +71,7 @@ fun ShiftsScreen(
                 displayedTime = viewModel.viewedSegment,
                 currentShiftName = viewModel.viewedUser,
                 dialog = viewModel.dialogContentState,
+                isMyShift = viewModel.isMyShift,
                 onDismissRequest = { viewModel.openShiftDialog = false },
                 onAddMeClick = {
                     viewModel.createShift()
