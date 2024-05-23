@@ -1,3 +1,4 @@
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -20,6 +21,15 @@ android {
             useSupportLibrary = true
         }
     }
+    signingConfigs{
+
+        create("superCool") {
+            storeFile = file("C:\\Users\\jose1\\.android\\my-release-key.keystore")
+            keyAlias = System.getenv("RELEASE_KEYSTORE_ALIAS")
+            keyPassword = System.getenv("RELEASE_KEY_PASSWORD")
+            storePassword = System.getenv("RELEASE_KEYSTORE_PASSWORD")
+        }
+    }
 
     buildTypes {
         create("customDebugType") {
@@ -27,6 +37,7 @@ android {
         }
         release {
             isMinifyEnabled = false
+            signingConfig = signingConfigs.create("superCool")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
