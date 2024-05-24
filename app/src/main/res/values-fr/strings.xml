@@ -29,6 +29,7 @@
     <string name="breed">Race</string>
     <string name="cancel">Annuler</string>
     <string name="confirm">OK</string>
+    <string name="myProfile">Mon Profil</string>
     <string name="myHorses">Mes chevaux</string>
     <string name="ownerInfo">Informations sur le propriétaire</string>
     <string name="horseInfo">Informations sur le cheval</string>
@@ -36,6 +37,16 @@
     <string name="months">mois</string>
     <string name="contactInfo">Informations de contact</string>
     <string name="home">Accueil</string>
+    <string name="mon">LUN</string>
+    <string name="tue">MAR</string>
+    <string name="wed">MER</string>
+    <string name="thu">JEU</string>
+    <string name="fri">VEN</string>
+    <string name="sat">SAM</string>
+    <string name="sun">DIM</string>
+    <string name="week">Semaine</string>
+    <string name="morning">Matin</string>
+    <string name="evening">Soir</string>
     <string name="age">Âge</string>
     <string name="mare">Jument</string>
     <string name="gelding">Hongre</string>
@@ -46,4 +57,12 @@
     <string name="vitamins">Vitamines</string>
     <string name="medicine">Médicament</string>
     <string name="editFeed">Modifier l\'alimentation</string>
+    <string name="logout">Déconnexion</string>
+    <string name="fillAllFields">Tous les champs doivent être remplis</string>
+    <string name="emailPasswordRequired">Email et mot de passe requis</string>
+    <string name="error">Erreur</string>
+    <string name="empty_shift">Ce créneau est vide</string>
+    <string name="add_shift">M\'ajouter à ce créneau</string>
+    <string name="full_shift">Ce créneau est occupé par</string>
+    <string name="remove_shift">Me retirer de ce créneau</string>
 </resources>

@@ -29,6 +29,7 @@
     <string name="breed">Rasse</string>
     <string name="cancel">Abbrechen</string>
     <string name="confirm">OK</string>
+    <string name="myProfile">Mein Profil</string>
     <string name="myHorses">Meine Pferde</string>
     <string name="ownerInfo">Besitzerinformationen</string>
     <string name="horseInfo">Pferdeinformationen</string>
@@ -36,6 +37,16 @@
     <string name="months">Monate</string>
     <string name="contactInfo">Kontaktinformationen</string>
     <string name="home">Startseite</string>
+    <string name="mon">MO</string>
+    <string name="tue">DI</string>
+    <string name="wed">MI</string>
+    <string name="thu">DO</string>
+    <string name="fri">FR</string>
+    <string name="sat">SA</string>
+    <string name="sun">SO</string>
+    <string name="week">Woche</string>
+    <string name="morning">Morgen</string>
+    <string name="evening">Abend</string>
     <string name="age">Alter</string>
     <string name="mare">Stute</string>
     <string name="gelding">Wallach</string>
@@ -46,4 +57,12 @@
     <string name="vitamins">Vitamine</string>
     <string name="medicine">Medikamente</string>
     <string name="editFeed">Fütterung bearbeiten</string>
+    <string name="logout">Abmelden</string>
+    <string name="fillAllFields">Alle Felder müssen ausgefüllt sein</string>
+    <string name="emailPasswordRequired">E-Mail und Passwort erforderlich</string>
+    <string name="error">Fehler</string>
+    <string name="empty_shift">Diese Schicht ist leer</string>
+    <string name="add_shift">Mich zu dieser Schicht hinzufügen</string>
+    <string name="full_shift">Diese Schicht ist besetzt von</string>
+    <string name="remove_shift">Mich von dieser Schicht entfernen</string>
 </resources>

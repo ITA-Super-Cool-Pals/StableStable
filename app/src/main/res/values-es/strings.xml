@@ -29,6 +29,7 @@
     <string name="breed">Raza</string>
     <string name="cancel">Cancelar</string>
     <string name="confirm">OK</string>
+    <string name="myProfile">Mi perfil</string>
     <string name="myHorses">Mis caballos</string>
     <string name="ownerInfo">Información del propietario</string>
     <string name="horseInfo">Información del caballo</string>
@@ -36,6 +37,16 @@
     <string name="months">meses</string>
     <string name="contactInfo">Información de contacto</string>
     <string name="home">Inicio</string>
+    <string name="mon">LUN</string>
+    <string name="tue">MAR</string>
+    <string name="wed">MIÉ</string>
+    <string name="thu">JUE</string>
+    <string name="fri">VIE</string>
+    <string name="sat">SÁB</string>
+    <string name="sun">DOM</string>
+    <string name="week">Semana</string>
+    <string name="morning">Mañana</string>
+    <string name="evening">Tarde</string>
     <string name="age">Edad</string>
     <string name="mare">Yegua</string>
     <string name="gelding">Caballo castrado</string>
@@ -46,4 +57,12 @@
     <string name="vitamins">Vitaminas</string>
     <string name="medicine">Medicina</string>
     <string name="editFeed">Editar alimentación</string>
+    <string name="logout">Cerrar sesión</string>
+    <string name="fillAllFields">Todos los campos deben ser llenados</string>
+    <string name="emailPasswordRequired">Correo electrónico y contraseña requeridos</string>
+    <string name="error">Error</string>
+    <string name="empty_shift">Este turno está vacío</string>
+    <string name="add_shift">Añadirme a este turno</string>
+    <string name="full_shift">Este turno está ocupado por</string>
+    <string name="remove_shift">Eliminarme de este turno</string>
 </resources>
