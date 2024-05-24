@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -83,9 +84,20 @@ fun ShiftsScreenContent(
                     }
             )
         }
-        Spacer(modifier = Modifier.fillMaxWidth().height(50.dp))
+        Spacer(modifier = Modifier
+            .fillMaxWidth()
+            .height(50.dp))
 
-
+        Row {
+            Spacer(modifier = Modifier.fillMaxWidth(0.39f))
+            Text(text = stringResource(id = R.string.morning),
+                fontStyle = FontStyle.Italic,
+                fontSize = 14.sp)
+            Spacer(modifier = Modifier.fillMaxWidth(0.49f))
+            Text(text = stringResource(id = R.string.evening),
+                fontStyle = FontStyle.Italic,
+                fontSize = 14.sp)
+        }
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
@@ -119,7 +131,7 @@ fun VagtPrev() {
                 "morning"
             )),
             onPreviousWeek = { },
-            onNextWeek = { }) { s, s1, s2, s3 ->
+            onNextWeek = { }) { _, _, _, _ ->
         }
     }
 
