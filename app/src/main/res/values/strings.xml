@@ -76,7 +76,7 @@
     <string name="error">Fejl</string>
     <string name="empty_shift">Denne vagt er tom</string>
     <string name="add_shift">Tilføj mig til denne vagt</string>
-    <string name="full_shift">Denne vagt er optaget af:</string>
+    <string name="full_shift">Denne vagt er optaget af</string>
     <string name="remove_shift">Fjern mig fra denne vagt</string>
 
 
