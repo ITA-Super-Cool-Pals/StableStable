@@ -9,11 +9,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -46,6 +48,11 @@ fun ShiftsSingleDayDialog(
         stringResource(id = R.string.sat),
         stringResource(id = R.string.sun)
     )
+    val segmentOfDay = when(displayedTime){
+        "evening" ->  stringResource(id = R.string.evening)
+        "morning" -> stringResource(id = R.string.morning)
+        else -> ""
+    }
 
     Dialog(
         onDismissRequest = { onDismissRequest() },
@@ -68,7 +75,7 @@ fun ShiftsSingleDayDialog(
             ) {
                 Text(text = weekDayList[displayedDay], fontWeight = FontWeight.Medium)
                 Text(
-                    text = displayedTime.replaceFirstChar { it.uppercase() },
+                    text = segmentOfDay,
                     fontWeight = FontWeight.Medium
                 )
             }
@@ -80,7 +87,7 @@ fun ShiftsSingleDayDialog(
             }
 
             Box(Modifier.fillMaxSize()) {
-                Button(
+                TextButton(
                     onClick = { onDismissRequest() },
                     modifier = Modifier
                         .align(Alignment.BottomEnd)
@@ -111,7 +118,9 @@ fun CardContentEmpty(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
         ) {
-            Button(onClick = { onAddMeClick() }) {
+            Button(onClick = { onAddMeClick() },
+                shape = RoundedCornerShape(5.dp)
+            ) {
                 Text(text = stringResource(id = R.string.add_shift))
             }
         }
@@ -143,7 +152,8 @@ fun CardContentFull(
         if (isMyShift) {
             Button(modifier = Modifier
                 .align(Alignment.CenterHorizontally),
-                onClick = { onRemoveMeClick() }
+                onClick = { onRemoveMeClick() },
+                shape = RoundedCornerShape(5.dp)
             ) {
                 Text(text = stringResource(id = R.string.remove_shift))
             }
