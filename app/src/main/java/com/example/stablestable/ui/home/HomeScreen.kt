@@ -4,22 +4,33 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.example.stablestable.R
 import com.example.stablestable.components.CreateScaffold
+import com.example.stablestable.navigation.Screen
 
 @Composable
 fun HomeScreen(
     goToRiders: () -> Unit,
     goToHome: () -> Unit,
     goToShifts: () -> Unit,
-    goToHorses: () -> Unit
+    goToHorses: () -> Unit,
+    goToMyProfile: () -> Unit,
+    onLogout: () -> Unit
 ) {
     CreateScaffold(
         content = {paddingValues ->
-        CreateHomeScreen(paddingValues)
+        CreateHomeScreen(
+            paddingValues,
+            goToRiders = goToRiders,
+            goToHorses = goToHorses,
+            goToShifts = goToShifts
+        )
         },
         goToHome = goToHome,
         goToRiders = goToRiders,
         goToShifts = goToShifts,
         goToHorses = goToHorses,
-        screen = stringResource(R.string.home)
+        goToMyProfile = goToMyProfile,
+        onLogout = onLogout,
+        screen = stringResource(R.string.home),
+        currentScreen = Screen.HomeScreen.route
     )
 }

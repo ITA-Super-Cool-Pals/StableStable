@@ -22,11 +22,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.stablestable.R
 import com.example.stablestable.data.classes.Shift
+import com.example.stablestable.ui.theme.StableStableTheme
 
 @Composable
 fun ShiftsScreenContent(
@@ -35,82 +40,61 @@ fun ShiftsScreenContent(
     shifts: List<Shift>,
     onPreviousWeek: () -> Unit,
     onNextWeek: () -> Unit,
-    onBoxOneClick: (String, String, String, Shift?) -> Unit
+    onShiftsBoxClick: (Int, String, String, Shift?) -> Unit
 ) {
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(paddingValues)
+
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
-        ) {
-            Text(text = "Vagtplan", fontSize = 36.sp, fontWeight = FontWeight.Medium)
-        }
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(height = 30.dp),
+                .padding(top = 8.dp),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // TODO: Ændres, Man skal kunne vælge andre uger.
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                 contentDescription = "Arrow forward",
                 modifier = Modifier
-                    .size(25.dp)
+                    .size(35.dp)
                     .padding(end = 5.dp)
                     .clickable {
                         onPreviousWeek()
                     }
             )
-            Text(text = "Uge ${week.toString()}", modifier = Modifier, fontWeight = FontWeight.Medium)
+            Text(
+                text = "${stringResource(id = R.string.week)} $week", modifier = Modifier,
+                fontWeight = FontWeight.Bold,
+                fontSize = 26.sp
+            )
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.ArrowForward,
                 contentDescription = "Arrow forward",
                 modifier = Modifier
-                    .size(25.dp)
-                    .padding(end = 5.dp)
+                    .size(35.dp)
+                    .padding(start = 5.dp)
                     .clickable {
                         onNextWeek()
                     }
             )
         }
-        HorizontalDivider(
-            modifier = Modifier.padding(start = 100.dp, end = 100.dp, bottom = 15.dp),
-            thickness = 2.dp
-        )
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .heightIn(max = 100.dp)
-                .padding(6.dp)
-        ) {
-            Spacer(modifier = Modifier.width(width = 80.dp))
-            Text(
-                modifier = Modifier.fillMaxWidth(0.5f),
-                text = "Morning",
-                textAlign = TextAlign.Center
-            )
+        Spacer(modifier = Modifier.fillMaxWidth().height(50.dp))
 
-            Text(
-                modifier = Modifier.fillMaxWidth(), text = "Aften", textAlign = TextAlign.Center
-            )
 
-        }
         Row(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
             ShiftsScreenMatrix(
                 shifts,
-                onBoxOneClick = { s: String, s1: String, s2: String, sh: Shift? ->
-                    onBoxOneClick(
-                        s, s1, s2, sh
-                    )
+                onShiftsBoxClick = { i: Int, s: String, s1: String, sh: Shift? ->
+                    onShiftsBoxClick(i, s, s1, sh)
                 })
 
         }
@@ -118,5 +102,25 @@ fun ShiftsScreenContent(
 
     }
 
+}
+
+@SuppressWarnings
+@Preview
+@Composable
+fun VagtPrev() {
+    StableStableTheme {
+        ShiftsScreenContent(
+            paddingValues = PaddingValues(6.dp),
+            week = 13,
+            shifts = listOf(Shift(
+                13,
+                3,
+                "John",
+                "morning"
+            )),
+            onPreviousWeek = { },
+            onNextWeek = { }) { s, s1, s2, s3 ->
+        }
+    }
 
 }
