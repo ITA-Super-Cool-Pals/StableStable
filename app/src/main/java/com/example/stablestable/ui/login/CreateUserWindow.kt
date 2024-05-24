@@ -68,7 +68,7 @@ fun CreateUserWindow(
                     value = viewModel.email,
                     onValueChange = { viewModel.email = it },
                     label = { Text(stringResource(R.string.email)) },
-                    leadingIcon = {
+                    trailingIcon = {
                         Icon(
                             imageVector = Icons.Default.Email,
                             contentDescription = stringResource(R.string.email)
