@@ -91,12 +91,10 @@ fun ShiftsScreenContent(
         Row {
             Spacer(modifier = Modifier.fillMaxWidth(0.39f))
             Text(text = stringResource(id = R.string.morning),
-                fontStyle = FontStyle.Italic,
-                fontSize = 14.sp)
+                fontStyle = FontStyle.Italic)
             Spacer(modifier = Modifier.fillMaxWidth(0.49f))
             Text(text = stringResource(id = R.string.evening),
-                fontStyle = FontStyle.Italic,
-                fontSize = 14.sp)
+                fontStyle = FontStyle.Italic)
         }
         Row(
             modifier = Modifier.fillMaxWidth(),

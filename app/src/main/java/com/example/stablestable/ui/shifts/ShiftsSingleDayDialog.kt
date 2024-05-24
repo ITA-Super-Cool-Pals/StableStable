@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -117,7 +118,9 @@ fun CardContentEmpty(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
         ) {
-            Button(onClick = { onAddMeClick() }) {
+            Button(onClick = { onAddMeClick() },
+                shape = RoundedCornerShape(5.dp)
+            ) {
                 Text(text = stringResource(id = R.string.add_shift))
             }
         }
@@ -149,7 +152,8 @@ fun CardContentFull(
         if (isMyShift) {
             Button(modifier = Modifier
                 .align(Alignment.CenterHorizontally),
-                onClick = { onRemoveMeClick() }
+                onClick = { onRemoveMeClick() },
+                shape = RoundedCornerShape(5.dp)
             ) {
                 Text(text = stringResource(id = R.string.remove_shift))
             }
