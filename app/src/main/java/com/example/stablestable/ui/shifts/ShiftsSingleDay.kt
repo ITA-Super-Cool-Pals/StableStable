@@ -101,11 +101,7 @@ fun ShiftsSingleDay(
             }
 
         ) {
-            Text(text = stringResource(id = R.string.morning) ,modifier = Modifier.align(Alignment.TopCenter),
-                fontSize = 12.sp,
-                fontStyle = FontStyle.Italic,
-                color = MaterialTheme.colorScheme.outlineVariant
-            )
+
 
             if (shiftMorn != null) {
                 Text(modifier = Modifier.align(Alignment.Center),text = shiftMorn.user)
@@ -136,11 +132,7 @@ fun ShiftsSingleDay(
             }
         ) {
 
-            Text(text = stringResource(id = R.string.evening) ,modifier = Modifier.align(Alignment.TopCenter),
-                fontSize = 12.sp,
-                fontStyle = FontStyle.Italic,
-                color = MaterialTheme.colorScheme.outlineVariant
-            )
+
 
             if (shiftEve != null) {
                 Text(modifier = Modifier.align(Alignment.Center),text = shiftEve.user)
