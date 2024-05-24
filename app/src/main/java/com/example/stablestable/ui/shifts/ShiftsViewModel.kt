@@ -26,7 +26,7 @@ class ShiftsViewModel(
 ) : ViewModel() {
 
     init {
-        val dateInit: LocalDate = LocalDate.now();
+        val dateInit: LocalDate = LocalDate.now()
         val currentWeekOfYearInit: Int = dateInit.get(WeekFields.of(Locale.GERMAN).weekOfYear())
         getCurrentShifts(currentWeekOfYearInit)
     }
@@ -36,10 +36,12 @@ class ShiftsViewModel(
     var isMyShift by mutableStateOf(true)
 
 
-    private val date: LocalDate = LocalDate.now();
+    private val date: LocalDate = LocalDate.now()
     private val currentWeekOfYear: Int = date.get(WeekFields.of(Locale.GERMAN).weekOfYear())
     var currentWeek by mutableIntStateOf(currentWeekOfYear)
 
+
+    val currentUserId = authViewModel.userId?:""
     var viewedWeek: Int = currentWeek
     var viewedDay: Int = 0
     var viewedSegment: String = ""
@@ -51,8 +53,8 @@ class ShiftsViewModel(
 
 
 
+
     fun checkCurrentUser(id: String){
-        val currentUserId = authViewModel.userId?:""
 
         isMyShift = currentUserId == id
 
@@ -87,17 +89,18 @@ class ShiftsViewModel(
                 try {
                     authViewModel.currentUserProfile.collect { currentUser ->
                         if (currentUser != null) {
-                            val currentUserName = currentUser.firstName
+
                             viewedUser = currentUser.firstName
 
                             val currentUserId = authViewModel.userId ?: ""
+                            viewedUserId = currentUserId
 
                             shiftsService.addShift(
                                 Shift(
                                     viewedWeek,
                                     viewedDay,
-                                    currentUserName,
-                                    currentUserId,
+                                    viewedUser,
+                                    viewedUserId,
                                     viewedSegment
                                 )
                             )
