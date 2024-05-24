@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.example.stablestable.R
 import com.example.stablestable.components.CreateScaffold
+import com.example.stablestable.navigation.Screen
 
 @Composable
 fun HomeScreen(
@@ -16,7 +17,12 @@ fun HomeScreen(
 ) {
     CreateScaffold(
         content = {paddingValues ->
-        CreateHomeScreen(paddingValues)
+        CreateHomeScreen(
+            paddingValues,
+            goToRiders = goToRiders,
+            goToHorses = goToHorses,
+            goToShifts = goToShifts
+        )
         },
         goToHome = goToHome,
         goToRiders = goToRiders,
@@ -24,6 +30,7 @@ fun HomeScreen(
         goToHorses = goToHorses,
         goToMyProfile = goToMyProfile,
         onLogout = onLogout,
-        screen = stringResource(R.string.home)
+        screen = stringResource(R.string.home),
+        currentScreen = Screen.HomeScreen.route
     )
 }

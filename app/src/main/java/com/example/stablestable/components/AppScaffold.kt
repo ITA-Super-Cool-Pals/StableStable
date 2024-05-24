@@ -32,11 +32,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -47,7 +43,7 @@ import com.example.stablestable.data.classes.NavigationBarItem
 import com.example.stablestable.ui.home.HomeViewModel
 import kotlinx.coroutines.launch
 
-
+//Lykke
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CreateScaffold(
@@ -58,7 +54,8 @@ fun CreateScaffold(
     goToShifts: () -> Unit,
     goToHorses: () -> Unit,
     goToMyProfile: () -> Unit,
-    onLogout: () -> Unit
+    onLogout: () -> Unit,
+    currentScreen: String
 ) {
     val viewModel = viewModel<HomeViewModel>()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
@@ -68,28 +65,28 @@ fun CreateScaffold(
     val items = listOf(
         NavigationBarItem(
             title = stringResource(R.string.riders),
-            route = "riders",
+            route = "stableUsers_screen",
             selectedIcon = Icons.Filled.Person,
             unselectedIcon = Icons.Outlined.Person,
             hasNews = false,
         ),
         NavigationBarItem(
             title = stringResource(R.string.horses),
-            route = "horses",
+            route = "stableHorses_screen",
             selectedIcon = Icons.Filled.BedroomBaby,
             unselectedIcon = Icons.Outlined.BedroomBaby,
             hasNews = false,
         ),
         NavigationBarItem(
             title = stringResource(R.string.home),
-            route = "home",
+            route = "home_screen",
             selectedIcon = Icons.Filled.Home,
             unselectedIcon = Icons.Outlined.Home,
             hasNews = false,
         ),
         NavigationBarItem(
             title = stringResource(R.string.shifts),
-            route = "shifts",
+            route = "shifts_screen",
             selectedIcon = Icons.Filled.DateRange,
             unselectedIcon = Icons.Outlined.DateRange,
             hasNews = false,
@@ -102,10 +99,7 @@ fun CreateScaffold(
             hasNews = false,
         )
     )
-    var selectedItemIndex by rememberSaveable {
-        mutableStateOf(2)
-    }
-
+    //Emily
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
@@ -117,6 +111,7 @@ fun CreateScaffold(
                 }
             }
         },
+        //Lykke
         content = {
             Scaffold(
                 modifier = Modifier
@@ -164,16 +159,15 @@ fun CreateScaffold(
                 },
                 bottomBar = {
                     NavigationBar {
-                        items.forEachIndexed { index, item ->
+                        items.forEach { item ->
                             NavigationBarItem(
-                                selected = selectedItemIndex == index,
+                                selected = item.route == currentScreen,
                                 onClick = {
-                                    selectedItemIndex = index
                                     when (item.route) {
-                                        "riders" -> goToRiders()
-                                        "home" -> goToHome()
-                                        "shifts" -> goToShifts()
-                                        "horses" -> goToHorses()
+                                        "stableUsers_screen" -> goToRiders()
+                                        "home_screen" -> goToHome()
+                                        "shifts_screen" -> goToShifts()
+                                        "stableHorses_screen" -> goToHorses()
                                     }
                                 },
                                 label = {
@@ -192,7 +186,7 @@ fun CreateScaffold(
                                         }
                                     ) {
                                         Icon(
-                                            imageVector = if (index == selectedItemIndex) {
+                                            imageVector = if (item.route == currentScreen) {
                                                 item.selectedIcon
                                             } else item.unselectedIcon,
                                             contentDescription = item.title
