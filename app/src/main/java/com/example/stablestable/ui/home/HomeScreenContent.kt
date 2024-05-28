@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.example.stablestable.R
 import com.example.stablestable.components.CreateBigButton
-
+//Lykke
 @Composable
 fun CreateHomeScreen(
     paddingValues: PaddingValues,
