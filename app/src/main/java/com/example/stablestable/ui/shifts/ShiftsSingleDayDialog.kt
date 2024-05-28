@@ -28,6 +28,12 @@ import androidx.compose.ui.window.Dialog
 import com.example.stablestable.R
 import com.example.stablestable.ui.theme.StableStableTheme
 
+
+/*
+    Filen er skrevet af Josef
+
+ */
+
 @Composable
 fun ShiftsSingleDayDialog(
     displayedDay: Int,
@@ -48,8 +54,8 @@ fun ShiftsSingleDayDialog(
         stringResource(id = R.string.sat),
         stringResource(id = R.string.sun)
     )
-    val segmentOfDay = when(displayedTime){
-        "evening" ->  stringResource(id = R.string.evening)
+    val segmentOfDay = when (displayedTime) {
+        "evening" -> stringResource(id = R.string.evening)
         "morning" -> stringResource(id = R.string.morning)
         else -> ""
     }
@@ -60,9 +66,7 @@ fun ShiftsSingleDayDialog(
         Card(
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.surfaceVariant
-            ),
-            modifier = Modifier
-                .size(width = 300.dp, height = 250.dp)
+            ), modifier = Modifier.size(width = 300.dp, height = 250.dp)
 
 
         ) {
@@ -75,8 +79,7 @@ fun ShiftsSingleDayDialog(
             ) {
                 Text(text = weekDayList[displayedDay], fontWeight = FontWeight.Medium)
                 Text(
-                    text = segmentOfDay,
-                    fontWeight = FontWeight.Medium
+                    text = segmentOfDay, fontWeight = FontWeight.Medium
                 )
             }
 
@@ -88,9 +91,7 @@ fun ShiftsSingleDayDialog(
 
             Box(Modifier.fillMaxSize()) {
                 TextButton(
-                    onClick = { onDismissRequest() },
-                    modifier = Modifier
-                        .align(Alignment.BottomEnd)
+                    onClick = { onDismissRequest() }, modifier = Modifier.align(Alignment.BottomEnd)
                 ) {
                     Text(text = stringResource(id = R.string.close))
                 }
@@ -115,11 +116,10 @@ fun CardContentEmpty(
 
         }
         Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
+            modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
         ) {
-            Button(onClick = { onAddMeClick() },
-                shape = RoundedCornerShape(5.dp)
+            Button(
+                onClick = { onAddMeClick() }, shape = RoundedCornerShape(5.dp)
             ) {
                 Text(text = stringResource(id = R.string.add_shift))
             }
@@ -130,28 +130,26 @@ fun CardContentEmpty(
 
 @Composable
 fun CardContentFull(
-    nameOnShift: String,
-    isMyShift: Boolean,
-    onRemoveMeClick: () -> Unit
+    nameOnShift: String, isMyShift: Boolean, onRemoveMeClick: () -> Unit
 ) {
-    Column(modifier = Modifier
-        .fillMaxWidth()
-        .padding(6.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(6.dp)
+    ) {
         Text(
             text = "${stringResource(id = R.string.full_shift)}:",
             fontSize = 18.sp,
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally)
+            modifier = Modifier.align(Alignment.CenterHorizontally)
         )
         Text(
             text = nameOnShift,
             fontSize = 18.sp,
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally)
+            modifier = Modifier.align(Alignment.CenterHorizontally)
         )
         if (isMyShift) {
-            Button(modifier = Modifier
-                .align(Alignment.CenterHorizontally),
+            Button(
+                modifier = Modifier.align(Alignment.CenterHorizontally),
                 onClick = { onRemoveMeClick() },
                 shape = RoundedCornerShape(5.dp)
             ) {
@@ -167,13 +165,13 @@ fun CardContentFull(
 @Composable
 fun DialogPreview() {
     StableStableTheme {
-        ShiftsSingleDayDialog(
-            displayedDay = 6,
+        ShiftsSingleDayDialog(displayedDay = 6,
             displayedTime = "Evening",
             currentShiftName = "John",
             dialog = "full",
             isMyShift = false,
-            {}, {}) {}
+            {},
+            {}) {}
     }
 }
 

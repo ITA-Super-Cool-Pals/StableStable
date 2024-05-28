@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Logout
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Logout
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -27,8 +26,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.stablestable.R
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 @Composable
 fun BurgerMenu(
@@ -46,8 +43,7 @@ fun BurgerMenu(
                 .padding(16.dp)
         ) {
             Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -58,8 +54,7 @@ fun BurgerMenu(
                     style = MaterialTheme.typography.headlineMedium
                 )
                 Icon(
-                    imageVector = Icons.Filled.Close,
-                    contentDescription = "Close menu"
+                    imageVector = Icons.Filled.Close, contentDescription = "Close menu"
                 )
             }
             Spacer(
@@ -70,14 +65,11 @@ fun BurgerMenu(
                     .background(MaterialTheme.colorScheme.outline)
                     .align(Alignment.CenterHorizontally)
             )
-            Row(
-                modifier = Modifier
-                    .clickable { onNavigate("Profile") }
-                    .fillMaxWidth()
-            ) {
+            Row(modifier = Modifier
+                .clickable { onNavigate("Profile") }
+                .fillMaxWidth()) {
                 Icon(
-                    imageVector = Icons.Filled.Person,
-                    contentDescription = "My Profile"
+                    imageVector = Icons.Filled.Person, contentDescription = "My Profile"
                 )
                 Text(
                     text = stringResource(R.string.myProfile),
@@ -86,14 +78,11 @@ fun BurgerMenu(
                 )
             }
             Spacer(modifier = Modifier.height(16.dp))
-            Row(
-                modifier = Modifier
-                    .clickable { onNavigate("Logout") }
-                    .fillMaxWidth()
-            ) {
+            Row(modifier = Modifier
+                .clickable { onNavigate("Logout") }
+                .fillMaxWidth()) {
                 Icon(
-                    imageVector = Icons.AutoMirrored.Filled.Logout,
-                    contentDescription = "Logout"
+                    imageVector = Icons.AutoMirrored.Filled.Logout, contentDescription = "Logout"
                 )
                 Text(
                     text = stringResource(R.string.logout),

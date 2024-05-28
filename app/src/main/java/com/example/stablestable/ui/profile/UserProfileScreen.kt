@@ -8,6 +8,12 @@ import com.example.stablestable.R
 import com.example.stablestable.components.CreateScaffold
 import com.example.stablestable.navigation.Screen
 
+/*
+    Filen er skrevet af Lykke
+
+ */
+
+
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun UserProfileScreen(
@@ -20,9 +26,9 @@ fun UserProfileScreen(
     onHorseClick: (String) -> Unit,
     onArrowBack: () -> Unit,
     userId: String
-){
+) {
     CreateScaffold(
-        content = {paddingValues ->
+        content = { paddingValues ->
             UserProfileScreenContent(userId, onHorseClick, paddingValues, onArrowBack)
         },
         goToHome = goToHome,

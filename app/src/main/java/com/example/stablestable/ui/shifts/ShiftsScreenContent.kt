@@ -9,30 +9,30 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.stablestable.R
 import com.example.stablestable.data.classes.Shift
 import com.example.stablestable.ui.theme.StableStableTheme
+
+/*
+    Filen er skrevet af Josef
+
+ */
 
 @Composable
 fun ShiftsScreenContent(
@@ -84,17 +84,23 @@ fun ShiftsScreenContent(
                     }
             )
         }
-        Spacer(modifier = Modifier
-            .fillMaxWidth()
-            .height(50.dp))
+        Spacer(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(50.dp)
+        )
 
         Row {
             Spacer(modifier = Modifier.fillMaxWidth(0.39f))
-            Text(text = stringResource(id = R.string.morning),
-                fontStyle = FontStyle.Italic)
+            Text(
+                text = stringResource(id = R.string.morning),
+                fontStyle = FontStyle.Italic
+            )
             Spacer(modifier = Modifier.fillMaxWidth(0.49f))
-            Text(text = stringResource(id = R.string.evening),
-                fontStyle = FontStyle.Italic)
+            Text(
+                text = stringResource(id = R.string.evening),
+                fontStyle = FontStyle.Italic
+            )
         }
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -122,12 +128,14 @@ fun VagtPrev() {
         ShiftsScreenContent(
             paddingValues = PaddingValues(6.dp),
             week = 13,
-            shifts = listOf(Shift(
-                13,
-                3,
-                "John",
-                "morning"
-            )),
+            shifts = listOf(
+                Shift(
+                    13,
+                    3,
+                    "John",
+                    "morning"
+                )
+            ),
             onPreviousWeek = { },
             onNextWeek = { }) { _, _, _, _ ->
         }

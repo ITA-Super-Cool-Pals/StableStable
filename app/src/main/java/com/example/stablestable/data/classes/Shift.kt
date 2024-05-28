@@ -1,5 +1,10 @@
 package com.example.stablestable.data.classes
 
+/*
+    Filen er skrevet af Josef
+
+ */
+
 
 data class Shift(
     // kode på uge/dag/time, fx. 13wedMORN eller 43tueEVEN
@@ -8,6 +13,7 @@ data class Shift(
     val dayOfWeek: Int = 0,
     val user: String = "",
     val userId: String = "",
+
     // Morning/Evening
     val shiftTime: String = ""
 )
