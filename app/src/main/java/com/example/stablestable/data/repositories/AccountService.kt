@@ -4,6 +4,11 @@ import com.example.stablestable.data.classes.HorseFeed
 import com.example.stablestable.data.classes.HorseProfile
 import com.example.stablestable.data.classes.UserProfile
 
+/*
+    Filen er skrevet af Josef
+
+ */
+
 interface AccountService {
     suspend fun getUserById(userId: String): UserProfile?
     suspend fun getCurrentUser(userId: String): UserProfile?

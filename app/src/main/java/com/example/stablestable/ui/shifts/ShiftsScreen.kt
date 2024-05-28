@@ -11,6 +11,11 @@ import com.example.stablestable.components.CreateScaffold
 import com.example.stablestable.data.classes.Shift
 import com.example.stablestable.navigation.Screen
 
+/*
+    Scaffold lavet af Lykke.
+    Content og dialog lavet af Josef
+ */
+
 @Composable
 fun ShiftsScreen(
     goToHome: () -> Unit,
@@ -24,34 +29,35 @@ fun ShiftsScreen(
     val shiftsWithFlowState = viewModel.shifts.collectAsState()
 
     CreateScaffold(
-        content = {paddingValues ->
+        content = { paddingValues ->
 
-                ShiftsScreenContent(
-                    paddingValues,
-                    week = viewModel.currentWeek,
-                    shifts = shiftsWithFlowState.value,
-                    onNextWeek = {
-                        viewModel.currentWeek ++
-                        viewModel.viewedWeek = viewModel.currentWeek
-                        viewModel.getCurrentShifts(viewModel.viewedWeek) },
-                    onPreviousWeek = {
-                        viewModel.currentWeek --
-                        viewModel.viewedWeek = viewModel.currentWeek
-                        viewModel.getCurrentShifts(viewModel.viewedWeek)
-                                     Log.d(TAG,"erro: ${viewModel.shifts.value}")},
-                    onShiftsBoxClick = { i: Int, s: String, s1: String, sh: Shift? ->
-                        viewModel.viewedDay = i
-                        viewModel.viewedSegment = s
-                        viewModel.viewedUser = s1
-                        viewModel.openShiftDialog = true
-                         if (sh != null) {
-                             viewModel.dialogContentState ="full"
-                             viewModel.viewedUserId = sh.userId
-                             viewModel.checkCurrentUser(viewModel.viewedUserId)
-                        } else {
-                             viewModel.dialogContentState ="empty"
-                        }
-                    })
+            ShiftsScreenContent(paddingValues,
+                week = viewModel.currentWeek,
+                shifts = shiftsWithFlowState.value,
+                onNextWeek = {
+                    viewModel.currentWeek++
+                    viewModel.viewedWeek = viewModel.currentWeek
+                    viewModel.getCurrentShifts(viewModel.viewedWeek)
+                },
+                onPreviousWeek = {
+                    viewModel.currentWeek--
+                    viewModel.viewedWeek = viewModel.currentWeek
+                    viewModel.getCurrentShifts(viewModel.viewedWeek)
+                    Log.d(TAG, "erro: ${viewModel.shifts.value}")
+                },
+                onShiftsBoxClick = { i: Int, s: String, s1: String, sh: Shift? ->
+                    viewModel.viewedDay = i
+                    viewModel.viewedSegment = s
+                    viewModel.viewedUser = s1
+                    viewModel.openShiftDialog = true
+                    if (sh != null) {
+                        viewModel.dialogContentState = "full"
+                        viewModel.viewedUserId = sh.userId
+                        viewModel.checkCurrentUser(viewModel.viewedUserId)
+                    } else {
+                        viewModel.dialogContentState = "empty"
+                    }
+                })
 
 
         },
@@ -68,8 +74,7 @@ fun ShiftsScreen(
     // Opening and closing the dialog
     when {
         viewModel.openShiftDialog -> {
-            ShiftsSingleDayDialog(
-                displayedDay = viewModel.viewedDay,
+            ShiftsSingleDayDialog(displayedDay = viewModel.viewedDay,
                 displayedTime = viewModel.viewedSegment,
                 currentShiftName = viewModel.viewedUser,
                 dialog = viewModel.dialogContentState,

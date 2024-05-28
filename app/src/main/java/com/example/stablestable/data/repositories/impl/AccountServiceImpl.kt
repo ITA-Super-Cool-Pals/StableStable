@@ -9,15 +9,15 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
-import kotlinx.coroutines.tasks.await
 import com.google.firebase.firestore.toObject
+import kotlinx.coroutines.tasks.await
 
 /*
  * Firebase Account and Database interaction
  * Code by Emily & Josef
  */
 
-class AccountServiceImpl: AccountService {
+class AccountServiceImpl : AccountService {
     private val db: FirebaseFirestore = Firebase.firestore
     private val auth: FirebaseAuth = Firebase.auth
 
@@ -49,8 +49,8 @@ class AccountServiceImpl: AccountService {
 
     // Add a horse to the database
     override suspend fun addHorse(horseProfile: HorseProfile) {
-       val horseDocRef = db.collection("horses").document()
-       horseDocRef.set(horseProfile)
+        val horseDocRef = db.collection("horses").document()
+        horseDocRef.set(horseProfile)
     }
 
     // Get all horses by owner id

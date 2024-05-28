@@ -15,7 +15,12 @@ import com.example.stablestable.navigation.AuthViewModel
 import kotlinx.coroutines.launch
 
 
-class UserProfileViewModel: ViewModel() {
+/*
+    Filen er skrevet af Emily og Josef
+
+ */
+
+class UserProfileViewModel : ViewModel() {
     private val authViewModel: AuthViewModel = AuthViewModel()
     private val accountService: AccountServiceImpl = AccountServiceImpl()
 
@@ -26,8 +31,10 @@ class UserProfileViewModel: ViewModel() {
 
     // Save list of users current horses
     var horseList = mutableStateListOf<HorseItem>()
+
     // Save state for showing horse add button
     var showAddHorseButton by mutableStateOf(false)
+
     // Save state for showing horse creation window
     var showHorseCreateWindow by mutableStateOf(false)
 
@@ -69,15 +76,16 @@ class UserProfileViewModel: ViewModel() {
     fun getHorses(userId: String) {
         viewModelScope.launch {
             try {
-                val horses: List<Pair<String, HorseProfile?>> = accountService.getHorsesByOwnerId(userId)
+                val horses: List<Pair<String, HorseProfile?>> =
+                    accountService.getHorsesByOwnerId(userId)
                 horseList.clear()
                 horses.forEach { (horseId, horseProfile) ->
                     if (horseProfile != null) {
                         horseList.add(HorseItem(horseId, horseProfile.name))
                     }
                 }
-            } catch (e: Exception){
-                Log.d(TAG,"Get Horses Error: ${e.message.toString()}")
+            } catch (e: Exception) {
+                Log.d(TAG, "Get Horses Error: ${e.message.toString()}")
             }
         }
     }

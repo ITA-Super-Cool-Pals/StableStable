@@ -42,6 +42,11 @@ import com.example.stablestable.R
 import com.example.stablestable.components.ArrowBack
 import com.example.stablestable.ui.horses.HorseCreateScreen
 
+/*
+    Filen er skrevet af Emily
+
+ */
+
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -50,7 +55,7 @@ fun UserProfileScreenContent(
     onHorseClick: (String) -> Unit,
     paddingValues: PaddingValues,
     onArrowBack: () -> Unit
-){
+) {
 
     val userProfileViewModel: UserProfileViewModel = viewModel()
 
@@ -63,10 +68,12 @@ fun UserProfileScreenContent(
         modifier = Modifier
             .fillMaxSize()
             .padding(paddingValues)
-    ){
-        Column(modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)) {
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
             ArrowBack {
                 onArrowBack()
             }
@@ -85,8 +92,7 @@ fun UserProfileScreenContent(
                 Text(
                     text = userProfileViewModel.fullName,
                     fontSize = 26.sp,
-                    modifier = Modifier
-                        .align(Alignment.CenterVertically)
+                    modifier = Modifier.align(Alignment.CenterVertically)
                 )
             }
 
@@ -122,8 +128,7 @@ fun UserProfileScreenContent(
                         )
                     }
                     Column(
-                        modifier = Modifier
-                            .padding(start = 10.dp)
+                        modifier = Modifier.padding(start = 10.dp)
                     ) {
                         // Phone
                         Text(text = stringResource(R.string.phone), color = Color.Gray)
@@ -197,17 +202,14 @@ fun UserProfileScreenContent(
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         userProfileViewModel.horseList.forEach { horseItem ->
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
+                            Row(verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.SpaceBetween,
                                 modifier = Modifier
                                     .clickable { onHorseClick(horseItem.horseId) }
                                     .fillMaxWidth()
-                                    .padding(start = 20.dp, end = 20.dp)
-                            ) {
+                                    .padding(start = 20.dp, end = 20.dp)) {
                                 Text(
-                                    text = horseItem.horseName,
-                                    fontSize = 30.sp
+                                    text = horseItem.horseName, fontSize = 30.sp
                                 )
                                 Icon(
                                     imageVector = Icons.Default.Visibility,
@@ -239,21 +241,20 @@ fun UserProfileScreenContent(
                             Button(
                                 onClick = {
                                     userProfileViewModel.showHorseCreateWindow = true
-                                },
-                                shape = RoundedCornerShape(5.dp)
+                                }, shape = RoundedCornerShape(5.dp)
                             ) {
                                 Text(stringResource(R.string.addHorse))
                             }
 
                             // Show the creation window if button is pressed
                             if (userProfileViewModel.showHorseCreateWindow) {
-                                HorseCreateScreen(
-                                    onConfirm = {
+                                HorseCreateScreen(onConfirm = {
+                                    userProfileViewModel.showHorseCreateWindow = false
+                                    userProfileViewModel.getHorses(userId)
+                                },
+                                    onDismiss = {
                                         userProfileViewModel.showHorseCreateWindow = false
-                                        userProfileViewModel.getHorses(userId)
-                                    },
-                                    onDismiss = { userProfileViewModel.showHorseCreateWindow = false }
-                                )
+                                    })
                             }
                         }
                     }

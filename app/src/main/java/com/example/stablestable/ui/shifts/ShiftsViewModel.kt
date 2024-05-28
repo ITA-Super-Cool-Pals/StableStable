@@ -20,6 +20,21 @@ import java.time.LocalDate
 import java.time.temporal.WeekFields
 import java.util.Locale
 
+/*
+
+    Denne fil er skrevet af Josef
+
+    Mulig forvirring:
+        viewed-values:
+            Disse bliver alle opdateret på clicks, når brugeren går ind på en bestemt vagt.
+
+        shifts med flow:
+            Jeg laver et mutable state flow, som jeg opdaterer fra databasen via ShiftsService
+            Hver gang jeg skal bruge værdien, getter jeg et non-mutable state flow fra ovenstående
+
+ */
+
+
 class ShiftsViewModel(
     private val shiftsService: ShiftsServiceImpl = ShiftsServiceImpl(),
     private val authViewModel: AuthViewModel = AuthViewModel()
@@ -41,7 +56,7 @@ class ShiftsViewModel(
     var currentWeek by mutableIntStateOf(currentWeekOfYear)
 
 
-    val currentUserId = authViewModel.userId?:""
+    val currentUserId = authViewModel.userId ?: ""
     var viewedWeek: Int = currentWeek
     var viewedDay: Int = 0
     var viewedSegment: String = ""
@@ -49,31 +64,20 @@ class ShiftsViewModel(
     var viewedUserId = ""
 
 
-
-
-
-
-
-    fun checkCurrentUser(id: String){
-
+    fun checkCurrentUser(id: String) {
         isMyShift = currentUserId == id
-
     }
 
 
-
-
-
     private val currentShift: Shift
-        get() =
-            Shift(viewedWeek, viewedDay, viewedUser,viewedUserId, viewedSegment)
+        get() = Shift(viewedWeek, viewedDay, viewedUser, viewedUserId, viewedSegment)
 
 
     private val _shifts = MutableStateFlow<List<Shift>>(emptyList())
     val shifts: StateFlow<List<Shift>>
         get() = _shifts
 
-    fun getCurrentShifts(week:Int) {
+    fun getCurrentShifts(week: Int) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 shiftsService.shiftsWithFlow().collect { list ->
@@ -97,11 +101,7 @@ class ShiftsViewModel(
 
                             shiftsService.addShift(
                                 Shift(
-                                    viewedWeek,
-                                    viewedDay,
-                                    viewedUser,
-                                    viewedUserId,
-                                    viewedSegment
+                                    viewedWeek, viewedDay, viewedUser, viewedUserId, viewedSegment
                                 )
                             )
 
@@ -116,11 +116,13 @@ class ShiftsViewModel(
 
     fun removeShift() {
         viewModelScope.launch {
-            try {
-                shiftsService.removeShift(currentShift.shiftCode)
-                Log.d(TAG, "Message: Removed")
-            } catch (e: Exception) {
-                Log.d(TAG, "Message: $e")
+            withContext(Dispatchers.IO) {
+                try {
+                    shiftsService.removeShift(currentShift.shiftCode)
+                    Log.d(TAG, "Message: Removed")
+                } catch (e: Exception) {
+                    Log.d(TAG, "Message: $e")
+                }
             }
         }
 

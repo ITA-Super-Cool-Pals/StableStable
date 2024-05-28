@@ -13,21 +13,25 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
 
+/*
+ *   Filen er skrevet af Josef
+ *
+ */
+
 class ShiftsServiceImpl : ShiftsService {
     private val db: FirebaseFirestore = Firebase.firestore
 
 
-
-    override fun shiftsWithFlow(): Flow<List<Shift>>{
+    override fun shiftsWithFlow(): Flow<List<Shift>> {
         return callbackFlow {
             val dbSnapshot = db.collection("shifts")
 
             dbSnapshot.addSnapshotListener { value, error ->
-                error?.let{
+                error?.let {
                     this.close(it)
 
                 }
-                value?.let{
+                value?.let {
                     // Check if value can be casted as Shift
                     // if not, return empty list
 
@@ -38,10 +42,10 @@ class ShiftsServiceImpl : ShiftsService {
                     try {
                         val data = value.toObjects(Shift::class.java)
                         this.trySend(data)
-                    } catch (e: Exception){
+                    } catch (e: Exception) {
                         val data = emptyList<Shift>()
                         this.trySend(data)
-                        Log.d(TAG,"Exception at shift collection: $e")
+                        Log.d(TAG, "Exception at shift collection: $e")
 
                     }
 
@@ -49,14 +53,12 @@ class ShiftsServiceImpl : ShiftsService {
                 }
 
             }
-            awaitClose { this.cancel()}
+            awaitClose { this.cancel() }
         }
     }
 
 
-
-
-    override suspend fun getCurrentWeekShifts(week:Int): List<Shift> {
+    override suspend fun getCurrentWeekShifts(week: Int): List<Shift> {
         val shiftList = mutableListOf<Shift>()
         //val query = db.collection("shifts").whereEqualTo("weekNumber", week)
 
