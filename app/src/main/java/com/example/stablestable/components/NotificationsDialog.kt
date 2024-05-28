@@ -10,6 +10,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.stablestable.R
 import com.example.stablestable.ui.home.HomeViewModel
 
+//Lykke
 @Composable
  fun NotificationsDialog(
     //listOfNotifications: List<String>,

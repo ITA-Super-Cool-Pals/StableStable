@@ -6,6 +6,7 @@ import com.example.stablestable.R
 import com.example.stablestable.components.CreateScaffold
 import com.example.stablestable.navigation.Screen
 
+//Lykke
 @Composable
 fun HomeScreen(
     goToRiders: () -> Unit,
