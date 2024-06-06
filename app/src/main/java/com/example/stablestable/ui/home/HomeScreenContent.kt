@@ -17,7 +17,8 @@ fun CreateHomeScreen(
     paddingValues: PaddingValues,
     goToRiders: () -> Unit,
     goToHorses: () -> Unit,
-    goToShifts: () -> Unit
+    goToShifts: () -> Unit,
+    goToBoard: () -> Unit
     ) {
     Box(
         modifier = Modifier
@@ -39,7 +40,7 @@ fun CreateHomeScreen(
                 goToShifts
             )
             CreateBigButton(screen = stringResource(R.string.board),
-                goToRiders)
+                goToBoard)
         }
     }
 }

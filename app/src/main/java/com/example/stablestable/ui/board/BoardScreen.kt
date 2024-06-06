@@ -1,13 +1,12 @@
-package com.example.stablestable.ui.home
+package com.example.stablestable.ui.board
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.example.stablestable.R
 import com.example.stablestable.components.CreateScaffold
-
 //Lykke
 @Composable
-fun HomeScreen(
+fun BoardScreen(
     goToRiders: () -> Unit,
     goToHome: () -> Unit,
     goToShifts: () -> Unit,
@@ -16,25 +15,21 @@ fun HomeScreen(
     currentScreen: String,
     goToMyProfile: () -> Unit,
     onLogout: () -> Unit
-) {
+){
     CreateScaffold(
         content = {paddingValues ->
-        CreateHomeScreen(
-            paddingValues,
-            goToRiders = goToRiders,
-            goToHorses = goToHorses,
-            goToShifts = goToShifts,
-            goToBoard = goToBoard
-        )
+            BoardScreenContent(
+                paddingValues
+            )
         },
         goToHome = goToHome,
         goToRiders = goToRiders,
         goToShifts = goToShifts,
         goToHorses = goToHorses,
-        goToBoard = goToBoard,
         goToMyProfile = goToMyProfile,
+        goToBoard = goToBoard,
         onLogout = onLogout,
-        screen = stringResource(R.string.home),
+        screen = stringResource(R.string.board),
         currentScreen = currentScreen
     )
 }

@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.example.stablestable.R
 import com.example.stablestable.components.CreateScaffold
-import com.example.stablestable.navigation.Screen
 
 /*
     Filen er skrevet af Lykke
@@ -22,9 +21,11 @@ fun UserProfileScreen(
     goToShifts: () -> Unit,
     goToHorses: () -> Unit,
     goToMyProfile: () -> Unit,
+    goToBoard: () -> Unit,
     onLogout: () -> Unit,
     onHorseClick: (String) -> Unit,
     onArrowBack: () -> Unit,
+    currentScreen: String,
     userId: String
 ) {
     CreateScaffold(
@@ -36,9 +37,10 @@ fun UserProfileScreen(
         goToShifts = goToShifts,
         goToHorses = goToHorses,
         goToMyProfile = goToMyProfile,
+        goToBoard = goToBoard,
         onLogout = onLogout,
         screen = stringResource(R.string.riders),
-        currentScreen = Screen.StableUsers.route
+        currentScreen = currentScreen
 
     )
 }

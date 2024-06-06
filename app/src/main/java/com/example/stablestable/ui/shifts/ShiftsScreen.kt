@@ -9,7 +9,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.stablestable.R
 import com.example.stablestable.components.CreateScaffold
 import com.example.stablestable.data.classes.Shift
-import com.example.stablestable.navigation.Screen
 
 /*
     Scaffold lavet af Lykke.
@@ -22,8 +21,10 @@ fun ShiftsScreen(
     goToRiders: () -> Unit,
     goToShifts: () -> Unit,
     goToHorses: () -> Unit,
+    goToBoard: () -> Unit,
     goToMyProfile: () -> Unit,
     onLogout: () -> Unit,
+    currentScreen: String,
     viewModel: ShiftsViewModel = viewModel<ShiftsViewModel>()
 ) {
     val shiftsWithFlowState = viewModel.shifts.collectAsState()
@@ -65,10 +66,11 @@ fun ShiftsScreen(
         goToRiders = goToRiders,
         goToShifts = goToShifts,
         goToHorses = goToHorses,
+        goToBoard = goToBoard,
         goToMyProfile = goToMyProfile,
         onLogout = onLogout,
+        currentScreen = currentScreen,
         screen = stringResource(R.string.shifts),
-        currentScreen = Screen.ShiftsScreen.route
     )
 
     // Opening and closing the dialog

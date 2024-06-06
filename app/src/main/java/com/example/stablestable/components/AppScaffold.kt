@@ -3,15 +3,15 @@ package com.example.stablestable.components
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.Message
-import androidx.compose.material.icons.automirrored.outlined.Message
 import androidx.compose.material.icons.filled.BedroomBaby
+import androidx.compose.material.icons.filled.ChatBubbleOutline
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.outlined.BedroomBaby
+import androidx.compose.material.icons.outlined.ChatBubbleOutline
 import androidx.compose.material.icons.outlined.DateRange
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Person
@@ -54,6 +54,7 @@ fun CreateScaffold(
     goToShifts: () -> Unit,
     goToHorses: () -> Unit,
     goToMyProfile: () -> Unit,
+    goToBoard: () -> Unit,
     onLogout: () -> Unit,
     currentScreen: String
 ) {
@@ -93,9 +94,9 @@ fun CreateScaffold(
         ),
         NavigationBarItem(
             title = stringResource(R.string.board),
-            route = "board",
-            selectedIcon = Icons.AutoMirrored.Filled.Message,
-            unselectedIcon = Icons.AutoMirrored.Outlined.Message,
+            route = "board_screen",
+            selectedIcon = Icons.Filled.ChatBubbleOutline,
+            unselectedIcon = Icons.Outlined.ChatBubbleOutline,
             hasNews = false,
         )
     )
@@ -160,6 +161,8 @@ fun CreateScaffold(
                 bottomBar = {
                     NavigationBar {
                         items.forEach { item ->
+                            val isSelected = item.route == currentScreen
+                            println("Item route: ${item.route}, currentScreen: $currentScreen, isSelected: $isSelected")
                             NavigationBarItem(
                                 selected = item.route == currentScreen,
                                 onClick = {
@@ -168,6 +171,7 @@ fun CreateScaffold(
                                         "home_screen" -> goToHome()
                                         "shifts_screen" -> goToShifts()
                                         "stableHorses_screen" -> goToHorses()
+                                        "board_screen" -> goToBoard()
                                     }
                                 },
                                 label = {

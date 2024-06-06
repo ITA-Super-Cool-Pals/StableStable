@@ -70,7 +70,8 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
     implementation("com.google.firebase:firebase-auth") // Firebase Authentication
     implementation("com.google.firebase:firebase-firestore-ktx")
-    implementation("androidx.compose.material3:material3-android:1.2.1") // Firestore
+    implementation("androidx.compose.material3:material3-android:1.2.1")
+    implementation("androidx.compose.runtime:runtime-livedata:1.6.7") // Firestore
 
     // When using the BoM, don't specify versions in Firebase dependencies
     // https://firebase.google.com/docs/android/setup#available-libraries

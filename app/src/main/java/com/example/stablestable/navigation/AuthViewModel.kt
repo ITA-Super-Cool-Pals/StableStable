@@ -2,6 +2,8 @@ package com.example.stablestable.navigation
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.stablestable.data.classes.UserProfile
@@ -35,7 +37,8 @@ class AuthViewModel : ViewModel() {
     val currentUserProfile: StateFlow<UserProfile?> = _currentUserProfile
 
     //Lykke
-    private val _currentScreen = mutableStateOf<String?>(null)
+    private val _currentScreen = MutableLiveData<String>()
+    val currentScreen: LiveData<String> get() = _currentScreen
 
 
     init {

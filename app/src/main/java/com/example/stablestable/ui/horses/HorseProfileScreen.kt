@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.example.stablestable.R
 import com.example.stablestable.components.CreateScaffold
-import com.example.stablestable.navigation.Screen
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -16,6 +15,8 @@ fun HorseProfileScreen(
     goToShifts: () -> Unit,
     goToHorses: () -> Unit,
     goToMyProfile: () -> Unit,
+    goToBoard: () -> Unit,
+    currentScreen: String,
     onLogout: () -> Unit,
     onArrowBack: () -> Unit,
     horseId: String
@@ -29,10 +30,10 @@ fun HorseProfileScreen(
         goToShifts = goToShifts,
         goToHorses = goToHorses,
         goToMyProfile = goToMyProfile,
+        goToBoard = goToBoard,
         onLogout = onLogout,
         screen = stringResource(R.string.horses),
-        currentScreen = Screen.StableHorses.route
-
+        currentScreen = currentScreen
     )
 }
 
