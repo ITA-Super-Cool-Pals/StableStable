@@ -1,19 +1,33 @@
 package com.example.stablestable.ui.board
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Send
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Send
+import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.stablestable.R
 import com.example.stablestable.components.MessageList
 
 @Composable
 fun BoardScreenContent(
     paddingValues: PaddingValues
 ){
-    val boardViewModel: BoardViewModel = viewModel()
+    val viewModel: BoardViewModel = viewModel()
     val sampleMessages = List(100) { "Message #$it" }
 
     Box(
@@ -21,7 +35,28 @@ fun BoardScreenContent(
             .fillMaxSize()
             .padding(paddingValues)
     ) {
-        MessageList(messages = sampleMessages)
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight() // Wrap content height to avoid filling the entire screen height
+                .padding(horizontal = 16.dp), // Add horizontal padding to center the input field
+            horizontalAlignment = Alignment.CenterHorizontally
+        ){
+
+            OutlinedTextField(
+                value = viewModel.inputFieldText,
+                onValueChange = { viewModel.inputFieldText = it },
+                label = { Text(stringResource(R.string.post)) },
+                trailingIcon = {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.Send,
+                        contentDescription = stringResource(R.string.post)
+                    )
+                }
+            )
+
+            MessageList(messages = sampleMessages)
+        }
     }
 
 }
