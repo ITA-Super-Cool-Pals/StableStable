@@ -1,5 +1,6 @@
 <resources>
     <!-- Global -->
+    <string name="writePost">Skriv besked...</string>
     <string name="appName" translatable="false">StableStable</string>
     <string name="notifications">Notifikationer</string>
     <string name="close">Luk</string>
@@ -78,9 +79,6 @@
     <string name="add_shift">Tilføj mig til denne vagt</string>
     <string name="full_shift">Denne vagt er optaget af</string>
     <string name="remove_shift">Fjern mig fra denne vagt</string>
-
-    <!-- Board Screen -->
-    <string name="post">Fællesbesked</string>
 
 
 </resources>

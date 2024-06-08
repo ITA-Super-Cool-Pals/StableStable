@@ -19,7 +19,7 @@ fun BoardScreen(
     CreateScaffold(
         content = {paddingValues ->
             BoardScreenContent(
-                paddingValues
+                paddingValues,
             )
         },
         goToHome = goToHome,

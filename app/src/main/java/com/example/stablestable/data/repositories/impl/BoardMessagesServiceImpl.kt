@@ -3,7 +3,6 @@ package com.example.stablestable.data.repositories.impl
 import android.content.ContentValues
 import android.util.Log
 import com.example.stablestable.data.classes.BoardMessage
-import com.example.stablestable.data.classes.Shift
 import com.example.stablestable.data.repositories.BoardMessagesService
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
@@ -17,7 +16,7 @@ import kotlinx.coroutines.flow.callbackFlow
 class BoardMessagesServiceImpl: BoardMessagesService {
     private val db: FirebaseFirestore = Firebase.firestore
 
-    override suspend fun createBoardPost(boardMessage: BoardMessage) {
+    override suspend fun createBoardPostOnDB(boardMessage: BoardMessage) {
         val boardMessagesDocRef = db.collection("boardMessages").document()
         boardMessagesDocRef.set(boardMessage)
     }

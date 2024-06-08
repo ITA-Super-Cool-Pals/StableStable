@@ -1,5 +1,6 @@
 package com.example.stablestable.ui.board
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -9,8 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Send
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -44,13 +43,17 @@ fun BoardScreenContent(
         ){
 
             OutlinedTextField(
-                value = viewModel.inputFieldText,
-                onValueChange = { viewModel.inputFieldText = it },
-                label = { Text(stringResource(R.string.post)) },
+                value = viewModel.inputFieldText.value,
+                onValueChange = { viewModel.inputFieldText.value = it },
+                label = { Text(stringResource(R.string.writePost)) },
                 trailingIcon = {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.Send,
-                        contentDescription = stringResource(R.string.post)
+                        contentDescription = stringResource(R.string.writePost),
+                        modifier = Modifier.clickable {
+                            viewModel.createBoardMessage()
+                            viewModel.inputFieldText.value = ""
+                        }
                     )
                 }
             )
