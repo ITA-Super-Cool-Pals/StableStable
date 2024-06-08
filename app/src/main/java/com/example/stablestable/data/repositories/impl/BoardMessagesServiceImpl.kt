@@ -31,10 +31,10 @@ class BoardMessagesServiceImpl: BoardMessagesService {
 
                 }
                 value?.let {
-                    // Check if value can be casted as Shift
+                    // Check if value can be casted as Message
                     // if not, return empty list
 
-                    // Check if shit is empty
+                    // Check if messages is empty
                     if (value.size() < 1) {
                         this.trySend(emptyList())
                     }

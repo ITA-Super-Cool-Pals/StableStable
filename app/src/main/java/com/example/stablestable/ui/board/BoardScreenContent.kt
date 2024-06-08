@@ -14,10 +14,13 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.stablestable.R
 import com.example.stablestable.components.MessageList
@@ -27,7 +30,12 @@ fun BoardScreenContent(
     paddingValues: PaddingValues
 ){
     val viewModel: BoardViewModel = viewModel()
-    val sampleMessages = List(100) { "Message #$it" }
+    val messages = viewModel.boardMessages.collectAsState().value
+
+    // Load messages when the composable is first displayed
+    LaunchedEffect(Unit) {
+        viewModel.getCurrentBoardMessages()
+    }
 
     Box(
         modifier = Modifier
@@ -43,9 +51,13 @@ fun BoardScreenContent(
         ){
 
             OutlinedTextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 16.dp),
                 value = viewModel.inputFieldText.value,
                 onValueChange = { viewModel.inputFieldText.value = it },
                 label = { Text(stringResource(R.string.writePost)) },
+                textStyle = androidx.compose.ui.text.TextStyle(fontSize = 18.sp),
                 trailingIcon = {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.Send,
@@ -58,7 +70,7 @@ fun BoardScreenContent(
                 }
             )
 
-            MessageList(messages = sampleMessages)
+            MessageList(messages = messages.map { it.content })
         }
     }
 
