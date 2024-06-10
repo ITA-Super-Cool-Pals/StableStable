@@ -6,20 +6,20 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.stablestable.data.classes.UserProfile
 
 
 @Composable
 fun MessageItem(
     timeStamp: String,
     message: String,
-    userProfile: UserProfile?
+    sender: String
 ) {
     Box(
         modifier = Modifier
@@ -30,12 +30,11 @@ fun MessageItem(
     ) {
         Column {
             Text(text = timeStamp, fontSize = 12.sp)
-            userProfile?.let {
-                Text(
-                    text = "${it.firstName} ${it.lastName}",
-                    fontSize = 18.sp
-                )
-            }
+            Text(
+                text = sender,
+                fontSize = 18.sp,
+                color = MaterialTheme.colorScheme.primary
+            )
             Text(text = message, fontSize = 18.sp)
         }
     }

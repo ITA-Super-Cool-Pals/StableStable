@@ -39,6 +39,8 @@ class BoardViewModel: ViewModel() {
 
     var inputFieldText = mutableStateOf("")
 
+    private var userName: String = ""
+
     val userId: String
         get() = authViewModel.userId ?: ""
 
@@ -48,15 +50,14 @@ class BoardViewModel: ViewModel() {
     val boardMessages: StateFlow<List<BoardMessage>>
         get() = _boardMessages
 
-    private val _userProfile = MutableStateFlow<UserProfile?>(null)
-    val userProfile: StateFlow<UserProfile?>
-        get() = _userProfile
+    private val userProfile = MutableStateFlow<UserProfile?>(null)
 
     fun createBoardMessage() {
         stableId?.let {
             val message = BoardMessage(
                 userId = userId,
                 content = inputFieldText.value,
+                userName = userName,
                 stableId = it
             )
             saveBoardMessage(message)
@@ -87,10 +88,13 @@ class BoardViewModel: ViewModel() {
             println("Stable ID is null, cannot fetch messages")
         }
     }
-    fun fetchUserProfile(userId: String) {
+    private fun fetchUserProfile(userId: String) {
         viewModelScope.launch {
             val profile = accountService.getUserById(userId)
-            _userProfile.value = profile
+            userProfile.value = profile
+            if (profile != null) {
+                userName = profile.firstName + " " + profile.lastName
+            }
             println("user profile: $profile")
         }
     }

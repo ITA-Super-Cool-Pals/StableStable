@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.stablestable.R
 import com.example.stablestable.components.MessageList
-import com.example.stablestable.data.classes.UserProfile
 
 @Composable
 fun BoardScreenContent(
@@ -34,15 +33,10 @@ fun BoardScreenContent(
 
     // Load messages when the composable is first displayed
     LaunchedEffect(Unit) {
-        val userId = viewModel.userId
         viewModel.getCurrentBoardMessages()
-        if (userId.isNotEmpty()) {
-            viewModel.fetchUserProfile(userId)
-        }
     }
 
     val messages = viewModel.boardMessages.collectAsState().value
-    val userProfile: UserProfile? = viewModel.userProfile.collectAsState().value
 
 
     Box(
@@ -78,7 +72,7 @@ fun BoardScreenContent(
                 }
             )
 
-            MessageList(messages = messages, userProfile = userProfile)
+            MessageList(messages = messages)
         }
     }
 
