@@ -4,7 +4,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.stablestable.data.classes.BoardMessage
+import com.example.stablestable.data.classes.UserProfile
+import com.example.stablestable.data.repositories.AccountService
 import com.example.stablestable.data.repositories.BoardMessagesService
+import com.example.stablestable.data.repositories.impl.AccountServiceImpl
 import com.example.stablestable.data.repositories.impl.BoardMessagesServiceImpl
 import com.example.stablestable.navigation.AuthViewModel
 import kotlinx.coroutines.Dispatchers
@@ -17,26 +20,50 @@ import kotlinx.coroutines.withContext
 class BoardViewModel: ViewModel() {
     private val authViewModel: AuthViewModel = AuthViewModel()
     private val boardMessagesService: BoardMessagesService = BoardMessagesServiceImpl()
+    private val accountService: AccountService = AccountServiceImpl()
+
+
+    //Waits for currentUser to be retrieved and created in AuthViewModel
+    //before using currentUser´s stableId in this viewModel
+    init {
+        viewModelScope.launch {
+            authViewModel.currentUserProfile.collect { currentUser ->
+                if (currentUser != null) {
+                    stableId = currentUser.stableId
+                    getCurrentBoardMessages()
+                    fetchUserProfile(userId)
+                }
+            }
+        }
+    }
 
     var inputFieldText = mutableStateOf("")
 
-    private val userId: String
+    val userId: String
         get() = authViewModel.userId ?: ""
 
-    private val stableId: String
-        get() = authViewModel.currentUserProfile.value?.stableId ?: ""
+    private var stableId: String? = null
 
     private val _boardMessages = MutableStateFlow<List<BoardMessage>>(emptyList())
     val boardMessages: StateFlow<List<BoardMessage>>
         get() = _boardMessages
 
+    private val _userProfile = MutableStateFlow<UserProfile?>(null)
+    val userProfile: StateFlow<UserProfile?>
+        get() = _userProfile
+
     fun createBoardMessage() {
-        val message = BoardMessage(
-            userId = userId,
-            content = inputFieldText.value,
-            stableId = stableId
-        )
-        saveBoardMessage(message)
+        stableId?.let {
+            val message = BoardMessage(
+                userId = userId,
+                content = inputFieldText.value,
+                stableId = it
+            )
+            saveBoardMessage(message)
+        } ?: run {
+            // Handle the case where stableId is null
+            println("Stable ID is null, cannot create message")
+        }
     }
 
     private fun saveBoardMessage(message: BoardMessage) {
@@ -46,12 +73,25 @@ class BoardViewModel: ViewModel() {
     }
 
     fun getCurrentBoardMessages() {
-        viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                boardMessagesService.getListOfBoardPosts().collect { list ->
-                    _boardMessages.value = list
+        stableId?.let { id ->
+            viewModelScope.launch {
+                withContext(Dispatchers.IO) {
+                    boardMessagesService.getListOfBoardPostsByStableId(id).collect { list ->
+                        val sortedList = list.sortedByDescending { it.timeStamp }
+                        _boardMessages.value = sortedList
+                    }
                 }
             }
+        } ?: run {
+            // Handle the case where stableId is null
+            println("Stable ID is null, cannot fetch messages")
+        }
+    }
+    fun fetchUserProfile(userId: String) {
+        viewModelScope.launch {
+            val profile = accountService.getUserById(userId)
+            _userProfile.value = profile
+            println("user profile: $profile")
         }
     }
 
